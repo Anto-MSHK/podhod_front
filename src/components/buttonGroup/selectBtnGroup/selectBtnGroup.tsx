@@ -29,7 +29,7 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
                         <Button
                             color={cSelected.includes(index) ? "warning" : undefined}
                             className={`${styles.btnItem} ${
-                                cSelected.includes(index) ? styles.orange : ""
+                                cSelected.includes(index) ? styles.active : styles.deactive
                             }`}
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}

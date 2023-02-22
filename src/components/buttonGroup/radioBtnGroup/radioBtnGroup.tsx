@@ -19,7 +19,7 @@ export const RadioBtnGroup: FC<radioBtnI> = ({ data }) => {
               <Button
                 color={rSelected === index ? "warning" : undefined}
                 className={`${styles.btnItem} ${
-                  rSelected === index ? styles.orange : ""
+                  rSelected === index ? styles.active : styles.deactive
                 }`}
                 onClick={() => setRSelected(index)}
                 active={rSelected === index}
