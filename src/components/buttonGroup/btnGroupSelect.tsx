@@ -14,7 +14,7 @@ interface BtnGroupI {
 export const BtnGroupSelect: FC<BtnGroupI> = ({view, data}) => {
 
     return (
-        <div style={{backgroundColor: 'black'}}>
+        <div>
             {view === 'radio' ? (
                 <ButtonToolbar>
                     <ButtonGroup>

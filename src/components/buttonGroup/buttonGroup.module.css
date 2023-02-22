@@ -1,8 +1,6 @@
 .buttonsWrapper {
   display: flex;
   column-gap: 10px;
-  width: 100%;
-  padding: 15px;
 }
 
 .btnItem {
