@@ -11,7 +11,7 @@
     border-radius: 10px;
 }
 
-.active {
+.activate {
     color: white !important;
     background-color: #1a52df !important;
     border: 1px solid #1a52df !important;

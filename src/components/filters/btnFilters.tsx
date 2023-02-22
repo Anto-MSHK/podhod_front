@@ -38,7 +38,6 @@ export const BtnFilters: FC<SortI> = ({date,sort , type}) => {
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}
                         ><Spinner size="sm">
-
                         </Spinner>
                             <span>
                              {' '}{el.name}
