@@ -55,7 +55,7 @@
 }
 
 .asyncButton {
-  composes: button;
+  color-scheme: button;
   position: relative;
 }
 
