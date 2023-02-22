@@ -1,8 +1,9 @@
 import React from 'react';
 import { ButtonArt } from '../../components/button.art/ButtonArt';
 import {BtnGroupSelect} from "../../components/buttonGroup/btnGroupSelect";
-import { data } from './mock';
+import {data, sort} from './mock';
 import styles from './autumn2010.module.css'
+import BtnFilters from "../../components/filters/btnFilters";
 
 export const Autumn2010 = () => {
     return (
@@ -18,6 +19,10 @@ export const Autumn2010 = () => {
             <div>
                 <h1 className={styles.h1}>Test button</h1>
                 <ButtonArt name={'Test Button'}/>
+            </div>
+            <div>
+                <h1 className={styles.h1}>Filter buttons:</h1>
+                <BtnFilters sort={sort} date={1} type={undefined}/>
             </div>
         </div>
     );

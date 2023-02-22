@@ -1,12 +1,15 @@
 import React, {FC, useState} from 'react';
-import {Button} from "reactstrap";
-import styles from '../buttonGroup.module.css'
+import {Button, Spinner} from "reactstrap";
+import styles from "./buttonFilter.module.css";
+import {sort} from "../../pages/Autumn2010/mock";
 
-interface selectBtnI {
-    data: { name: string; }[];
+interface SortI {
+    sort: { name: string}[];
+    date: string | number;
+    type?: string;
 }
 
-export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
+export const BtnFilters: FC<SortI> = ({date, sort, type}) => {
 
     const [cSelected, setCSelected] = useState<number []>([]);
 
@@ -22,7 +25,7 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
 
     return (
         <div className={styles.buttonsWrapper}>
-            {data && data.map((el, index) => {
+            {sort && sort.map((el, index) => {
                 index++
                 return (
                     <div key={index}>
@@ -33,8 +36,12 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
                             }`}
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}
-                        >
-                            {el.name}
+                        ><Spinner size="sm">
+
+                        </Spinner>
+                            <span>
+                             {' '}{el.name}
+                        </span>
                         </Button>
                     </div>
                 );
@@ -42,3 +49,5 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
         </div>
     );
 };
+
+export default BtnFilters;

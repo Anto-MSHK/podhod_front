@@ -5,3 +5,8 @@ export const data = [
         {name: 'Черновик'}
 ]
 
+export const sort = [
+        {name: 'По дате'},
+        {name: 'По типу'}
+]
+
