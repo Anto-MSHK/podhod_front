@@ -27,12 +27,11 @@ const setStatus = (status: string, type: string) => {
         </div>
     );
 };
-//! Одинаковые стили - вынести основную часть!
 export const PublicationStatus: React.FC<IPublicationStatusProps> = (props) => {
     return (
-        <>
+        <div className={styles.status_container}>
             {setStatus(props.status, props.type)}
-        </>
+        </div>
 
     );
 };
