@@ -36,7 +36,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
         return (
             <div key={index}>
                 <Button
-                    className={`${styles.btnItem} ${isActive ? styles.active : styles.deactive}`}
+                    className={`${styles.btnItem} ${isActive ? styles.active : styles.deactivate}`}
                     color={isActive ? 'warning' : undefined}
                     onClick={handleClick}
                     active={isActive}
