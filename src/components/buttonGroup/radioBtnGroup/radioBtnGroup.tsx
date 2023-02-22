@@ -10,17 +10,18 @@ export const RadioBtnGroup: FC<radioBtnI> = ({data}) => {
 
     const [rSelected, setRSelected] = useState<number | null>(null);
 
+
     return (
         <div className={styles.buttonsWrapper}>
             {data && data.map((el, index) => {
                 index++
                 return (
-                    <div>
+                    <div key={index}>
                         <Button
-                            color="warning"
+                            color={'primary'}
+                            className={styles.btnItem}
                             onClick={() => setRSelected(index)}
                             active={rSelected === index}
-                            outline
                         >
                             {el.name}
                         </Button>

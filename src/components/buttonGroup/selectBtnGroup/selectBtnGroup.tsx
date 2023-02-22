@@ -27,7 +27,7 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
                 return (
                     <div>
                         <Button
-                            color="warning"
+                            style={{backgroundColor: '#DF791A', color: 'white'}}
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}
                             outline
