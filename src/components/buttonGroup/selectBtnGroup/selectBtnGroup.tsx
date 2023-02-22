@@ -25,12 +25,14 @@ export const SelectBtnGroup: FC<selectBtnI> = ({data}) => {
             {data && data.map((el, index) => {
                 index++
                 return (
-                    <div>
+                    <div key={index}>
                         <Button
-                            style={{backgroundColor: '#DF791A', color: 'white'}}
+                            color={cSelected.includes(index) ? "warning" : undefined}
+                            className={`${styles.btnItem} ${
+                                cSelected.includes(index) ? styles.orange : ""
+                            }`}
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}
-                            outline
                         >
                             {el.name}
                         </Button>
