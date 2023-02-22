@@ -1,0 +1,43 @@
+@import url("./fonts.css");
+@import url("./normalize.css");
+
+body {
+  margin: 0;
+  font-weight: 400;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: "Gilgory";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 44px;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+}
+
+h2 {
+  font-size: 34px;
+  font-weight: 600;
+  margin: 15px 0 8px 0;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 15px 0 5px 0;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+p.min {
+  font-size: 16px;
+  color: #9d9d9d;
+  font-weight: 500;
+  margin-bottom: 10px;
+}

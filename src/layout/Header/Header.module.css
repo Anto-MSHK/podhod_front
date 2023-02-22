@@ -1,0 +1,11 @@
+.header {
+  background-color: #ffffff;
+  border-radius: 0 0 10px 10px;
+  height: 70px;
+}
+
+.name {
+  color: #E74D36;
+  margin: 0px 10px;
+  font-weight: 700;
+}
