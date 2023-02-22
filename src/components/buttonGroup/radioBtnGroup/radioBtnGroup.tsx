@@ -1,33 +1,34 @@
-import React, {FC, useState} from 'react';
-import {Button} from "reactstrap";
-import styles from '../buttonGroup.module.css'
+import React, { FC, useState } from "react";
+import { Button } from "reactstrap";
+import styles from "../buttonGroup.module.css";
 
 interface radioBtnI {
-    data: { name: string; }[];
+  data: { name: string }[];
 }
 
-export const RadioBtnGroup: FC<radioBtnI> = ({data}) => {
+export const RadioBtnGroup: FC<radioBtnI> = ({ data }) => {
+  const [rSelected, setRSelected] = useState<number | null>(null);
 
-    const [rSelected, setRSelected] = useState<number | null>(null);
-
-
-    return (
-        <div className={styles.buttonsWrapper}>
-            {data && data.map((el, index) => {
-                index++
-                return (
-                    <div key={index}>
-                        <Button
-                            color={'primary'}
-                            className={styles.btnItem}
-                            onClick={() => setRSelected(index)}
-                            active={rSelected === index}
-                        >
-                            {el.name}
-                        </Button>
-                    </div>
-                );
-            })}
-        </div>
-    );
+  return (
+    <div className={styles.buttonsWrapper}>
+      {data &&
+        data.map((el, index) => {
+          index++;
+          return (
+            <div key={index}>
+              <Button
+                color={rSelected === index ? "warning" : undefined}
+                className={`${styles.btnItem} ${
+                  rSelected === index ? styles.orange : ""
+                }`}
+                onClick={() => setRSelected(index)}
+                active={rSelected === index}
+              >
+                {el.name}
+              </Button>
+            </div>
+          );
+        })}
+    </div>
+  );
 };

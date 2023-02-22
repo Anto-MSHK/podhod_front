@@ -1,23 +1,25 @@
 .buttonsWrapper {
-    display: flex;
-    column-gap: 10px;
-    width: 100%;
-    padding: 15px;
+  display: flex;
+  column-gap: 10px;
+  width: 100%;
+  padding: 15px;
 }
-
 
 .btnItem {
-    background-color: #2B2B2B;
-    border: 1px solid black;
-    color: white;
-    width: 100%;
-    font-weight: 500;
-    font-size: 18px;
-    border-radius: 10px;
+  color: white !important;
+  width: 100%;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 10px;
 }
 
+.orange {
+  color: white !important;
+  background-color: #df791a !important;
+  border: 1px solid #df791a !important;
+}
 
 .btnGroupWrapper {
-    display: flex;
-    column-gap: 5px;
+  display: flex;
+  column-gap: 5px;
 }
