@@ -1,7 +1,8 @@
 import React, {FC, useState} from 'react';
 import {Button, Spinner} from "reactstrap";
 import styles from "./buttonFilter.module.css";
-import {sort} from "../../pages/Autumn2010/mock";
+import {MainPage} from "../../pages/StylePage/StylePage";
+
 
 interface SortI {
     sort: { name: string}[];
@@ -9,7 +10,7 @@ interface SortI {
     type?: string;
 }
 
-export const BtnFilters: FC<SortI> = ({date, sort, type}) => {
+export const BtnFilters: FC<SortI> = ({date,sort , type}) => {
 
     const [cSelected, setCSelected] = useState<number []>([]);
 

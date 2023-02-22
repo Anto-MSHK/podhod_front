@@ -8,6 +8,11 @@ export const MainPage = () => {
     { name: "Черновик" },
   ];
 
+ const sort = [
+      { name: "По дате"},
+      { name: "По типу"},
+  ]
+
   return (
     <div>
       <h1>{`<h1>`} - Заголовок 1</h1>
