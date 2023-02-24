@@ -41,3 +41,30 @@ p.min {
   font-weight: 500;
   margin-bottom: 10px;
 }
+
+p.bold {
+  font-weight: 700;
+}
+
+p.medium {
+  font-weight: 600;
+}
+
+p.regular {
+  font-weight: 500;
+}
+
+p.bold-italic {
+  font-weight: 700;
+  font-style: italic;
+}
+
+p.medium-italic {
+  font-weight: 600;
+  font-style: italic;
+}
+
+p.regular-italic {
+  font-weight: 500;
+  font-style: italic;
+}

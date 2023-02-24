@@ -1,0 +1,16 @@
+.images_gallery_wrapper {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+  justify-content: end;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.drag_and_drop {
+  padding: 0px;
+  margin: 0;
+  display: flex;
+  justify-content: end;
+  width: fit-content;
+}

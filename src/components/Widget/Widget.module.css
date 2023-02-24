@@ -1,0 +1,31 @@
+.widget_container {
+  min-width: fit-content;
+  padding: 15px;
+  display: flex;
+  background-color: #171717;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.info {
+  color: #5b88de;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.widget_img {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.text {
+  color: #5b88de;
+  margin-left: 5px;
+}

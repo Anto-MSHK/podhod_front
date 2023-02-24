@@ -1,0 +1,28 @@
+.styledCard_container {
+  width: 425px;
+
+  display: flex;
+}
+
+.cardWidget {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardTitle {
+  margin: 0 0 4px 0;
+}
+
+.cardButton {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.card_status {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-between;
+  /* flex-direction: row; */
+  position: absolute;
+}
