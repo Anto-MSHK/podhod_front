@@ -8,6 +8,7 @@ import icon7 from '../icon/Icon7.svg';
 import { Widget } from './../Widget/Widget';
 import { StyledCard } from './../StyledCard/StyledCard';
 import DragAndDrop from '../DragAndDrop/dragAndDrop';
+import ImagesGallery from '../ImagesGallery/imagesGallery';
 
 
 interface ITestProps {
@@ -29,6 +30,7 @@ export const Test: React.FC<ITestProps> = (props) => {
             <StyledCard eventTitle='Экспозиция музея' dateOfCreation='22.02.2023' />
 
             <DragAndDrop/>
+            <ImagesGallery/>
         </>
     );
 };

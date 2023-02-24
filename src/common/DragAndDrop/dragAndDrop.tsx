@@ -4,7 +4,7 @@ import addFileIcon from '../icon/addFileIcon.svg'
 
 
 interface IDragAndDrop {
-
+ 
 }
 
 
@@ -24,6 +24,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
         e.preventDefault()
         let files = structuredClone(e.dataTransfer.files)
         setDrag(false)
+        
         console.log(files);
     }
 
