@@ -7,6 +7,8 @@ import icon4 from '../icon/Icon4.svg';
 import icon7 from '../icon/Icon7.svg';
 import { Widget } from './../Widget/Widget';
 import { StyledCard } from './../StyledCard/StyledCard';
+import DragAndDrop from '../DragAndDrop/dragAndDrop';
+
 
 interface ITestProps {
 }
@@ -25,6 +27,8 @@ export const Test: React.FC<ITestProps> = (props) => {
             <PublicationStatus status='Выставка' type='event' />
 
             <StyledCard eventTitle='Экспозиция музея' dateOfCreation='22.02.2023' />
+
+            <DragAndDrop/>
         </>
     );
 };
