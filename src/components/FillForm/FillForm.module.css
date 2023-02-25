@@ -1,0 +1,50 @@
+.fillForm_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.asd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form_info {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    background: rgba(226, 226, 226, 0.07);
+    border-radius: 15px;
+    padding: 1.5%;
+    justify-content: space-between;
+}
+
+.left {
+    width: 62%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.name {
+    width: 100%;
+}
+
+
+.formControl {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* input {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+select {
+    font-weight: bold;
+    font-size: 1.5rem;
+} */
