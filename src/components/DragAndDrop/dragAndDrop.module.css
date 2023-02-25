@@ -1,21 +1,29 @@
 .drag_and_drop_wrapper {
   width: fit-content;
   height: fit-content;
-  padding: 20px;
   border: 3px solid #a8a8a8;
-  border-radius: 9px;
-  font-size: 24px;
-  font-weight: 600;
+  border-radius: 20px;
   position: relative;
+  text-align: center;
+  font-family: 'Gilroy';
+  padding: 10px;
   
 }
 
+
 .drag_and_drop_area {
+  flex-shrink: 0;
   color: #a8a8a8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 10px;
+}
+.bold{
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .icon {
@@ -29,5 +37,4 @@
   height:  100%;
   background-color: red;
   position: absolute;
-
 }

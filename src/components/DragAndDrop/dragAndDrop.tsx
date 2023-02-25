@@ -42,7 +42,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
     }
   };
 
-  const handleChange =  (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     if (e.target.files && e.target.files.length) {
       processImages(e.target.files)
@@ -76,7 +76,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
             accept="image/*,.png,.jpg,.web,"
           />
           <img className={styles.icon} src={addFileIcon} />
-          Клик или перенос
+          <p className={styles.bold}>Клик или перенос</p>
         </div>
       )}
     </div>

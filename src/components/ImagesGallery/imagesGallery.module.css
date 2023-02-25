@@ -6,21 +6,20 @@
   align-items: center;
   border-radius: 15px;
   flex-wrap: nowrap;
-  max-height: 170px;
+  max-height: 200px;
   justify-content: space-between;
+  gap: 50px;
 }
 
 .drag_and_drop {
-  padding: 0px;
-  margin: 0px;
   display: flex;
   width: fit-content;
-  
+  height: fit-content;
 }
 .image{
   flex-grow: 0.5;
   width: 200px;
-  height: 160px;
+  height: 180px;
 }
 .image_container{
   display: flex;
@@ -28,10 +27,11 @@
   justify-content: center;
   align-items: center;
   width: 200px;
-  height: 160px;
+  height: fit-content;
   box-shadow: 1px 2px 8px black;
   border-radius: 10px;
   flex-shrink: 0;
+ 
   
 }
 .images_wrapper{
@@ -40,6 +40,24 @@
   gap: 10px;
   overflow-x: auto;
   overflow-y: hidden;
+  padding: 10px;
+  position: relative;
+  border-radius: 20px;
+}
 
-  
+
+.images_wrapper::-webkit-scrollbar {
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  height: 5px;             /* ширина scrollbar */
+}
+
+.images_wrapper::-webkit-scrollbar-thumb {
+  width: 1px;
+  height: 1px;
+  background-color: grey;
+  opacity: .5;    
+  border-radius: 2px;      
+  border: 0px; 
 }
