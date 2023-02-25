@@ -1,4 +1,4 @@
-import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
+
 import { PublicationStatus } from "./../../components/PublicationStatus/PublicationStatus";
 import { Widget } from "./../../components/Widget/Widget";
 import { StyledCard } from "../../components/StyledCard/StyledCard";
@@ -10,6 +10,7 @@ import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
+import { BtnGroupSelect } from '../../components/buttonGroup/ButtonGroup';
 
 export const MainPage = () => {
   const btnData = [

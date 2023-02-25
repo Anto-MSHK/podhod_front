@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Button, ButtonGroup, ButtonToolbar } from "reactstrap";
-import styles from "./ButtonGroup.module.css";
+import styles from "./buttonGroup.module.css";
 
 type btnGroup = { name: string }[];
 

@@ -1,16 +1,45 @@
 .images_gallery_wrapper {
   display: flex;
-  padding: 20px;
+  flex-direction: row;
+  padding: 10px;
   background-color: white;
-  justify-content: end;
   align-items: center;
   border-radius: 15px;
+  flex-wrap: nowrap;
+  max-height: 170px;
+  justify-content: space-between;
 }
 
 .drag_and_drop {
   padding: 0px;
-  margin: 0;
+  margin: 0px;
   display: flex;
-  justify-content: end;
   width: fit-content;
+  
+}
+.image{
+  flex-grow: 0.5;
+  width: 200px;
+  height: 160px;
+}
+.image_container{
+  display: flex;
+  padding-right: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 160px;
+  box-shadow: 1px 2px 8px black;
+  border-radius: 10px;
+  flex-shrink: 0;
+  
+}
+.images_wrapper{
+  width: 90%;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  
 }

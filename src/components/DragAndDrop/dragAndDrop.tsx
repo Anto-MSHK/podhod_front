@@ -1,12 +1,30 @@
 import React, { useState } from "react";
 import styles from "./dragAndDrop.module.css";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
+import { useAppDispatch } from '../../app/hooks';
+import { setImage } from "../../app/Slices/imagesUploadSlice";
+import { read } from "fs";
 
-interface IDragAndDrop {}
+interface IDragAndDrop { }
 
 const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
   const [drag, setDrag] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<FileList | null>(null);
+  const dispatch = useAppDispatch()
+
+  const processImages = (images: FileList) => {
+    Array.from(images).forEach(image => {
+      const reader = new FileReader();
+      reader.readAsDataURL(image)
+      reader.onload = function () {
+        dispatch(setImage({
+          name: image.name,
+          lastModified: image.lastModified,
+          size: image.size,
+          url: reader.result as string
+        }))
+      }
+    })
+  }
 
   const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -16,17 +34,19 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
     e.preventDefault();
     setDrag(false);
   };
-  const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+  const dropHandler = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
-    let files = structuredClone(e.dataTransfer.files);
     setDrag(false);
-
-    console.log(files);
+    if (e.dataTransfer.files) {
+      processImages(e.dataTransfer.files)
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
-    setSelectedFile(e.target.files);
+  const handleChange =  (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if (e.target.files && e.target.files.length) {
+      processImages(e.target.files)
+    }
   };
 
   return (
