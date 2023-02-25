@@ -18,6 +18,7 @@ import { ButtonArt } from "./../ButtonArt/ButtonArt";
 
 interface IStyledCardProps {
   eventTitle: string;
+
   dateOfCreation: string;
 }
 

@@ -1,63 +1,64 @@
 .images_gallery_wrapper {
   display: flex;
-  flex-direction: row;
-  padding: 10px;
-  background-color: white;
-  align-items: center;
-  border-radius: 15px;
-  flex-wrap: nowrap;
-  max-height: 200px;
   justify-content: space-between;
-  gap: 50px;
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  height: 170px;
+  position: relative;
 }
 
 .drag_and_drop {
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-}
-.image{
-  flex-grow: 0.5;
-  width: 200px;
-  height: 180px;
-}
-.image_container{
-  display: flex;
-  padding-right: 5px;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: fit-content;
-  box-shadow: 1px 2px 8px black;
-  border-radius: 10px;
-  flex-shrink: 0;
- 
-  
-}
-.images_wrapper{
-  width: 90%;
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 10px;
-  position: relative;
-  border-radius: 20px;
+  height: 100%;
 }
 
+.image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+.image_container {
+  position: relative;
+  min-width: 170px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 7px 6px -3px rgba(34, 60, 80, 0.34);
+  -moz-box-shadow: 0px 7px 6px -3px rgba(34, 60, 80, 0.34);
+  box-shadow: 0px 7px 6px -3px rgba(34, 60, 80, 0.34);
+}
+.images_wrapper {
+  display: flex;
+  gap: 10px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+  margin-right: 10px;
+  position: relative;
+}
 
 .images_wrapper::-webkit-scrollbar {
   position: absolute;
   padding: 0px;
   margin: 0px;
-  height: 5px;             /* ширина scrollbar */
+  height: 5px; /* ширина scrollbar */
 }
 
 .images_wrapper::-webkit-scrollbar-thumb {
   width: 1px;
   height: 1px;
   background-color: grey;
-  opacity: .5;    
-  border-radius: 2px;      
-  border: 0px; 
+  opacity: 0.5;
+  border-radius: 2px;
+  border: 0px;
 }
