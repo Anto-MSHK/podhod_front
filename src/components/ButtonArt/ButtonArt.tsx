@@ -1,5 +1,5 @@
-import React, {FC} from "react";
-import {Button, ButtonProps} from "reactstrap";
+import React, { FC } from "react";
+import { Button, ButtonProps } from "reactstrap";
 import styles from "./ButtonArt.module.css";
 
 interface IButtonArt extends ButtonProps {
@@ -7,6 +7,7 @@ interface IButtonArt extends ButtonProps {
     children: JSX.Element | string;
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
+    icon?: any;
 }
 
 export const ButtonArt: FC<IButtonArt> = ({
@@ -16,8 +17,10 @@ export const ButtonArt: FC<IButtonArt> = ({
                                               type = "button",
                                               color,
                                               active,
+                                              icon,
                                           }) => {
     const customClassName = className ? className : styles.customBtn;
+    const iconElement = icon ? <img className={styles.imageWrapper} src={icon} /> : null;
 
     return (
         <div className={`${styles.customBtnWrapper}`}>
@@ -28,6 +31,7 @@ export const ButtonArt: FC<IButtonArt> = ({
                 type={type}
                 active={active}
             >
+                {iconElement}
                 {children}
             </Button>
         </div>

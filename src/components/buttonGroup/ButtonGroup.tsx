@@ -3,7 +3,7 @@ import { ButtonGroup, ButtonToolbar } from "reactstrap";
 import styles from './buttonGroup.module.css'
 import {ButtonArt} from "../ButtonArt/ButtonArt";
 
-type btnGroup = { name: string }[];
+type btnGroup = { name: string, icon?: any }[];
 
 interface BtnGroupI {
   view: string;
@@ -27,38 +27,39 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
     setCSelected(newSelected);
   };
 
-  const renderButton = (el: { name: string }, index: number) => {
+  const renderButton = (el: { name: string, icon?: any }, index: number) => {
     const isActive =
-      view === "radio" ? rSelected === index : cSelected.includes(index);
+        view === "radio" ? rSelected === index : cSelected.includes(index);
 
     const handleClick =
-      view === "radio"
-        ? () => handleRadioClick(index)
-        : () => handleSelectClick(index);
+        view === "radio"
+            ? () => handleRadioClick(index)
+            : () => handleSelectClick(index);
 
     return (
-      <div key={index}>
-        <ButtonArt
-          className={`${styles.btnItem} ${
-            isActive ? styles.active : styles.deactivate
-          }`}
-          color={isActive ? "warning" : undefined}
-          onClick={handleClick}
-          active={isActive}
-        >
-          {el.name}
-        </ButtonArt>
-      </div>
+        <div key={index}>
+          <ButtonArt
+              className={`${styles.btnItem} ${
+                  isActive ? styles.active : styles.deactivate
+              }`}
+              color={isActive ? "warning" : undefined}
+              onClick={handleClick}
+              active={isActive}
+              icon={el.icon}
+          >
+            {el.name}
+          </ButtonArt>
+        </div>
     );
   };
 
   return (
-    <ButtonToolbar>
-      <ButtonGroup>
-        <div className={styles.buttonsWrapper}>
-          {data && data.map(renderButton)}
-        </div>
-      </ButtonGroup>
-    </ButtonToolbar>
+      <ButtonToolbar>
+        <ButtonGroup>
+          <div className={styles.buttonsWrapper}>
+            {data && data.map(renderButton)}
+          </div>
+        </ButtonGroup>
+      </ButtonToolbar>
   );
 };

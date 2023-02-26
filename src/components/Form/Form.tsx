@@ -3,6 +3,8 @@ import {ButtonArt} from '../ButtonArt/ButtonArt';
 import {BtnGroupSelect} from '../buttonGroup/ButtonGroup'
 import {FormInput} from "./Input";
 import styles from './Form.module.css'
+import registerIcon from '../../assets/icons/RegisterIcon.svg'
+import loginIcon from '../../assets/icons/loginIcon.svg'
 
 export const Form = () => {
     const [organization, setOrganization] = useState('');
@@ -34,8 +36,8 @@ export const Form = () => {
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
             <BtnGroupSelect view={"radio"} data={
                 [
-                    {name: 'Регистрация'},
-                    {name: 'Вход'}
+                    {name: 'Регистрация', icon: registerIcon},
+                    {name: 'Вход', icon: loginIcon}
                 ]
             }/>
             <FormInput
