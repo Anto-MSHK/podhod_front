@@ -1,17 +1,33 @@
-import React, { FC } from "react";
-import { Button } from "reactstrap";
+import React, {FC} from "react";
+import {Button, ButtonProps} from "reactstrap";
 import styles from "./ButtonArt.module.css";
 
-interface IButtonArt {
-    className: string;
+interface IButtonArt extends ButtonProps {
+    className?: string;
     children: JSX.Element | string;
-    onCLick?: () => void;
+    onClick?: () => void;
+    type?: "button" | "submit" | "reset";
 }
 
-export const ButtonArt: FC<IButtonArt> = ({ children, className, onCLick }) => {
+export const ButtonArt: FC<IButtonArt> = ({
+                                              children,
+                                              className = "",
+                                              onClick,
+                                              type = "button",
+                                              color,
+                                              active,
+                                          }) => {
+    const customClassName = className ? className : styles.customBtn;
+
     return (
         <div className={`${styles.customBtnWrapper}`}>
-            <Button color={"warning"} className={`${styles.customBtn} ${className}`} onClick={onCLick}>
+            <Button
+                color={color}
+                className={customClassName}
+                onClick={onClick}
+                type={type}
+                active={active}
+            >
                 {children}
             </Button>
         </div>

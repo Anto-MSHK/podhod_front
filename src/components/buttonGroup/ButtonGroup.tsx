@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
-import { Button, ButtonGroup, ButtonToolbar } from "reactstrap";
+import { ButtonGroup, ButtonToolbar } from "reactstrap";
 import styles from './buttonGroup.module.css'
+import {ButtonArt} from "../ButtonArt/ButtonArt";
 
 type btnGroup = { name: string }[];
 
@@ -37,7 +38,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
 
     return (
       <div key={index}>
-        <Button
+        <ButtonArt
           className={`${styles.btnItem} ${
             isActive ? styles.active : styles.deactivate
           }`}
@@ -46,7 +47,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
           active={isActive}
         >
           {el.name}
-        </Button>
+        </ButtonArt>
       </div>
     );
   };

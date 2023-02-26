@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './FillForm.module.css';
-import { ButtonArt } from './../ButtonArt/ButtonArt';
+import { ButtonArt } from '../ButtonArt/ButtonArt';
 import { Input } from 'reactstrap';
 import { CheckBox } from '../CheckBox/CheckBox';
 import { useState } from 'react';
@@ -37,7 +37,7 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
         <div className={styles.fillForm_container}>
             <div className={styles.asd}>
                 <h2>Информация</h2>
-                <ButtonArt className={styles.formBtn} onCLick={() => changeForm(change)}>{change}</ButtonArt>
+                <ButtonArt className={styles.formBtn} onClick={() => changeForm(change)}>{change}</ButtonArt>
             </div>
             <div className={styles.form_info}>
                 <div className={styles.left}>

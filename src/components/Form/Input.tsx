@@ -1,15 +1,20 @@
 import React, {FC} from 'react';
-import { Input } from 'reactstrap';
+import {Input, InputProps} from 'reactstrap';
 
-interface FormInputI {
-    placeholder: string
+interface FormInputI extends InputProps{
+    placeholder: string,
+    value: string,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    minLength?: number
+    required?: boolean
 }
-export const FormInput: FC<FormInputI> = ({placeholder})=> {
+
+export const FormInput: FC<FormInputI> = ({placeholder, value, onChange, type = 'text', minLength, required = false})=> {
 
     return (
         <div>
             <p>{placeholder}</p>
-            <Input />
+            <Input value={value} onChange={onChange} type={type} minLength={minLength} required={required} />
         </div>
     );
 };
