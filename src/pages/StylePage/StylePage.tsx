@@ -1,6 +1,6 @@
-import { BtnGroupSelect } from "./../../components/buttonGroup/ButtonGroup";
-import { PublicationStatus } from "./../../components/PublicationStatus/PublicationStatus";
-import { Widget } from "./../../components/Widget/Widget";
+import { BtnGroupSelect } from "../../components/buttonGroup/ButtonGroup";
+import { PublicationStatus } from "../../components/PublicationStatus/PublicationStatus";
+import { Widget } from "../../components/Widget/Widget";
 import { StyledCard } from "../../components/StyledCard/StyledCard";
 import DragAndDrop from "../../components/DragAndDrop/dragAndDrop";
 import ImagesGallery from "../../components/ImagesGallery/imagesGallery";
@@ -11,6 +11,7 @@ import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
 import { FillForm } from "../../components/FillForm/FillForm";
+import {Form} from "../../components/Form/Form";
 
 export const MainPage = () => {
   const btnData = [
@@ -93,6 +94,9 @@ export const MainPage = () => {
       </div>
       <div >
         <FillForm/>
+      </div>
+      <div>
+        <Form />
       </div>
     </div>
   );
