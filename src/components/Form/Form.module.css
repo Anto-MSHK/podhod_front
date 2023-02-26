@@ -7,10 +7,15 @@
     flex-direction: column;
 }
 
-.inputFont {
+.inputElements {
     font-weight: 500;
     color: black;
     font-size: 20px;
+}
+
+.inputElements:focus {
+    border-color: #df791a !important;
+    box-shadow: 0 0 0 0.25rem rgb(223 121 26 / 35%) !important;
 }
 
 .inputsWrapper {

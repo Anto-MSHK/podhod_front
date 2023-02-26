@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Button, ButtonProps } from "reactstrap";
 import styles from "./ButtonArt.module.css";
 
-interface IButtonArt extends ButtonProps {
+interface ButtonArtI extends ButtonProps {
     className?: string;
     children: JSX.Element | string;
     onClick?: () => void;
@@ -10,7 +10,7 @@ interface IButtonArt extends ButtonProps {
     icon?: any;
 }
 
-export const ButtonArt: FC<IButtonArt> = ({
+export const ButtonArt: FC<ButtonArtI> = ({
                                               children,
                                               className = "",
                                               onClick,
@@ -20,7 +20,7 @@ export const ButtonArt: FC<IButtonArt> = ({
                                               icon,
                                           }) => {
     const customClassName = className ? className : styles.customBtn;
-    const iconElement = icon ? <img className={styles.imageWrapper} src={icon} /> : null;
+    const iconElement = icon ? <img className={styles.imageWrapper} src={icon} alt={''}/> : null;
 
     return (
         <div className={`${styles.customBtnWrapper}`}>

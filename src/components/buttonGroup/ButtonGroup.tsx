@@ -3,7 +3,7 @@ import { ButtonGroup, ButtonToolbar } from "reactstrap";
 import styles from './buttonGroup.module.css'
 import {ButtonArt} from "../ButtonArt/ButtonArt";
 
-type btnGroup = { name: string, icon?: any }[];
+export type btnGroup = { name: string, icon?: any }[];
 
 interface BtnGroupI {
   view: string;

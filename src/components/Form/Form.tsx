@@ -1,72 +1,69 @@
-import React, {useState} from 'react';
+import React, {FC, useState, ChangeEvent, FormEvent} from 'react';
 import {ButtonArt} from '../ButtonArt/ButtonArt';
-import {BtnGroupSelect} from '../buttonGroup/ButtonGroup'
-import {FormInput} from "./Input";
-import styles from './Form.module.css'
-import registerIcon from '../../assets/icons/RegisterIcon.svg'
-import loginIcon from '../../assets/icons/loginIcon.svg'
+import {BtnGroupSelect, btnGroup} from '../buttonGroup/ButtonGroup';
+import {FormInput} from './Input';
+import styles from './Form.module.css';
+import registerIcon from '../../assets/icons/RegisterIcon.svg';
+import loginIcon from '../../assets/icons/loginIcon.svg';
 
-export const Form = () => {
-    const [organization, setOrganization] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+interface FormDataI {
+    organization: string;
+    email: string;
+    password: string;
+}
 
-    const handleOrganizationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setOrganization(event.target.value);
+export const Form: FC = () => {
+    const [formData, setFormData] = useState<FormDataI>({organization: '', email: '', password: ''});
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = event.target;
+        setFormData((prevFormData) => ({...prevFormData, [name]: value}));
     };
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
-    };
-
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-    };
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = {organization, email, password};
         console.log(formData); // Отправка данных
-        setOrganization('')
-        setEmail('')
-        setPassword('')
+        setFormData({organization: '', email: '', password: ''});
     };
+
+    const formBtns: btnGroup = [
+        {name: 'Регистрация', icon: registerIcon},
+        {name: 'Вход', icon: loginIcon},
+    ];
 
     return (
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
             <div>
-                <BtnGroupSelect view={"radio"} data={
-                    [
-                        {name: 'Регистрация', icon: registerIcon},
-                        {name: 'Вход', icon: loginIcon}
-                    ]
-                }/>
+                <BtnGroupSelect view="radio" data={formBtns}/>
             </div>
             <div className={styles.inputsWrapper}>
                 <FormInput
-                    placeholder={'Название организации'}
-                    value={organization}
-                    onChange={handleOrganizationChange}
+                    placeholder="Название организации"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleInputChange}
                     required
                 />
                 <FormInput
-                    placeholder={'Почта'}
-                    value={email}
-                    onChange={handleEmailChange}
+                    placeholder="Почта"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     type="email"
                     required
                 />
                 <FormInput
-                    placeholder={'Пароль'}
-                    value={password}
-                    onChange={handlePasswordChange}
+                    placeholder="Пароль"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
                     type="password"
                     minLength={8}
                     required
                 />
             </div>
             <div className={styles.submitBtn}>
-                <ButtonArt children={'Продолжить регистрацию'} type="submit" />
+                <ButtonArt children="Продолжить регистрацию" type="submit"/>
             </div>
         </form>
     );
