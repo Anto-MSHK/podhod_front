@@ -34,34 +34,40 @@ export const Form = () => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
-            <BtnGroupSelect view={"radio"} data={
-                [
-                    {name: 'Регистрация', icon: registerIcon},
-                    {name: 'Вход', icon: loginIcon}
-                ]
-            }/>
-            <FormInput
-                placeholder={'Название организации'}
-                value={organization}
-                onChange={handleOrganizationChange}
-                required
-            />
-            <FormInput
-                placeholder={'Почта'}
-                value={email}
-                onChange={handleEmailChange}
-                type="email"
-                required
-            />
-            <FormInput
-                placeholder={'Пароль'}
-                value={password}
-                onChange={handlePasswordChange}
-                type="password"
-                minLength={8}
-                required
-            />
-            <ButtonArt children={'Продолжить регистрацию'} type="submit" />
+            <div>
+                <BtnGroupSelect view={"radio"} data={
+                    [
+                        {name: 'Регистрация', icon: registerIcon},
+                        {name: 'Вход', icon: loginIcon}
+                    ]
+                }/>
+            </div>
+            <div className={styles.inputsWrapper}>
+                <FormInput
+                    placeholder={'Название организации'}
+                    value={organization}
+                    onChange={handleOrganizationChange}
+                    required
+                />
+                <FormInput
+                    placeholder={'Почта'}
+                    value={email}
+                    onChange={handleEmailChange}
+                    type="email"
+                    required
+                />
+                <FormInput
+                    placeholder={'Пароль'}
+                    value={password}
+                    onChange={handlePasswordChange}
+                    type="password"
+                    minLength={8}
+                    required
+                />
+            </div>
+            <div className={styles.submitBtn}>
+                <ButtonArt children={'Продолжить регистрацию'} type="submit" />
+            </div>
         </form>
     );
 };

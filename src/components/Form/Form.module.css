@@ -6,3 +6,19 @@
     row-gap: 15px;
     flex-direction: column;
 }
+
+.inputFont {
+    font-weight: 500;
+    color: black;
+    font-size: 20px;
+}
+
+.inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.submitBtn {
+    margin-top: 15px;
+}
