@@ -29,7 +29,7 @@
   width: 64px;
   height: 64px;
 }
-input {
+.drag_and_drop_wrapper input {
   cursor: pointer;
   opacity: 0;
   width: 100%;

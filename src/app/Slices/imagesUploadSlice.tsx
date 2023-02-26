@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit';
 
 
 
-type imageType = {
+export type imageType = {
+  id: string,
   name: string,
   lastModified: number,
   size: number,
@@ -26,8 +27,11 @@ const imagesUploadSlice = createSlice({
       setImage(state, action: PayloadAction<imageType>){
         state.uploadedImages = [...state.uploadedImages, action.payload]
       },  
+      removeImage(state, action: PayloadAction<string>){
+        state.uploadedImages = state.uploadedImages.filter(image => image.id !== action.payload)
+      }
     },
   })
 
-  export const {setImage} = imagesUploadSlice.actions 
+  export const {setImage, removeImage} = imagesUploadSlice.actions 
 export default imagesUploadSlice.reducer 

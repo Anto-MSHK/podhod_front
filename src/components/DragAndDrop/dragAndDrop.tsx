@@ -17,6 +17,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
       reader.readAsDataURL(image)
       reader.onload = function () {
         dispatch(setImage({
+          id: Date.now().toString(),
           name: image.name,
           lastModified: image.lastModified,
           size: image.size,
