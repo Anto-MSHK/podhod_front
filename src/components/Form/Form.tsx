@@ -12,8 +12,14 @@ interface FormDataI {
     password: string;
 }
 
+enum FormMode {
+    Register = 'register',
+    Login = 'login',
+}
+
 export const Form: FC = () => {
     const [formData, setFormData] = useState<FormDataI>({organization: '', email: '', password: ''});
+    const [formMode, setFormMode] = useState<FormMode>(FormMode.Register);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
@@ -26,9 +32,13 @@ export const Form: FC = () => {
         setFormData({organization: '', email: '', password: ''});
     };
 
+    const handleModeChange = (mode: FormMode) => {
+        setFormMode(mode);
+    };
+
     const formBtns: btnGroup = [
-        {name: 'Регистрация', icon: registerIcon},
-        {name: 'Вход', icon: loginIcon},
+        {name: 'Регистрация', icon: registerIcon, onClick: () => handleModeChange(FormMode.Register)},
+        {name: 'Вход', icon: loginIcon, onClick: () => handleModeChange(FormMode.Login)},
     ];
 
     return (
@@ -37,13 +47,15 @@ export const Form: FC = () => {
                 <BtnGroupSelect view="radio" data={formBtns}/>
             </div>
             <div className={styles.inputsWrapper}>
-                <FormInput
-                    placeholder="Название организации"
-                    name="organization"
-                    value={formData.organization}
-                    onChange={handleInputChange}
-                    required
-                />
+                {formMode === FormMode.Register && (
+                    <FormInput
+                        placeholder="Название организации"
+                        name="organization"
+                        value={formData.organization}
+                        onChange={handleInputChange}
+                        required
+                    />
+                )}
                 <FormInput
                     placeholder="Почта"
                     name="email"
@@ -63,7 +75,7 @@ export const Form: FC = () => {
                 />
             </div>
             <div className={styles.submitBtn}>
-                <ButtonArt children="Продолжить регистрацию" type="submit"/>
+                <ButtonArt children={formMode === FormMode.Register ? "Продолжить регистрацию" : "Войти"} type="submit"/>
             </div>
         </form>
     );
