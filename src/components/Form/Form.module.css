@@ -2,7 +2,6 @@
     display: flex;
     padding: 15px;
     background-color: rgba(226, 226, 226, 0.03);
-    margin-top: 15px;
     border-radius: 15px;
     row-gap: 15px;
     flex-direction: column;

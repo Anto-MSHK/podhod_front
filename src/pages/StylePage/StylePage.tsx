@@ -95,7 +95,7 @@ export const MainPage = () => {
       <div >
         <FillForm/>
       </div>
-      <div>
+      <div style={{marginTop: '10px'}}>
         <Form />
       </div>
     </div>
