@@ -1,8 +1,8 @@
 import React, {FC, useState, ChangeEvent, FormEvent} from 'react';
 import {ButtonArt} from '../ButtonArt/ButtonArt';
 import {BtnGroupSelect, btnGroup} from '../buttonGroup/ButtonGroup';
-import {FormInput} from './Input';
-import styles from './Form.module.css';
+import {AuthInput} from './AuthInput';
+import styles from './AuthForm.module.css';
 import registerIcon from '../../assets/icons/RegisterIcon.svg';
 import loginIcon from '../../assets/icons/loginIcon.svg';
 
@@ -17,7 +17,7 @@ enum FormMode {
     Login = 'login',
 }
 
-export const Form: FC = () => {
+export const AuthForm: FC = () => {
     const [formData, setFormData] = useState<FormDataI>({organization: '', email: '', password: ''});
     const [formMode, setFormMode] = useState<FormMode>(FormMode.Register);
 
@@ -57,9 +57,9 @@ export const Form: FC = () => {
             <div>
                 <BtnGroupSelect view="radio" data={formBtns}/>
             </div>
-            <div className={styles.inputsWrapper}>
+            <div className={styles.AuthInputsWrapper}>
                 {formMode === FormMode.Register && (
-                    <FormInput
+                    <AuthInput
                         placeholder="Название организации"
                         name="organization"
                         value={formData.organization}
@@ -67,7 +67,7 @@ export const Form: FC = () => {
                         required
                     />
                 )}
-                <FormInput
+                <AuthInput
                     placeholder="Почта"
                     name="email"
                     value={formData.email}
@@ -75,7 +75,7 @@ export const Form: FC = () => {
                     type="email"
                     required
                 />
-                <FormInput
+                <AuthInput
                     placeholder="Пароль"
                     name="password"
                     value={formData.password}

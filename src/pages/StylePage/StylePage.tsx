@@ -11,7 +11,7 @@ import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
 import { FillForm } from "../../components/FillForm/FillForm";
-import {Form} from "../../components/Form/Form";
+import {AuthForm} from "../../components/AuthForm/AuthForm";
 
 export const MainPage = () => {
   const btnData = [
@@ -96,7 +96,7 @@ export const MainPage = () => {
         <FillForm/>
       </div>
       <div style={{marginTop: '10px', marginBottom: '10px'}}>
-        <Form />
+        <AuthForm />
       </div>
     </div>
   );

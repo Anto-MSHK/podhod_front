@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {Input, InputProps} from 'reactstrap';
-import styles from './Form.module.css';
+import styles from './AuthForm.module.css';
 
 interface FormInputI extends InputProps {
     placeholder: string;
@@ -10,7 +10,7 @@ interface FormInputI extends InputProps {
     required?: boolean;
 }
 
-export const FormInput: FC<FormInputI> = ({
+export const AuthInput: FC<FormInputI> = ({
                                          placeholder,
                                          name,
                                          value,
@@ -29,7 +29,7 @@ export const FormInput: FC<FormInputI> = ({
                 type={type}
                 minLength={minLength}
                 required={required}
-                className={styles.inputElements}
+                className={styles.AuthInputElements}
             />
         </div>
     );
