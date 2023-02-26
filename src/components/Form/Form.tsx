@@ -28,9 +28,20 @@ export const Form: FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formData); // Отправка данных
+
+        const data: Partial<FormDataI> = {
+            email: formData.email,
+            password: formData.password,
+        };
+
+        if (formMode === FormMode.Register) {
+            data.organization = formData.organization;
+        }
+
+        console.log(data);
         setFormData({organization: '', email: '', password: ''});
     };
+
 
     const handleModeChange = (mode: FormMode) => {
         setFormMode(mode);
