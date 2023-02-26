@@ -8,16 +8,21 @@ import { useAppDispatch } from '../../app/hooks';
 
 interface IImageComponent {
     image: imageType
+    isDragged: boolean
 }
 
 
-const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
+const ImageComponent: React.FC<IImageComponent> = ({ image, isDragged }) => {
 
     const [modal, setModal] = useState(false)
     const dispatch = useAppDispatch()
 
 
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+        if (!isDragged) {
+            setModal(!modal)
+        }
+    };
 
     const delImage = (id: string) => {
         dispatch(removeImage(id))
@@ -26,7 +31,6 @@ const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
     return (
         <div>
             <div
-                className={styles.image_container}
                 onClick={() => toggle()}>
                 <img className={styles.image} src={image.url} alt="" />
             </div>
