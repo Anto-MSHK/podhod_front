@@ -1,6 +1,6 @@
 import React, {FC, useState, ChangeEvent, FormEvent} from 'react';
 import {ButtonArt} from '../ButtonArt/ButtonArt';
-import {BtnGroupSelect, btnGroup} from '../buttonGroup/ButtonGroup';
+import {BtnGroupSelect, btnGroup} from '../ButtonGroup/ButtonGroup';
 import {AuthInput} from './AuthInput';
 import styles from './AuthForm.module.css';
 import registerIcon from '../../assets/icons/RegisterIcon.svg';

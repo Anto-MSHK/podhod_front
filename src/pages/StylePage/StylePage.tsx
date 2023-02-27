@@ -1,4 +1,4 @@
-import { BtnGroupSelect } from "../../components/buttonGroup/ButtonGroup";
+import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
 import { PublicationStatus } from "../../components/PublicationStatus/PublicationStatus";
 import { Widget } from "../../components/Widget/Widget";
 import { StyledCard } from "../../components/StyledCard/StyledCard";

@@ -26,8 +26,6 @@
 
 .status_event {
   background-color: #5b88de;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   display: flex;
   justify-content: center;
   align-items: center;

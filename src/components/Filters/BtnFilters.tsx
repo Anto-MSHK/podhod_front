@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Button, Spinner} from "reactstrap";
-import styles from "./buttonFilter.module.css";
-import {MainPage} from "../../pages/StylePage/StylePage";
+import styles from "./ButtonFilter.module.css";
 
 
 interface SortI {
