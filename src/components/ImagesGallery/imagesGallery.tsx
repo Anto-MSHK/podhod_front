@@ -7,6 +7,7 @@ import ImageComponent from './ImageComponent';
 import { randomInt } from 'crypto';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { swapImage } from '../../app/Slices/imagesUploadSlice';
+import { right } from '@popperjs/core';
 
 
 
@@ -19,31 +20,35 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
 
     const images = useAppSelector(state => state.images.uploadedImages)
     const dispatch = useAppDispatch()
-    const [isDragged, setIsDragged] = useState(false)
-    const [dragCounter, setDragCounter] = useState(0)
+    const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+    const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
-    const onDrag = (e: DraggableEvent, data: DraggableData) => {
-        e.preventDefault()
-        setIsDragged(true)
-        setDragCounter((prevState) => prevState+1)
-    }
-    const onMouseDown = (e:MouseEvent) => {
-        e.preventDefault()
-       
-      
-        console.log(dragCounter);
-    }
+    const handleDragStart = (index: number) => {
+        setDraggedIndex(index);
+        console.log('draged ' + draggedIndex);
+    };
 
-    const onStop = (e: DraggableEvent, id: string) => {
-        console.log(images);
-        e.preventDefault()
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>, index: number) => {
+        event.preventDefault();
+        setDragOverIndex(index);
+        console.log();
+        console.log('dragedOver ' + dragOverIndex);
+    };
+
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>, index: number) => {
+        event.preventDefault();
+        /*   const newItems = [...items];
+          const draggedItem = newItems[draggedIndex];
+          newItems.splice(draggedIndex, 1);
+          newItems.splice(index, 0, draggedItem); */
+          console.log('index= ' + index + ' draggedIndex= ' + draggedIndex);
         dispatch(swapImage({
-            counter: dragCounter,
-            id,
+            draggedIndex: draggedIndex as number,
+            index,
         }))
-        console.log(images);
-        setDragCounter(0)
-    }
+        setDraggedIndex(null);
+        setDragOverIndex(null);
+    };
 
 
     return (
@@ -51,25 +56,24 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
             <div className={styles.images_wrapper}>
                 {
                     images &&
-                    images.map(image => (
-                        <Draggable
-
-                            axis='x'
-                            handle=".handle"
-                            
-                            onDrag={(e, data) => onDrag(e, data)}
-                            onMouseDown={(e) =>  onMouseDown(e)}
-                        
-                            onStop={(e) => onStop(e, image.id )}
-
-                            grid={[180, 0]}>
-                            <div  className='handle'>
-                                <div className={styles.image_container}>
-                                    <ImageComponent isDragged={isDragged} image={image} key={image.id} />
-                                </div>
-                            </div>
-                        </Draggable>
-
+                    images.map((image, index) => (
+                        <div
+                            key={index}
+                            className={styles.image_container}
+                            draggable
+                            onDragStart={() => handleDragStart(index)}
+                            onDragOver={(e) => handleDragOver(e, index)}
+                            onDrop={(e) => handleDrop(e, index)}
+                            style={{
+                                opacity: draggedIndex === index ? 0.5 : 1,
+                                border: draggedIndex === index ? '5px solid blue' : 'none',
+                                backgroundColor: dragOverIndex === index ? "lightgray" : "white",
+                                scale: dragOverIndex === index ? "1.05" : "1",
+                                cursor:   "pointer"
+                            }}
+                        >
+                            <ImageComponent image={image}  />
+                        </div>
                     ))
                 }
             </div>
