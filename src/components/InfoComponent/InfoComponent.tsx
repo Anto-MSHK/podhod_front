@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Card, CardBody, CardHeader, CardText, CardTitle } from 'reactstrap'
+import { Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import styles from "./InfoComponent.module.css";
 
 interface IInfoComponent{
@@ -20,11 +20,11 @@ export const InfoComponent: FC<IInfoComponent> = ({icon}) => {
     
     <CardBody >
       <CardTitle tag="h5" className={styles.icon_info}>
-      <img src={icon} alt="123"className={styles.iconred} />
+      <img src={icon} alt='' className={styles.iconred} />
         Не может быть опубликовано
       </CardTitle>
       <CardText className={styles.text}>
-      Есть не заполненные поля
+      Есть незаполненные поля
       </CardText>
     </CardBody>
   </Card>
