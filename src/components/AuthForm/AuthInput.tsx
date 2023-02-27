@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {Input, InputProps} from 'reactstrap';
+import { Input, InputProps } from 'reactstrap';
 import styles from './AuthForm.module.css';
 
 interface FormInputI extends InputProps {
@@ -11,14 +11,14 @@ interface FormInputI extends InputProps {
 }
 
 export const AuthInput: FC<FormInputI> = ({
-                                         placeholder,
-                                         name,
-                                         value,
-                                         onChange,
-                                         type = 'text',
-                                         minLength,
-                                         required = false,
-                                     }) => {
+    placeholder,
+    name,
+    value,
+    onChange,
+    type = 'text',
+    minLength,
+    required = false,
+}) => {
     return (
         <div>
             <p>{placeholder}</p>

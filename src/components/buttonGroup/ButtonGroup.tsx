@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import {ButtonGroup, ButtonGroupProps, ButtonToolbar} from "reactstrap";
-import styles from './buttonGroup.module.css'
+import styles from './ButtonGroup.module.css'
 import {ButtonArt} from "../ButtonArt/ButtonArt";
 
 export type btnGroup = { name: string, icon?: any, onClick?: () => void; }[];
