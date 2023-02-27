@@ -9,9 +9,11 @@ import icon1 from "../../assets/icons/Icon.svg";
 import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
+import icon9 from '../../assets/icons/Icon9.svg'
 import icon7 from "../../assets/icons/Icon7.svg";
 import { FillForm } from "../../components/FillForm/FillForm";
 import {AuthForm} from "../../components/AuthForm/AuthForm";
+import { InfoComponent } from "../../components/InfoComponent/InfoComponent"
 
 export const MainPage = () => {
   const btnData = [
@@ -97,6 +99,9 @@ export const MainPage = () => {
       </div>
       <div style={{marginTop: '10px', marginBottom: '10px'}}>
         <AuthForm />
+      </div>
+      <div>
+        <InfoComponent icon={icon9} />
       </div>
     </div>
   );

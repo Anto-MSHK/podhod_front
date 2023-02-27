@@ -1,0 +1,17 @@
+.icon_info {
+    display: flex;
+    gap: 10px;
+}
+
+.iconred {
+    display: flex;
+    width: 30px;
+    margin-bottom: 20px;
+    
+} 
+
+.text{
+    display: flex;
+    margin-left: 35px;
+    opacity: 0.5;
+}
