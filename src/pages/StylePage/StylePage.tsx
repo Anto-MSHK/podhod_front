@@ -128,7 +128,7 @@ export const MainPage = () => {
           textButtonSubmit="Продолжить"
         >
           <div>
-            <FormInput name="email" label="Email" />
+            <FormInput  name="email" label="Email" />
             <FormInput
               name="password"
               label="Пароль"
