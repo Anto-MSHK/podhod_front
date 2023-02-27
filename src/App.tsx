@@ -12,7 +12,6 @@ function App() {
       <Routes>
         <Route element={<MainPage />} path="/"></Route>
         <Route element={<TestPage />} path="/redux-test"></Route>
-        <Route element={<InfoComponent icon={""} />} path="/info"></Route>
       </Routes>
     </Layout>
   );

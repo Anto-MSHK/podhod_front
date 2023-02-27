@@ -9,11 +9,15 @@ import icon1 from "../../assets/icons/Icon.svg";
 import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
-import icon9 from '../../assets/icons/Icon9.svg'
+import icon9 from "../../assets/icons/Icon9.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
 import { FillForm } from "../../components/FillForm/FillForm";
-import {AuthForm} from "../../components/AuthForm/AuthForm";
-import { InfoComponent } from "../../components/InfoComponent/InfoComponent"
+// import { AuthForm } from "../../components/AuthForm/AuthForm";
+import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
+import { FormContainer } from "../../components/AuthForm/Form";
+import { FormInput } from "./../../components/AuthForm/FormInput";
+import * as Yup from "yup";
+import { useFormik, FormikConfig } from "formik";
 
 export const MainPage = () => {
   const btnData = [
@@ -24,6 +28,24 @@ export const MainPage = () => {
   ];
 
   const sort = [{ name: "По дате" }, { name: "По типу" }];
+
+  const formConfig: FormikConfig<any> = {
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  };
+
+  const schemaConfig: Yup.ObjectShape = {
+    password: Yup.string()
+      .min(2, "Too Short!")
+      .max(10, "Too Long!")
+      .required("Required")
+      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+  };
 
   return (
     <div>
@@ -94,14 +116,23 @@ export const MainPage = () => {
         <ImagesGallery />
         <div style={{ margin: "10px 0" }} />
       </div>
-      <div >
-        <FillForm/>
+      <div>
+        <FillForm />
       </div>
-      <div style={{marginTop: '10px', marginBottom: '10px'}}>
-        <AuthForm />
+      <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+        <FormContainer
+          schemaConfig={schemaConfig}
+          formConfig={formConfig}
+          textButtonSubmit="Продолжить"
+        >
+          <div>
+            <FormInput name="email" label="тест" help="тест" />
+            <FormInput name="password" label="тест" help="тест" />
+          </div>
+        </FormContainer>
       </div>
       <div>
-        <InfoComponent icon={icon9} />
+        <InfoComponent icon={icon9} title={"Andrew"} desc={"boba"} />
       </div>
     </div>
   );
