@@ -21,10 +21,10 @@ export const InfoComponent: FC<IInfoComponent> = ({icon}) => {
     <CardBody >
       <CardTitle tag="h5" className={styles.icon_info}>
       <img src={icon} alt="123"className={styles.iconred} />
-        Не может быть опублековано
+        Не может быть опубликовано
       </CardTitle>
       <CardText className={styles.text}>
-      Есть не заполненные поля.
+      Есть не заполненные поля
       </CardText>
     </CardBody>
   </Card>
