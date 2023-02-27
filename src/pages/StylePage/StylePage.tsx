@@ -40,11 +40,13 @@ export const MainPage = () => {
   };
 
   const schemaConfig: Yup.ObjectShape = {
+    email: Yup.string()
+      .email("Некорректная почта!")
+      .required("Обязательное поле!"),
     password: Yup.string()
-      .min(2, "Too Short!")
-      .max(10, "Too Long!")
-      .required("Required")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+      .min(4, "Минимум 4 символа!")
+      .max(12, "Максимум 12 символов!")
+      .required("Обязательное поле!"),
   };
 
   return (
@@ -126,8 +128,12 @@ export const MainPage = () => {
           textButtonSubmit="Продолжить"
         >
           <div>
-            <FormInput name="email" label="тест" help="тест" />
-            <FormInput name="password" label="тест" help="тест" />
+            <FormInput name="email" label="Email" />
+            <FormInput
+              name="password"
+              label="Пароль"
+              help="От 4 до 12 символов"
+            />
           </div>
         </FormContainer>
       </div>

@@ -16,16 +16,23 @@ interface FormInputI extends InputProps {
   form?: any;
 }
 
-export const CustomInput: FC<FormInputI> = ({ label, field, help, form }) => {
+export const CustomInput: FC<FormInputI> = ({ field, form }) => {
   return (
     <div>
       <Input
         {...field}
-        invalid={form.errors[`${field.name}`] !== undefined}
+        valid={
+          form.touched[`${field.name}`] &&
+          form.errors[`${field.name}`] === undefined
+        }
+        invalid={
+          form.touched[`${field.name}`] &&
+          form.errors[`${field.name}`] !== undefined
+        }
         className={styles.AuthInputElements}
       />
       <FormFeedback invalid tag="h3">
-        {form.errors[`${field.name}`]}
+        {form.touched[`${field.name}`] ? form.errors[`${field.name}`] : ""}
       </FormFeedback>
     </div>
   );
@@ -34,11 +41,9 @@ export const CustomInput: FC<FormInputI> = ({ label, field, help, form }) => {
 export const FormInput: FC<FormInputI> = ({ name, label, help }) => {
   return (
     <FormGroup>
-      <div>
-        <h3>{label}</h3>
-        <Field name={name} component={CustomInput}></Field>
-        <FormText tag={"p"}>{help}</FormText>
-      </div>
+      <h3>{label}</h3>
+      <Field name={name} component={CustomInput}></Field>
+      <FormText tag={"p"}>{help}</FormText>
     </FormGroup>
   );
 };
