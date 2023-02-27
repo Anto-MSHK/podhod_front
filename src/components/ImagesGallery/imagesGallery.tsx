@@ -7,6 +7,7 @@ import ImageComponent from './ImageComponent';
 import { randomInt } from 'crypto';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { swapImage } from '../../app/Slices/imagesUploadSlice';
+import { right } from '@popperjs/core';
 
 
 
@@ -40,6 +41,7 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
           const draggedItem = newItems[draggedIndex];
           newItems.splice(draggedIndex, 1);
           newItems.splice(index, 0, draggedItem); */
+          console.log('index= ' + index + ' draggedIndex= ' + draggedIndex);
         dispatch(swapImage({
             draggedIndex: draggedIndex as number,
             index,
@@ -63,13 +65,14 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
                             onDragOver={(e) => handleDragOver(e, index)}
                             onDrop={(e) => handleDrop(e, index)}
                             style={{
-                                opacity: draggedIndex ? 0.5 : 1,
+                                opacity: draggedIndex === index ? 0.5 : 1,
                                 border: draggedIndex === index ? '5px solid blue' : 'none',
                                 backgroundColor: dragOverIndex === index ? "lightgray" : "white",
-                                cursor: "move"
+                                scale: dragOverIndex === index ? "1.05" : "1",
+                                cursor:   "pointer"
                             }}
                         >
-                            <ImageComponent image={image} key={image.id} />
+                            <ImageComponent image={image}  />
                         </div>
                     ))
                 }

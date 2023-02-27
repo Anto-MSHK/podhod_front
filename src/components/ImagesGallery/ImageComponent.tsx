@@ -35,7 +35,7 @@ const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
                 <ModalHeader toggle={toggle}>
                     <h3>{image.name}</h3>
                 </ModalHeader>
-                <ModalBody className={styles.modal_image_container}>
+                <ModalBody draggable = {false} className={styles.modal_image_container}>
                     <img className={styles.modal_image} src={image.url} />
                 </ModalBody>
                 <ModalFooter>
