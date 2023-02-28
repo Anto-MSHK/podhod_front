@@ -1,10 +1,13 @@
 .customBtn {
+    display: flex;
     color: white !important;
-    background-color: #df791a !important;
-    border: 1px solid #df791a !important;
+    background-color: #df791a ;
+    border: 1px solid #df791a ;
     border-radius: 10px;
     font-weight: 500;
     font-size: 18px;
+    align-items: center;
+    text-align: center;
 }
 
 .imageWrapper {

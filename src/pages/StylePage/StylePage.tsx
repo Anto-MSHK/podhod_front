@@ -12,6 +12,7 @@ import icon4 from "../../assets/icons/Icon4.svg";
 import icon9 from "../../assets/icons/Icon9.svg";
 import icon8 from "../../assets/icons/Icon8.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
+import loginIcon from '../../assets/icons/loginIcon.svg'
 import registerIcon from "../../assets/icons/RegisterIcon.svg"
 import { FillForm } from "../../components/FillForm/FillForm";
 // import { AuthForm } from "../../components/AuthForm/AuthForm";
@@ -128,14 +129,13 @@ export const MainPage = () => {
         <FormContainer
           schemaConfig={schemaConfig}
           formConfig={formConfig}
-          textButtonSubmit="Продолжить"
         >
           <div>
 
             <div>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <ButtonArt icon={registerIcon} type='submit'>Зарегистрироваться</ButtonArt>
-                <ButtonArt >Выйти</ButtonArt>
+                <ButtonArt  icon = {loginIcon} iconWidth = {25} style={{backgroundColor: '#282828', border: '2px solid #282828'}}>Выйти</ButtonArt>
               </div>
 
               <FormInput name="email" label="Email" />
@@ -153,14 +153,15 @@ export const MainPage = () => {
           <InfoComponent icon={icon9} title={"Не может быть опубликовано"} desc={"Есть незаполненные поля"} />
         </div>
         <div style={{ width: '300px' }}>
-          <InfoComponent iconWidth={40} icon={icon8} title={"Успешно опубликовано"} desc={"Ошибок не найдено"} />
+          <InfoComponent icon={icon8} title={"Успешно опубликовано"} desc={"Ошибок не найдено"} />
         </div>
         <div >
           <InfoComponent iconWidth={100} icon={icon7} title={"А тут здоровая иконка"} desc={"Прикол да"} />
         </div>
       </div>
           <InfoComponent iconWidth={50} icon={icon4} title={"Пример адаптивности"} 
-          desc={"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."} />
+          desc={("Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус.")} />
+
     </div>
   );
 };

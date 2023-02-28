@@ -57,12 +57,14 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
         <FormContainer
             schemaConfig={schemaConfig}
             formConfig={formConfig}
-            textButtonSubmit='Подтвердить'
         >
             <div className={styles.fillForm_container}>
                 <div className={styles.asd}>
                     <h2>Информация</h2>
-                    <ButtonArt type={disabled ? 'submit' : 'button'} className={styles.formBtn} onClick = {changeForm}>{disabled ? 'Изменить' : 'Сохранить'}</ButtonArt>
+                    <ButtonArt type={disabled ? 'submit' : 'button'} className={styles.formBtn} 
+                    onClick = {changeForm}>
+                        {disabled ? 'Изменить' : 'Сохранить'}
+                        </ButtonArt>
                 </div>
                 <div className={styles.form_info}>
                     <div className={styles.left}>

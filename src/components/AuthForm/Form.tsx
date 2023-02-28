@@ -7,7 +7,6 @@ import { Formik, FormikProps, Form } from "formik";
 
 interface FormContainerI {
   children: JSX.Element;
-  textButtonSubmit: string;
   formConfig: FormikConfig<any>;
   schemaConfig: Yup.ObjectShape;
 }

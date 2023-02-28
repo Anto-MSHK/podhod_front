@@ -31,7 +31,7 @@ export const CustomInput: FC<CustomInputI> = ({ field, form, type, children, dis
   return (
     <div>
       <Input
-
+        disabled = {disabled}
         type={type}
         {...field}
         valid={
