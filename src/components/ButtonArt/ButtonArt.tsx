@@ -4,7 +4,7 @@ import styles from "./ButtonArt.module.css";
 
 interface ButtonArtI extends ButtonProps {
   className?: string;
-  children: JSX.Element | string;
+
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   icon?: any;
@@ -16,6 +16,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
   onClick,
   type = "button",
   color,
+
   active,
   icon,
 }) => {
@@ -27,7 +28,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
   return (
     <div className={`${styles.customBtnWrapper}`}>
       <Button
-        color={color}
+        color = {color}
         className={customClassName}
         onClick={onClick}
         type={type}
