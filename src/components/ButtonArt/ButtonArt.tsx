@@ -10,6 +10,7 @@ interface ButtonArtI extends ButtonProps {
   icon?: any;
   iconWidth?: number;
   disabled?: boolean;
+  inActiveStyle?: boolean;
 }
 
 export const ButtonArt: FC<ButtonArtI> = ({
@@ -23,6 +24,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
   icon,
   iconWidth,
   disabled,
+  inActiveStyle,
 }) => {
   const customClassName = className ? className : styles.customBtn;
   const iconElement = icon ? (
@@ -35,10 +37,10 @@ export const ButtonArt: FC<ButtonArtI> = ({
   ) : null;
 
   return (
-    <div>
+    <div className={styles.custom_btn_container}>
       <Button
         color={color}
-        className={`${customClassName}`}
+        className={`${inActiveStyle ? styles.disabled : customClassName}`}
         onClick={onClick}
         type={type}
         active={active}

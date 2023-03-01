@@ -1,0 +1,58 @@
+.auth_wrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: fit-content;
+    justify-content: end;
+}
+
+.auth_background_image {}
+
+.auth_container {
+    width: 600px;
+    margin-right: 100px;
+}
+
+.auth_btns_container{
+    display: flex;
+    gap: 10px;
+}
+.auth_submit_btn_container {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+/* .formWrapper {
+    display: flex;
+    padding: 15px;
+    background-color: rgba(226, 226, 226, 0.03);
+    border-radius: 15px;
+    row-gap: 15px;
+    flex-direction: column;
+}
+
+.AuthInputElements {
+    font-weight: 500;
+    color: black;
+    font-size: 20px;
+}
+
+.AuthInputElements:focus {
+    border-color: #df791a !important;
+    box-shadow: 0 0 0 0.25rem rgb(223 121 26 / 35%) !important;
+}
+
+.AuthInputsWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.submitBtn {
+    margin-top: 15px;
+} */
