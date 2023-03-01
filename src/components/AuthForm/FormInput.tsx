@@ -14,7 +14,7 @@ import { type } from 'os';
 
 
 interface CustomInputI extends InputProps {
-  form: any;
+  form: string;
   type?: InputType;
   disabled: boolean
 }
