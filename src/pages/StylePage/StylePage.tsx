@@ -12,8 +12,8 @@ import icon4 from "../../assets/icons/Icon4.svg";
 import icon9 from "../../assets/icons/Icon9.svg";
 import icon8 from "../../assets/icons/Icon8.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
-import loginIcon from '../../assets/icons/loginIcon.svg'
-import registerIcon from "../../assets/icons/RegisterIcon.svg"
+import loginIcon from "../../assets/icons/loginIcon.svg";
+import registerIcon from "../../assets/icons/RegisterIcon.svg";
 import { FillForm } from "../../components/FillForm/FillForm";
 // import { AuthForm } from "../../components/AuthForm/AuthForm";
 import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
@@ -21,7 +21,8 @@ import { FormContainer } from "../../components/AuthForm/Form";
 import { FormInput } from "./../../components/AuthForm/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
-import { ButtonArt } from '../../components/ButtonArt/ButtonArt';
+import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
+import { MyForm } from "./Test";
 
 export const MainPage = () => {
   const btnData = [
@@ -126,42 +127,70 @@ export const MainPage = () => {
         <FillForm />
       </div>
       <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-        <FormContainer
-          schemaConfig={schemaConfig}
-          formConfig={formConfig}
-        >
-          <div>
-
+        <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+          {(formik) => (
             <div>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <ButtonArt icon={registerIcon} type='submit'>Зарегистрироваться</ButtonArt>
-                <ButtonArt  icon = {loginIcon} iconWidth = {25} style={{backgroundColor: '#282828', border: '2px solid #282828'}}>Выйти</ButtonArt>
-              </div>
+              <div>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <ButtonArt icon={registerIcon} type="submit">
+                    Зарегистрироваться
+                  </ButtonArt>
+                  <ButtonArt
+                    icon={loginIcon}
+                    iconWidth={25}
+                    style={{
+                      backgroundColor: "#282828",
+                      border: "2px solid #282828",
+                    }}
+                  >
+                    Выйти
+                  </ButtonArt>
+                </div>
 
-              <FormInput name="email" label="Email" />
-              <FormInput
-                name="password"
-                label="Пароль"
-                help="От 4 до 12 символов"
-              />
+                <FormInput name="email" label="Email" />
+                <FormInput
+                  name="password"
+                  label="Пароль"
+                  help="От 4 до 12 символов"
+                />
+              </div>
             </div>
-          </div>
+          )}
         </FormContainer>
       </div>
-      <div style={{ display: "flex", gap: '10px'}}>
-        <div style={{ width: '300px' }}>
-          <InfoComponent icon={icon9} title={"Не может быть опубликовано"} desc={"Есть незаполненные поля"} />
+      <MyForm />
+      <div style={{ display: "flex", gap: "10px" }}>
+        <div style={{ width: "300px" }}>
+          <InfoComponent
+            icon={icon9}
+            title={"Не может быть опубликовано"}
+            desc={"Есть незаполненные поля"}
+          />
         </div>
-        <div style={{ width: '300px' }}>
-          <InfoComponent icon={icon8} title={"Успешно опубликовано"} desc={"Ошибок не найдено"} />
+        <div style={{ width: "300px" }}>
+          <InfoComponent
+            icon={icon8}
+            title={"Успешно опубликовано"}
+            desc={"Ошибок не найдено"}
+          />
         </div>
-        <div >
-          <InfoComponent iconWidth={100} icon={icon7} title={"А тут здоровая иконка"} desc={"Прикол да"} />
+        <div>
+          <InfoComponent
+            iconWidth={100}
+            icon={icon7}
+            title={"А тут здоровая иконка"}
+            desc={"Прикол да"}
+          />
         </div>
       </div>
-          <InfoComponent iconWidth={50} icon={icon4} title={"Пример адаптивности"} 
-          desc={("Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус.")} />
-
+      <InfoComponent
+        iconWidth={50}
+        icon={icon4}
+        title={"Пример адаптивности"}
+        desc={
+          "Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
+        }
+      />
     </div>
   );
 };
