@@ -125,29 +125,6 @@ export const MainPage = () => {
       <div>
         <FillForm />
       </div>
-      <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-        <FormContainer
-          schemaConfig={schemaConfig}
-          formConfig={formConfig}
-        >
-          <div>
-
-            <div>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <ButtonArt icon={registerIcon} type='submit'>Зарегистрироваться</ButtonArt>
-                <ButtonArt  icon = {loginIcon} iconWidth = {25} style={{backgroundColor: '#282828', border: '2px solid #282828'}}>Выйти</ButtonArt>
-              </div>
-
-              <FormInput name="email" label="Email" />
-              <FormInput
-                name="password"
-                label="Пароль"
-                help="От 4 до 12 символов"
-              />
-            </div>
-          </div>
-        </FormContainer>
-      </div>
       <div style={{ display: "flex", gap: '10px'}}>
         <div style={{ width: '300px' }}>
           <InfoComponent icon={icon9} title={"Не может быть опубликовано"} desc={"Есть незаполненные поля"} />
