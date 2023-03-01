@@ -63,7 +63,6 @@ const AuthPage = () => {
                     formConfig={formConfig}
                 >
                     {(formik) => (
-
                         <div>
                             <div className={styles.auth_btns_container}>
                                 <ButtonArt

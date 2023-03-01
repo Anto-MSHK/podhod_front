@@ -23,6 +23,7 @@ import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import { MyForm } from "./Test";
+import BtnFilters from "../../components/Filters/BtnFilters";
 
 export const MainPage = () => {
   const btnData = [
@@ -71,6 +72,7 @@ export const MainPage = () => {
           <BtnGroupSelect view="radio" data={btnData} />
           <div style={{ margin: "10px 0" }} />
           <BtnGroupSelect view="select" data={btnData} />
+          <BtnFilters sort={sort} date={""}/>
           <div style={{ margin: "10px 0" }} />
           <div style={{ display: "flex" }}>
             <div style={{ marginRight: 45 }}>
