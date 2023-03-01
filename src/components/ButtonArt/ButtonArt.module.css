@@ -1,8 +1,10 @@
 .customBtn {
+    width: 100%;
     display: flex;
+    justify-content: center;
     color: white !important;
-    background-color: #df791a ;
-    border: 1px solid #df791a ;
+    background-color: #df791a !important;
+    border: 1px solid #df791a !important;
     border-radius: 10px;
     font-weight: 500;
     font-size: 18px;
