@@ -3,7 +3,7 @@ import { Card, CardBody, CardText, CardTitle } from "reactstrap";
 import { number } from "yup";
 import styles from "./InfoComponent.module.css";
 
-interface IInfoComponent {
+type IInfoComponent = {
   title: string;
   icon?: string;
   desc?: string;

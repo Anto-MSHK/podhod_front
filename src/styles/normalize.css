@@ -145,3 +145,17 @@ template {
 [hidden] {
   display: none;
 }
+.auth {
+  margin-left: auto;
+  margin-top: 5rem;
+  width: 50%;
+}
+.ath {
+  width: 40%;
+  height: 87%;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+}
