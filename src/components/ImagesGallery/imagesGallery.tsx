@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import DragAndDrop from '../DragAndDrop/dragAndDrop';
 import styles from './imagesGallery.module.css'
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import ImageComponent from './ImageComponent';
-import { randomInt } from 'crypto';
-import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { swapImage } from '../../app/Slices/imagesUploadSlice';
-import { right } from '@popperjs/core';
 
 
 
@@ -37,10 +33,6 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, index: number) => {
         event.preventDefault();
-        /*   const newItems = [...items];
-          const draggedItem = newItems[draggedIndex];
-          newItems.splice(draggedIndex, 1);
-          newItems.splice(index, 0, draggedItem); */
           console.log('index= ' + index + ' draggedIndex= ' + draggedIndex);
         dispatch(swapImage({
             draggedIndex: draggedIndex as number,
@@ -66,7 +58,7 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
                             onDrop={(e) => handleDrop(e, index)}
                             style={{
                                 opacity: draggedIndex === index ? 0.5 : 1,
-                                border: draggedIndex === index ? '5px solid blue' : 'none',
+                                border: draggedIndex === index ? '5px solid #df791a' : 'none',
                                 backgroundColor: dragOverIndex === index ? "lightgray" : "white",
                                 scale: dragOverIndex === index ? "1.05" : "1",
                                 cursor:   "pointer"

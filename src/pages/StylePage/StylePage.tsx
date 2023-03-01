@@ -10,7 +10,10 @@ import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import icon4 from "../../assets/icons/Icon4.svg";
 import icon9 from "../../assets/icons/Icon9.svg";
+import icon8 from "../../assets/icons/Icon8.svg";
 import icon7 from "../../assets/icons/Icon7.svg";
+import loginIcon from '../../assets/icons/loginIcon.svg'
+import registerIcon from "../../assets/icons/RegisterIcon.svg"
 import { FillForm } from "../../components/FillForm/FillForm";
 // import { AuthForm } from "../../components/AuthForm/AuthForm";
 import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
@@ -18,6 +21,7 @@ import { FormContainer } from "../../components/AuthForm/Form";
 import { FormInput } from "./../../components/AuthForm/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
+import { ButtonArt } from '../../components/ButtonArt/ButtonArt';
 
 export const MainPage = () => {
   const btnData = [
@@ -40,11 +44,13 @@ export const MainPage = () => {
   };
 
   const schemaConfig: Yup.ObjectShape = {
+    email: Yup.string()
+      .email("Некорректная почта!")
+      .required("Обязательное поле!"),
     password: Yup.string()
-      .min(2, "Too Short!")
-      .max(10, "Too Long!")
-      .required("Required")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+      .min(4, "Минимум 4 символа!")
+      .max(12, "Максимум 12 символов!")
+      .required("Обязательное поле!"),
   };
 
   return (
@@ -123,17 +129,39 @@ export const MainPage = () => {
         <FormContainer
           schemaConfig={schemaConfig}
           formConfig={formConfig}
-          textButtonSubmit="Продолжить"
         >
           <div>
-            <FormInput name="email" label="тест" help="тест" />
-            <FormInput name="password" label="тест" help="тест" />
+
+            <div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <ButtonArt icon={registerIcon} type='submit'>Зарегистрироваться</ButtonArt>
+                <ButtonArt  icon = {loginIcon} iconWidth = {25} style={{backgroundColor: '#282828', border: '2px solid #282828'}}>Выйти</ButtonArt>
+              </div>
+
+              <FormInput name="email" label="Email" />
+              <FormInput
+                name="password"
+                label="Пароль"
+                help="От 4 до 12 символов"
+              />
+            </div>
           </div>
         </FormContainer>
       </div>
-      <div>
-        <InfoComponent icon={icon9} title={"Andrew"} desc={"boba"} />
+      <div style={{ display: "flex", gap: '10px'}}>
+        <div style={{ width: '300px' }}>
+          <InfoComponent icon={icon9} title={"Не может быть опубликовано"} desc={"Есть незаполненные поля"} />
+        </div>
+        <div style={{ width: '300px' }}>
+          <InfoComponent icon={icon8} title={"Успешно опубликовано"} desc={"Ошибок не найдено"} />
+        </div>
+        <div >
+          <InfoComponent iconWidth={100} icon={icon7} title={"А тут здоровая иконка"} desc={"Прикол да"} />
+        </div>
       </div>
+          <InfoComponent iconWidth={50} icon={icon4} title={"Пример адаптивности"} 
+          desc={("Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус.")} />
+
     </div>
   );
 };

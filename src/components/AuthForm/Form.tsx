@@ -7,15 +7,14 @@ import { Formik, FormikProps, Form } from "formik";
 
 interface FormContainerI {
   children: JSX.Element;
-  textButtonSubmit: string;
   formConfig: FormikConfig<any>;
   schemaConfig: Yup.ObjectShape;
 }
 export const FormContainer: FC<FormContainerI> = ({
   children,
-  textButtonSubmit,
   schemaConfig,
   formConfig,
+
 }) => {
   const schema = Yup.object().shape(schemaConfig);
   return (
@@ -23,12 +22,13 @@ export const FormContainer: FC<FormContainerI> = ({
       initialValues={formConfig.initialValues}
       validationSchema={schema}
       onSubmit={formConfig.onSubmit}
+    
+
     >
       {(formik: FormikProps<any>) => (
-        <Form>
-          {children}
-          <ButtonArt type="submit">{textButtonSubmit}</ButtonArt>
-        </Form>
+          <Form  >
+            {children}
+          </Form>
       )}
     </Formik>
   );

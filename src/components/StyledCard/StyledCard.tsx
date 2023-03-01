@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Button,
   Card,
   CardBody,
   CardSubtitle,
@@ -14,7 +13,7 @@ import icon1 from "../../assets/icons/Icon.svg";
 import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import { PublicationStatus } from "../PublicationStatus/PublicationStatus";
-import { ButtonArt } from "./../ButtonArt/ButtonArt";
+import { ButtonArt } from "../ButtonArt/ButtonArt";
 
 interface IStyledCardProps {
   eventTitle: string;
@@ -44,7 +43,7 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = (
           <Widget info="от 250р." icon={icon2} description="платный вход" />
           <Widget info="6+" icon={icon3} description="возраст" />
         </CardText>
-        <ButtonArt className={styles.cardButton}>
+        <ButtonArt>
           Продолжить заполнение
         </ButtonArt>
       </CardBody>
