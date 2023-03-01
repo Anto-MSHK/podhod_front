@@ -4,10 +4,10 @@ import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import {FormInput} from "../../components/AuthForm/FormInput";
-import { FormikConfig } from "formik";
+import {FormikConfig} from "formik";
 import * as Yup from "yup";
 import imageForAuth from "../../assets/pictures/imageForAuth.png"
-import  "../../styles/normalize.css";
+import "../../styles/normalize.css";
 
 
 const formConfig: FormikConfig<any> = {
@@ -39,8 +39,7 @@ const AuthPage = () => {
                     schemaConfig={schemaConfig}
                     formConfig={formConfig}
                 >
-                    <div>
-
+                    {(formik) => (
                         <div>
                             <div style={{display: 'flex', gap: '10px'}}>
                                 <ButtonArt icon={registerIcon} type='submit'>Зарегистрироваться</ButtonArt>
@@ -56,7 +55,7 @@ const AuthPage = () => {
                                 label="Пароль"
                                 help="От 4 до 12 символов"/>
                         </div>
-                    </div>
+                    )}
                 </FormContainer>
             </div>
         </>
