@@ -3,14 +3,14 @@ import { StyledCard } from "../../components/StyledCard/StyledCard";
 import { BtnGroupSelect } from '../ButtonGroup/ButtonGroup';
 import BtnFilters from '../Filters/BtnFilters';
 import styles from "./EventOverviewPage.module.css";
-import icon1 from "../../assets/icons/Icon.svg"
-import icon2 from "../../assets/icons/Icon2.svg";
-import icon3 from "../../assets/icons/Icon3.svg";
+import event1 from "../../assets/pictures/Event1.png";
+import event2 from "../../assets/pictures/Event2.png";
+import event3 from "../../assets/pictures/Event3.png";
 
 const items =[
-    {name: "Fff", date: "12.06.2023", image: icon1},
-    {name: "Dff", date: "12.06.2023", image: icon2},
-    {name: "Tff", date: "12.06.2023", image: icon3},
+    {name: "Fff", date: "12.06.2023", image: event1},
+    {name: "Dff", date: "12.06.2023", image: event2},
+    {name: "Tff", date: "12.06.2023", image: event3},
 ] 
 
 
