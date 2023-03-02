@@ -4,6 +4,7 @@ import {MainPage} from "./pages/StylePage/StylePage";
 import {Layout} from "./layout/Layout";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import {ExpoCreatePage} from "./pages/ExpoCreatePage/ExpoCreatePage";
+import { EventOverviewPage } from "./components/EventOverviewPage/EventOverviewPage";
 
 function App() {
     return (
