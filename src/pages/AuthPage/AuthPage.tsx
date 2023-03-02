@@ -82,17 +82,20 @@ const AuthPage = () => {
                             </div>
                             <div className={styles.auth_form_container}>
                                 {
-                                    authPageState === 'registration' && <FormInput name="organizationName" label="Название организации" />
+                                    authPageState === 'registration'
+                                    && <FormInput name="organizationName" label="Название организации" />
                                 }
                                 <FormInput name="email" label="Email" />
                                 <FormInput
                                     name="password"
                                     label="Пароль"
-                                    help = {formik.getFieldMeta('password').error ? "От 4 до 12 символов" : ''}
+                                    help={formik.getFieldMeta('password').error ? "От 4 до 12 символов" : ''}
                                 />
                             </div>
                             <div className={styles.auth_submit_btn_container}>
-                                <ButtonArt type='submit'>{authPageState === 'registration' ? 'Войти' : 'Продолжить регистрацию'}</ButtonArt>
+                                <ButtonArt disabled = {Object.keys(formik.errors).length > 0} type='submit'>
+                                    {authPageState === 'registration' ? 'Продолжить регистрацию' : 'Войти'}
+                                </ButtonArt>
                             </div>
                         </div>)}
                 </FormContainer>
