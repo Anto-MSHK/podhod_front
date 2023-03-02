@@ -9,14 +9,14 @@
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
-    width: 85%;
+    width: 80%;
 }
 
 .PreviewWrapper {
     display: flex;
     flex-direction: column;
     row-gap: 1vw;
-    width: 15%;
+    width: 20%;
 }
 
 .ImgGalleryTitle {
