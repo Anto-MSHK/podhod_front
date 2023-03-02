@@ -1,6 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Button, Spinner} from "reactstrap";
 import styles from "./ButtonFilter.module.css";
+import {ButtonArt} from "../ButtonArt/ButtonArt";
 
 
 interface SortI {
@@ -29,10 +30,10 @@ export const BtnFilters: FC<SortI> = ({date,sort , type}) => {
                 index++
                 return (
                     <div key={index}>
-                        <Button
+                        <ButtonArt
                             color={cSelected.includes(index) ? "warning" : undefined}
                             className={`${styles.btnItem} ${
-                                cSelected.includes(index) ? styles.active : styles.deactivate
+                                cSelected.includes(index) ? styles.activate : styles.deactivate
                             }`}
                             onClick={() => onCheckboxBtnClick(index)}
                             active={cSelected.includes(index)}
@@ -41,7 +42,7 @@ export const BtnFilters: FC<SortI> = ({date,sort , type}) => {
                             <span>
                              {' '}{el.name}
                         </span>
-                        </Button>
+                        </ButtonArt>
                     </div>
                 );
             })}

@@ -1,0 +1,51 @@
+.ExpoCreateWrapper {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 4vw;
+    padding: 20px;
+}
+
+.InfoWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vw;
+    width: 100%;
+}
+
+.PreviewWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+}
+
+.ImgGalleryTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.ImgGalleryTitle p{
+    font-weight: 500;
+    font-size: medium;
+    color: #ABABAB;
+    text-align: end;
+}
+
+.PreviewPicture {
+    height: 70%;
+    width: 100%;
+    border: 1px solid #E74D36;
+    border-radius: 15px;
+}
+
+.FormWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+}
+
+.ImgGalleryWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}

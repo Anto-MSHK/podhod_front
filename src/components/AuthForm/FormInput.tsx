@@ -7,7 +7,7 @@ import {
   InputProps,
 } from "reactstrap";
 import styles from "./AuthForm.module.css";
-import { Field, FieldConfig, FieldProps, FieldValidator, FormikConfig, Formik } from 'formik';
+import { Field, FieldConfig, FieldProps, FieldValidator, FormikConfig, Formik, FormikTouched } from 'formik';
 import { InputType } from "reactstrap/types/lib/Input";
 import { type } from 'os';
 
@@ -60,7 +60,8 @@ export const FormInput: FC<CustomFormInputI> = ({
   type,
   children,
   value,
-  disabled
+  disabled,
+
 }) => {
   return (
 
