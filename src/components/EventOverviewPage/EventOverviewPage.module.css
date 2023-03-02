@@ -1,0 +1,17 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    padding: 15px;
+}
+.filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    margin-top: 10px;
+    column-gap: 1vw;
+
+}

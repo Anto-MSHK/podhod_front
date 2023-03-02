@@ -17,7 +17,7 @@ import { ButtonArt } from "../ButtonArt/ButtonArt";
 
 interface IStyledCardProps {
   eventTitle: string;
-
+  image?: string;
   dateOfCreation: string;
 }
 
@@ -26,7 +26,7 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = (
 ) => {
   return (
     <Card className={styles.styledCard_container} color="dark" inverse>
-      <img src={img1} alt="123" className={styles.card_img} />
+      <img src={props.image} alt="123" className={styles.card_img} />
       <div className={styles.card_status}>
         <PublicationStatus status="Выставка" type="event" />
         <PublicationStatus status="Черновик" type="draft" />

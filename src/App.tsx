@@ -1,11 +1,10 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import {Routes, Route} from "react-router-dom";
 import {TestPage} from "./pages/TestPage/TestPage";
 import {MainPage} from "./pages/StylePage/StylePage";
 import {Layout} from "./layout/Layout";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import {ExpoCreatePage} from "./pages/ExpoCreatePage/ExpoCreatePage";
+import { EventOverviewPage } from "./components/EventOverviewPage/EventOverviewPage";
 
 function App() {
     return (
@@ -15,6 +14,7 @@ function App() {
                 <Route element={<TestPage/>} path="/redux-test"></Route>
                 <Route element={<AuthPage/>} path="/registration"></Route>
                 <Route element={<ExpoCreatePage/>} path='/expocreate'></Route>
+                <Route element={<EventOverviewPage />} path="/event"></Route>
             </Routes>
         </Layout>
     );
