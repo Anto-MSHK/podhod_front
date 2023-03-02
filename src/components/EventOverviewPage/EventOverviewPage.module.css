@@ -1,0 +1,11 @@
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
