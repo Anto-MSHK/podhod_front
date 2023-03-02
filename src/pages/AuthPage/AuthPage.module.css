@@ -4,10 +4,22 @@
     display: flex;
     height: fit-content;
     justify-content: end;
+    
+/*     background-repeat: no-repeat;
+    background-position-x: left;
+    background-size: contain; */
+}
+@media (max-width: 1600px) {
+    .auth_wrapper{
+        justify-content: center;
+    }
+    .auth_img{
+        opacity: 0;
+    }
 }
 
 .auth_container {
-    width: 600px;
+    width: 1000px;
     max-width: 50%;
     margin-right: 50px;
     float: right;
@@ -22,50 +34,49 @@
     margin: 0 auto;
 }
 
+
 .auth_img {
-    width: 40%;
-    height: 100%;
-    left: 0;
-    bottom: 0;
     display: flex;
-    position: absolute;
-    justify-content: space-between;
+    left: -10vw;
+    top: 0%;
     flex-wrap: wrap;
     box-sizing: border-box;
     padding-top: 80px;
+    position: absolute;
+}
+@media screen and (max-width: 2070px) {
+    .auth_img{
+        display: flex;
+        transform: translateX(-10vw);
+        top: 0%;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding-top: 80px;
+        position: absolute;
+    }
+}
+@media screen and (max-width: 1790px) {
+    .auth_img{
+        display: flex;
+        transform: translateX(-15vw);
+        top: 0%;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding-top: 80px;
+        position: absolute;
+    }
+}
+@media screen and (max-width: 1720px) {
+    .auth_img{
+        display: flex;
+        transform: translateX(-20vw);
+        top: 0%;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding-top: 80px;
+        position: absolute;
+    }
 }
 
 
 
-
-
-
-/* .formWrapper {
-    display: flex;
-    padding: 15px;
-    background-color: rgba(226, 226, 226, 0.03);
-    border-radius: 15px;
-    row-gap: 15px;
-    flex-direction: column;
-}
-
-.AuthInputElements {
-    font-weight: 500;
-    color: black;
-    font-size: 20px;
-}
-
-.AuthInputElements:focus {
-    border-color: #df791a !important;
-    box-shadow: 0 0 0 0.25rem rgb(223 121 26 / 35%) !important;
-}
-
-.AuthInputsWrapper {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
-.submitBtn {
-    margin-top: 15px;
-} */

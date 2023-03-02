@@ -6,8 +6,10 @@ import loginIcon from "../../assets/icons/loginIcon.svg";
 import { FormInput } from "../../components/AuthForm/FormInput";
 import { FormikConfig } from "formik";
 import * as Yup from "yup";
-import imageForAuth from "../../assets/pictures/imageForAuth.png"
+import imageForAuth from "../../assets/pictures/backGroundImg.svg"
 import styles from './AuthPage.module.css';
+import { url } from 'inspector';
+
 
 
 
@@ -55,8 +57,10 @@ const AuthPage = () => {
     }
 
     return (
-        <div className={styles.auth_wrapper}>
+        <div className={styles.auth_wrapper} >
+
             <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
+
             <div className={styles.auth_container}>
                 <FormContainer
                     schemaConfig={schemaConfig}
@@ -93,7 +97,7 @@ const AuthPage = () => {
                                 />
                             </div>
                             <div className={styles.auth_submit_btn_container}>
-                                <ButtonArt disabled = {Object.keys(formik.errors).length > 0} type='submit'>
+                                <ButtonArt disabled={Object.keys(formik.errors).length > 0} type='submit'>
                                     {authPageState === 'registration' ? 'Продолжить регистрацию' : 'Войти'}
                                 </ButtonArt>
                             </div>
