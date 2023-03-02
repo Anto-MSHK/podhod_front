@@ -56,7 +56,7 @@ const AuthPage = () => {
 
     return (
         <div className={styles.auth_wrapper}>
-            <img className="ath" src={imageForAuth} alt="imageForAuth" />
+            <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
             <div className={styles.auth_container}>
                 <FormContainer
                     schemaConfig={schemaConfig}

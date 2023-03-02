@@ -1,16 +1,16 @@
 .auth_wrapper {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     display: flex;
     height: fit-content;
     justify-content: end;
 }
 
-
-
 .auth_container {
     width: 600px;
-    margin-right: 100px;
+    max-width: 50%;
+    margin-right: 50px;
+    float: right;
 }
 
 .auth_btns_container{
@@ -20,6 +20,19 @@
 .auth_submit_btn_container {
     width: fit-content;
     margin: 0 auto;
+}
+
+.auth_img {
+    width: 40%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding-top: 80px;
 }
 
 
