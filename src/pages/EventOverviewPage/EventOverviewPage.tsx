@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React  from 'react'
 import { StyledCard } from "../../components/StyledCard/StyledCard";
-import { BtnGroupSelect } from '../ButtonGroup/ButtonGroup';
-import BtnFilters from '../Filters/BtnFilters';
+import { BtnGroupSelect } from '../../components/ButtonGroup/ButtonGroup';
+import BtnFilters from '../../components/Filters/BtnFilters';
 import styles from "./EventOverviewPage.module.css";
 import event1 from "../../assets/pictures/Event1.png";
 import event2 from "../../assets/pictures/Event2.png";
