@@ -47,10 +47,11 @@ const AuthPage = () => {
         activeBtn: authPageStateT,
         setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void
     ) => {
-        if (activeBtn === 'registration' && authPageState === 'login') {
+
+        if (activeBtn === 'registration' && authPageState !== 'registration') {
             setFieldValue('organizationName', '')
             setAuthPageState('registration')
-        } else {
+        } else if (activeBtn === 'login' && authPageState !== 'login')  {
             setFieldValue('organizationName', 'login')
             setAuthPageState('login')
         }
@@ -58,9 +59,7 @@ const AuthPage = () => {
 
     return (
         <div className={styles.auth_wrapper} >
-
             <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
-
             <div className={styles.auth_container}>
                 <FormContainer
                     schemaConfig={schemaConfig}
@@ -70,7 +69,6 @@ const AuthPage = () => {
                         <div>
                             <div className={styles.auth_btns_container}>
                                 <ButtonArt
-
                                     icon={registerIcon}
                                     onClick={() => handleAuth('registration', formik.setFieldValue)}
                                     inActiveStyle={authPageState === 'login'}

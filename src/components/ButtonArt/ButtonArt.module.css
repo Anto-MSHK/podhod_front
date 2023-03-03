@@ -3,24 +3,30 @@
   display: flex;
   justify-content: center;
   color: white !important;
-  background-color: #df791a !important;
-  border: 1px solid #df791a !important;
+  background-color: var(--main_btn_color) !important;
+  border: 1px solid var(--main_btn_color) !important;
   border-radius: 10px;
   font-weight: 500;
   font-size: 18px;
   align-items: center;
   text-align: center;
 }
+.customBtn:hover{
+  background-color: var(--main_btn_color_hover) !important;
+
+}
 
 .disabled {
   background-color: #636363 !important;
+  border: 1px solid  #636363 !important;
   font-weight: 500;
   font-size: 18px;
   align-items: center;
   text-align: center;
-   width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  border-radius: 10px;
 }
 
 .imageWrapper {
