@@ -24,12 +24,7 @@ const items = [
     { id: 3, name: "3", date: "12.06.2023", image: event3, type: 'Выставка', status: 'published' },
 ];
 
-const btnData = [
-    { name: "Все" },
-    { name: "Активные" },
-    { name: "Просмотренные" },
-    { name: "Черновик" },
-];
+
 
 const sort = [{ name: "По дате" }, { name: "По типу" }];
 
@@ -38,27 +33,13 @@ export function EventOverviewPage() {
 
     const handleSort = (status: string) => {
         const draftCard = [...items];
-
         switch (status) {
-            case 'draft':
-                setItems(draftCard.reduce((newArr: Iitems[], items) => {
-                    if (items.status === 'draft') {
-                        newArr.push(items);
-                    }
-                    return newArr;
-                }, []));
+            case '':
+                setItems(draftCard);
                 break;
-            case 'completed':
+            case status:
                 setItems(draftCard.reduce((newArr: Iitems[], items) => {
-                    if (items.status === 'completed') {
-                        newArr.push(items);
-                    }
-                    return newArr;
-                }, []));
-                break;
-            case 'published':
-                setItems(draftCard.reduce((newArr: Iitems[], items) => {
-                    if (items.status === 'published') {
+                    if (items.status === status) {
                         newArr.push(items);
                     }
                     return newArr;
@@ -68,6 +49,13 @@ export function EventOverviewPage() {
                 setItems(draftCard);
         }
     };
+
+    const btnData = [
+        { name: "Все", onClick: () => handleSort('') },
+        { name: "Активные", onClick: () => handleSort('published') },
+        { name: "Неактивные", onClick: () => handleSort('completed') },
+        { name: "Черновик", onClick: () => handleSort('draft') },
+    ];
 
     return (
 
@@ -89,13 +77,6 @@ export function EventOverviewPage() {
                         key={item.id} />
                 ))}
             </div>
-            <div style={{ display: 'flex' }}>
-                <ButtonArt onClick={() => handleSort('draft')}>draft</ButtonArt>
-                <ButtonArt onClick={() => handleSort('completed')}>completed</ButtonArt>
-                <ButtonArt onClick={() => handleSort('published')}>published</ButtonArt>
-                <ButtonArt onClick={() => handleSort('')}>ALL</ButtonArt>
-            </div>
-
         </div>
     );
 }
