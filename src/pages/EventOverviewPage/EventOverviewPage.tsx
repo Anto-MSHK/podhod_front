@@ -29,7 +29,7 @@ const items = [
 const sort = [{ name: "По дате" }, { name: "По типу" }];
 
 export function EventOverviewPage() {
-    const [item, setItems] = useState<Iitems[]>([]);
+    const [item, setItems] = useState<Iitems[]>(items);
 
     const handleSort = (status: string) => {
         const draftCard = [...items];
