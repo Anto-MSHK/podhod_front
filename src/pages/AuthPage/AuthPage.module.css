@@ -1,5 +1,5 @@
 :root {
-    --contentWidth: 1000px
+    --contentWidth:700px
 }
 
 .auth_wrapper {
@@ -7,14 +7,13 @@
     display: flex;
     height: fit-content;
     justify-content: end;
-
 }
 
 .auth_container {
     width: var(--contentWidth);
     margin-right: 300px;
 }
-@media (max-width: 1850px) {
+@media (max-width: 1200px) {
     .auth_wrapper {
         display: flex;
         justify-content: center;
@@ -25,7 +24,7 @@
     }
 
     .auth_img {
-        opacity: 0;
+       opacity: 0;
     }
 }
 
@@ -44,12 +43,11 @@
 
 
 .auth_img {
-    display: flex;
-    right: calc((var(--contentWidth) + var(--contentWidth)/2));
-    top: 0%;
-    flex-wrap: wrap;
-    box-sizing: border-box;
+    right: calc((var(--contentWidth) + var(--contentWidth)/1.2));
+    top: 3%;
     padding-top: 80px;
     position: absolute;
+    max-width: 100%;
+    height: auto;
 }
 
