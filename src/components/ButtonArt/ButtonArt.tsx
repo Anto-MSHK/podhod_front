@@ -18,7 +18,6 @@ export const ButtonArt: FC<ButtonArtI> = ({
   className = "",
   onClick,
   type = "button",
-  color,
   style,
   active,
   icon,
@@ -39,13 +38,14 @@ export const ButtonArt: FC<ButtonArtI> = ({
   return (
     <div className={styles.custom_btn_container}>
       <Button
-        color={color}
+
         className={`${inActiveStyle ? styles.disabled : customClassName}`}
         onClick={onClick}
         type={type}
         active={active}
         style={style}
         disabled={disabled}
+
       >
         {iconElement}
         {children}

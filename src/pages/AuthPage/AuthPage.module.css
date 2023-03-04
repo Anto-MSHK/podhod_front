@@ -1,34 +1,42 @@
+:root {
+    --contentWidth: 1000px
+}
+
 .auth_wrapper {
-    margin: 0 auto;
     padding: 0;
     display: flex;
     height: fit-content;
     justify-content: end;
-    
-/*     background-repeat: no-repeat;
-    background-position-x: left;
-    background-size: contain; */
+
 }
-@media (max-width: 1600px) {
-    .auth_wrapper{
+
+.auth_container {
+    width: var(--contentWidth);
+    margin-right: 300px;
+}
+@media (max-width: 1850px) {
+    .auth_wrapper {
+        display: flex;
         justify-content: center;
+
     }
-    .auth_img{
+    .auth_container{
+        margin-right: 0;
+    }
+
+    .auth_img {
         opacity: 0;
     }
 }
 
-.auth_container {
-    width: 1000px;
-    max-width: 50%;
-    margin-right: 50px;
-    float: right;
-}
 
-.auth_btns_container{
+.auth_btns_container {
     display: flex;
     gap: 10px;
+
+
 }
+
 .auth_submit_btn_container {
     width: fit-content;
     margin: 0 auto;
@@ -37,46 +45,11 @@
 
 .auth_img {
     display: flex;
-    left: -10vw;
+    right: calc((var(--contentWidth) + var(--contentWidth)/2));
     top: 0%;
     flex-wrap: wrap;
     box-sizing: border-box;
     padding-top: 80px;
     position: absolute;
 }
-@media screen and (max-width: 2070px) {
-    .auth_img{
-        display: flex;
-        transform: translateX(-10vw);
-        top: 0%;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        padding-top: 80px;
-        position: absolute;
-    }
-}
-@media screen and (max-width: 1790px) {
-    .auth_img{
-        display: flex;
-        transform: translateX(-15vw);
-        top: 0%;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        padding-top: 80px;
-        position: absolute;
-    }
-}
-@media screen and (max-width: 1720px) {
-    .auth_img{
-        display: flex;
-        transform: translateX(-20vw);
-        top: 0%;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        padding-top: 80px;
-        position: absolute;
-    }
-}
-
-
 

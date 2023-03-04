@@ -53,9 +53,7 @@ const AuthPage = () => {
 
     return (
         <div className={styles.auth_wrapper} >
-
             <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
-
             <div className={styles.auth_container}>
                 <FormContainer
                     schemaConfig={schemaConfig}
@@ -65,7 +63,6 @@ const AuthPage = () => {
                         <div>
                             <div className={styles.auth_btns_container}>
                                 <ButtonArt
-
                                     icon={registerIcon}
                                     onClick={() => handleAuth('registration', formik.setFieldValue)}
                                     inActiveStyle={authPageState === 'login'}
