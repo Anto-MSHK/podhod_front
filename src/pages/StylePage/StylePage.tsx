@@ -112,12 +112,12 @@ export const MainPage = () => {
                         <PublicationStatus status="Черновик" type="draft" />
                         <PublicationStatus status="Выставка" type="event" />
                     </div>
-                    <StyledCard
+                {/*     <StyledCard
                         eventTitle="Экспозиция музея"
                         dateOfCreation="22.02.2023"
                         type='Выставка'
                         status="completed"
-                    />
+                    /> */}
                 </div>
             </div>
             <div>

@@ -16,12 +16,48 @@ interface Iitems {
     image: string;
     type: string;
     status: string;
+    numberOfExhibits: string,
+    entryCost: string,
+    ageRestriction: string,
 }
 
 const items = [
-    { id: 1, name: "1", date: "12.06.2023", image: event1, type: 'Выставка', status: 'draft' },
-    { id: 2, name: "2", date: "12.06.2023", image: event2, type: 'Выставка', status: 'completed' },
-    { id: 3, name: "3", date: "12.06.2023", image: event3, type: 'Выставка', status: 'published' },
+    {
+        id: 1, name: "1", date: "12.06.2023", image: event1, type: 'Выставка', status: 'draft',
+        numberOfExhibits: '50', entryCost: '1000', ageRestriction: '50'
+    },
+    {
+        id: 2, name: "2", date: "12.06.2023", image: event2, type: 'Выставка', status: 'completed',
+        numberOfExhibits: '2000000000', entryCost: '15000', ageRestriction: '6'
+    },
+    {
+        id: 3, name: "3", date: "12.06.2023", image: event3, type: 'Выставка', status: 'published',
+        numberOfExhibits: '10', entryCost: '300', ageRestriction: '12'
+    },
+    {
+        id: 4, name: "5", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
+    {
+        id: 5, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
+    {
+        id:6, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
+    {
+        id: 7, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
+    {
+        id: 8, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
+    {
+        id: 9, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
+        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
+    },
 ];
 
 
@@ -34,16 +70,17 @@ export function EventOverviewPage() {
     const handleSort = (status: string) => {
         const draftCard = [...items];
         switch (status) {
-            case '':
+            case 'all':
                 setItems(draftCard);
                 break;
             case status:
-                setItems(draftCard.reduce((newArr: Iitems[], items) => {
+               /*  setItems(draftCard.reduce((newArr: Iitems[], items) => {
                     if (items.status === status) {
                         newArr.push(items);
                     }
                     return newArr;
-                }, []));
+                }, [])) */;
+                setItems(draftCard.filter(item => item.status === status))
                 break;
             default:
                 setItems(draftCard);
@@ -51,7 +88,7 @@ export function EventOverviewPage() {
     };
 
     const btnData = [
-        { name: "Все", onClick: () => handleSort('') },
+        { name: "Все", onClick: () => handleSort('all') },
         { name: "Активные", onClick: () => handleSort('published') },
         { name: "Неактивные", onClick: () => handleSort('completed') },
         { name: "Черновик", onClick: () => handleSort('draft') },
@@ -66,15 +103,16 @@ export function EventOverviewPage() {
                 <div style={{ margin: "10px 0" }} />
                 <BtnFilters sort={sort} date={"12.02.2023"} type={""} />
             </div>
-            <div className={styles.card}>
+            <div className={styles.events_container}>
                 {item.map((item) => (
-                    <StyledCard
-                        eventTitle={item.name}
-                        dateOfCreation={item.date}
-                        image={item.image}
-                        type={item.type}
-                        status={item.status}
-                        key={item.id} />
+                    <div className={styles.event}>
+                        <StyledCard
+                            eventTitle={item.name}
+                            dateOfCreation={item.date}
+                            {...item}
+                            key={item.id}
+                        />
+                    </div>
                 ))}
             </div>
         </div>

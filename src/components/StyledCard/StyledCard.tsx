@@ -20,7 +20,11 @@ interface IStyledCardProps {
     dateOfCreation: string;
     type: string;
     status: string;
+    numberOfExhibits: string,
+    entryCost: string,
+    ageRestriction: string,
 }
+
 
 const btnTitle = (status: string) => {
     if (status === 'draft') return 'Продолжить заполнение';
@@ -43,9 +47,9 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = (props) => 
                     Дата создания: {props.dateOfCreation}
                 </CardSubtitle>
                 <CardText className={styles.cardWidget}>
-                    <Widget info="4" icon={icon1} description="экспоната" />
-                    <Widget info="от 250р." icon={icon2} description="платный вход" />
-                    <Widget info="6+" icon={icon3} description="возраст" />
+                    <Widget info={props.numberOfExhibits} icon={icon1} description="экспоната" />
+                    <Widget info={`от ${props.entryCost}р`} icon={icon2} description="платный вход" />
+                    <Widget info={`${props.ageRestriction}+`} icon={icon3} description="возраст" />
                 </CardText>
                 <ButtonArt>
                     {btnTitle(props.status)}
