@@ -6,19 +6,14 @@ import loginIcon from "../../assets/icons/loginIcon.svg";
 import { FormInput } from "../../components/AuthForm/FormInput";
 import { FormikConfig } from "formik";
 import * as Yup from "yup";
-import imageForAuth from "../../assets/pictures/backGroundImg.svg"
+import imageForAuth from "../../assets/pictures/backGroundImg.svg";
 import styles from './AuthPage.module.css';
 import { url } from 'inspector';
 
 
-
-
-
-
-
 const AuthPage = () => {
-    type authPageStateT = 'login' | 'registration'
-    const [authPageState, setAuthPageState] = useState<authPageStateT>('login')
+    type authPageStateT = 'login' | 'registration';
+    const [authPageState, setAuthPageState] = useState<authPageStateT>('login');
     const formConfig: FormikConfig<any> = {
         initialValues: {
             organizationName: "",
@@ -47,15 +42,14 @@ const AuthPage = () => {
         activeBtn: authPageStateT,
         setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void
     ) => {
-
-        if (activeBtn === 'registration' && authPageState !== 'registration') {
-            setFieldValue('organizationName', '')
-            setAuthPageState('registration')
-        } else if (activeBtn === 'login' && authPageState !== 'login')  {
-            setFieldValue('organizationName', 'login')
-            setAuthPageState('login')
+        if (activeBtn === 'registration' && authPageState === 'login') {
+            setFieldValue('organizationName', '');
+            setAuthPageState('registration');
+        } else {
+            setFieldValue('organizationName', 'login');
+            setAuthPageState('login');
         }
-    }
+    };
 
     return (
         <div className={styles.auth_wrapper} >

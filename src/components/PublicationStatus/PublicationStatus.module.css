@@ -1,41 +1,44 @@
 .status_container {
-  border-radius: 8px;
-  color: #ffffff;
-  font-weight: 600;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .status {
-  padding: 5px 8px;
+    padding: 5px 8px;
 }
 
 .status_completed {
-  background-color: #48b653;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
+    background-color: #48b653;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
 }
 
 .status_draft {
-  background-color: #e74d36;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
+    background-color: #e74d36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
 }
 
 .status_event {
-  background-color: #5b88de;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  /* position: absolute; */
+    background-color: #5b88de;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    /* position: absolute; */
 }
 
 .status_img {
-  width: 15px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-right: 5px;
+    width: 15px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 5px;
 }
