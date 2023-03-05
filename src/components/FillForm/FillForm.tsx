@@ -6,6 +6,8 @@ import { FormContainer } from "../AuthForm/Form";
 import * as Yup from "yup";
 import { FormikConfig, FormikProps } from 'formik';
 import { FormInput } from "../AuthForm/FormInput";
+import { useAppDispatch } from '../../app/hooks';
+import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 
 interface IFillFormProps { }
 
@@ -18,9 +20,10 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
     const options = Options.map((text, index) => {
         return <option key={index}>{text}</option>;
     });
+    const dispatch = useAppDispatch()
 
     interface formType {
-        organizationName: string;
+        eventName: string;
         description: string;
         age: string;
         eventType: string;
@@ -28,25 +31,23 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
     }
     const formConfig: FormikConfig<formType> = {
         initialValues: {
-            organizationName: "",
+            eventName: "",
             description: "",
             age: ages[0],
             eventType: Options[0],
             checked: [],
         },
         onSubmit: (values, form) => {
+            dispatch(setEvent(values))
             form.setSubmitting(false);
             setEditing(false);
-            alert(JSON.stringify(values, null, 2));
+          /*   alert(JSON.stringify(values, null, 2)); */
         },
     };
     const schemaConfig: Yup.ObjectShape = {
-        organizationName: Yup.string()
-            .email("Некорректная почта!")
+       eventName: Yup.string()
             .required("Обязательное поле!"),
         description: Yup.string()
-            /* .min(4, "Минимум 4 символа!")
-                  .max(12, "Максимум 12 символов!") */
             .required("Обязательное поле!"),
         age: Yup.string().required("Обязательное поле!"),
         eventType: Yup.string().required("Обязательное поле!"),
@@ -86,7 +87,7 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
                     <div className={styles.form_info}>
                         <div className={styles.left}>
                             <FormInput
-                                name="organizationName"
+                                name="eventName"
                                 label="Название:"
                                 disabled={!editing}
                             />

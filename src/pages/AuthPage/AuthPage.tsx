@@ -54,9 +54,9 @@ const AuthPage = () => {
     return (
         <div className={styles.auth_wrapper} >
             <div className={styles.auth_img_container}>
-            <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
+                <img className={styles.auth_img} src={imageForAuth} alt="imageForAuth" />
             </div>
-     
+
             <div className={styles.auth_container}>
                 <FormContainer
                     schemaConfig={schemaConfig}
@@ -92,7 +92,7 @@ const AuthPage = () => {
                                 />
                             </div>
                             <div className={styles.auth_submit_btn_container}>
-                                <ButtonArt disabled={(Object.keys(formik.errors).length > 0) } type='submit'>
+                                <ButtonArt disabled={(Object.keys(formik.errors).length > 0)} type='submit'>
                                     {authPageState === 'registration' ? 'Продолжить регистрацию' : 'Войти'}
                                 </ButtonArt>
                             </div>

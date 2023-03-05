@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import styles from './imagesGallery.module.css'
 import { Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'reactstrap';
-import { imageType, removeImage } from '../../app/Slices/imagesUploadSlice';
+import { imageType, removeImage, ImagesArrayType } from '../../app/Slices/imagesUploadSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 
 
 interface IImageComponent {
     image: imageType
+    type: ImagesArrayType
 }
 
 
-const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
+const ImageComponent: React.FC<IImageComponent> = ({ image, type }) => {
 
     const [modal, setModal] = useState(false)
     const dispatch = useAppDispatch()
@@ -22,13 +23,15 @@ const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
     };
 
     const delImage = (id: string) => {
-        dispatch(removeImage(id))
+        dispatch(removeImage({
+            id,
+            key: type
+        }))
     }
 
     return (
-        <div>
-            <div
-                onClick={() => toggle()}>
+        <>
+            <div onClick={() => toggle()}>
                 <img className={styles.image} src={image.url} alt="" />
             </div>
             <Modal backdrop={true} className={styles.modal_image_wrapper} isOpen={modal}>
@@ -44,7 +47,7 @@ const ImageComponent: React.FC<IImageComponent> = ({ image }) => {
                     </Button>
                 </ModalFooter>
             </Modal>
-        </div>
+        </>
 
     );
 };

@@ -122,9 +122,9 @@ export const MainPage = () => {
             </div>
             <div>
                 <div style={{ margin: "10px 0" }} />
-                <DragAndDrop />
+                {/* <DragAndDrop /> */}
                 <div style={{ margin: "10px 0" }} />
-                <ImagesGallery />
+                {/* <ImagesGallery /> */}
                 <div style={{ margin: "10px 0" }} />
             </div>
             <div>

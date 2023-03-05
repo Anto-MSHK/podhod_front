@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styles from "./dragAndDrop.module.css";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
 import { useAppDispatch } from '../../app/hooks';
-import { setImage } from "../../app/Slices/imagesUploadSlice";
+import { setImage, ImagesArrayType } from '../../app/Slices/imagesUploadSlice';
 import { read } from "fs";
 
-interface IDragAndDrop { }
+interface IDragAndDrop {
+  type: ImagesArrayType
+ }
 
 const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
   const [drag, setDrag] = useState(false);
@@ -17,11 +19,16 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
       reader.readAsDataURL(image)
       reader.onload = function () {
         dispatch(setImage({
-          id: Date.now().toString(),
-          name: image.name,
-          lastModified: image.lastModified,
-          size: image.size,
-          url: reader.result as string
+          image: {
+              id: Date.now().toString(),
+              name: image.name,
+              lastModified: image.lastModified,
+              size: image.size,
+              url: reader.result as string
+          },
+          key: props.type
+
+      
         }))
       }
     })

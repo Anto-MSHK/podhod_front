@@ -60,6 +60,11 @@
   height: 100%;
 }
 
+.scrollable_images_wrapper{
+  display: flex;
+  gap: 10px;
+}
+
 .images_wrapper::-webkit-scrollbar {
   position: absolute;
   padding: 0px;

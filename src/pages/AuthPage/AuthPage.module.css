@@ -3,17 +3,20 @@
 }
 
 .auth_wrapper {
+   
     padding: 0;
     display: flex;
     height: fit-content;
+    margin: 0 auto;
     justify-content: end;
+    width: 100%;
 }
 
 .auth_container {
     width: var(--contentWidth);
-    margin-right: 300px;
+    margin-right: 150px;
 }
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .auth_wrapper {
         display: flex;
         justify-content: center;
@@ -26,7 +29,7 @@
     .auth_img {
        opacity: 0;
     }
-}
+} */
 
 
 .auth_btns_container {
@@ -43,11 +46,58 @@
 
 
 .auth_img {
-    right: calc((var(--contentWidth) + var(--contentWidth)/1.2));
-    top: 3%;
+    right: calc((var(--contentWidth) + 100px));
     padding-top: 80px;
     position: absolute;
     max-width: 100%;
-    height: auto;
+    top: 0;
+
 }
+/* для маленьких экранов */
+@media screen and (max-width: 576px) {
+    .auth_img{
+        opacity: 0;
+    }
+    .auth_wrapper{
+        display: flex;
+        justify-content: center;
+    }
+    .auth_container{
+        margin-right: 0;
+    }
+  }
+  
+/* для средних */
+  @media screen and (min-width: 576px) and (max-width: 992px) {
+    .auth_img{
+        top: 0;
+        max-width: 50%;
+        transform: translateX(250px) ;
+    }
+    .auth_container {
+        margin-right: 0;
+        max-width: 500px;
+    }
+
+  }
+/* для больших */
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    .auth_img{
+        max-width: 40%;
+        transform: translateX(calc(((var(--contentWidth))+ var(--contentWidth)) )) ;
+    }
+    .auth_container{
+        margin-right: 0px;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .auth_img{
+        max-width: 50%;
+        transform: translateX(calc(((var(--contentWidth)/4)/-1 ))) ;
+    }
+  }
+  
+
+  
+
 

@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import imagesUploadReducer from './Slices/imagesUploadSlice';
+import ExpoCreateReducer from './Slices/ExpoCreateSlice';
+
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    images : imagesUploadReducer
+    images : imagesUploadReducer,
+    eventCreate: ExpoCreateReducer
   },
 });
 

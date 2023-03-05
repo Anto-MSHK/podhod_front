@@ -11,16 +11,28 @@ export type imageType = {
   url: string,
 }
 
+export type ImagesArrayType = 'galleryImages' | 'backGroundImages'
+type setImageType = {
+  image: imageType,
+  key: ImagesArrayType
+}
 type imagesUploadSliceT = {
-  uploadedImages: imageType[];
+  galleryImages: imageType[];
+  backGroundImages: imageType[];
+}
+type removeImageType = {
+  id: string,
+  key: ImagesArrayType
 }
 type swapImageType = {
   draggedIndex: number,
-  index: number
+  index: number,
+  key:  ImagesArrayType
 }
 
 const initialState: imagesUploadSliceT = {
-  uploadedImages: []
+  galleryImages: [],
+  backGroundImages: [],
 }
 
 
@@ -29,16 +41,16 @@ const imagesUploadSlice = createSlice({
   name: 'images',
   initialState,
   reducers: {
-    setImage(state, action: PayloadAction<imageType>) {
-      state.uploadedImages = [...state.uploadedImages, action.payload]
+    setImage(state, action: PayloadAction<setImageType>) {
+      state[action.payload.key] = [...state[action.payload.key], action.payload.image]
     },
-    removeImage(state, action: PayloadAction<string>) {
-      state.uploadedImages = state.uploadedImages.filter(image => image.id !== action.payload)
+    removeImage(state, action: PayloadAction<removeImageType>) {
+      state[action.payload.key] = state[action.payload.key].filter(image => image.id !== action.payload.id)
     },
     swapImage(state, action: PayloadAction<swapImageType>) {
-      const draggedImage = state.uploadedImages[action.payload.draggedIndex]
-      state.uploadedImages.splice(action.payload.draggedIndex,1)
-      state.uploadedImages.splice(action.payload.index,0,draggedImage)
+      const draggedImage = state[action.payload.key][action.payload.draggedIndex]
+      state[action.payload.key].splice(action.payload.draggedIndex,1)
+      state[action.payload.key].splice(action.payload.index,0,draggedImage)
     }
   },
 })

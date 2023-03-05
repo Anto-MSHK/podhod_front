@@ -3,18 +3,19 @@ import DragAndDrop from '../DragAndDrop/dragAndDrop';
 import styles from './imagesGallery.module.css'
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import ImageComponent from './ImageComponent';
-import { swapImage } from '../../app/Slices/imagesUploadSlice';
+import { swapImage, ImagesArrayType } from '../../app/Slices/imagesUploadSlice';
+
 
 
 
 interface IImagesGallery {
-
+    type: ImagesArrayType
 }
 
 
-const ImagesGallery: React.FC<IImagesGallery> = () => {
+const ImagesGallery: React.FC<IImagesGallery> = ({ type }) => {
 
-    const images = useAppSelector(state => state.images.uploadedImages)
+    const images = useAppSelector(state => state.images[type])
     const dispatch = useAppDispatch()
     const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
     const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
@@ -33,10 +34,11 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, index: number) => {
         event.preventDefault();
-          console.log('index= ' + index + ' draggedIndex= ' + draggedIndex);
+        console.log('index= ' + index + ' draggedIndex= ' + draggedIndex);
         dispatch(swapImage({
             draggedIndex: draggedIndex as number,
             index,
+            key: type
         }))
         setDraggedIndex(null);
         setDragOverIndex(null);
@@ -64,14 +66,15 @@ const ImagesGallery: React.FC<IImagesGallery> = () => {
                                 cursor:   "pointer"
                             }}
                         >
-                            <ImageComponent image={image}  />
+                            <ImageComponent type= {type} image={image}  />
                         </div>
                     ))
                 }
+              
             </div>
 
             <div className={styles.drag_and_drop}>
-                <DragAndDrop />
+                <DragAndDrop type={type} />
             </div>
         </div>
 
