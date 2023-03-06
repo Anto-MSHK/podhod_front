@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
+import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
 import styles from "./Header.module.css";
 export const Header = () => {
   return (
@@ -7,6 +7,17 @@ export const Header = () => {
       <NavbarBrand href="/">
         <h3 className={styles.name}>Подход</h3>
       </NavbarBrand>
+      <Nav>
+        <NavItem>
+          <NavLink href='/registration' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Регистрация</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href='/event' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Список мероприятий</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href='/expocreate' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Создать мероприятие</NavLink>
+        </NavItem>
+      </Nav>
     </Navbar>
   );
 };

@@ -6,7 +6,7 @@ import loginIcon from "../../assets/icons/loginIcon.svg";
 import { FormInput } from "../../components/AuthForm/FormInput";
 import { FormikConfig } from "formik";
 import * as Yup from "yup";
-import imageForAuth from "../../assets/pictures/backGroundImg.svg";
+import imageForAuth from "../../assets/pictures/AuthPngPicture.png";
 import styles from './AuthPage.module.css';
 import { url } from 'inspector';
 
