@@ -1,16 +1,56 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+
+
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import imagesUploadReducer from './Slices/imagesUploadSlice';
 import ExpoCreateReducer from './Slices/ExpoCreateSlice';
+import { eventsApi } from './services/EventsApi';
+import storage from 'redux-persist/es/storage';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    images : imagesUploadReducer,
-    eventCreate: ExpoCreateReducer
-  },
+
+
+
+
+
+
+
+const rootReducer = combineReducers({
+  [eventsApi.reducerPath]: eventsApi.reducer,
+  counter: counterReducer,
+  images: imagesUploadReducer,
+  eventCreate: ExpoCreateReducer
 });
+
+const persistConfig = {
+  key: 'root',
+  storage,
+
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleWare) =>
+    getDefaultMiddleWare({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat([
+      eventsApi.middleware
+    ]),
+});
+
+export const persistor = persistStore(store)
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

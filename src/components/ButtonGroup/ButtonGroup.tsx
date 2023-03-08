@@ -3,14 +3,15 @@ import { ButtonGroup, ButtonGroupProps, ButtonToolbar } from "reactstrap";
 import styles from './ButtonGroup.module.css';
 import { ButtonArt } from "../ButtonArt/ButtonArt";
 
-export type btnGroup = { name: string, icon?: any, onClick?: () => void; }[];
+export type btnGroup = { name: string, icon?: any, onClick?: () => void; label?: string }[];
 
 interface BtnGroupI extends ButtonGroupProps {
     view: string;
     data: btnGroup;
+    handleActiveBtn?: (lable: string | number[] | number) => void
 }
 
-export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
+export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data, handleActiveBtn }) => {
     const [rSelected, setRSelected] = useState<number | null>(0);
     const [cSelected, setCSelected] = useState<number[]>([]);
 
@@ -27,7 +28,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
         setCSelected(newSelected);
     };
 
-    const renderButton = (el: { name: string, icon?: any, onClick?: () => void; }, index: number) => {
+    const renderButton = (el: { name: string, icon?: any, onClick?: () => void; lable?: string }, index: number) => {
         const isActive = view === "radio" ? rSelected === index : cSelected.includes(index);
 
         const handleClick = view === "radio" ? () => handleRadioClick(index) : () => handleSelectClick(index);
@@ -35,6 +36,10 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data }) => {
         const combinedOnClick = () => {
             handleClick();
             el.onClick && el.onClick();
+            if (el.lable && handleActiveBtn) {
+                handleActiveBtn(el.lable)
+            }
+           
         };
 
         return (

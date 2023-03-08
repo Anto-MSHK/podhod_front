@@ -1,15 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState  } from 'react';
 import styles from './ExpoCreatePage.module.css'
 import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
 import { FillForm } from "../../components/FillForm/FillForm";
 import ImagesGallery from "../../components/ImagesGallery/imagesGallery";
 import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
 import errorIcon from '../../assets/icons/Icon9.svg'
-import { useAppSelector } from '../../app/hooks';
-import { type } from 'os';
-
-import ImageComponent from '../../components/ImagesGallery/ImageComponent';
 import Preview from '../../components/PreviewComponent/Preview';
+
 
 
 const btnData = [
@@ -20,9 +17,14 @@ const btnData = [
 ];
 
 
-export const ExpoCreatePage = () => {
+export const ExpoCreatePage: React.FC = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
+    const [activeBtn, setActiveBtn] = useState<string | number| number[]>()
+    const handleActiveBtn = (lable: string | number | number[]) => {
+        setActiveBtn(lable)
+    }
+
     useEffect(() => {
         
         const handleScroll = () => {
@@ -39,8 +41,11 @@ export const ExpoCreatePage = () => {
 
     return (
         <div className={styles.ExpoCreateWrapper}>
+            {
+                JSON.stringify(console.log(activeBtn))
+            }
             <div className={styles.InfoWrapper}>
-                <BtnGroupSelect view={'radio'} data={btnData} />
+                <BtnGroupSelect handleActiveBtn={handleActiveBtn} view={'radio'} data={btnData} />
                 <div className={styles.FormWrapper}>
                     <div>
                         <FillForm />

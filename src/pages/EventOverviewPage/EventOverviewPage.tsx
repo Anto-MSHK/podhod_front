@@ -8,6 +8,8 @@ import event2 from "../../assets/pictures/Event2.png";
 import event3 from "../../assets/pictures/Event3.png";
 import { useState } from 'react';
 import { ButtonArt } from './../../components/ButtonArt/ButtonArt';
+import { useFetchEventsQuery } from '../../app/services/EventsApi';
+import { EventT } from '../../app/Types/EventsT';
 
 interface Iitems {
     id: number;
@@ -21,7 +23,7 @@ interface Iitems {
     ageRestriction: string,
 }
 
-const items = [
+/* const items = [
     {
         id: 1, name: "1", date: "12.06.2023", image: event1, type: 'Выставка', status: 'draft',
         numberOfExhibits: '50', entryCost: '1000', ageRestriction: '50'
@@ -58,14 +60,15 @@ const items = [
         id: 9, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
         numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
     },
-];
+]; */
 
 
 
 const sort = [{ name: "По дате" }, { name: "По типу" }];
 
 export function EventOverviewPage() {
-    const [item, setItems] = useState<Iitems[]>(items);
+    const {data: events, isLoading} = useFetchEventsQuery()
+    const [items, setItems] = useState<EventT[]>(events as EventT[]);
 
     const handleSort = (status: string) => {
         const draftCard = [...items];
@@ -104,16 +107,17 @@ export function EventOverviewPage() {
                 <BtnFilters sort={sort} date={"12.02.2023"} type={""} />
             </div>
             <div className={styles.events_container}>
-                {item.map((item) => (
+                {/* {items.map((item) => (
                     <div className={styles.event}>
                         <StyledCard
-                            eventTitle={item.name}
-                            dateOfCreation={item.date}
-                            {...item}
+                            event={item}
                             key={item.id}
                         />
                     </div>
-                ))}
+                ))} */
+                
+                JSON.stringify(items)
+                }
             </div>
         </div>
     );

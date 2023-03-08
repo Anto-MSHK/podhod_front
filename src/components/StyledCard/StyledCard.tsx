@@ -13,16 +13,18 @@ import icon2 from "../../assets/icons/Icon2.svg";
 import icon3 from "../../assets/icons/Icon3.svg";
 import { PublicationStatus } from "../PublicationStatus/PublicationStatus";
 import { ButtonArt } from "../ButtonArt/ButtonArt";
+import { EventT } from '../../app/Types/EventsT';
 
 interface IStyledCardProps {
-    eventTitle: string;
+    event: EventT
+ /*    eventTitle: string;
     image?: string;
     dateOfCreation: string;
     type: string;
     status: string;
     numberOfExhibits: string,
     entryCost: string,
-    ageRestriction: string,
+    ageRestriction: string, */
 }
 
 
@@ -32,27 +34,26 @@ const btnTitle = (status: string) => {
     if (status === 'published') return 'Статистика';
 };
 
-export const StyledCard: React.FunctionComponent<IStyledCardProps> = (props) => {
+export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({event}) => {
     return (
         <Card className={styles.styledCard_container} color="dark" inverse>
-            <img src={props.image} alt="123" className={styles.card_img} />
+            <img src={icon3} alt="123" className={styles.card_img} />
             <div className={styles.card_status}>
-                <PublicationStatus type={props.type} status={props.status} />
+                <PublicationStatus type={event.name} status={event.status} />
             </div>
             <CardBody className={styles.cardBody} inverse="true">
                 <CardTitle tag="h3" className={styles.cardTitle}>
-                    {props.eventTitle}
+                    {event.name}
                 </CardTitle>
                 <CardSubtitle tag="p" className="mb-2 min">
-                    Дата создания: {props.dateOfCreation}
                 </CardSubtitle>
                 <CardText className={styles.cardWidget}>
-                    <Widget info={props.numberOfExhibits} icon={icon1} description="экспоната" />
-                    <Widget info={`от ${props.entryCost}р`} icon={icon2} description="платный вход" />
-                    <Widget info={`${props.ageRestriction}+`} icon={icon3} description="возраст" />
+                    <Widget info={'1'} icon={icon1} description="экспоната" />
+                    <Widget info={`от ${event.prices}р`} icon={icon2} description="платный вход" />
+                    <Widget info={`+`} icon={icon3} description="возраст" />
                 </CardText>
                 <ButtonArt>
-                    {btnTitle(props.status)}
+                    {btnTitle(event.status)}
                 </ButtonArt>
             </CardBody>
         </Card>
