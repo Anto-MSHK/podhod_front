@@ -1,0 +1,126 @@
+
+.preview_picture {
+    display: flex;
+    flex-direction: column;
+    width: 7.4cm;
+    height: 13.2cm;
+    border: 1px solid #E74D36;
+    border-radius: 15px;
+    margin: 0 auto;
+
+    background-size: cover;
+    background-position: 50% 50%;
+    
+    padding: 15px;
+    background-color: #2e2e2e;
+    gap: 10px;
+}
+
+.preview_picture__header {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: space-evenly;
+}
+
+.preview_picture__logo {
+    margin: 0 auto;
+
+}
+
+.preview_picture__age {
+    display: flex;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    justify-self: end;
+    justify-content: center;
+}
+
+.preview_picture__content {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    max-height: 250px;
+}
+
+.preview_picture__event_name {
+    display: flex;
+    width: 100%;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+}
+
+.preview_picture__description {
+    display: flex;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+  
+    
+}
+
+.preview_images {
+    display: flex;
+    width: 100%;
+    height: 25%;
+    min-height: 75px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    gap: 5px;
+}
+
+.preview_images::-webkit-scrollbar {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    height: 5px;
+    /* ширина scrollbar */
+}
+
+.preview_images::-webkit-scrollbar-thumb{
+    width: 1px;
+    height: 1px;
+    background-color: grey;
+    opacity: 0.5;
+    border-radius: 2px;
+    border: 0px;
+}
+
+.preview_image_container {
+    border: 1px solid white;
+    position: relative;
+    min-width: 100px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.35);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.35);
+    box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.35);
+
+}
+
+.preview_picture__footer{
+    width: 100%;
+    height: 15%;
+    
+}
+.preview_picture__move_btn{
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid white;
+    height: 100%;
+    padding: 5px;
+    background-color: #161616;
+    text-align: start;
+   
+}
+.preview_picture__move_btn p{
+   margin: 0;
+   
+}

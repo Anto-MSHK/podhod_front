@@ -1,23 +1,18 @@
-import React from "react";
-import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
+import React from "react";/* 
+import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap"; */
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 export const Header = () => {
   return (
-    <Navbar className={styles.header}>
-      <NavbarBrand href="/">
-        <h3 className={styles.name}>Подход</h3>
-      </NavbarBrand>
-      <Nav>
-        <NavItem>
-          <NavLink href='/registration' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Регистрация</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href='/event' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Список мероприятий</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href='/expocreate' style={{fontWeight:'500', textDecoration:'none', color:'black'}}>Создать мероприятие</NavLink>
-        </NavItem>
-      </Nav>
-    </Navbar>
+    <div className={styles.header}>
+      <div className={styles.header__logo_container}>
+        <NavLink to='/'><h3 className={styles.header__logo}>Подход</h3></NavLink>
+      </div>
+      <div className={styles.header__nav_links}>
+        <NavLink to='/registration'><p>Регистрация</p></NavLink>
+        <NavLink to='/event' ><p>Список мероприятий</p></NavLink>
+        <NavLink to='/expocreate' ><p>Создать мероприятие</p></NavLink>
+      </div>
+    </div>
   );
 };

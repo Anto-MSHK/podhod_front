@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './ExpoCreatePage.module.css'
 import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
 import { FillForm } from "../../components/FillForm/FillForm";
@@ -9,20 +9,33 @@ import { useAppSelector } from '../../app/hooks';
 import { type } from 'os';
 
 import ImageComponent from '../../components/ImagesGallery/ImageComponent';
+import Preview from '../../components/PreviewComponent/Preview';
+
 
 const btnData = [
-    { name: "Главный экран" },
-    { name: "Экспонаты" },
-    { name: "Карта" },
-    { name: "Настройки" },
+    { name: "Главный экран", lable: 'mainScreen' },
+    { name: "Экспонаты", lable: 'exhibits' },
+    { name: "Карта", lable: 'map' },
+    { name: "Настройки", lable: 'settings' },
 ];
 
 
 export const ExpoCreatePage = () => {
 
-    const event = useAppSelector(state => state.eventCreate.event)
-    const backGroundImages = useAppSelector(state => state.images.backGroundImages)
-    const galleryImages = useAppSelector(state => state.images.galleryImages)
+    const containerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        
+        const handleScroll = () => {
+            setTimeout(() => {
+                if (containerRef.current) {
+
+                    containerRef.current.style.transform = `translateY(${window.scrollY}px)`;
+                }
+            }, 100)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
     return (
         <div className={styles.ExpoCreateWrapper}>
@@ -46,45 +59,15 @@ export const ExpoCreatePage = () => {
                         </div>
                         <ImagesGallery type='backGroundImages' />
                     </div>
+                   
                 </div>
             </div>
-            <div className={styles.PreviewWrapper}>
-                <div>
-                    <h2>Предпросмотр</h2>
-                </div>
-                <div className={styles.preview_picture} style={{ backgroundImage: backGroundImages.length ? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backGroundImages[0].url})` : 'none' }}>
-                    <div className={styles.preview_picture__header}>
-                        <div className={styles.preview_picture__logo}>
-                            Типа лого или что там
-                        </div>
-                        <div className={styles.preview_picture__age}>
-                            <p>{event?.age}</p>
-                        </div>
+            <div ref={containerRef} className={styles.preview_wrapper} style={{}}>
+                <div className={styles.preview__container}>
+                    <div>
+                        <h2>Предпросмотр</h2>
                     </div>
-                    <div className={styles.preview_picture__content}>
-                        <div className={styles.preview_picture__event_name}>
-                            <h2>{event?.eventName}</h2>
-                        </div>
-                        <div className={styles.preview_picture__description}>
-                            <p>{event?.description}</p>
-                        </div>
-                    </div>
-                    <div className={styles.preview_images}>
-                        {/*  <ScrollableImages images={galleryImages} type = 'galleryImages'/> */}
-                        {
-                            galleryImages.map((image) => (
-                                <div className={styles.preview_image_container}>
-                                    <ImageComponent image={image} type='galleryImages' />
-                                </div>
-
-                            ))
-                        }
-                    </div>
-                    <div className={styles.preview_picture__footer}>
-                        <div className={styles.preview_picture__move_btn}>
-                            <p>Перейти к выставке --{`>`}</p>
-                        </div>
-                    </div>
+                    <Preview />
                 </div>
                 <div className={styles.InfoComponentWrapper}>
                     <InfoComponent title={'Не может быть опубликовано'} desc={'Есть незаполненные поля'}

@@ -4,14 +4,19 @@ import addFileIcon from "../../assets/icons/addFileIcon.svg";
 import { useAppDispatch } from '../../app/hooks';
 import { setImage, ImagesArrayType } from '../../app/Slices/imagesUploadSlice';
 import { read } from "fs";
+import { Input } from "reactstrap";
 
 interface IDragAndDrop {
   type: ImagesArrayType
  }
 
-const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
-  const [drag, setDrag] = useState(false);
-  const dispatch = useAppDispatch()
+ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
+   const [drag, setDrag] = useState(false);
+   const dispatch = useAppDispatch()
+   
+   window.document.addEventListener('drag', function(event) {
+     event.preventDefault();
+   });
 
   const processImages = (images: FileList) => {
     Array.from(images).forEach(image => {
@@ -27,8 +32,6 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
               url: reader.result as string
           },
           key: props.type
-
-      
         }))
       }
     })
@@ -67,7 +70,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
           onDragOver={(e) => dragStartHandler(e)}
           onDrop={(e) => dropHandler(e)}
         >
-          Отпустите файл
+          <p>Отпустите файл</p>
         </div>
       ) : (
         <div
@@ -76,7 +79,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
           onDragLeave={(e) => dragLeaveHandler(e)}
           onDragOver={(e) => dragStartHandler(e)}
         >
-          <input
+          <Input
             type="file"
             multiple
             onChange={handleChange}
@@ -84,7 +87,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
             accept="image/*,.png,.jpg,.web,"
           />
           <img className={styles.icon} src={addFileIcon} />
-          <p className={styles.bold}>Клик или перенос</p>
+          <p >Добавить изображение</p>
         </div>
       )}
     </div>

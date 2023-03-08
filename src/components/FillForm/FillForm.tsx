@@ -91,12 +91,16 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
                                 label="Название:"
                                 disabled={!editing}
                             />
+                            
+
                             <FormInput
+
                                 name="description"
                                 label="Описание:"
                                 type="textarea"
                                 disabled={!editing}
                             />
+                        
                         </div>
                         <div className={styles.right}>
                             <FormInput

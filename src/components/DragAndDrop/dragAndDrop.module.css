@@ -4,26 +4,27 @@
   border: 3px solid #a8a8a8;
   border-radius: 20px;
   position: relative;
-  text-align: center;
   padding: 10px;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: flex;
+  justify-content: center;
 }
 
 .drag_and_drop_area {
-  flex-shrink: 0;
   color: #a8a8a8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin: 10px;
 }
-.bold {
-  margin-bottom: 0;
+.drag_and_drop_area p{
+  margin: 0;
+  padding: 0;
   font-weight: 700;
   font-size: 24px;
 }
+
 
 .icon {
   width: 64px;
