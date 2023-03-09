@@ -67,32 +67,33 @@ interface Iitems {
 const sort = [{ name: "По дате" }, { name: "По типу" }];
 
 export function EventOverviewPage() {
-    const {data: events, isLoading} = useFetchEventsQuery()
+    const { data: events, isLoading } = useFetchEventsQuery()
     const [items, setItems] = useState<EventT[]>(events as EventT[]);
 
     const handleSort = (status: string) => {
-        const draftCard = [...items];
-        switch (status) {
-            case 'all':
-                setItems(draftCard);
-                break;
-            case status:
-               /*  setItems(draftCard.reduce((newArr: Iitems[], items) => {
-                    if (items.status === status) {
-                        newArr.push(items);
-                    }
-                    return newArr;
-                }, [])) */;
-                setItems(draftCard.filter(item => item.status === status))
-                break;
-            default:
-                setItems(draftCard);
+
+        if (events) {
+            switch (status) {
+                case 'all':
+                    setItems(events);
+                    break;
+
+                case status:
+                   /*  setItems(draftCard.reduce((newArr: Iitems[], items) => {
+                        if (items.status === status) {
+                            newArr.push(items);
+                        }
+                        return newArr;
+                    }, [])) */;
+                    setItems(events.filter(item => item.status === status))
+                    break;
+            }
         }
     };
 
     const btnData = [
         { name: "Все", onClick: () => handleSort('all') },
-        { name: "Активные", onClick: () => handleSort('published') },
+        { name: "Активные", onClick: () => handleSort('active') },
         { name: "Неактивные", onClick: () => handleSort('completed') },
         { name: "Черновик", onClick: () => handleSort('draft') },
     ];
@@ -108,14 +109,14 @@ export function EventOverviewPage() {
             </div>
             <div className={styles.events_container}>
                 {
-                items.map((item) => (
-                    <div className={styles.event}>
-                        <StyledCard
-                            event={item}
-                            key={item.id}
-                        />
-                    </div>
-                ))}
+                    items.map((item) => (
+                        <div className={styles.event}>
+                            <StyledCard
+                                event={item}
+                                key={item.id}
+                            />
+                        </div>
+                    ))}
             </div>
         </div>
     );
