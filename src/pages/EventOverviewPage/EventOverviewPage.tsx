@@ -109,7 +109,7 @@ export function EventOverviewPage() {
             </div>
             <div className={styles.events_container}>
                 {
-                    items.map((item) => (
+                   items && items.map((item) => (
                         <div className={styles.event}>
                             <StyledCard
                                 event={item}
