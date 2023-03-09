@@ -1,20 +1,57 @@
 .ExpoCreateWrapper {
     display: flex;
     justify-content: space-between;
-    column-gap: 4vw;
+    column-gap: 20px;
     padding: 20px;
 }
-
 .InfoWrapper {
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
     width: 80%;
 }
+@media (max-width: 1600px) {
+    .ExpoCreateWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .preview_wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1vw;
+        width: min-content; 
+      
+    }
+    .InfoWrapper {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.toolbar_wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.toolbar__main_submint_btn_container{
+    width: 200px;
+    height: fit-content;
+}
+
+@media (max-width: 960px) {
+    .toolbar_wrapper{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+}
+.toolbar__main_submit_btn{
+    height: 100%;
+}
 
 .preview_wrapper {
+    margin-right: 50px;
     display: flex;
-
     flex-direction: column;
     row-gap: 1vw;
     width: min-content;
@@ -22,16 +59,6 @@
     transition:  0.5s ease-out
 }
 
-
-@media (max-width: 1600px) {
-    .preview_wrapper {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        row-gap: 1vw;
-        width: min-content;
-    }
-}
 
 .preview__container {
     background-color: #E74D36;
@@ -64,5 +91,6 @@
 .ImgGalleryWrapper {
     display: flex;
     flex-direction: column;
+    min-width: 450px;
     row-gap: 5px;
 }

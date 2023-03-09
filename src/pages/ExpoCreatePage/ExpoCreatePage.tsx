@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState  } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styles from './ExpoCreatePage.module.css'
 import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
 import { FillForm } from "../../components/FillForm/FillForm";
@@ -6,6 +6,7 @@ import ImagesGallery from "../../components/ImagesGallery/imagesGallery";
 import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
 import errorIcon from '../../assets/icons/Icon9.svg'
 import Preview from '../../components/PreviewComponent/Preview';
+import { ButtonArt } from '../../components/ButtonArt/ButtonArt';
 
 
 
@@ -20,16 +21,16 @@ const btnData = [
 export const ExpoCreatePage: React.FC = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const [activeBtn, setActiveBtn] = useState<string | number| number[]>()
+    const [activeBtn, setActiveBtn] = useState<string | number | number[]>()
     const handleActiveBtn = (lable: string | number | number[]) => {
         setActiveBtn(lable)
     }
 
     useEffect(() => {
-        
         const handleScroll = () => {
             setTimeout(() => {
-                if (containerRef.current) {
+
+                if (containerRef.current && (window.innerWidth >= 1600)) {
 
                     containerRef.current.style.transform = `translateY(${window.scrollY}px)`;
                 }
@@ -41,11 +42,13 @@ export const ExpoCreatePage: React.FC = () => {
 
     return (
         <div className={styles.ExpoCreateWrapper}>
-            {
-                JSON.stringify(console.log(activeBtn))
-            }
             <div className={styles.InfoWrapper}>
-                <BtnGroupSelect handleActiveBtn={handleActiveBtn} view={'radio'} data={btnData} />
+                <div className={styles.toolbar_wrapper}>
+                    <BtnGroupSelect handleActiveBtn={handleActiveBtn} view={'radio'} data={btnData} />
+                   <div className={styles.toolbar__main_submint_btn_container}>
+                   <ButtonArt  >Сохранить событие</ButtonArt>
+                    </div> 
+                </div>
                 <div className={styles.FormWrapper}>
                     <div>
                         <FillForm />
@@ -64,7 +67,7 @@ export const ExpoCreatePage: React.FC = () => {
                         </div>
                         <ImagesGallery type='backGroundImages' />
                     </div>
-                   
+
                 </div>
             </div>
             <div ref={containerRef} className={styles.preview_wrapper} style={{}}>
