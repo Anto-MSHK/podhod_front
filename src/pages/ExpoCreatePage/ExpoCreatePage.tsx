@@ -30,8 +30,7 @@ export const ExpoCreatePage: React.FC = () => {
         const handleScroll = () => {
             setTimeout(() => {
 
-                if (containerRef.current && (window.innerWidth >= 1600)) {
-
+                if (containerRef.current ) {
                     containerRef.current.style.transform = `translateY(${window.scrollY}px)`;
                 }
             }, 100)
