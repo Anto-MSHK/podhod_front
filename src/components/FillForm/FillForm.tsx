@@ -8,9 +8,19 @@ import { FormikConfig, FormikProps } from 'formik';
 import { FormInput } from "../AuthForm/FormInput";
 import { useAppDispatch } from '../../app/hooks';
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
+import { useAddEventMutation } from "../../app/services/EventsApi";
+import { CreateEventPayloadT } from '../../app/Types/EventsT';
+import { type } from 'os';
+
 
 interface IFillFormProps { }
-
+interface formType {
+    eventName: string;
+    description: string;
+    age: string;
+    eventType: string;
+    checked: boolean[];
+}
 export const FillForm: React.FC<IFillFormProps> = (props) => {
     const Options = ["Выставка", "Экспозиция", "Показ мод"];
     const ages = ["0+", "6+", "12+", "16+", "18+"];
@@ -21,14 +31,13 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
         return <option key={index}>{text}</option>;
     });
     const dispatch = useAppDispatch()
-
-    interface formType {
-        eventName: string;
-        description: string;
-        age: string;
-        eventType: string;
-        checked: boolean[];
+    const [addEvent, {isError}] = useAddEventMutation()
+    const handleAddEvent = async(event: CreateEventPayloadT)=>{
+        console.log('sss');
+        await addEvent(event).unwrap()
     }
+   
+
     const formConfig: FormikConfig<formType> = {
         initialValues: {
             eventName: "",
@@ -38,6 +47,20 @@ export const FillForm: React.FC<IFillFormProps> = (props) => {
             checked: [],
         },
         onSubmit: (values, form) => {
+            let event: CreateEventPayloadT = {
+                date: new Date().toISOString(),
+                description: values.description,
+                name: values.eventName,
+                type: 'promo-exhibition',
+                prices: [
+                    {
+                        criterion: 'VIP',
+                        price: 200,
+
+                    }
+                ]
+            }
+            handleAddEvent(event)
             dispatch(setEvent(values))
             form.setSubmitting(false);
             setEditing(false);

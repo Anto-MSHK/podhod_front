@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyledCard } from "../../components/StyledCard/StyledCard";
 import { BtnGroupSelect } from '../../components/ButtonGroup/ButtonGroup';
 import BtnFilters from '../../components/Filters/BtnFilters';
@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { ButtonArt } from './../../components/ButtonArt/ButtonArt';
 import { useFetchEventsQuery } from '../../app/services/EventsApi';
 import { EventT } from '../../app/Types/EventsT';
+
 
 interface Iitems {
     id: number;
@@ -66,18 +67,26 @@ interface Iitems {
 
 const sort = [{ name: "По дате" }, { name: "По типу" }];
 
-export function EventOverviewPage() {
+export const EventOverviewPage: React.FC = () => {
     const { data: events, isLoading } = useFetchEventsQuery()
-    const [items, setItems] = useState<EventT[]>(events as EventT[]);
+    const [items, setItems] = useState<EventT[]>([]);
+
+    useEffect(() => {
+        let isCancelled = false
+        if (!isCancelled && events) {
+            setItems([...events])
+        }
+        return () => {
+            isCancelled = true
+        }
+    }, [events])
 
     const handleSort = (status: string) => {
-
         if (events) {
             switch (status) {
                 case 'all':
-                    setItems(events);
+                    setItems([...events]);
                     break;
-
                 case status:
                    /*  setItems(draftCard.reduce((newArr: Iitems[], items) => {
                         if (items.status === status) {
@@ -107,15 +116,16 @@ export function EventOverviewPage() {
                 <div style={{ margin: "10px 0" }} />
                 <BtnFilters sort={sort} date={"12.02.2023"} type={""} />
             </div>
-            <div className={styles.events_container}>
+            <div className={styles.events_wrapper}>
                 {
-                   items && items.map((item) => (
-                        <div className={styles.event}>
+                    items && items.map((item) => (
+                        <div className={styles.events_container}>
                             <StyledCard
                                 event={item}
                                 key={item.id}
                             />
                         </div>
+
                     ))}
             </div>
         </div>

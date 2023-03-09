@@ -1,12 +1,13 @@
+import { type } from 'os';
 
 
 type PriceT = {
-    id: number,
+    id?: number,
     criterion: string,
     price: number,
-    eventId: number,
-    createdAt: Date,
-    updateAt: Date,
+    eventId?: number,
+    createdAt?: string,
+    updateAt?: Date,
 }
 
 
@@ -14,11 +15,19 @@ export type EventT = {
     id: number,
     name: string,
     description: string,
-    date: Date,
+    date: string,
     ageLimit: number | null,
     status: string,
-    createdAt: Date,
-    updateAt: Date,
+    createdAt: string,
+    updateAt: string,
+    prices: PriceT[]
+}
+
+export type CreateEventPayloadT = {
+    name: string,
+    description: string,
+    date: string,
+    type: string,
     prices: PriceT[]
 }
 export type EventStateResponse = {
@@ -36,8 +45,8 @@ export type EventPagesT = {
     description: null,
     visibleLog: true,
     eventId: 1,
-    createdAt: Date,
-    updatedAt: Date,
+    createdAt: string,
+    updatedAt: string,
     imgs: ImgT[]
 }
 export type ImageResponseT = {

@@ -1,32 +1,46 @@
-
-
 .styledCard_container {
-    max-width: 425px;
+
     display: flex;
+    width: 100%;
+    height: 100%;
+    
 }
 
 
 .cardWidget {
     max-width: 100%;
-    overflow-x: scroll ;
+    overflow-x: scroll;
     display: flex;
     gap: 10px;
     justify-content: space-between;
     position: relative;
-    
+
 }
+
 .cardWidget::-webkit-scrollbar {
     background-color: none;
     padding: 0px;
     margin: 0px;
-    height: 5px; 
-  }
-  
-  .cardWidget::-webkit-scrollbar-thumb {
+    height: 5px;
+}
+
+.cardWidget::-webkit-scrollbar-thumb {
     background-color: rgb(139, 139, 139);
     opacity: 0.1;
     border: 0px;
-  }
+}
+
+.card__img_container {
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+}
+
+.card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .cardTitle {
     margin: 0 0 4px 0;

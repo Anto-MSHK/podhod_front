@@ -13,20 +13,22 @@
 
 .events_container {
     display: flex;
-    max-width: 100vw;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    column-gap: 1vw;
 
+    height: 610px;
+    width: 425px;
+    max-width: 425px;
 }
-.event{
-    margin-bottom: 20px;
+.events_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+ 
 }
+
 @media (max-width: 960px ){
-    .events_container{
+    .events_wrapper{
         max-width: 750px;
         justify-content: center;
-       
     }
   
 }

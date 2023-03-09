@@ -53,12 +53,19 @@ const btnTitle = (status: string) => {
 
 export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({ event }) => {
     const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id)
-    let path = eventPages && eventPages[0].imgs[0].path
+    let path = eventPages?.length && eventPages[0].imgs[0].path
 
     return (
         <Card className={styles.styledCard_container} color="dark" inverse>
 
-            <img src={`${API_URL}/${path}`} alt="123" className={styles.card_img} />
+            <div className={styles.card__img_container}>
+                <img className={styles.card__img}  src={
+                    path ?
+                        `${API_URL}/${path}`
+                        :
+                        icon1
+                } alt="123" />
+            </div>
             <div className={styles.card_status}>
                 <PublicationStatus type={event.name} status={event.status} />
             </div>

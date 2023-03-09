@@ -24,7 +24,7 @@ const initialState: imagesUploadSliceT = {
 
 
 const ExpoCreateSlice = createSlice({
-    name: 'event',
+    name: 'eventCreate',
     initialState,
     reducers: {
         setEvent(state, action: PayloadAction<eventForm>) {
