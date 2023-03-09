@@ -1,7 +1,7 @@
 import { API_URL } from '../http';
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { EventT, EventStateResponse } from '../Types/EventsT';
+import { EventT, EventStateResponse, EventPagesT, ImgT } from '../Types/EventsT';
 
 
 export const eventsApi = createApi({
@@ -15,7 +15,17 @@ export const eventsApi = createApi({
                 url: `/events`,
             }),
         }),
+        getEventPages: builder.query<EventPagesT[], number>({
+            query: (eventId: number) => ({
+                url: `/${eventId}/pages`,
+            }),
+        }),
+        getPageImg: builder.query<string, string>({
+            query: (path: string) => ({
+                url: `/${path}`,
+            }),
+        }),
     }),
 });
 
-export const { useFetchEventsQuery } = eventsApi;
+export const { useFetchEventsQuery, useGetEventPagesQuery, useGetPageImgQuery } = eventsApi;

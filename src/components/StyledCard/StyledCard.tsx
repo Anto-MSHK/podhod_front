@@ -14,6 +14,8 @@ import icon3 from "../../assets/icons/Icon3.svg";
 import { PublicationStatus } from "../PublicationStatus/PublicationStatus";
 import { ButtonArt } from "../ButtonArt/ButtonArt";
 import { EventT } from '../../app/Types/EventsT';
+import { useGetEventPagesQuery, useGetPageImgQuery } from "../../app/services/EventsApi";
+import { API_URL } from "../../app/http";
 
 interface IStyledCardProps {
     event: EventT
@@ -35,9 +37,13 @@ const btnTitle = (status: string) => {
 };
 
 export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({event}) => {
+    const {data:eventPages, isLoading} = useGetEventPagesQuery(event.id)
+    let path = eventPages && eventPages[0].imgs[0].path
+
     return (
         <Card className={styles.styledCard_container} color="dark" inverse>
-            <img src={icon3} alt="123" className={styles.card_img} />
+          
+            <img src={`${API_URL}/${path}`} alt="123" className={styles.card_img} />
             <div className={styles.card_status}>
                 <PublicationStatus type={event.name} status={event.status} />
             </div>

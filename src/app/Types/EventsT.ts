@@ -8,7 +8,7 @@ type PriceT = {
     createdAt: Date,
     updateAt: Date,
 }
-   
+
 
 export type EventT = {
     id: number,
@@ -24,4 +24,23 @@ export type EventT = {
 export type EventStateResponse = {
     status: string,
     result: EventT[]
+}
+export type ImgT = {
+    id: number,
+    description: string,
+    path: string
+}
+export type EventPagesT = {
+    id: 1,
+    name: string,
+    description: null,
+    visibleLog: true,
+    eventId: 1,
+    createdAt: Date,
+    updatedAt: Date,
+    imgs: ImgT[]
+}
+export type ImageResponseT = {
+    status: string,
+    result: ImgT
 }
