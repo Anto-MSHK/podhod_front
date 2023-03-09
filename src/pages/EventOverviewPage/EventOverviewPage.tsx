@@ -107,17 +107,15 @@ export function EventOverviewPage() {
                 <BtnFilters sort={sort} date={"12.02.2023"} type={""} />
             </div>
             <div className={styles.events_container}>
-                {/* {items.map((item) => (
+                {
+                items.map((item) => (
                     <div className={styles.event}>
                         <StyledCard
                             event={item}
                             key={item.id}
                         />
                     </div>
-                ))} */
-                
-                JSON.stringify(items)
-                }
+                ))}
             </div>
         </div>
     );

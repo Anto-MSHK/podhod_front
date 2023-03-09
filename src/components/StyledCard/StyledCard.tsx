@@ -31,7 +31,7 @@ interface IStyledCardProps {
 const btnTitle = (status: string) => {
     if (status === 'draft') return 'Продолжить заполнение';
     if (status === 'completed') return 'Опубликовать';
-    if (status === 'published') return 'Статистика';
+    if (status === 'active') return 'Статистика';
 };
 
 export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({event}) => {
@@ -49,8 +49,12 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({event}) =
                 </CardSubtitle>
                 <CardText className={styles.cardWidget}>
                     <Widget info={'1'} icon={icon1} description="экспоната" />
-                    <Widget info={`от ${event.prices}р`} icon={icon2} description="платный вход" />
-                    <Widget info={`+`} icon={icon3} description="возраст" />
+                    <Widget info={event.ageLimit ? event.ageLimit + '+' : '0+'} icon={icon3} description="возраст" />
+                    {
+                        event.prices.map((price)=>(
+                            <Widget key={price.id} info={`от ${price.price}р`} icon={icon2} description={price.criterion} />
+                        ))
+                    }
                 </CardText>
                 <ButtonArt>
                     {btnTitle(event.status)}
