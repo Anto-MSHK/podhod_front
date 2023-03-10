@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyledCard } from "../../components/StyledCard/StyledCard";
 import { BtnGroupSelect } from '../../components/ButtonGroup/ButtonGroup';
-import BtnFilters from '../../components/Filters/BtnFilters';
+import {BtnFilters} from '../../components/Filters/BtnFilters';
 import styles from "./EventOverviewPage.module.css";
 import event1 from "../../assets/pictures/Event1.png";
 import event2 from "../../assets/pictures/Event2.png";
@@ -10,6 +10,9 @@ import { useState } from 'react';
 import { ButtonArt } from './../../components/ButtonArt/ButtonArt';
 import { useFetchEventsQuery } from '../../app/services/EventsApi';
 import { EventT } from '../../app/Types/EventsT';
+import {date} from "yup";
+import icon10 from '../../assets/icons/Icon10.svg'
+import icon11 from '../../assets/icons/Icon11.svg'
 
 
 interface Iitems {
@@ -66,6 +69,8 @@ interface Iitems {
 
 
 const sort = [{ name: "По дате" }, { name: "По типу" }];
+const handleFilter = (date: string | number, type?: string | undefined) => {};
+
 
 export const EventOverviewPage: React.FC = () => {
     const { data: events, isLoading } = useFetchEventsQuery()
@@ -114,7 +119,14 @@ export const EventOverviewPage: React.FC = () => {
             <div className={styles.filter}>
                 <BtnGroupSelect view="radio" data={btnData} />
                 <div style={{ margin: "10px 0" }} />
-                <BtnFilters sort={sort} date={"12.02.2023"} type={""} />
+                <BtnFilters
+                    sort={[
+                        { name: 'По дате', icon: icon10 },
+                        { name: 'По типу', icon: icon11 },
+                    ]}
+                    date={"22.02.2023"}
+                    onFilter={handleFilter}
+                />
             </div>
             <div className={styles.events_wrapper}>
                 {
