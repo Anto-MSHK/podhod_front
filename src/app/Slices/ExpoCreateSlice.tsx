@@ -7,7 +7,7 @@ import { ExpoCreatePage } from '../../pages/ExpoCreatePage/ExpoCreatePage';
 export type eventForm = {
     eventName: string;
     description: string;
-    age: string;
+    age: number;
     eventType: string;
     checked: string[];
 }

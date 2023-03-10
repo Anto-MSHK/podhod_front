@@ -2,13 +2,13 @@
     display: flex;
     column-gap: 20px;
     padding: 20px;
-    width: 100%;
+    width: 70vw;
 }
 .InfoWrapper {
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
-    width: 80vw;
+    width: 100%;
 }
 
 

@@ -17,15 +17,15 @@ interface IFillFormProps { }
 interface formType {
     eventName: string;
     description: string;
-    age: string;
+    age: number;
     eventType: string;
     checked: string[];
 }
 export const FillForm: React.FC<IFillFormProps> = (props) => {
     const Options = ["Выставка", "Экспозиция", "Показ мод"];
-    const ages = ["0+", "6+", "12+", "16+", "18+"];
+    const ages = [0, 6, 12, 16, 18];
     const agesOption = ages.map((age, index) => {
-        return <option key={index}>{age}</option>;
+        return <option key={index}>{age+'+'}</option>;
     });
     const options = Options.map((text, index) => {
         return <option key={index}>{text}</option>;

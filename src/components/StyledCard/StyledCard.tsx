@@ -53,7 +53,7 @@ const btnTitle = (status: string) => {
 
 export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({ event }) => {
     const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id)
-    let path = eventPages?.length && eventPages[0].imgs[0].path
+    let path: string | undefined =  (eventPages?.length && eventPages[0].imgs.length) ? eventPages[0].imgs[0].path : undefined 
 
     return (
         <Card className={styles.styledCard_container} color="dark" inverse>
