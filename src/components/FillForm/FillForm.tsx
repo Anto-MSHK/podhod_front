@@ -19,7 +19,7 @@ interface formType {
     description: string;
     age: string;
     eventType: string;
-    checked: boolean[];
+    checked: string[];
 }
 export const FillForm: React.FC<IFillFormProps> = (props) => {
     const Options = ["Выставка", "Экспозиция", "Показ мод"];

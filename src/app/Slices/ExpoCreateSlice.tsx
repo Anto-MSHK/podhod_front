@@ -9,7 +9,7 @@ export type eventForm = {
     description: string;
     age: string;
     eventType: string;
-    checked: boolean[];
+    checked: string[];
 }
 
 type imagesUploadSliceT = {

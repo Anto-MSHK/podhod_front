@@ -15,8 +15,9 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data, handleActiveBtn }) =
     const [rSelected, setRSelected] = useState<number | null>(0);
     const [cSelected, setCSelected] = useState<number[]>([]);
 
-    const handleRadioClick = (index: number) => setRSelected(index);
-
+    const handleRadioClick = (index: number) => {
+        setRSelected(index);
+}
     const handleSelectClick = (index: number) => {
         const selectedIndex = cSelected.indexOf(index);
         const newSelected = [...cSelected];
@@ -26,6 +27,10 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data, handleActiveBtn }) =
             newSelected.splice(selectedIndex, 1);
         }
         setCSelected(newSelected);
+
+        if (handleActiveBtn) {
+            handleActiveBtn(newSelected)
+        }
     };
 
     const renderButton = (el: { name: string, icon?: any, onClick?: () => void; lable?: string }, index: number) => {
@@ -39,7 +44,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({ view, data, handleActiveBtn }) =
             if (el.lable && handleActiveBtn) {
                 handleActiveBtn(el.lable)
             }
-           
+
         };
 
         return (
