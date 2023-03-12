@@ -7,6 +7,8 @@ import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
 import errorIcon from '../../assets/icons/Icon9.svg'
 import Preview from '../../components/PreviewComponent/Preview';
 import { ButtonArt } from '../../components/ButtonArt/ButtonArt';
+import { ExpoCreateMainPage } from './ExpoCreateMainForm.tsx/ExpoCreateMainForm';
+import { ExpoCreateExhibitsPage } from './ExpoCreateExhibits/ExpoCreateExhibits';
 
 
 
@@ -21,16 +23,27 @@ const btnData = [
 export const ExpoCreatePage: React.FC = () => {
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const [activeBtn, setActiveBtn] = useState<string | number | number[]>()
+    const [activeBtn, setActiveBtn] = useState<string | number | number[]>('mainScreen')
     const handleActiveBtn = (lable: string | number | number[]) => {
         setActiveBtn(lable)
+    }
+    const contentComponent = () => {
+        switch (activeBtn) {
+            case 'mainScreen':
+                return <ExpoCreateMainPage />
+            case 'exhibits':
+                return <ExpoCreateExhibitsPage/>
+            default:
+              
+        }
+
     }
 
     useEffect(() => {
         const handleScroll = () => {
             setTimeout(() => {
 
-                if (containerRef.current ) {
+                if (containerRef.current) {
                     containerRef.current.style.transform = `translateY(${window.scrollY}px)`;
                 }
             }, 100)
@@ -39,34 +52,21 @@ export const ExpoCreatePage: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+
+
     return (
         <div className={styles.ExpoCreateWrapper}>
             <div className={styles.InfoWrapper}>
                 <div className={styles.toolbar_wrapper}>
                     <BtnGroupSelect handleActiveBtn={handleActiveBtn} view={'radio'} data={btnData} />
-                   <div className={styles.toolbar__main_submint_btn_container}>
-                   <ButtonArt  >Сохранить событие</ButtonArt>
-                    </div> 
+                    <div className={styles.toolbar__main_submint_btn_container}>
+                        <ButtonArt  >Сохранить событие</ButtonArt>
+                    </div>
                 </div>
-                <div className={styles.FormWrapper}>
-                    <div>
-                        <FillForm />
-                    </div>
-                    <div className={styles.ImgGalleryWrapper}>
-                        <div className={styles.ImgGalleryTitle}>
-                            <h3>Галерея</h3>
-                            <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2</p>
-                        </div>
-                        <ImagesGallery type='galleryImages' />
-                    </div>
-                    <div className={styles.ImgGalleryWrapper}>
-                        <div className={styles.ImgGalleryTitle}>
-                            <h3>Задний фон</h3>
-                            <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2</p>
-                        </div>
-                        <ImagesGallery type='backGroundImages' />
-                    </div>
-
+                <div className={styles.content_wrapper}>
+                    {
+                        contentComponent()
+                    }
                 </div>
             </div>
             <div ref={containerRef} className={styles.preview_wrapper} style={{}}>

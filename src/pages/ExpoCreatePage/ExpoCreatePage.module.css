@@ -2,7 +2,7 @@
     display: flex;
     column-gap: 20px;
     padding: 20px;
-    width: 70vw;
+    width: 80vmax;
 }
 .InfoWrapper {
     display: flex;
@@ -10,6 +10,8 @@
     row-gap: 2vw;
     width: 100%;
 }
+
+
 
 
 .toolbar_wrapper{
@@ -39,7 +41,7 @@
     flex-direction: column;
     width: min-content;
     height: fit-content;
-    transition:  0.5s ease-out
+    transition:  0.5s ease-out;
 }
 
 
@@ -52,29 +54,7 @@
     width: min-content;
 }
 
-.ImgGalleryTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-}
-
-.ImgGalleryTitle p {
-    font-weight: 500;
-    font-size: medium;
-    color: #ABABAB;
-    text-align: end;
-}
 
 
-.FormWrapper {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1vw;
-}
 
-.ImgGalleryWrapper {
-    display: flex;
-    flex-direction: column;
-    min-width: 450px;
-    row-gap: 5px;
-}
+

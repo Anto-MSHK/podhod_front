@@ -1,0 +1,29 @@
+.content_wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+}
+
+.ImgGalleryWrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+    row-gap: 5px;
+}
+.ImgGalleryTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.ImgGalleryTitle p {
+    font-weight: 500;
+    font-size: medium;
+    color: #ABABAB;
+    text-align: end;
+}
+.media_wrapper{
+    background-color: rgba(226, 226, 226, 0.03);
+    padding: 1vmax;
+    border-radius: 15px;
+}
