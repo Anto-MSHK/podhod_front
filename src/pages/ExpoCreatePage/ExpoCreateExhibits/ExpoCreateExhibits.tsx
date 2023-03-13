@@ -74,9 +74,7 @@ export const ExpoCreateExhibitsPage = () => {
                     {data && data.map((el: any) => {
                         return (
                             <div className={styles.mainCreateExhibitWrapper}>
-                                <div className={styles.exhibitsListWrapper} onClick={() => {
-                                    setModal(true)
-                                }}>
+                                <div className={styles.exhibitsListWrapper}>
                                     <div>
                                         {el.name}
                                     </div>

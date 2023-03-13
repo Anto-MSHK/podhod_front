@@ -22,6 +22,10 @@
     font-weight: 600;
 }
 
-.exhibitsListWrapper:hover {
+/* .exhibitsListWrapper:hover {
     border: 1px solid #DF791AFF;
+} */
+
+.exhibitsDeleteWrapper:hover {
+    border: 2px solid #E74D36;
 }
