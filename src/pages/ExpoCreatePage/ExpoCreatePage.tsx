@@ -13,7 +13,7 @@ import { ExpoCreateExhibitsPage } from './ExpoCreateExhibits/ExpoCreateExhibits'
 
 
 const btnData = [
-    { name: "Главный экран", lable: 'mainScreen' },
+    { name: "Главная", lable: 'mainScreen' },
     { name: "Экспонаты", lable: 'exhibits' },
     { name: "Карта", lable: 'map' },
     { name: "Настройки", lable: 'settings' },
