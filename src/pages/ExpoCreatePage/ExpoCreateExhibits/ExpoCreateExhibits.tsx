@@ -11,6 +11,7 @@ import {useFetchExhibitsQuery} from "../../../app/services/ExhibitsApi";
 import {useAddExhibitMutation} from "../../../app/services/ExhibitsApi";
 import {useAppDispatch} from "../../../app/hooks";
 import {setExhibit} from "../../../app/Slices/ExhibitCreateSlice";
+import {CreateExhibitPayloadT} from '../../../app/Types/ExhibitsT';
 
 interface formType {
     exhibitName: string;
@@ -19,7 +20,7 @@ interface formType {
 }
 
 
-export const ExpoCreateExhibitsPage: React.FC = () => {
+export const ExpoCreateExhibitsPage = () => {
 
     const toggle = () => setModal(!modal);
     const {data} = useFetchExhibitsQuery();
@@ -37,10 +38,12 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
             exhibitDescription: '',
         },
         onSubmit: (values, form) => {
-            let exhibit: any = {
-                exhibitName: values.exhibitName,
-                exhibitShort: values.exhibitShort,
-                exhibitDescription: values.exhibitDescription
+            console.log('Submitting form...', values); // add console.log statement
+            let exhibit: CreateExhibitPayloadT = {
+                date: new Date().toISOString(),
+                name: values.exhibitName,
+                short: values.exhibitShort,
+                description: values.exhibitDescription
             }
             handleAddExhibit(exhibit)
             dispatch(setExhibit(values))
@@ -59,57 +62,63 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
     const [modal, setModal] = useState(false);
 
     return (
-        <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
-            {(formik) => (
-                <div className={styles.main_page_form_wrapper}>
-                    <div>
-                        <ButtonArt onClick={() => {
+        <div className={styles.main_page_form_wrapper}>
+            <div>
+                <ButtonArt onClick={() => {
+                    setModal(true)
+                }}>Создать экспонат</ButtonArt>
+            </div>
+            <div>
+                {data && data.map((el: any) => {
+                    return (
+                        <div className={styles.exhibitsListWrapper} onClick={() => {
                             setModal(true)
-                        }}>Создать экспонат</ButtonArt>
-                    </div>
-                    <div>
-                        {data && data.map((el: any) => {
-                            return (
-                                <div className={styles.exhibitsListWrapper} onClick={() => {
-                                    setModal(true)
-                                }}>
-                                    {el.name}
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <Modal isOpen={modal} toggle={toggle} fullscreen
-                           style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                        <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>
-                            Экспонат</ModalHeader>
-                        <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                            <div>
-                                <FormInput name='exhibitName' label="Название:"/>
-                                <FormInput name='exhibitShort' label="Короткое описание:"/>
-                                <FormInput name='exhibitDescription' label="Полное описание:" type={'textarea'}/>
-                            </div>
-                            <h2>Медиа</h2>
-                            <div className={styles.media_wrapper}>
-                                <div className={styles.ImgGalleryWrapper}>
-                                    <div className={styles.ImgGalleryTitle}>
-                                        <h3>Галерея</h3>
-                                        <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2</p>
+                        }}>
+                            {el.name}
+                        </div>
+                    )
+                })}
+            </div>
+            <Modal isOpen={modal} toggle={toggle} fullscreen
+                   style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+                    {(formik) => (
+                        <div>
+                            <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>
+                                Экспонат</ModalHeader>
+                            <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                                <div>
+                                    <div>
+                                        <FormInput name='exhibitName' label="Название:"/>
+                                        <FormInput name='exhibitShort' label="Короткое описание:"/>
+                                        <FormInput name='exhibitDescription' label="Полное описание:"
+                                                   type={'textarea'}/>
                                     </div>
-                                    <ImagesGallery type='galleryImages'/>
+                                    <h2>Медиа</h2>
+                                    <div className={styles.media_wrapper}>
+                                        <div className={styles.ImgGalleryWrapper}>
+                                            <div className={styles.ImgGalleryTitle}>
+                                                <h3>Галерея</h3>
+                                                <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 :
+                                                    2</p>
+                                            </div>
+                                            <ImagesGallery type='galleryImages'/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </ModalBody>
-                        <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                            <ButtonArt color="primary" type="submit">
-                                Сохранить
-                            </ButtonArt>
-                            <ButtonArt onClick={toggle}>
-                                Отменить
-                            </ButtonArt>
-                        </ModalFooter>
-                    </Modal>
-                </div>
-            )}
-        </FormContainer>
+                            </ModalBody>
+                            <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                                <ButtonArt color="primary" type="submit">
+                                    Сохранить
+                                </ButtonArt>
+                                <ButtonArt onClick={toggle}>
+                                    Отменить
+                                </ButtonArt>
+                            </ModalFooter>
+                        </div>
+                    )}
+                </FormContainer>
+            </Modal>
+        </div>
     );
 };

@@ -5,3 +5,10 @@ export type exhibitsT = {
     description?: string
     chapters?: {}[]
 }
+
+export type CreateExhibitPayloadT = {
+    name: string,
+    short: string,
+    description: string,
+    date: string,
+}
