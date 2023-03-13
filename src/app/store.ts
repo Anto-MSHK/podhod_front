@@ -2,6 +2,7 @@ import {configureStore, ThunkAction, Action, combineReducers} from '@reduxjs/too
 import counterReducer from '../features/counter/counterSlice';
 import imagesUploadReducer from './Slices/imagesUploadSlice';
 import ExpoCreateReducer from './Slices/ExpoCreateSlice';
+import ExhibitCreateReducer from "./Slices/ExhibitCreateSlice";
 import {eventsApi} from './services/EventsApi';
 import storage from 'redux-persist/es/storage';
 import {
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     [exhibitsApi.reducerPath]: exhibitsApi.reducer,
     counter: counterReducer,
     images: imagesUploadReducer,
-    eventCreate: ExpoCreateReducer
+    eventCreate: ExpoCreateReducer,
+    exhibitCreate: ExhibitCreateReducer
 });
 
 const persistConfig = {

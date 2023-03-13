@@ -8,69 +8,55 @@ import {FormikConfig} from 'formik';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {ButtonArt} from "../../../components/ButtonArt/ButtonArt";
 import {useFetchExhibitsQuery} from "../../../app/services/ExhibitsApi";
-
-interface IFillFormProps {
-}
+import {useAddExhibitMutation} from "../../../app/services/ExhibitsApi";
+import {useAppDispatch} from "../../../app/hooks";
+import {setExhibit} from "../../../app/Slices/ExhibitCreateSlice";
 
 interface formType {
-    eventName: string;
-    description: string;
-    age: number;
-    eventType: string;
-    checked: string[];
+    exhibitName: string;
+    exhibitShort: string;
+    exhibitDescription: string;
 }
 
 
 export const ExpoCreateExhibitsPage: React.FC = () => {
 
+    const toggle = () => setModal(!modal);
     const {data} = useFetchExhibitsQuery();
-
-    const Options = ["Выставка", "Экспозиция", "Показ мод"];
-    const ages = [0, 6, 12, 16, 18];
-    const agesOption = ages.map((age, index) => {
-        return <option key={index}>{age + '+'}</option>;
-    });
-    const options = Options.map((text, index) => {
-        return <option key={index}>{text}</option>;
-    });
+    const dispatch = useAppDispatch()
+    const [addExhibit, {isError}] = useAddExhibitMutation()
+    const handleAddExhibit = async (exhibit: any) => {
+        console.log('sss');
+        await addExhibit(exhibit).unwrap()
+    }
 
     const formConfig: FormikConfig<formType> = {
         initialValues: {
-            eventName: "",
-            description: "",
-            age: ages[0],
-            eventType: Options[0],
-            checked: [],
+            exhibitName: '',
+            exhibitShort: '',
+            exhibitDescription: '',
         },
         onSubmit: (values, form) => {
-            let event = {
-                date: new Date().toISOString(),
-                description: values.description,
-                name: values.eventName,
-                type: 'promo-exhibition',
-                prices: [
-                    {
-                        criterion: 'VIP',
-                        price: 200,
-
-                    }
-                ]
+            let exhibit: any = {
+                exhibitName: values.exhibitName,
+                exhibitShort: values.exhibitShort,
+                exhibitDescription: values.exhibitDescription
             }
-            /*   alert(JSON.stringify(values, null, 2)); */
+            handleAddExhibit(exhibit)
+            dispatch(setExhibit(values))
+            toggle()
         },
     };
 
     const schemaConfig: Yup.ObjectShape = {
-        eventName: Yup.string()
+        exhibitName: Yup.string()
             .required("Обязательное поле!"),
-        description: Yup.string()
+        exhibitShort: Yup.string()
             .required("Обязательное поле!"),
-        age: Yup.string().required("Обязательное поле!"),
-        eventType: Yup.string().required("Обязательное поле!"),
+        exhibitDescription: Yup.string()
+            .required("Обязательное поле!"),
     };
     const [modal, setModal] = useState(false);
-
-    const toggle = () => setModal(!modal);
 
     return (
         <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
@@ -84,7 +70,9 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
                     <div>
                         {data && data.map((el: any) => {
                             return (
-                                <div className={styles.exhibitsListWrapper} onClick={() => {setModal(true)}}>
+                                <div className={styles.exhibitsListWrapper} onClick={() => {
+                                    setModal(true)
+                                }}>
                                     {el.name}
                                 </div>
                             )
@@ -97,8 +85,8 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
                         <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                             <div>
                                 <FormInput name='exhibitName' label="Название:"/>
-                                <FormInput name='exhibitName' label="Короткое описание:"/>
-                                <FormInput name='exhibitName' label="Полное описание:" type={'textarea'}/>
+                                <FormInput name='exhibitShort' label="Короткое описание:"/>
+                                <FormInput name='exhibitDescription' label="Полное описание:" type={'textarea'}/>
                             </div>
                             <h2>Медиа</h2>
                             <div className={styles.media_wrapper}>
@@ -112,9 +100,9 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
                             </div>
                         </ModalBody>
                         <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                            <ButtonArt color="primary" onClick={toggle}>
+                            <ButtonArt color="primary" type="submit">
                                 Сохранить
-                            </ButtonArt>{' '}
+                            </ButtonArt>
                             <ButtonArt onClick={toggle}>
                                 Отменить
                             </ButtonArt>

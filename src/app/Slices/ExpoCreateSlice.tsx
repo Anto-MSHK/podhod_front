@@ -12,6 +12,7 @@ export type eventForm = {
     checked: string[];
 }
 
+
 type imagesUploadSliceT = {
     event: eventForm | undefined;
 }
@@ -33,6 +34,7 @@ const ExpoCreateSlice = createSlice({
 
     },
 })
+
 
 export const { setEvent } = ExpoCreateSlice.actions
 export default ExpoCreateSlice.reducer 
