@@ -14,7 +14,7 @@ import icon3 from "../../assets/icons/Icon3.svg";
 import { PublicationStatus } from "../PublicationStatus/PublicationStatus";
 import { ButtonArt } from "../ButtonArt/ButtonArt";
 import { EventT } from '../../app/Types/EventsT';
-import { useGetEventPagesQuery, useGetPageImgQuery } from "../../app/services/EventsApi";
+import {useGetEventPagesQuery} from "../../app/services/EventsApi";
 import { API_URL } from "../../app/http";
 
 interface IStyledCardProps {

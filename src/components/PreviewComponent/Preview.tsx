@@ -8,6 +8,7 @@ interface IPreview {
 }
 const Preview: React.FC = () => {
     const event = useAppSelector(state => state.eventCreate.event)
+    const exhibit = useAppSelector(state => state.exhibitCreate.exhibit)
     const backGroundImages = useAppSelector(state => state.images.backGroundImages)
     const galleryImages = useAppSelector(state => state.images.galleryImages)
     return (
