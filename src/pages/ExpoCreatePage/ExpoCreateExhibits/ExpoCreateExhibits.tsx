@@ -1,17 +1,17 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import styles from './ExpoCreateExhibits.module.css'
-import { FillForm } from "../../../components/FillForm/FillForm";
 import ImagesGallery from "../../../components/ImagesGallery/imagesGallery";
-import { FormInput } from '../../../components/AuthForm/FormInput';
-import { FormContainer } from '../../../components/AuthForm/Form';
+import {FormInput} from '../../../components/AuthForm/FormInput';
+import {FormContainer} from '../../../components/AuthForm/Form';
 import * as Yup from "yup";
-import { FormikConfig, FormikProps } from 'formik';
-import { type } from 'os';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {FormikConfig} from 'formik';
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {ButtonArt} from "../../../components/ButtonArt/ButtonArt";
 import {useFetchExhibitsQuery} from "../../../app/services/ExhibitsApi";
 
-interface IFillFormProps { }
+interface IFillFormProps {
+}
+
 interface formType {
     eventName: string;
     description: string;
@@ -23,12 +23,12 @@ interface formType {
 
 export const ExpoCreateExhibitsPage: React.FC = () => {
 
-    const { data } = useFetchExhibitsQuery();
+    const {data} = useFetchExhibitsQuery();
 
     const Options = ["Выставка", "Экспозиция", "Показ мод"];
     const ages = [0, 6, 12, 16, 18];
     const agesOption = ages.map((age, index) => {
-        return <option key={index}>{age+'+'}</option>;
+        return <option key={index}>{age + '+'}</option>;
     });
     const options = Options.map((text, index) => {
         return <option key={index}>{text}</option>;
@@ -56,12 +56,12 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
                     }
                 ]
             }
-          /*   alert(JSON.stringify(values, null, 2)); */
+            /*   alert(JSON.stringify(values, null, 2)); */
         },
     };
 
     const schemaConfig: Yup.ObjectShape = {
-       eventName: Yup.string()
+        eventName: Yup.string()
             .required("Обязательное поле!"),
         description: Yup.string()
             .required("Обязательное поле!"),
@@ -77,46 +77,49 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
             {(formik) => (
                 <div className={styles.main_page_form_wrapper}>
                     <div>
-                        <ButtonArt onClick={() => {setModal(true)}}>Создать экспонат</ButtonArt>
+                        <ButtonArt onClick={() => {
+                            setModal(true)
+                        }}>Создать экспонат</ButtonArt>
                     </div>
                     <div>
                         {data && data.map((el: any) => {
-                            console.log(el.name)
-                            return(
-                                <div>
+                            return (
+                                <div className={styles.exhibitsListWrapper} onClick={() => {setModal(true)}}>
                                     {el.name}
                                 </div>
                             )
                         })}
                     </div>
-                    <Modal isOpen={modal} toggle={toggle} fullscreen style={{backgroundColor: '#1E1E1E', color: 'white'}} >
-                <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>Создать экспонат</ModalHeader>
-                <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                <div>
-                        <FormInput name='exhibitName' label="Название:" />
-                        <FormInput name='exhibitName' label="Короткое описание:" />
-                        <FormInput name='exhibitName' label="Полное описание:" type={'textarea'} />
-                    </div>
-                    <h2>Медиа</h2>
-                    <div className={styles.media_wrapper}>
-                        <div className={styles.ImgGalleryWrapper}>
-                            <div className={styles.ImgGalleryTitle}>
-                                <h3>Галерея</h3>
-                                <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2</p>
+                    <Modal isOpen={modal} toggle={toggle} fullscreen
+                           style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                        <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>
+                            Экспонат</ModalHeader>
+                        <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                            <div>
+                                <FormInput name='exhibitName' label="Название:"/>
+                                <FormInput name='exhibitName' label="Короткое описание:"/>
+                                <FormInput name='exhibitName' label="Полное описание:" type={'textarea'}/>
                             </div>
-                            <ImagesGallery type='galleryImages' />
-                        </div>
-                    </div>
-                </ModalBody>
-                <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                  <ButtonArt color="primary" onClick={toggle}>
-                    Создать
-                  </ButtonArt>{' '}
-                  <ButtonArt style={{color: 'none'}} onClick={toggle}>
-                    Закрыть
-                  </ButtonArt>
-                </ModalFooter>
-              </Modal>
+                            <h2>Медиа</h2>
+                            <div className={styles.media_wrapper}>
+                                <div className={styles.ImgGalleryWrapper}>
+                                    <div className={styles.ImgGalleryTitle}>
+                                        <h3>Галерея</h3>
+                                        <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2</p>
+                                    </div>
+                                    <ImagesGallery type='galleryImages'/>
+                                </div>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                            <ButtonArt color="primary" onClick={toggle}>
+                                Сохранить
+                            </ButtonArt>{' '}
+                            <ButtonArt onClick={toggle}>
+                                Отменить
+                            </ButtonArt>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )}
         </FormContainer>
