@@ -8,6 +8,8 @@ import * as Yup from "yup";
 import { FormikConfig, FormikProps } from 'formik';
 import { type } from 'os';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {ButtonArt} from "../../../components/ButtonArt/ButtonArt";
+import {useFetchExhibitsQuery} from "../../../app/services/ExhibitsApi";
 
 interface IFillFormProps { }
 interface formType {
@@ -20,6 +22,8 @@ interface formType {
 
 
 export const ExpoCreateExhibitsPage: React.FC = () => {
+
+    const { data } = useFetchExhibitsQuery();
 
     const Options = ["Выставка", "Экспозиция", "Показ мод"];
     const ages = [0, 6, 12, 16, 18];
@@ -73,11 +77,21 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
             {(formik) => (
                 <div className={styles.main_page_form_wrapper}>
                     <div>
-                        <Button onClick={() => {setModal(true)}}>Открыть модалку</Button>
+                        <ButtonArt onClick={() => {setModal(true)}}>Создать экспонат</ButtonArt>
                     </div>
-                    <Modal isOpen={modal} toggle={toggle} fullscreen >
-                <ModalHeader style={{backgroundColor: 'black', color: 'white'}} toggle={toggle}>Создать экспонат</ModalHeader>
-                <ModalBody style={{backgroundColor: 'black', color: 'white'}}>
+                    <div>
+                        {data && data.map((el: any) => {
+                            console.log(el.name)
+                            return(
+                                <div>
+                                    {el.name}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <Modal isOpen={modal} toggle={toggle} fullscreen style={{backgroundColor: '#1E1E1E', color: 'white'}} >
+                <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>Создать экспонат</ModalHeader>
+                <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                 <div>
                         <FormInput name='exhibitName' label="Название:" />
                         <FormInput name='exhibitName' label="Короткое описание:" />
@@ -94,13 +108,13 @@ export const ExpoCreateExhibitsPage: React.FC = () => {
                         </div>
                     </div>
                 </ModalBody>
-                <ModalFooter style={{backgroundColor: 'black', color: 'white'}}>
-                  <Button color="primary" onClick={toggle}>
-                    Do Something
-                  </Button>{' '}
-                  <Button color="secondary" onClick={toggle}>
-                    Cancel
-                  </Button>
+                <ModalFooter style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                  <ButtonArt color="primary" onClick={toggle}>
+                    Создать
+                  </ButtonArt>{' '}
+                  <ButtonArt style={{color: 'none'}} onClick={toggle}>
+                    Закрыть
+                  </ButtonArt>
                 </ModalFooter>
               </Modal>
                 </div>
