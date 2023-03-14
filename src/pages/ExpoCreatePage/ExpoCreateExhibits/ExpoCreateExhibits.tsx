@@ -31,8 +31,8 @@ export const ExpoCreateExhibitsPage = () => {
         const [addExhibit] = useAddExhibitMutation();
         const [updateExhibit] = useUpdateExhibitMutation();
         const [deleteExhibit] = useDeleteExhibitMutation();
-        const dispatch = useAppDispatch()
         const [editingExhibit, setEditingExhibit] = useState<any>(null);
+        const dispatch = useAppDispatch()
 
         const toggle = () => setModal(!modal);
 
@@ -59,13 +59,10 @@ export const ExpoCreateExhibitsPage = () => {
             console.log("Updating exhibit...", values);
             if (editingExhibit !== null) {
                 let exhibit: UpdateExhibitPayloadT = {
-                    date: new Date().toISOString(),
-                    id: editingExhibit.id,
                     name: values.exhibitName,
-                    short: values.exhibitShort,
                     description: values.exhibitDescription,
                 };
-                updateExhibit(exhibit);
+                updateExhibit({id: editingExhibit.id, data: exhibit});
                 toggle()
             }
         };
