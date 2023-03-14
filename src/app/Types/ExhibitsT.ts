@@ -12,3 +12,9 @@ export type CreateExhibitPayloadT = {
     description: string,
     date: string,
 }
+
+export type UpdateExhibitPayloadT = {
+    name: string,
+    description: string,
+    short: string
+}
