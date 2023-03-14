@@ -86,12 +86,12 @@ export const ExpoCreateExhibitsPage = () => {
                         )
                     })}
                 </div>
-                <Modal isOpen={modal} toggle={toggle} fullscreen
+                <Modal isOpen={modal} toggle={toggle} size={'xl'} contentClassName={styles.modalWrapper}
                        style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                     <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
                         {(formik) => (
                             <div>
-                                <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}} toggle={toggle}>
+                                <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                                     Экспонат</ModalHeader>
                                 <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                                     <div>
@@ -100,17 +100,6 @@ export const ExpoCreateExhibitsPage = () => {
                                             <FormInput name='exhibitShort' label="Короткое описание:"/>
                                             <FormInput name='exhibitDescription' label="Полное описание:"
                                                        type={'textarea'}/>
-                                        </div>
-                                        <h2>Медиа</h2>
-                                        <div className={styles.media_wrapper}>
-                                            <div className={styles.ImgGalleryWrapper}>
-                                                <div className={styles.ImgGalleryTitle}>
-                                                    <h3>Галерея</h3>
-                                                    <p>Изображения должны иметь размер до 2 мб и соотношение сторон 3 :
-                                                        2</p>
-                                                </div>
-                                                <ImagesGallery type='galleryImages'/>
-                                            </div>
                                         </div>
                                     </div>
                                 </ModalBody>
