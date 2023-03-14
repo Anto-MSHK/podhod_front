@@ -22,6 +22,7 @@ interface formType {
 }
 
 
+
 export const ExpoCreateExhibitsPage = () => {
 
         const toggle = () => setModal(!modal);
@@ -32,16 +33,25 @@ export const ExpoCreateExhibitsPage = () => {
         await addExhibit(exhibit).unwrap()
     }
     const [deleteExhibit] = useDeleteExhibitMutation();
+    const [editingExhibit, setEditingExhibit] = useState<any>(null);
 
         const handleDeleteExhibit = async (id: any) => {
             console.log('delete...')
             await deleteExhibit(id).unwrap();
         }
+
+    const handleEditExhibit = (exhibit: any) => {
+            console.log(exhibit)
+        setEditingExhibit(exhibit);
+        toggle();
+    };
+
+
         const formConfig: FormikConfig<formType> = {
             initialValues: {
-                exhibitName: '',
-                exhibitShort: '',
-                exhibitDescription: '',
+                exhibitName: editingExhibit && editingExhibit.id === null ? '' : editingExhibit && editingExhibit.name,
+                exhibitShort: editingExhibit && editingExhibit.id === null ? '' : editingExhibit && editingExhibit.short,
+                exhibitDescription: editingExhibit && editingExhibit.id === null ? '' : editingExhibit && editingExhibit.description,
             },
             onSubmit: (values, form) => {
                 console.log('Submitting form...', values); // add console.log statement
@@ -78,7 +88,7 @@ export const ExpoCreateExhibitsPage = () => {
                     {data && data.map((el: any) => {
                         return (
                             <div className={styles.mainCreateExhibitWrapper}>
-                                <div className={styles.exhibitsListWrapper}>
+                                <div className={styles.exhibitsListWrapper} onClick={() => handleEditExhibit(el)}>
                                     <div>
                                         {el.name}
                                     </div>
@@ -91,12 +101,12 @@ export const ExpoCreateExhibitsPage = () => {
                     })}
                 </div>
                 <Modal isOpen={modal} toggle={toggle} size={'xl'} contentClassName={styles.modalWrapper}
-                       style={{backgroundColor: '#1E1E1E', color: 'white'}}>
+                       style={{backgroundColor: '#1E1E1E', color: 'white'}} onClosed={() => {setEditingExhibit(null)}}>
                     <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
                         {(formik) => (
                             <div>
                                 <ModalHeader style={{backgroundColor: '#1E1E1E', color: 'white'}}>
-                                    Экспонат</ModalHeader>
+                                    {editingExhibit === null ? 'Создание экспоната' : 'Редактирование экспоната'}</ModalHeader>
                                 <ModalBody style={{backgroundColor: '#1E1E1E', color: 'white'}}>
                                     <div>
                                         <div>

@@ -22,9 +22,9 @@
     font-weight: 600;
 }
 
-/* .exhibitsListWrapper:hover {
-    border: 1px solid #DF791AFF;
-} */
+.exhibitsListWrapper:hover {
+    box-shadow: inset 0 0 0 2px #df791a;
+}
 
 .exhibitsDeleteWrapper:hover {
     box-shadow: inset 0 0 0 2px #E74D36;
