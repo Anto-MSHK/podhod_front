@@ -61,6 +61,7 @@ export const ExpoCreateExhibitsPage = () => {
                 let exhibit: UpdateExhibitPayloadT = {
                     name: values.exhibitName,
                     description: values.exhibitDescription,
+                    short: values.exhibitShort
                 };
                 updateExhibit({id: editingExhibit.id, data: exhibit});
                 toggle()

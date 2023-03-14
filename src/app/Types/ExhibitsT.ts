@@ -16,4 +16,5 @@ export type CreateExhibitPayloadT = {
 export type UpdateExhibitPayloadT = {
     name: string,
     description: string,
+    short: string
 }
