@@ -101,7 +101,11 @@ export const ExpoCreatePage: React.FC = () => {
             </div>
 
             <div className={styles.content_wrapper}>
-              {<ExpoMainPage data={event} />}
+              {activeBtn === "mainScreen" ? (
+                <ExpoMainPage data={event} />
+              ) : (
+                <ExpoCreateExhibitsPage />
+              )}
             </div>
           </div>
           <div ref={containerRef} className={styles.preview_wrapper} style={{}}>
