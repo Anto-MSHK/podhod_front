@@ -1,40 +1,31 @@
-import { createSlice, PayloadAction, Action, current } from '@reduxjs/toolkit';
-import { type } from 'os';
-import { ExpoCreatePage } from '../../pages/ExpoCreatePage/ExpoCreatePage';
-
-
+import { createSlice, PayloadAction, Action, current } from "@reduxjs/toolkit";
+import { type } from "os";
+import { ExpoCreatePage } from "../../pages/ExpoCreatePage/ExpoCreatePage";
 
 export type eventForm = {
-    eventName: string;
-    description: string;
-    age: number;
-    eventType: string;
-    checked: string[];
-}
-
+  eventName: string;
+  description: string;
+  age: string | null;
+  eventType: string;
+};
 
 type imagesUploadSliceT = {
-    event: eventForm | undefined;
-}
-
+  event: eventForm | undefined;
+};
 
 const initialState: imagesUploadSliceT = {
-    event: undefined
-}
-
-
+  event: undefined,
+};
 
 const ExpoCreateSlice = createSlice({
-    name: 'eventCreate',
-    initialState,
-    reducers: {
-        setEvent(state, action: PayloadAction<eventForm>) {
-            state.event = action.payload
-        },
-
+  name: "eventCreate",
+  initialState,
+  reducers: {
+    setEvent(state, action: PayloadAction<eventForm>) {
+      state.event = action.payload;
     },
-})
+  },
+});
 
-
-export const { setEvent } = ExpoCreateSlice.actions
-export default ExpoCreateSlice.reducer 
+export const { setEvent } = ExpoCreateSlice.actions;
+export default ExpoCreateSlice.reducer;

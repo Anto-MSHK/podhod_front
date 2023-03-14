@@ -11,6 +11,29 @@
   border-radius: 10px;
 }
 
+.dropItem {
+  width: 100%;
+  color: black !important;
+  background-color: #ffffff !important;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.dropItem:hover {
+  width: 100%;
+  background-color: #e7e7e7 !important;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.dropItem:focus {
+  width: 100%;
+  color: white !important;
+  background-color: #df791a !important;
+  font-weight: 500;
+  font-size: 18px;
+}
+
 .active {
   color: white !important;
   background-color: #df791a !important;
@@ -18,9 +41,9 @@
 }
 
 .deactivate {
-  color: #9D9D9D !important;
-  background-color: #2B2B2B !important;
-  border: 1px solid #2B2B2B !important;
+  color: #9d9d9d !important;
+  background-color: #2b2b2b !important;
+  border: 1px solid #2b2b2b !important;
 }
 
 .btnGroupWrapper {
@@ -29,5 +52,4 @@
 }
 
 .btnIcon {
-
 }

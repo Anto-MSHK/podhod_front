@@ -1,60 +1,52 @@
 .ExpoCreateWrapper {
-    display: flex;
-    column-gap: 20px;
-    padding: 20px;
-    width: 80vmax;
+  display: flex;
+  column-gap: 20px;
+  padding: 20px;
 }
 .InfoWrapper {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vw;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vw;
+  width: 100%;
 }
 
-
-
-
-.toolbar_wrapper{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.toolbar_wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-.toolbar__main_submint_btn_container{
-    width: 200px;
-    height: fit-content;
+.toolbar__main_submint_btn_container {
+  width: 200px;
+  height: fit-content;
 }
 
 @media (max-width: 1140px) {
-    .toolbar_wrapper{
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 10px;
-    }
+  .toolbar_wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
 }
-.toolbar__main_submit_btn{
-    height: 100%;
+.toolbar__main_submit_btn {
+  height: 100%;
 }
 
 .preview_wrapper {
-  
-    display: flex;
-    flex-direction: column;
-    width: min-content;
-    height: fit-content;
-    transition:  0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  height: fit-content;
+  transition: 0.5s ease-out;
 }
 
-
+.InfoComponentWrapper {
+  margin-top: 10px;
+}
 .preview__container {
-    margin: 0 auto;
-    background-color: #E74D36;
-    border-radius: 10px;
-    height: fit-content;
-    padding: 20px;
-    width: min-content;
+  margin: 0 auto;
+  background-color: #e74d36;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 10px;
+  width: min-content;
 }
-
-
-
-
-

@@ -7,6 +7,7 @@ interface ButtonArtI extends ButtonProps {
   style?: React.CSSProperties;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  size?: "lg" | "sm";
   icon?: any;
   iconWidth?: number;
   disabled?: boolean;
@@ -24,6 +25,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
   iconWidth,
   disabled,
   inActiveStyle,
+  size,
 }) => {
   const customClassName = className ? className : styles.customBtn;
   const iconElement = icon ? (
@@ -38,14 +40,13 @@ export const ButtonArt: FC<ButtonArtI> = ({
   return (
     <div className={styles.custom_btn_container}>
       <Button
-
         className={`${inActiveStyle ? styles.disabled : customClassName}`}
         onClick={onClick}
         type={type}
         active={active}
         style={style}
         disabled={disabled}
-
+        size={size}
       >
         {iconElement}
         {children}

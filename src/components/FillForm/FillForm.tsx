@@ -1,165 +1,188 @@
 import * as React from "react";
 import styles from "./FillForm.module.css";
 import { ButtonArt } from "../ButtonArt/ButtonArt";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormContainer } from "../AuthForm/Form";
 import * as Yup from "yup";
-import { FormikConfig, FormikProps } from 'formik';
+import { FormikConfig, FormikProps } from "formik";
 import { FormInput } from "../AuthForm/FormInput";
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from "../../app/hooks";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
-import { useAddEventMutation } from "../../app/services/EventsApi";
-import { CreateEventPayloadT } from '../../app/Types/EventsT';
-import { type } from 'os';
+import {
+  useAddEventMutation,
+  useUpdateEventMutation,
+} from "../../app/services/EventsApi";
+import {
+  CreateEventPayloadT,
+  EventT,
+  UpdateEventPayloadT,
+} from "../../app/Types/EventsT";
+import { type } from "os";
+import { idText } from "typescript";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-interface IFillFormProps { }
 interface formType {
-    eventName: string;
-    description: string;
-    age: number;
-    eventType: string;
-    checked: string[];
+  eventName: string;
+  description: string;
+  age: string;
+  eventType: string;
 }
-export const FillForm: React.FC<IFillFormProps> = (props) => {
-    const Options = ["Выставка", "Экспозиция", "Показ мод"];
-    const ages = [0, 6, 12, 16, 18];
-    const agesOption = ages.map((age, index) => {
-        return <option key={index}>{age+'+'}</option>;
-    });
-    const options = Options.map((text, index) => {
-        return <option key={index}>{text}</option>;
-    });
-    const dispatch = useAppDispatch()
-    const [addEvent, {isError}] = useAddEventMutation()
-    const handleAddEvent = async(event: CreateEventPayloadT)=>{
-        console.log('sss');
-        await addEvent(event).unwrap()
-    }
-   
-
-    const formConfig: FormikConfig<formType> = {
-        initialValues: {
-            eventName: "",
-            description: "",
-            age: ages[0],
-            eventType: Options[0],
-            checked: [],
-        },
-        onSubmit: (values, form) => {
-            let event: CreateEventPayloadT = {
-                date: new Date().toISOString(),
-                description: values.description,
-                name: values.eventName,
-                type: 'promo-exhibition',
-                prices: [
-                    {
-                        criterion: 'VIP',
-                        price: 200,
-
-                    }
-                ]
-            }
-            handleAddEvent(event)
-            dispatch(setEvent(values))
-            form.setSubmitting(false);
-            setEditing(false);
-          /*   alert(JSON.stringify(values, null, 2)); */
-        },
-    };
-    const schemaConfig: Yup.ObjectShape = {
-       eventName: Yup.string()
-            .required("Обязательное поле!"),
-        description: Yup.string()
-            .required("Обязательное поле!"),
-        age: Yup.string().required("Обязательное поле!"),
-        eventType: Yup.string().required("Обязательное поле!"),
-    };
-
-    const [editing, setEditing] = useState(false);
-
-    const toggleEditing = () => {
-        setEditing(!editing);
-    };
-
+interface MainInfoExpoFormI {
+  defaultData: EventT | undefined;
+}
+export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
+  defaultData,
+}) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const Options = [
+    { name: "Выставка", value: "exhibition" },
+    { name: "Ярмарка", value: "fair" },
+    { name: "Промо-выставка", value: "promo-exhibition" },
+  ];
+  const ages = [0, 6, 12, 16, 18];
+  const agesOption = ages.map((age, index) => {
     return (
-        <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
-            {(formik) => (
-                <div className={styles.fillForm_container}>
-                    <div className={styles.asd}>
-                        <h2>{`Информация`}</h2>
-                        <div style={{ display: "flex", gap: 15 }}>
-                            {editing && (
-                                <ButtonArt
-                                    type="submit"
-                                    disabled={
-                                        !editing ||
-                                        formik.isSubmitting ||
-                                        Object.keys(formik.errors).length > 0 ||
-                                        Object.keys(formik.touched).length === 0
-                                    }
-                                >
-                                    {editing ? "Сохранить" : "Изменить"}
-                                </ButtonArt>
-                            )}
-                            <ButtonArt type="button" onClick={toggleEditing}>
-                                {editing ? "Отмена" : "Редактировать"}
-                            </ButtonArt>
-                        </div>
-                    </div>
-                    <div className={styles.form_info}>
-                        <div className={styles.left}>
-                            <FormInput
-                                name="eventName"
-                                label="Название:"
-                                disabled={!editing}
-                            />
-                            
-
-                            <FormInput
-
-                                name="description"
-                                label="Описание:"
-                                type="textarea"
-                                disabled={!editing}
-                            />
-                        
-                        </div>
-                        <div className={styles.right}>
-                            <FormInput
-                                name="age"
-                                label="Возраст:"
-                                type="select"
-                                disabled={!editing}
-                            >
-                                {agesOption}
-                            </FormInput>
-                            <FormInput
-                                name="eventType"
-                                label="Тип события:"
-                                type="select"
-                                disabled={!editing}
-                            >
-                                {options}
-                            </FormInput>
-                            <FormInput
-                                name="checked"
-                                label="Показать логотип:"
-                                type="checkbox"
-                                value={"showLogo"}
-                                disabled={!editing}
-                            />
-                            <FormInput
-                                name="checked"
-                                label="Показать тип события:"
-                                type="checkbox"
-                                value={"showEventType"}
-                                disabled={!editing}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
-        </FormContainer>
+      <option key={index} value={age + "+"}>
+        {age + "+"}
+      </option>
     );
+  });
+  const options = Options.map((elements, index) => {
+    return (
+      <option key={index} value={elements.value}>
+        {elements.name}
+      </option>
+    );
+  });
+  const dispatch = useAppDispatch();
+  const [addEvent, { isError }] = useAddEventMutation();
+  const [updateEvent, { isError: isErrorUpdate }] = useUpdateEventMutation();
+  const handleAddEvent = async (event: CreateEventPayloadT) => {
+    return await addEvent(event).unwrap();
+  };
+  const handleUpdateEvent = async (event: UpdateEventPayloadT) => {
+    await updateEvent(event).unwrap();
+  };
+  const formConfig: FormikConfig<formType> = {
+    initialValues: {
+      eventName: defaultData ? defaultData.name : "",
+      description: defaultData ? defaultData.description : "",
+      age: defaultData ? defaultData.ageLimit || "0+" : "0+",
+      eventType: defaultData ? defaultData.type : "promo-exhibition",
+    },
+    onSubmit: async (values, form) => {
+      let event: CreateEventPayloadT = {
+        date: new Date().toISOString(),
+        description: values.description,
+        name: values.eventName,
+        type: values.eventType,
+        prices: [
+          {
+            criterion: "VIP",
+            price: 200,
+          },
+        ],
+        ageLimit: values.age,
+      };
+      if (id) {
+        let updateEvent: UpdateEventPayloadT = {
+          id: id,
+          date: new Date().toISOString(),
+          description: values.description,
+          name: values.eventName,
+          type: values.eventType,
+          ageLimit: values.age,
+        };
+        handleUpdateEvent(updateEvent);
+      } else {
+        const newEvent = await handleAddEvent(event);
+        navigate(`/expo/${newEvent.id}`);
+      }
+      form.setSubmitting(false);
+      dispatch(setEvent(values));
+      setEditing(false);
+      /*   alert(JSON.stringify(values, null, 2)); */
+    },
+  };
+  const schemaConfig: Yup.ObjectShape = {
+    eventName: Yup.string().required("Обязательное поле!"),
+    description: Yup.string().required("Обязательное поле!"),
+    age: Yup.string().required("Обязательное поле!"),
+    eventType: Yup.string().required("Обязательное поле!"),
+  };
+
+  useEffect(() => {
+    if (!id) setEditing(true);
+  }, [id]);
+  const [editing, setEditing] = useState(false);
+
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
+
+  return (
+    <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+      {(formik) => (
+        <div className={styles.fillForm_container}>
+          <div className={styles.asd}>
+            <h2>{`Основная информация`}</h2>
+            <div style={{ display: "flex", gap: 15 }}>
+              {editing && (
+                <ButtonArt
+                  type="submit"
+                  disabled={
+                    !editing ||
+                    formik.isSubmitting ||
+                    Object.keys(formik.errors).length > 0
+                  }
+                >
+                  {editing ? "Сохранить" : "Изменить"}
+                </ButtonArt>
+              )}
+              {id && (
+                <ButtonArt type="button" onClick={toggleEditing}>
+                  {editing ? "Отмена" : "Редактировать"}
+                </ButtonArt>
+              )}
+            </div>
+          </div>
+          <div className={styles.form_info}>
+            <div className={styles.left}>
+              <FormInput
+                name="eventName"
+                label="Название:"
+                disabled={!editing}
+              />
+
+              <FormInput
+                name="description"
+                label="Описание:"
+                type="textarea"
+                disabled={!editing}
+              />
+            </div>
+            <div className={styles.right}>
+              <FormInput
+                name="age"
+                label="Возраст:"
+                type="select"
+                disabled={!editing}
+              >
+                {agesOption}
+              </FormInput>
+              <FormInput
+                name="eventType"
+                label="Тип события:"
+                type="select"
+                disabled={!editing}
+              >
+                {options}
+              </FormInput>
+            </div>
+          </div>
+        </div>
+      )}
+    </FormContainer>
+  );
 };

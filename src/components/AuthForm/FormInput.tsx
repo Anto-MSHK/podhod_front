@@ -7,16 +7,22 @@ import {
   InputProps,
 } from "reactstrap";
 import styles from "./AuthForm.module.css";
-import { Field, FieldConfig, FieldProps, FieldValidator, FormikConfig, Formik, FormikTouched } from 'formik';
+import {
+  Field,
+  FieldConfig,
+  FieldProps,
+  FieldValidator,
+  FormikConfig,
+  Formik,
+  FormikTouched,
+} from "formik";
 import { InputType } from "reactstrap/types/lib/Input";
-import { type } from 'os';
-
-
+import { type } from "os";
 
 interface CustomInputI extends InputProps {
   form: any;
   type?: InputType;
-  disabled: boolean
+  disabled: boolean;
 }
 interface CustomFormInputI extends FieldConfig {
   label?: string;
@@ -24,19 +30,26 @@ interface CustomFormInputI extends FieldConfig {
   name: string;
   type?: InputType;
   value?: any;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
-export const CustomInput: FC<CustomInputI> = ({ field, form, type, children, disabled }) => {
+export const CustomInput: FC<CustomInputI> = ({
+  field,
+  form,
+  type,
+  children,
+  disabled,
+}) => {
   return (
     <div>
       <Input
-        disabled = {disabled}
+        disabled={disabled}
         type={type}
         {...field}
         valid={
-          form.touched[`${field.name}`] &&
-          form.errors[`${field.name}`] === undefined
+          form.values[`${field.name}`] ||
+          (form.touched[`${field.name}`] &&
+            form.errors[`${field.name}`] === undefined)
         }
         invalid={
           form.touched[`${field.name}`] &&
@@ -61,14 +74,11 @@ export const FormInput: FC<CustomFormInputI> = ({
   children,
   value,
   disabled,
-
 }) => {
   return (
-
     <FormGroup>
       <h3>{label}</h3>
       <Field
-        
         disabled={disabled}
         type={type}
         name={name}
