@@ -28,6 +28,9 @@ export const ExpoCreateExhibitsPage = () => {
         const {data} = useFetchExhibitsQuery();
         const dispatch = useAppDispatch()
         const [addExhibit, {isError}] = useAddExhibitMutation()
+    const handleAddExhibit = async (exhibit: any) => {
+        await addExhibit(exhibit).unwrap()
+    }
     const [deleteExhibit] = useDeleteExhibitMutation();
 
         const handleDeleteExhibit = async (id: any) => {
@@ -48,6 +51,7 @@ export const ExpoCreateExhibitsPage = () => {
                     short: values.exhibitShort,
                     description: values.exhibitDescription
                 }
+                handleAddExhibit(exhibit)
                 dispatch(setExhibit(values))
                 toggle()
             },
