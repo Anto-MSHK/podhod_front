@@ -9,7 +9,7 @@
   overflow-x: scroll;
   display: flex;
   gap: 10px;
-  justify-content: space-between;
+  justify-content: start;
   position: relative;
 }
 

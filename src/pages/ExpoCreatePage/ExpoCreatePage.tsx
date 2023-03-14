@@ -14,6 +14,7 @@ import { useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Spinner } from "reactstrap";
+import { ManySpinner } from "../../components/Spinner/Spinner";
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -84,12 +85,15 @@ export const ExpoCreatePage: React.FC = () => {
       {(!isLoading && event) || !id ? (
         <div className={styles.ExpoCreateWrapper}>
           <div className={styles.InfoWrapper}>
-            <h1 style={{ margin: "0 0 -15px 0" }}>
-              <p className="min" style={{ margin: 0, fontSize: 20 }}>
+            <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
+              <p
+                className="min"
+                style={{ margin: 0, fontSize: 20, fontWeight: 600 }}
+              >
                 {(typesEvent as any)[`${eventSlice?.eventType}`]}
               </p>
               {event && event.name
-                ? `«${event.name}»`
+                ? `«${eventSlice?.eventName}»`
                 : "Создайте новое мероприятие"}
             </h1>
             <div className={styles.toolbar_wrapper}>
@@ -127,11 +131,7 @@ export const ExpoCreatePage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <Spinner
-          color="warning"
-          type="grow"
-          style={{ width: 100, height: 100 }}
-        />
+        <ManySpinner />
       )}
     </div>
   );

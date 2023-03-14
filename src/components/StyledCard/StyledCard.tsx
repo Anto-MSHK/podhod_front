@@ -88,12 +88,18 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
         </CardTitle>
         <CardSubtitle tag="p" className="mb-2 min"></CardSubtitle>
         <CardText className={styles.cardWidget}>
-          <Widget info={"1"} icon={icon1} description="экспоната" />
           <Widget
-            info={event.ageLimit ? event.ageLimit + "+" : "0+"}
-            icon={icon3}
-            description="возраст"
+            info={(event as any).showpieces.length}
+            icon={icon1}
+            description="ла экспоната"
           />
+          {event.ageLimit && (
+            <Widget
+              info={event.ageLimit || ""}
+              icon={icon3}
+              description="возраст"
+            />
+          )}
           {event.prices.map((price) => (
             <Widget
               key={price.id}
