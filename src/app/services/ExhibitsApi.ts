@@ -33,6 +33,14 @@ export const exhibitsApi = createApi({
             }),
             invalidatesTags: [{type: 'Exhibits', id: 'LIST'}]
         }),
+        updateExhibit: builder.mutation({
+            query: ({id, data}) => ({
+                url: `/25/showpieces/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: (result, error, {id}) => [{type: 'Exhibits', id}]
+        }),
         deleteExhibit: builder.mutation({
             query: (id) => ({
                 url: `/25/showpieces/${id}`,
@@ -43,4 +51,4 @@ export const exhibitsApi = createApi({
     }),
 });
 
-export const {useFetchExhibitsQuery, useAddExhibitMutation, useDeleteExhibitMutation} = exhibitsApi;
+export const {useFetchExhibitsQuery, useAddExhibitMutation, useUpdateExhibitMutation,useDeleteExhibitMutation} = exhibitsApi;

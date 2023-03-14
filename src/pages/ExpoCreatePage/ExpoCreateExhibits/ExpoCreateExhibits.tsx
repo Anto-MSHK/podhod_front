@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
 import styles from './ExpoCreateExhibits.module.css'
-import ImagesGallery from "../../../components/ImagesGallery/imagesGallery";
 import {FormInput} from '../../../components/AuthForm/FormInput';
 import {FormContainer} from '../../../components/AuthForm/Form';
 import * as Yup from "yup";
 import {FormikConfig} from 'formik';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {ButtonArt} from "../../../components/ButtonArt/ButtonArt";
-import {useFetchExhibitsQuery} from "../../../app/services/ExhibitsApi";
-import {useAddExhibitMutation} from "../../../app/services/ExhibitsApi";
-import {useDeleteExhibitMutation} from "../../../app/services/ExhibitsApi";
+import {
+    useFetchExhibitsQuery,
+    useAddExhibitMutation,
+    useDeleteExhibitMutation,
+    useUpdateExhibitMutation
+} from "../../../app/services/ExhibitsApi";
 import {useAppDispatch} from "../../../app/hooks";
 import {setExhibit} from "../../../app/Slices/ExhibitCreateSlice";
-import {CreateExhibitPayloadT} from '../../../app/Types/ExhibitsT';
+import {CreateExhibitPayloadT, UpdateExhibitPayloadT} from '../../../app/Types/ExhibitsT';
 import deleteIcon from '../../../assets/icons/Icon6.svg'
 
 interface formType {
@@ -22,29 +24,56 @@ interface formType {
 }
 
 
-
 export const ExpoCreateExhibitsPage = () => {
 
-        const toggle = () => setModal(!modal);
+        const [modal, setModal] = useState(false);
         const {data} = useFetchExhibitsQuery();
+        const [addExhibit] = useAddExhibitMutation();
+        const [updateExhibit] = useUpdateExhibitMutation();
+        const [deleteExhibit] = useDeleteExhibitMutation();
         const dispatch = useAppDispatch()
-        const [addExhibit, {isError}] = useAddExhibitMutation()
-    const handleAddExhibit = async (exhibit: any) => {
-        await addExhibit(exhibit).unwrap()
-    }
-    const [deleteExhibit] = useDeleteExhibitMutation();
-    const [editingExhibit, setEditingExhibit] = useState<any>(null);
+        const [editingExhibit, setEditingExhibit] = useState<any>(null);
+
+        const toggle = () => setModal(!modal);
+
+        const handleEditExhibit = (exhibit: any) => {
+            console.log(exhibit)
+            setEditingExhibit(exhibit);
+            toggle();
+        };
+
+        const handleAddExhibit = (values: formType) => {
+            console.log("Submitting form...", values);
+            let exhibit: CreateExhibitPayloadT = {
+                date: new Date().toISOString(),
+                name: values.exhibitName,
+                short: values.exhibitShort,
+                description: values.exhibitDescription,
+            };
+            dispatch(setExhibit(values));
+            addExhibit(exhibit);
+            toggle()
+        };
+
+        const handleUpdateExhibit = (values: formType) => {
+            console.log("Updating exhibit...", values);
+            if (editingExhibit !== null) {
+                let exhibit: UpdateExhibitPayloadT = {
+                    date: new Date().toISOString(),
+                    id: editingExhibit.id,
+                    name: values.exhibitName,
+                    short: values.exhibitShort,
+                    description: values.exhibitDescription,
+                };
+                updateExhibit(exhibit);
+                toggle()
+            }
+        };
 
         const handleDeleteExhibit = async (id: any) => {
             console.log('delete...')
             await deleteExhibit(id).unwrap();
         }
-
-    const handleEditExhibit = (exhibit: any) => {
-            console.log(exhibit)
-        setEditingExhibit(exhibit);
-        toggle();
-    };
 
 
         const formConfig: FormikConfig<formType> = {
@@ -54,16 +83,11 @@ export const ExpoCreateExhibitsPage = () => {
                 exhibitDescription: editingExhibit && editingExhibit.id === null ? '' : editingExhibit && editingExhibit.description,
             },
             onSubmit: (values, form) => {
-                console.log('Submitting form...', values); // add console.log statement
-                let exhibit: CreateExhibitPayloadT = {
-                    date: new Date().toISOString(),
-                    name: values.exhibitName,
-                    short: values.exhibitShort,
-                    description: values.exhibitDescription
+                if (editingExhibit === null) {
+                    handleAddExhibit(values);
+                } else {
+                    handleUpdateExhibit(values);
                 }
-                handleAddExhibit(exhibit)
-                dispatch(setExhibit(values))
-                toggle()
             },
         };
 
@@ -75,7 +99,6 @@ export const ExpoCreateExhibitsPage = () => {
             exhibitDescription: Yup.string()
                 .required("Обязательное поле!"),
         };
-        const [modal, setModal] = useState(false);
 
         return (
             <div className={styles.main_page_form_wrapper}>
@@ -93,7 +116,9 @@ export const ExpoCreateExhibitsPage = () => {
                                         {el.name}
                                     </div>
                                 </div>
-                                <div className={styles.exhibitsDeleteWrapper} onClick={() => {handleDeleteExhibit(el.id)}}>
+                                <div className={styles.exhibitsDeleteWrapper} onClick={() => {
+                                    handleDeleteExhibit(el.id)
+                                }}>
                                     <img src={deleteIcon}/>
                                 </div>
                             </div>
@@ -101,7 +126,9 @@ export const ExpoCreateExhibitsPage = () => {
                     })}
                 </div>
                 <Modal isOpen={modal} toggle={toggle} size={'xl'} contentClassName={styles.modalWrapper}
-                       style={{backgroundColor: '#1E1E1E', color: 'white'}} onClosed={() => {setEditingExhibit(null)}}>
+                       style={{backgroundColor: '#1E1E1E', color: 'white'}} onClosed={() => {
+                    setEditingExhibit(null)
+                }}>
                     <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
                         {(formik) => (
                             <div>
