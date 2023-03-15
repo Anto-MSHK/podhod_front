@@ -7,17 +7,15 @@ interface IPreview {}
 const Preview: React.FC = () => {
   const event = useAppSelector((state) => state.eventCreate.event);
   const exhibit = useAppSelector((state) => state.exhibitCreate.exhibit);
-  const backGroundImages = useAppSelector(
-    (state) => state.images.backGroundImages
-  );
-  const galleryImages = useAppSelector((state) => state.images.galleryImages);
+  const galleryImages = useAppSelector((state) => state.images.galleryMainPage);
   return (
     <div
       className={styles.preview_picture}
       style={{
-        backgroundImage: backGroundImages.length
-          ? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backGroundImages[0].url})`
-          : "none",
+        backgroundImage:
+          galleryImages && galleryImages.length
+            ? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${galleryImages[0].url})`
+            : "none",
       }}
     >
       <div className={styles.preview_picture__header}>
@@ -34,11 +32,16 @@ const Preview: React.FC = () => {
         </div>
       </div>
       <div className={styles.preview_images}>
-        {galleryImages.map((image) => (
-          <div className={styles.preview_image_container}>
-            <ImageComponent image={image} type="galleryImages" />
-          </div>
-        ))}
+        {galleryImages &&
+          galleryImages.map((image) => (
+            <div className={styles.preview_image_container}>
+              <ImageComponent
+                image={image}
+                type="gallery"
+                field="galleryMainPage"
+              />
+            </div>
+          ))}
       </div>
       <div className={styles.preview_picture__footer}>
         <div className={styles.preview_picture__move_btn}>

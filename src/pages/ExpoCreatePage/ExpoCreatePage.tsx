@@ -13,8 +13,9 @@ import { useParams } from "react-router-dom";
 import { useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Spinner } from "reactstrap";
+import { Placeholder, Spinner } from "reactstrap";
 import { ManySpinner } from "../../components/Spinner/Spinner";
+import { SingleImageUpload } from "../../components/SingleImageUpload/SingleImageUpload";
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -84,26 +85,42 @@ export const ExpoCreatePage: React.FC = () => {
     <div>
       {(!isLoading && event) || !id ? (
         <div className={styles.ExpoCreateWrapper}>
-          <div className={styles.InfoWrapper}>
-            <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
-              <p
-                className="min"
-                style={{ margin: 0, fontSize: 20, fontWeight: 600 }}
-              >
-                {(typesEvent as any)[`${eventSlice?.eventType}`]}
-              </p>
-              {event && event.name
-                ? `«${eventSlice?.eventName}»`
-                : "Создайте новое мероприятие"}
-            </h1>
-            <div className={styles.toolbar_wrapper}>
-              <BtnGroupSelect
-                handleActiveBtn={handleActiveBtn}
-                view={"radio"}
-                data={btnData}
+          <div style={{ width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <SingleImageUpload
+                imgField="avatarExpo"
+                textButton={"добавьте фото "}
               />
+              <div className={styles.InfoWrapper}>
+                <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
+                  <p
+                    className="min"
+                    style={{ margin: 0, fontSize: 20, fontWeight: 600 }}
+                  >
+                    {(typesEvent as any)[`${eventSlice?.eventType}`]}
+                  </p>
+                  {event && event.name
+                    ? `«${eventSlice?.eventName}»`
+                    : "Создайте новое мероприятие"}
+                </h1>
+                <div className={styles.toolbar_wrapper}>
+                  <BtnGroupSelect
+                    handleActiveBtn={handleActiveBtn}
+                    view={"radio"}
+                    data={btnData}
+                  />
+                </div>
+              </div>
             </div>
-
+            <div
+              style={{
+                margin: "30px 0 15px 0",
+                background: "#DF791A",
+                height: 2,
+                borderRadius: 10,
+                overflow: "hidden",
+              }}
+            />
             <div className={styles.content_wrapper}>
               {activeBtn === "mainScreen" ? (
                 <ExpoMainPage data={event} />

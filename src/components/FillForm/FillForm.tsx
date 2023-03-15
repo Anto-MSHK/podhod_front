@@ -20,6 +20,8 @@ import {
 import { type } from "os";
 import { idText } from "typescript";
 import { useNavigate, useParams } from "react-router-dom";
+import ImagesGallery from "../ImagesGallery/imagesGallery";
+import { SingleImageUpload } from "../SingleImageUpload/SingleImageUpload";
 
 interface formType {
   eventName: string;
@@ -147,38 +149,40 @@ export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
               )}
             </div>
           </div>
-          <div className={styles.form_info}>
-            <div className={styles.left}>
-              <FormInput
-                name="eventName"
-                label="Название:"
-                disabled={!editing}
-              />
+          <div className={styles.form}>
+            <div className={styles.form_info}>
+              <div className={styles.left}>
+                <FormInput
+                  name="eventName"
+                  label="Название:"
+                  disabled={!editing}
+                />
 
-              <FormInput
-                name="description"
-                label="Описание:"
-                type="textarea"
-                disabled={!editing}
-              />
-            </div>
-            <div className={styles.right}>
-              <FormInput
-                name="age"
-                label="Возраст:"
-                type="select"
-                disabled={!editing}
-              >
-                {agesOption}
-              </FormInput>
-              <FormInput
-                name="eventType"
-                label="Тип события:"
-                type="select"
-                disabled={!editing}
-              >
-                {options}
-              </FormInput>
+                <FormInput
+                  name="description"
+                  label="Описание:"
+                  type="textarea"
+                  disabled={!editing}
+                />
+              </div>
+              <div className={styles.right}>
+                <FormInput
+                  name="age"
+                  label="Возраст:"
+                  type="select"
+                  disabled={!editing}
+                >
+                  {agesOption}
+                </FormInput>
+                <FormInput
+                  name="eventType"
+                  label="Тип события:"
+                  type="select"
+                  disabled={!editing}
+                >
+                  {options}
+                </FormInput>
+              </div>
             </div>
           </div>
         </div>

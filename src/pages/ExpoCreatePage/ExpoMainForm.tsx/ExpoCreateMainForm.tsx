@@ -19,27 +19,6 @@ export const ExpoMainPage: React.FC<ExpoMainPageI> = ({ data }) => {
       <div>
         <MainInfoExpoForm defaultData={data} />
       </div>
-      <h2>Медиа</h2>
-      <div className={styles.media_wrapper}>
-        <div className={styles.ImgGalleryWrapper}>
-          <div className={styles.ImgGalleryTitle}>
-            <h3>Галерея</h3>
-            <p>
-              Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2
-            </p>
-          </div>
-          <ImagesGallery type="galleryImages" />
-        </div>
-        <div className={styles.ImgGalleryWrapper}>
-          <div className={styles.ImgGalleryTitle}>
-            <h3>Задний фон</h3>
-            <p>
-              Изображения должны иметь размер до 2 мб и соотношение сторон 3 : 2
-            </p>
-          </div>
-          <ImagesGallery type="backGroundImages" />
-        </div>
-      </div>
     </div>
   );
 };

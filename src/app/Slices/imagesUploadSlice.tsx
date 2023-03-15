@@ -1,59 +1,78 @@
-import { createSlice, PayloadAction, Action, current } from '@reduxjs/toolkit';
-import { type } from 'os';
-
-
+import { createSlice, PayloadAction, Action, current } from "@reduxjs/toolkit";
+import { type } from "os";
 
 export type imageType = {
-  id: string,
-  name: string,
-  lastModified: number,
-  size: number,
-  url: string,
-}
+  id: string;
+  name: string;
+  lastModified: number;
+  size: number;
+  url: string;
+};
 
-export type ImagesArrayType = 'galleryImages' | 'backGroundImages'
-type setImageType = {
-  image: imageType,
-  key: ImagesArrayType
-}
+export type ImagesArrayType = "galleryMainPage";
+export type SingleType = "avatarExpo";
+
+type setGalleryType = {
+  image: imageType;
+  key: ImagesArrayType;
+};
+type setSingleType = {
+  image: imageType;
+  key: SingleType;
+};
 type imagesUploadSliceT = {
-  galleryImages: imageType[];
-  backGroundImages: imageType[];
-}
+  galleryMainPage: imageType[];
+  avatarExpo: imageType | undefined;
+};
+type removeImagesType = {
+  id: string;
+  key: ImagesArrayType;
+};
 type removeImageType = {
-  id: string,
-  key: ImagesArrayType
-}
+  id: string;
+  key: SingleType;
+};
 type swapImageType = {
-  draggedIndex: number,
-  index: number,
-  key:  ImagesArrayType
-}
+  draggedIndex: number;
+  index: number;
+  key: ImagesArrayType;
+};
 
 const initialState: imagesUploadSliceT = {
-  galleryImages: [],
-  backGroundImages: [],
-}
-
-
+  avatarExpo: undefined,
+  galleryMainPage: [],
+};
 
 const imagesUploadSlice = createSlice({
-  name: 'images',
+  name: "images",
   initialState,
   reducers: {
-    setImage(state, action: PayloadAction<setImageType>) {
-      state[action.payload.key] = [...state[action.payload.key], action.payload.image]
+    setSingle(state, action: PayloadAction<setSingleType>) {
+      state[action.payload.key] = action.payload.image;
+    },
+    setGallery(state, action: PayloadAction<setGalleryType>) {
+      state[action.payload.key] = [
+        ...state[action.payload.key],
+        action.payload.image,
+      ];
     },
     removeImage(state, action: PayloadAction<removeImageType>) {
-      state[action.payload.key] = state[action.payload.key].filter(image => image.id !== action.payload.id)
+      state[action.payload.key] = undefined;
+    },
+    removeImages(state, action: PayloadAction<removeImagesType>) {
+      state[action.payload.key] = state[action.payload.key].filter(
+        (image) => image.id !== action.payload.id
+      );
     },
     swapImage(state, action: PayloadAction<swapImageType>) {
-      const draggedImage = state[action.payload.key][action.payload.draggedIndex]
-      state[action.payload.key].splice(action.payload.draggedIndex,1)
-      state[action.payload.key].splice(action.payload.index,0,draggedImage)
-    }
+      const draggedImage =
+        state[action.payload.key][action.payload.draggedIndex];
+      state[action.payload.key].splice(action.payload.draggedIndex, 1);
+      state[action.payload.key].splice(action.payload.index, 0, draggedImage);
+    },
   },
-})
+});
 
-export const { setImage, removeImage, swapImage } = imagesUploadSlice.actions
-export default imagesUploadSlice.reducer 
+export const { setSingle, setGallery, removeImage, removeImages, swapImage } =
+  imagesUploadSlice.actions;
+export default imagesUploadSlice.reducer;

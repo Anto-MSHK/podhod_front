@@ -1,41 +1,65 @@
 import React, { useState } from "react";
 import styles from "./dragAndDrop.module.css";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
-import { useAppDispatch } from '../../app/hooks';
-import { setImage, ImagesArrayType } from '../../app/Slices/imagesUploadSlice';
+import { useAppDispatch } from "../../app/hooks";
+import {
+  setGallery,
+  ImagesArrayType,
+  SingleType,
+  setSingle,
+} from "../../app/Slices/imagesUploadSlice";
 import { read } from "fs";
 import { Input } from "reactstrap";
 
 interface IDragAndDrop {
-  type: ImagesArrayType
- }
+  type: "gallery" | "single";
+  field: ImagesArrayType | SingleType;
+  text?: string;
+}
 
- const DragAndDrop: React.FC<IDragAndDrop> = (props) => {
-   const [drag, setDrag] = useState(false);
-   const dispatch = useAppDispatch()
-   
-   window.document.addEventListener('drag', function(event) {
-     event.preventDefault();
-   });
+const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text }) => {
+  const [drag, setDrag] = useState(false);
+  const dispatch = useAppDispatch();
+
+  window.document.addEventListener("drag", function (event) {
+    event.preventDefault();
+  });
 
   const processImages = (images: FileList) => {
-    Array.from(images).forEach(image => {
+    Array.from(images).forEach((image) => {
       const reader = new FileReader();
-      reader.readAsDataURL(image)
+      reader.readAsDataURL(image);
       reader.onload = function () {
-        dispatch(setImage({
-          image: {
-              id: Date.now().toString(),
-              name: image.name,
-              lastModified: image.lastModified,
-              size: image.size,
-              url: reader.result as string
-          },
-          key: props.type
-        }))
-      }
-    })
-  }
+        if (type === "gallery")
+          dispatch(
+            setGallery({
+              image: {
+                id: Date.now().toString(),
+                name: image.name,
+                lastModified: image.lastModified,
+                size: image.size,
+                url: reader.result as string,
+              },
+              key: field as ImagesArrayType,
+            })
+          );
+        else {
+          dispatch(
+            setSingle({
+              image: {
+                id: Date.now().toString(),
+                name: image.name,
+                lastModified: image.lastModified,
+                size: image.size,
+                url: reader.result as string,
+              },
+              key: field as SingleType,
+            })
+          );
+        }
+      };
+    });
+  };
 
   const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -49,14 +73,14 @@ interface IDragAndDrop {
     e.preventDefault();
     setDrag(false);
     if (e.dataTransfer.files) {
-      processImages(e.dataTransfer.files)
+      processImages(e.dataTransfer.files);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (e.target.files && e.target.files.length) {
-      processImages(e.target.files)
+      processImages(e.target.files);
     }
   };
 
@@ -87,7 +111,7 @@ interface IDragAndDrop {
             accept="image/*,.png,.jpg,.web,"
           />
           <img className={styles.icon} src={addFileIcon} />
-          <p >Добавить изображение</p>
+          <p>{!text ? "Добавить изображение" : text}</p>
         </div>
       )}
     </div>
