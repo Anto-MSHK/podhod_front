@@ -3,10 +3,8 @@ import styles from "./imagesGallery.module.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader, Button } from "reactstrap";
 import {
   imageType,
-  removeImage,
   ImagesArrayType,
   SingleType,
-  removeImages,
 } from "../../app/Slices/imagesUploadSlice";
 import { useAppDispatch } from "../../app/hooks";
 
@@ -30,29 +28,14 @@ const ImageComponent: React.FC<IImageComponent> = ({
     setModal(!modal);
   };
 
-  const delImage = (id: string) => {
-    if (type === "gallery")
-      dispatch(
-        removeImage({
-          id,
-          key: field as SingleType,
-        })
-      );
-    else
-      dispatch(
-        removeImages({
-          id,
-          key: field as ImagesArrayType,
-        })
-      );
-  };
+  const delImage = (id: number) => {};
 
   return (
     <>
       <div onClick={() => toggle()}>
         <img
           className={className ? className : styles.image}
-          src={image.url}
+          src={image.path}
           alt=""
         />
       </div>
@@ -62,10 +45,10 @@ const ImageComponent: React.FC<IImageComponent> = ({
         isOpen={modal}
       >
         <ModalHeader toggle={toggle}>
-          <h3>{image.name}</h3>
+          <h3>{image.description}</h3>
         </ModalHeader>
         <ModalBody draggable={false} className={styles.modal_image_container}>
-          <img className={styles.modal_image} src={image.url} />
+          <img className={styles.modal_image} src={image.path} />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={() => delImage(image.id)}>

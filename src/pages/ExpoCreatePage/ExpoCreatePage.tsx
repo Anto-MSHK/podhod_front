@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Placeholder, Spinner } from "reactstrap";
 import { ManySpinner } from "../../components/Spinner/Spinner";
 import { SingleImageUpload } from "../../components/SingleImageUpload/SingleImageUpload";
+import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -43,15 +44,7 @@ export const ExpoCreatePage: React.FC = () => {
   const handleActiveBtn = (lable: string | number | number[]) => {
     setActiveBtn(lable);
   };
-  //   const contentComponent = () => {
-  //     switch (activeBtn) {
-  //       case "mainScreen":
-  //         return <ExpoCreateMainPage />;
-  //       case "exhibits":
-  //         return <ExpoCreateExhibitsPage />;
-  //       default:
-  //     }
-  //   };
+  const [isImgLoading, setIsImgLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,6 +70,9 @@ export const ExpoCreatePage: React.FC = () => {
         age: event.ageLimit,
         eventType: event.type,
       };
+      dispatch(getEventImg(event.id)).then(() => {
+        setIsImgLoading(false);
+      });
       dispatch(setEvent(values));
     }
   }, [event]);
@@ -90,7 +86,10 @@ export const ExpoCreatePage: React.FC = () => {
               <SingleImageUpload
                 imgField="avatarExpo"
                 textButton={"добавьте фото "}
+                path={`/img/to/event/${event?.id}`}
+                isLoading={isImgLoading}
               />
+
               <div className={styles.InfoWrapper}>
                 <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
                   <p

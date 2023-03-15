@@ -3,21 +3,22 @@ import styles from "./dragAndDrop.module.css";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
 import { useAppDispatch } from "../../app/hooks";
 import {
-  setGallery,
   ImagesArrayType,
   SingleType,
-  setSingle,
+  uploadEventImg,
 } from "../../app/Slices/imagesUploadSlice";
 import { read } from "fs";
 import { Input } from "reactstrap";
+import { $api } from "../../app/http";
 
 interface IDragAndDrop {
   type: "gallery" | "single";
   field: ImagesArrayType | SingleType;
+  path: string;
   text?: string;
 }
 
-const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text }) => {
+const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
   const [drag, setDrag] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -27,37 +28,12 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text }) => {
 
   const processImages = (images: FileList) => {
     Array.from(images).forEach((image) => {
+      const formData = new FormData();
+      formData.append("img", image);
+      formData.append("description", "Это главное изображение события");
+      dispatch(uploadEventImg({ path, formData }));
       const reader = new FileReader();
       reader.readAsDataURL(image);
-      reader.onload = function () {
-        if (type === "gallery")
-          dispatch(
-            setGallery({
-              image: {
-                id: Date.now().toString(),
-                name: image.name,
-                lastModified: image.lastModified,
-                size: image.size,
-                url: reader.result as string,
-              },
-              key: field as ImagesArrayType,
-            })
-          );
-        else {
-          dispatch(
-            setSingle({
-              image: {
-                id: Date.now().toString(),
-                name: image.name,
-                lastModified: image.lastModified,
-                size: image.size,
-                url: reader.result as string,
-              },
-              key: field as SingleType,
-            })
-          );
-        }
-      };
     });
   };
 

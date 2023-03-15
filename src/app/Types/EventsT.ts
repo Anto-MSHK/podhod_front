@@ -20,6 +20,12 @@ export type EventT = {
   updateAt: string;
   prices: PriceT[];
   type: "exhibition" | "fair" | "promo-exhibition";
+  img: {
+    id: number;
+    description: string;
+    path: string;
+    eventId: number;
+  };
 };
 
 export type CreateEventPayloadT = {

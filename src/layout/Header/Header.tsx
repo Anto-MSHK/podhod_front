@@ -1,8 +1,9 @@
 import React from "react"; /* 
 import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap"; */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 export const Header = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.header}>
       <div className={styles.header__logo_container}>
@@ -17,7 +18,13 @@ export const Header = () => {
         <NavLink to="/event">
           <p>Список мероприятий</p>
         </NavLink>
-        <NavLink to="/expo">
+        <NavLink
+          to={`/expo`}
+          onClick={() => {
+            navigate(`/expo`);
+            window.location.reload();
+          }}
+        >
           <p>Создать мероприятие</p>
         </NavLink>
       </div>

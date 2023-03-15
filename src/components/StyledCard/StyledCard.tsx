@@ -48,15 +48,11 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
   event,
 }) => {
   const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id);
-  let path: string | undefined =
-    eventPages?.length && eventPages[0].imgs.length
-      ? eventPages[0].imgs[0].path
-      : undefined;
 
   return (
     <Card className={styles.styledCard_container} color="dark" inverse>
       <div className={styles.card__img_container}>
-        {!path ? (
+        {!event.img ? (
           <div>
             <img className={styles.card__img} src={icon1} alt="123" />
             <p
@@ -73,8 +69,10 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
           </div>
         ) : (
           <img
-            className={styles.card__img + ` ${path ? styles.existImg : ""}`}
-            src={`${API_URL}/${path}`}
+            className={
+              styles.card__img + ` ${event.img.path ? styles.existImg : ""}`
+            }
+            src={`${API_URL}/${event.img.path}`}
             alt="123"
           />
         )}

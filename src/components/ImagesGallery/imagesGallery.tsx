@@ -4,16 +4,16 @@ import styles from "./imagesGallery.module.css";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import ImageComponent from "./ImageComponent";
 import {
-  swapImage,
   ImagesArrayType,
   SingleType,
 } from "../../app/Slices/imagesUploadSlice";
 
 interface IImagesGallery {
   imgField: ImagesArrayType;
+  path: string;
 }
 
-const ImagesGallery: React.FC<IImagesGallery> = ({ imgField }) => {
+const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
   const images = useAppSelector((state) => state.images[imgField]);
   const dispatch = useAppDispatch();
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
@@ -40,13 +40,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField }) => {
   ) => {
     event.preventDefault();
     console.log("index= " + index + " draggedIndex= " + draggedIndex);
-    dispatch(
-      swapImage({
-        draggedIndex: draggedIndex as number,
-        index,
-        key: imgField,
-      })
-    );
     setDraggedIndex(null);
     setDragOverIndex(null);
   };
@@ -78,7 +71,7 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField }) => {
       </div>
 
       <div className={styles.drag_and_drop}>
-        <DragAndDrop field={imgField} type="gallery" />
+        <DragAndDrop field={imgField} type="gallery" path={path} />
       </div>
     </div>
   );

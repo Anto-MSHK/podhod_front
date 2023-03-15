@@ -3,8 +3,9 @@ import DragAndDrop from "../DragAndDrop/dragAndDrop";
 import styles from "./SingleImageUpload.module.css";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import ImageComponent from "../ImagesGallery/ImageComponent";
+import { Spinner } from "reactstrap";
+import { useParams } from "react-router-dom";
 import {
-  swapImage,
   ImagesArrayType,
   SingleType,
 } from "../../app/Slices/imagesUploadSlice";
@@ -14,6 +15,8 @@ interface ISingleImageUpload {
   title?: string;
   help?: string;
   textButton?: string;
+  path: string;
+  isLoading: boolean;
 }
 
 export const SingleImageUpload: React.FC<ISingleImageUpload> = ({
@@ -21,7 +24,10 @@ export const SingleImageUpload: React.FC<ISingleImageUpload> = ({
   title,
   help,
   textButton,
+  path,
+  isLoading,
 }) => {
+  const { id } = useParams();
   const image = useAppSelector((state) => state.images[imgField]);
   const dispatch = useAppDispatch();
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
@@ -53,15 +59,24 @@ export const SingleImageUpload: React.FC<ISingleImageUpload> = ({
         )}
         <div className={styles.images_wrapper}></div>
         <div className={styles.drag_and_drop}>
-          {image ? (
+          {image && !isLoading ? (
             <ImageComponent
               field={imgField}
               type="single"
               image={image}
               className={styles.img}
             />
+          ) : !isLoading || !id ? (
+            <DragAndDrop
+              field={imgField}
+              type="single"
+              text={textButton}
+              path={path}
+            />
           ) : (
-            <DragAndDrop field={imgField} type="single" text={textButton} />
+            <div className={styles.img}>
+              <Spinner type="grow" className={styles.spinner} />
+            </div>
           )}
         </div>
       </div>

@@ -14,7 +14,7 @@ const Preview: React.FC = () => {
       style={{
         backgroundImage:
           galleryImages && galleryImages.length
-            ? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${galleryImages[0].url})`
+            ? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${galleryImages[0].path})`
             : "none",
       }}
     >
