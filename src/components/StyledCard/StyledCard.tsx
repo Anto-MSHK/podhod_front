@@ -10,7 +10,7 @@ import { ButtonArt } from "../ButtonArt/ButtonArt";
 import { EventT } from "../../app/Types/EventsT";
 import { useGetEventPagesQuery } from "../../app/services/EventsApi";
 import { API_URL } from "../../app/http";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 interface IStyledCardProps {
   event: EventT;
@@ -48,7 +48,7 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
   event,
 }) => {
   const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id);
-
+  const navigate = useNavigate();
   return (
     <Card className={styles.styledCard_container} color="dark" inverse>
       <div className={styles.card__img_container}>
@@ -108,7 +108,14 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
           ))}
         </CardText>
         <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
-          <ButtonArt>Редактировать</ButtonArt>
+          <ButtonArt
+            onClick={() => {
+              navigate(`/expo/${event.id}`);
+              window.location.reload();
+            }}
+          >
+            Редактировать
+          </ButtonArt>
         </NavLink>
       </CardBody>
     </Card>

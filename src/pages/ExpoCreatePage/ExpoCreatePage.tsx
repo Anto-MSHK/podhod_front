@@ -38,7 +38,7 @@ export const ExpoCreatePage: React.FC = () => {
   const eventSlice = useAppSelector((state) => state.eventCreate.event);
   const containerRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
-  const { data: event, isLoading } = useFetchEventQuery(id);
+  const { data: event, isLoading, isFetching } = useFetchEventQuery(id);
   const [activeBtn, setActiveBtn] =
     useState<string | number | number[]>("mainScreen");
   const handleActiveBtn = (lable: string | number | number[]) => {
@@ -83,12 +83,14 @@ export const ExpoCreatePage: React.FC = () => {
         <div className={styles.ExpoCreateWrapper}>
           <div style={{ width: "100%" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <SingleImageUpload
-                imgField="avatarExpo"
-                textButton={"добавьте фото "}
-                path={`/img/to/event/${event?.id}`}
-                isLoading={isImgLoading}
-              />
+              {id && (
+                <SingleImageUpload
+                  imgField="avatarExpo"
+                  textButton={"добавьте фото "}
+                  path={`/img/to/event/${event?.id}`}
+                  isLoading={isImgLoading}
+                />
+              )}
 
               <div className={styles.InfoWrapper}>
                 <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>

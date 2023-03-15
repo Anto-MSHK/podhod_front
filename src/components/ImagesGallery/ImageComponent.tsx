@@ -5,6 +5,7 @@ import {
   imageType,
   ImagesArrayType,
   SingleType,
+  deleteEventImg,
 } from "../../app/Slices/imagesUploadSlice";
 import { useAppDispatch } from "../../app/hooks";
 
@@ -33,9 +34,16 @@ const ImageComponent: React.FC<IImageComponent> = ({
   return (
     <>
       <div onClick={() => toggle()}>
+        <div
+          className={styles.closeIcon}
+          onClick={() => {
+            dispatch(deleteEventImg(`/img/${image.id}`));
+          }}
+        />
         <img
           className={className ? className : styles.image}
           src={image.path}
+          style={{ cursor: "pointer" }}
           alt=""
         />
       </div>
