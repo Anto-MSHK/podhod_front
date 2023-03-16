@@ -36,6 +36,7 @@ const typesEvent = {
 };
 export const ExpoCreatePage: React.FC = () => {
   const eventSlice = useAppSelector((state) => state.eventCreate.event);
+  const backgroundImage = useAppSelector((state) => state.images.avatarExpo)
   const containerRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
   const { data: event, isLoading, isFetching } = useFetchEventQuery(id);
@@ -137,7 +138,7 @@ export const ExpoCreatePage: React.FC = () => {
                   предпросмотр
                 </h3>
               </div>
-              <Preview />
+              <Preview   backgroundImg={backgroundImage }/>
             </div>
             <div className={styles.InfoComponentWrapper}>
               <InfoComponent
