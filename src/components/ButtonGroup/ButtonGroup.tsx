@@ -61,7 +61,8 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
             icon?: any;
             onClick?: () => void;
             lable?: string;
-            splits?: [{ title: string; label: string; onClick: () => void; }];
+            splits?: [{ title: string; label: string; onClick?: () => void; }];
+            disabled?: boolean;
         },
         index: number
     ) => {
@@ -110,7 +111,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
                         </DropdownItem>
                         {el.splits.length > 0 &&
                             el.splits.map((split) => (
-                                <DropdownItem className={styles.dropItem}>
+                                <DropdownItem className={styles.dropItem} onClick={split.onClick}>
                                     <p
                                         style={{
                                             margin: 0,
@@ -134,7 +135,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
                         onClick={combinedOnClick}
                         active={isActive}
                         icon={el.icon}
-                        disabled={false}
+                        disabled={el.disabled}
                     >
                         {el.name}
                     </ButtonArt>

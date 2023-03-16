@@ -30,13 +30,14 @@ export const ExpoCreatePage: React.FC = () => {
         {
             name: "Главная страница",
             lable: "mainScreen",
-            splits: [{ title: "Дополнительная страница", label: "any", onClick: () => alert(`pages/4`) }],
+            onCLick: () => alert('pages/1'),
+            splits: [{ title: "Дополнительная страница", label: "any", onClick: () => navigate('pages/1') }],
         },
         { name: "Экспонаты", lable: "exhibits", onClick: () => navigate('exhibits-page') },
         { name: "Настройки", lable: "settings", onClick: () => navigate('settings') },
     ];
-
-
+    //splits: [{ title: page?.pageTitle, label: "any", onClick: () => navigate(`pages/${id}`) }],
+    const { page } = useAppSelector(state => state.eventCreate);
 
     const eventSlice = useAppSelector((state) => state.eventCreate.event);
     const containerRef = useRef<HTMLDivElement>(null);

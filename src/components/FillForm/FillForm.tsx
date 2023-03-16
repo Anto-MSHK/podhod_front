@@ -32,8 +32,7 @@ interface formType {
 }
 interface MainInfoExpoFormI {
 }
-export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
-}) => {
+export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = () => {
     const { id } = useParams();
 
     const { data: defaultData, isLoading } = useFetchEventQuery(id);

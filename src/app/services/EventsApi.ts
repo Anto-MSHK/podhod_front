@@ -33,9 +33,23 @@ export const eventsApi = createApi({
                 url: `/${eventId}/pages`
             })
         }),
-        getPage: builder.query({
-            query: (pageId: number) => ({
+        fetchPage: builder.query({
+            query: (pageId: string | undefined) => ({
                 url: `/pages/${pageId}`
+            })
+        }),
+        addPage: builder.mutation({
+            query: (data) => ({
+                url: `/pages`,
+                method: "POST",
+                body: data
+            })
+        }),
+        updatePage: builder.mutation({
+            query: (data) => ({
+                url: `/pages/${data.id}`,
+                method: "PUT",
+                body: data
             })
         }),
         getPageImg: builder.query<string, string>({
@@ -66,5 +80,8 @@ export const {
     useGetEventPagesQuery,
     useGetPageImgQuery,
     useAddEventMutation,
-    useUpdateEventMutation
+    useUpdateEventMutation,
+    useAddPageMutation,
+    useFetchPageQuery,
+    useUpdatePageMutation
 } = eventsApi;
