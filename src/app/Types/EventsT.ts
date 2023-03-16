@@ -53,7 +53,7 @@ export type ImgT = {
 export type EventPagesT = {
     id: number;
     name: string;
-    description: null;
+    description: string;
     visibleLog: boolean;
     eventId: number;
     createdAt: string;

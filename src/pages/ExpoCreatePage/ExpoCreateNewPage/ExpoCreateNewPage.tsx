@@ -18,33 +18,32 @@ interface IAppProps {
 }
 
 interface formType {
-    title: string;
+    name: string;
     description: string;
     visibleLogo: boolean;
 }
 
 export const ExpoCreateNewPage: React.FC<IAppProps> = (props) => {
-    const { page_id } = useParams();
-    console.log(page_id);
+    const { id, page_id } = useParams();
+
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { data: defaultData, isFetching } = useFetchPageQuery(page_id);
+    const { data: defaultData, isFetching } = useFetchPageQuery({ page_id });
     const [addPage, { isError }] = useAddPageMutation();
     const [updatePage, { isError: isErrorUpdate }] = useUpdatePageMutation();
 
-    const handleAddPage = async (page: CreateEventPageT) => { return await addPage(page).unwrap(); };
-    const handleUpdatePage = async (page: UpdateEventPageT) => { return await updatePage(page).unwrap(); };
-
+    const handleAddPage = async (page: CreateEventPageT, id: string) => { return await addPage({ id, page }).unwrap(); };
+    const handleUpdatePage = async (page: UpdateEventPageT, id: string) => { return await updatePage({ id, page }).unwrap(); };
 
     const formConfig: FormikConfig<formType> = {
         initialValues: {
-            title: defaultData ? defaultData.title : '',
+            name: defaultData ? defaultData.name : '',
             description: defaultData ? defaultData.description : '',
             visibleLogo: true,
         },
         onSubmit: async (values, form) => {
             let page: CreateEventPageT = {
-                name: values.title,
+                name: values.name,
                 description: values.description,
                 imgs: [
                     {
@@ -59,13 +58,13 @@ export const ExpoCreateNewPage: React.FC<IAppProps> = (props) => {
                 let updatePage: UpdateEventPageT = {
                     id: page_id,
                     updatedAt: new Date().toISOString(),
-                    name: values.title,
+                    name: values.name,
                     description: values.description
                 };
-                handleUpdatePage(updatePage);
+                handleUpdatePage(updatePage, id!);
             } else {
-                const newPage = await handleAddPage(page);
-                navigate(`pages/${newPage.id}`);
+                const newPage = await handleAddPage(page, id!);
+                navigate(`${id}/pages/${newPage.id}`);
             }
             form.setSubmitting(false);
             dispatch(setPage(values));
@@ -74,7 +73,7 @@ export const ExpoCreateNewPage: React.FC<IAppProps> = (props) => {
         }
     };
     const schemaConfig: Yup.ObjectShape = {
-        pageTitle: Yup.string().required('Обязательное поле!'),
+        name: Yup.string().required('Обязательное поле!'),
         description: Yup.string().required('Обязательное поле!')
     };
 
@@ -118,7 +117,7 @@ export const ExpoCreateNewPage: React.FC<IAppProps> = (props) => {
                         <div className={styles.form_info}>
                             <div className={styles.left}>
                                 <FormInput
-                                    name="pageTitle"
+                                    name="name"
                                     label="Название страницы:"
                                     disabled={!editing}
                                 />

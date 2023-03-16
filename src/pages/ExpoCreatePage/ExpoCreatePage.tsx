@@ -30,7 +30,7 @@ export const ExpoCreatePage: React.FC = () => {
         {
             name: "Главная страница",
             lable: "mainScreen",
-            onCLick: () => alert('pages/1'),
+            onCLick: () => navigate('pages/1'),
             splits: [{ title: "Дополнительная страница", label: "any", onClick: () => navigate('pages/1') }],
         },
         { name: "Экспонаты", lable: "exhibits", onClick: () => navigate('exhibits-page') },

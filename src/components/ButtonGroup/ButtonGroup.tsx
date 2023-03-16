@@ -85,7 +85,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
         if (el.splits)
             return (
                 <UncontrolledDropdown group>
-                    <Button
+                    {<Button
                         className={`${styles.btnItem} ${isActive ? styles.active : styles.deactivate
                             }`}
                         color={isActive ? "warning" : undefined}
@@ -94,7 +94,7 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
                         icon={el.icon}
                     >
                         {el.name}
-                    </Button>
+                    </Button>}
                     <DropdownToggle
                         style={{ width: 50 }}
                         caret

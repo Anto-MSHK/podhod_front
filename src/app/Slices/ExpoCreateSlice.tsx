@@ -8,7 +8,7 @@ export type eventForm = {
 };
 
 export type pageForm = {
-    pageTitle: string;
+    name: string;
     description: string;
 };
 
@@ -29,7 +29,7 @@ const ExpoCreateSlice = createSlice({
         setEvent(state, action: PayloadAction<eventForm>) {
             state.event = action.payload;
         },
-        setPage(state, action) {
+        setPage(state, action: PayloadAction<pageForm>) {
             state.page = action.payload;
         }
     },

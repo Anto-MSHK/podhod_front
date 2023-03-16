@@ -34,20 +34,20 @@ export const eventsApi = createApi({
             })
         }),
         fetchPage: builder.query({
-            query: (pageId: string | undefined) => ({
-                url: `/pages/${pageId}`
+            query: ({ eventID, pageId }) => ({
+                url: `/${eventID}/pages/${pageId}`
             })
         }),
         addPage: builder.mutation({
-            query: (data) => ({
-                url: `/pages`,
+            query: ({ eventID, data }) => ({
+                url: `/${eventID}/pages`,
                 method: "POST",
                 body: data
             })
         }),
         updatePage: builder.mutation({
-            query: (data) => ({
-                url: `/pages/${data.id}`,
+            query: ({ eventID, data }) => ({
+                url: `${eventID}/pages/${data.id}`,
                 method: "PUT",
                 body: data
             })
