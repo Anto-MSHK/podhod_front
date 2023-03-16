@@ -11,6 +11,7 @@ import { EventT } from "../../app/Types/EventsT";
 import { useGetEventPagesQuery } from "../../app/services/EventsApi";
 import { API_URL } from "../../app/http";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { number as items } from 'yup';
 
 interface IStyledCardProps {
   event: EventT;
@@ -27,6 +28,21 @@ enum EventStatus {
   draft = "draft",
   active = "active",
   compilted = "complited",
+}
+
+export const pluralForm = (items: number) => {
+  if (items == undefined) {
+    return `экспонатов`;
+  }
+
+
+  if (items % 10 == 1 && items % 100 != 11) {
+    return `экспонат`;
+  } else if (2 <= items % 10 && items % 10 <= 4 && (items % 100 < 10 || items % 100 >= 20)) {
+    return `экспоната`;
+  } else {
+    return `экспонатов`;
+  }
 }
 
 const btnTitle = (status: string) => {
@@ -89,7 +105,7 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
           <Widget
             info={(event as any).showpieces.length}
             icon={icon1}
-            description="ла экспоната"
+            description={pluralForm((event as any).showpieces.length)}
           />
           {event.ageLimit && (
             <Widget
