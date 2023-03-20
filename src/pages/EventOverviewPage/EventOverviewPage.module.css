@@ -3,35 +3,26 @@
   flex-direction: column;
   row-gap: 1vw;
   padding: 15px;
+
 }
+
 .filter {
   display: flex;
   justify-content: space-between;
 }
 
 .events_container {
-  display: flex;
-
-  max-width: 425px;
+ display: flex;
 }
+
 .events_wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: auto-fit;
+  gap: 1vw;
 }
 
-@media (max-width: 960px) {
-  .events_wrapper {
-    max-width: none;
-    width: 100%;
-    justify-content: center;
-  }
-}
 @media (max-width: 767px) {
-  .events_container {
-    max-width: none;
-    justify-content: center;
-  }
   .filter {
     flex-wrap: wrap;
     gap: 10px;
