@@ -1,13 +1,14 @@
 .widget_container {
-  min-width: fit-content;
-  padding: 15px;
   display: flex;
+  min-width: fit-content;
+  padding: 5%;
   background-color: #171717;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-weight: 600;
+  font-size: clamp(1rem, 1vw, 5rem);
 }
 
 .info {
@@ -20,8 +21,8 @@
 }
 
 .widget_img {
-  width: 30px;
-  height: 30px;
+  width: max(2rem, 1.5vw);
+  aspect-ratio: 1/1;
   background-size: cover;
   background-repeat: no-repeat;
 }

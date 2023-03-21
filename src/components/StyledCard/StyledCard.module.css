@@ -1,15 +1,23 @@
 .styledCard_container {
   display: flex;
   width: 100%;
+  height: 100%;
 }
 
 .cardWidget {
+  display: flex;
+  height: 60%;
   max-width: 100%;
   overflow-x: scroll;
   display: flex;
   gap: 10px;
-  justify-content: start;
+  justify-content: center;
   position: relative;
+}
+
+.cardWidget>* {
+  display: flex;
+  flex: 1;
 }
 
 .cardWidget::-webkit-scrollbar {
@@ -26,43 +34,41 @@
 }
 
 .card__img_container {
-  min-height: 250px;
-  max-height: 250px;
+  height: 80%;
+  min-height: 325px;
   background-color: #2b2b2b;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.card__img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin: 0 100px;
-  border-radius: 10px;
-}
 
-.card__img.existImg {
-  width: 100%;
+
+.card__img_container>img {
+  inline-size: 100%;
   height: 100%;
   object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.cardBody {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 .cardTitle {
   margin: 0 0 4px 0;
+  font-size: clamp(1rem, 1vw, 5rem);
 }
 
-.cardButton {
-  width: 100%;
-  margin-top: 10px;
-}
+
 
 .card_status {
-  display: flex;
-  padding: 10px;
-  width: 100%;
-  justify-content: space-between;
+  font-size: clamp(1rem, 1vw, 5rem);
+  padding: 2%;
   position: absolute;
 }

@@ -123,16 +123,18 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
             />
           ))}
         </CardText>
-        <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
-          <ButtonArt
-            onClick={() => {
-              navigate(`/expo/${event.id}`);
-              window.location.reload();
-            }}
-          >
-            Редактировать
-          </ButtonArt>
-        </NavLink>
+        <div className={styles.cardButton}>
+          <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
+            <ButtonArt
+            /*  onClick={() => {
+               navigate(`/expo/${event.id}`);
+               window.location.reload();
+             }} */
+            >
+              Редактировать
+            </ButtonArt>
+          </NavLink>
+        </div>
       </CardBody>
     </Card>
   );
