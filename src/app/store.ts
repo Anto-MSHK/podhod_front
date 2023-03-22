@@ -21,10 +21,12 @@ import {
   REGISTER,
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
+import { eventPagesApi } from './services/EventPages.Api';
 
 const rootReducer = combineReducers({
   [eventsApi.reducerPath]: eventsApi.reducer,
   [exhibitsApi.reducerPath]: exhibitsApi.reducer,
+  [eventPagesApi.reducerPath]: eventPagesApi.reducer,
   counter: counterReducer,
   images: imagesUploadReducer,
   eventCreate: ExpoCreateReducer,
@@ -44,7 +46,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([eventsApi.middleware, exhibitsApi.middleware]),
+    }).concat([eventsApi.middleware, exhibitsApi.middleware, eventPagesApi.middleware]),
 });
 
 export const persistor = persistStore(store);

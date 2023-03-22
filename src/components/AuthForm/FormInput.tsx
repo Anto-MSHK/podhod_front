@@ -57,9 +57,9 @@ export const CustomInput: FC<CustomInputI> = ({
         }
         className={styles.AuthInputElements}
       >
-        {children ? children : null}
+        {children ? children : undefined}
       </Input>
-      <FormFeedback invalid tag="h3">
+      <FormFeedback invalid = 'true' tag="h3">
         {form.touched[`${field.name}`] ? form.errors[`${field.name}`] : ""}
       </FormFeedback>
     </div>

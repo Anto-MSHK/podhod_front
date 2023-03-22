@@ -20,6 +20,7 @@ import {
 } from "../../../app/Types/ExhibitsT";
 import deleteIcon from "../../../assets/icons/Icon6.svg";
 import { useParams } from "react-router-dom";
+import { exhibitsT } from '../../../app/Types/ExhibitsT';
 
 interface formType {
   exhibitName: string;
@@ -39,7 +40,7 @@ export const ExpoCreateExhibitsPage = () => {
 
   const toggle = () => setModal(!modal);
 
-  const handleEditExhibit = (exhibit: any) => {
+  const handleEditExhibit = (exhibit: exhibitsT) => {
     console.log(exhibit);
     setEditingExhibit(exhibit);
     toggle();
@@ -54,7 +55,7 @@ export const ExpoCreateExhibitsPage = () => {
       description: values.exhibitDescription,
     };
     dispatch(setExhibit(values));
-    addExhibit({ ...exhibit, id: eventId });
+    addExhibit({ body: exhibit, eventId: eventId as string });
     toggle();
   };
 
@@ -66,14 +67,14 @@ export const ExpoCreateExhibitsPage = () => {
         description: values.exhibitDescription,
         short: values.exhibitShort,
       };
-      updateExhibit({ id: editingExhibit.id, data: exhibit, eventId });
+      updateExhibit({ id: editingExhibit.id, body: exhibit, eventId: eventId as string});
       toggle();
     }
   };
 
-  const handleDeleteExhibit = async (id: any) => {
+  const handleDeleteExhibit = async (id: string) => {
     console.log("delete...");
-    await deleteExhibit({ id, eventId }).unwrap();
+    await deleteExhibit({ id, eventId: eventId as string}).unwrap();
   };
 
   const formConfig: FormikConfig<formType> = {
@@ -120,9 +121,9 @@ export const ExpoCreateExhibitsPage = () => {
       <div>
         {!isLoading &&
           data &&
-          data.map((el: any) => {
+          data.map((el: exhibitsT) => {
             return (
-              <div className={styles.mainCreateExhibitWrapper}>
+              <div key = {el.id} className={styles.mainCreateExhibitWrapper}>
                 <div
                   className={styles.exhibitsListWrapper}
                   onClick={() => handleEditExhibit(el)}

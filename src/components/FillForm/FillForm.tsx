@@ -104,7 +104,7 @@ export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
       form.setSubmitting(false);
       dispatch(setEvent(values));
       setEditing(false);
-      /*   alert(JSON.stringify(values, null, 2)); */
+    
     },
   };
   const schemaConfig: Yup.ObjectShape = {

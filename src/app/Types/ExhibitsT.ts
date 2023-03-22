@@ -1,5 +1,5 @@
 export type exhibitsT = {
-    id:	number
+    id:	string
     name: string
     short?: string
     description?: string

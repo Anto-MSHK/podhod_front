@@ -1,10 +1,11 @@
 import { API_URL } from "../http";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { EventPagesT } from '../Types/EventPageT';
+
 import {
   EventT,
   EventStateResponse,
-  EventPagesT,
   ImgT,
   CreateEventPayloadT,
   UpdateEventPayloadT,

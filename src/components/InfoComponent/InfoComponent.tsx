@@ -20,7 +20,7 @@ export const InfoComponent: FC<IInfoComponent> = ({
     <div>
       <Card className={styles.card_wrapper} inverse>
         <CardBody>
-          <CardTitle tag="h3" className={styles.card_title}>
+          <CardTitle  className={styles.card_title}>
             <div className={styles.card_icon_container}>
               <img
                 className={styles.card_icon}
@@ -32,7 +32,6 @@ export const InfoComponent: FC<IInfoComponent> = ({
                 alt=""
               />
             </div>
-
             <h3 className={styles.card_title_text}>{title}</h3>
           </CardTitle>
           <CardText

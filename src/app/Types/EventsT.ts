@@ -54,16 +54,7 @@ export type ImgT = {
   description: string;
   path: string;
 };
-export type EventPagesT = {
-  id: 1;
-  name: string;
-  description: null;
-  visibleLog: true;
-  eventId: 1;
-  createdAt: string;
-  updatedAt: string;
-  imgs: ImgT[];
-};
+
 export type ImageResponseT = {
   status: string;
   result: ImgT;
