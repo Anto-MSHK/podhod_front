@@ -1,16 +1,10 @@
 @import url("./fonts.css");
 @import url("./normalize.css");
 
-
-
-
-
-:root{
+:root {
   --main_btn_color: #df791a;
-  --main_btn_color_hover:#e9a362;
+  --main_btn_color_hover: #e9a362;
 }
-
-
 
 body {
   display: grid;
@@ -21,7 +15,6 @@ body {
   font-family: "Gilgory";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 h1 {
