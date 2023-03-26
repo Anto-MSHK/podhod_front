@@ -131,10 +131,9 @@ export const EventOverviewPage: React.FC = () => {
             <div className={styles.events_wrapper}>
                 {
                     items && items.map((item) => (
-                        <div className={styles.events_container}>
+                        <div key={item.id} className={styles.events_container}>
                             <StyledCard
                                 event={item}
-                                key={item.id}
                             />
                         </div>
 

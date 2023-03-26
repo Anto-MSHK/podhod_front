@@ -18,9 +18,8 @@ export const InfoComponent: FC<IInfoComponent> = ({
 }) => {
   return (
     <div>
-      <Card className={styles.card_wrapper} inverse>
-        <CardBody>
-          <CardTitle  className={styles.card_title}>
+      <Card className={styles.card_wrapper} >
+        <CardBody className={styles.card_body}>
             <div className={styles.card_icon_container}>
               <img
                 className={styles.card_icon}
@@ -32,15 +31,10 @@ export const InfoComponent: FC<IInfoComponent> = ({
                 alt=""
               />
             </div>
+          <CardTitle  className={styles.card_title}>
             <h3 className={styles.card_title_text}>{title}</h3>
+            <p className={styles.card_text}>{desc}</p> 
           </CardTitle>
-          <CardText
-            tag={"p"}
-            className={styles.card_text}
-            style={{ marginLeft: iconWidth ? iconWidth + 10 : 40 }}
-          >
-            {desc}
-          </CardText>
         </CardBody>
       </Card>
     </div>

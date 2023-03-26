@@ -13,7 +13,7 @@ export const Widget: React.FunctionComponent<IwidgetProps> = (props) => {
     return (
         <div className={styles.widget_container}>
             <div className={styles.info}>
-                <img src={props?.icon} alt="123" className={styles.widget_img} />
+                <img src={props?.icon} alt={props?.info} className={styles.widget_img} />
                 <div className={styles.text}>{props?.info}</div>
             </div>
             <div className={styles.info}>

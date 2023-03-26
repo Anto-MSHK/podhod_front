@@ -101,7 +101,8 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
           {event.name}
         </CardTitle>
         <CardSubtitle tag="p" className="mb-2 min"></CardSubtitle>
-        <CardText className={styles.cardWidget}>
+
+        <CardBody className={styles.cardWidget}>
           <Widget
             info={(event as any).showpieces.length}
             icon={icon1}
@@ -122,7 +123,7 @@ export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
               description={price.criterion}
             />
           ))}
-        </CardText>
+        </CardBody>
         <div className={styles.cardButton}>
           <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
             <ButtonArt
