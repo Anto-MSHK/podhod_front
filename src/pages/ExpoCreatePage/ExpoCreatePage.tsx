@@ -91,9 +91,9 @@ export const ExpoCreatePage: React.FC = () => {
   return (
     <div>
       {(!isLoading && event) || !id ? (
-        <div className={styles.ExpoCreateWrapper}>
-          <div style={{ width: "100%" }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={styles.expo_create_wrapper}>
+          <div className={styles.expo_create__content}>
+            <div className={styles.content__header_container} >
               {id && (
                 <SingleImageUpload
                   imgField="avatarExpo"
@@ -103,7 +103,7 @@ export const ExpoCreatePage: React.FC = () => {
                 />
               )}
 
-              <div className={styles.InfoWrapper}>
+              <div className={styles.header__info_container}>
                 <h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
                   <p
                     className="min"
@@ -115,7 +115,7 @@ export const ExpoCreatePage: React.FC = () => {
                     ? `«${eventSlice?.eventName}»`
                     : "Создайте новое мероприятие"}
                 </h1>
-                <div className={styles.toolbar_wrapper}>
+                <div className={styles.info__toolbar_container}>
                   <BtnGroupSelect
                     handleActiveBtn={handleActiveBtn}
                     view={"radio"}

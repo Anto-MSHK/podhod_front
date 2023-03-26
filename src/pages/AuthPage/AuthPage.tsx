@@ -68,15 +68,14 @@ const AuthPage = () => {
                                 <ButtonArt
                                     icon={registerIcon}
                                     onClick={() => handleAuth('registration', formik.setFieldValue)}
-                                    inActiveStyle={authPageState === 'login'}
                                 >
                                     Регистрация
                                 </ButtonArt>
                                 <ButtonArt
                                     onClick={() => handleAuth('login', formik.setFieldValue)}
                                     icon={loginIcon} iconWidth={25}
-                                    inActiveStyle={authPageState === 'registration'}
-                                >Вход
+                                >
+                                    Вход
                                 </ButtonArt>
                             </div>
                             <div className={styles.auth_form_container}>

@@ -11,6 +11,7 @@ interface ButtonArtI extends ButtonProps {
   icon?: any;
   iconWidth?: number;
   disabled?: boolean;
+  color?: string
 }
 
 export const ButtonArt: FC<ButtonArtI> = ({
@@ -24,6 +25,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
   iconWidth,
   disabled,
   size,
+  color,
 }) => {
   const customClassName = className ? className : styles.customBtn;
   const iconElement = icon ? (
@@ -45,6 +47,7 @@ export const ButtonArt: FC<ButtonArtI> = ({
         style={style}
         disabled={disabled}
         size={size}
+        color={color}
       >
         {iconElement}
         {children}

@@ -3,33 +3,19 @@
 }
 
 .auth_wrapper {
-   
     padding: 0;
     display: flex;
     height: fit-content;
     margin: 0 auto;
     justify-content: end;
     width: 100%;
+ 
 }
 
 .auth_container {
     width: var(--contentWidth);
     margin-right: 150px;
 }
-/* @media (max-width: 1200px) {
-    .auth_wrapper {
-        display: flex;
-        justify-content: center;
-
-    }
-    .auth_container{
-        margin-right: 0;
-    }
-
-    .auth_img {
-       opacity: 0;
-    }
-} */
 
 
 .auth_btns_container {

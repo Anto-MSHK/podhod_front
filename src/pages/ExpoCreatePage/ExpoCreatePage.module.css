@@ -1,17 +1,25 @@
-.ExpoCreateWrapper {
+.expo_create_wrapper {
   display: flex;
   column-gap: 20px;
   padding: 20px;
 }
-.InfoWrapper {
+.expo_create__content{
+  width: 100%;
+}
+.content__header_container{
+  display: flex;
+  align-items: center;
+  
+}
+.header__info_container {
   margin: 0 0 0 20px;
   display: flex;
   flex-direction: column;
-  row-gap: 2vw;
+  row-gap: 3rem;
   width: 100%;
 }
 
-.toolbar_wrapper {
+.info__toolbar_container{
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -22,10 +30,15 @@
 }
 
 @media (max-width: 1140px) {
-  .toolbar_wrapper {
+  .info__toolbar_container {
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
+  }
+}
+@media screen and (max-height: 500px) {
+  .expo_create_wrapper{
+    flex-wrap: wrap;
   }
 }
 .toolbar__main_submit_btn {
