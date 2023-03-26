@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyledCard } from "../../components/StyledCard/StyledCard";
 import { BtnGroupSelect } from '../../components/ButtonGroup/ButtonGroup';
-import {BtnFilters} from '../../components/Filters/BtnFilters';
+import { BtnFilters } from '../../components/Filters/BtnFilters';
 import styles from "./EventOverviewPage.module.css";
 import event1 from "../../assets/pictures/Event1.png";
 import event2 from "../../assets/pictures/Event2.png";
@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { ButtonArt } from './../../components/ButtonArt/ButtonArt';
 import { useFetchEventsQuery } from '../../app/services/EventsApi';
 import { EventT } from '../../app/Types/EventsT';
-import {date} from "yup";
+import { date } from "yup";
 import icon10 from '../../assets/icons/icon10.svg'
 import icon11 from '../../assets/icons/Icon11.svg'
 
@@ -69,7 +69,7 @@ interface Iitems {
 
 
 const sort = [{ name: "По дате" }, { name: "По типу" }];
-const handleFilter = (date: string | number, type?: string | undefined) => {};
+const handleFilter = (date: string | number, type?: string | undefined) => { };
 
 
 export const EventOverviewPage: React.FC = () => {
@@ -128,16 +128,18 @@ export const EventOverviewPage: React.FC = () => {
                     onFilter={handleFilter}
                 />
             </div>
-            <div className={styles.events_wrapper}>
-                {
-                    items && items.map((item) => (
-                        <div key={item.id} className={styles.events_container}>
-                            <StyledCard
-                                event={item}
-                            />
-                        </div>
+            <div className={styles.content_container}>
+                <div className={styles.content_container__grid_list}>
+                    {
+                        items && items.map((item) => (
+                            <div key={item.id} className={styles.grid_list__item_container}>
+                                <StyledCard
+                                    event={item}
+                                />
+                            </div>
 
-                    ))}
+                        ))}
+                </div>
             </div>
         </div>
     );

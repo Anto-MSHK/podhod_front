@@ -3,7 +3,8 @@
   flex-direction: column;
   row-gap: 1vw;
   padding: 15px;
-
+  max-width: 2050px;
+  margin: 0 auto;
 }
 
 .filter {
@@ -11,15 +12,19 @@
   justify-content: space-between;
 }
 
-.events_container {
-  display: flex;
-
+.content_container{
+  width: 100%;
 }
-
-.events_wrapper {
+.content_container__grid_list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1vw;
+
+  
+}
+.grid_list__item_container {
+  display: flex;
+
 }
 
 @media (max-width: 767px) {
