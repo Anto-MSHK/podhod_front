@@ -11,7 +11,7 @@ import { ButtonArt } from './../../components/ButtonArt/ButtonArt';
 import { useFetchEventsQuery } from '../../app/services/EventsApi';
 import { EventT } from '../../app/Types/EventsT';
 import { date } from "yup";
-import icon10 from '../../assets/icons/icon10.svg'
+import icon10 from '../../assets/icons/Icon10.svg'
 import icon11 from '../../assets/icons/Icon11.svg'
 
 

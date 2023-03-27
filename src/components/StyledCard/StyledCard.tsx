@@ -27,7 +27,7 @@ interface IStyledCardProps {
 enum EventStatus {
   draft = "draft",
   active = "active",
-  compilted = "complited",
+  completed = "completed",
 }
 
 export const pluralForm = (items: number) => {
@@ -50,7 +50,7 @@ const btnTitle = (status: string) => {
     case EventStatus.draft:
       return "Продолжить заполнение";
 
-    case EventStatus.compilted:
+    case EventStatus.completed:
       return "Опубликовать";
 
     case EventStatus.active:
