@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ButtonArt } from '../ButtonArt/ButtonArt';
+import { CustomBtn } from '../CustomBtn/CustomBtn';
 import styles from './ButtonFilter.module.css';
 import icon10 from '../../assets/icons/Icon10.svg'
 import icon11 from '../../assets/icons/Icon11.svg'
@@ -33,7 +33,7 @@ export const BtnFilters: FC<SortI> = ({ date, sort, type, onFilter }) => {
                     return (
                         <div key={index}>
                             {el.name === 'Date' ? (
-                                <ButtonArt
+                                <CustomBtn
                                     className={`${styles.btnItem} ${
                                         date === 'all' || date === el.name.toLowerCase()
                                             ? styles.activate
@@ -43,9 +43,9 @@ export const BtnFilters: FC<SortI> = ({ date, sort, type, onFilter }) => {
                                 >
                                     <img src={el.icon} alt={`icon ${index}`} />
                                     <span className={styles.btnItem}>{el.name}</span>
-                                </ButtonArt>
+                                </CustomBtn>
                             ) : (
-                                <ButtonArt
+                                <CustomBtn
                                     color={isActive ? 'warning' : undefined}
                                     className={`${styles.btnItem} ${isActive ? styles.activate : styles.deactivate}`}
                                     onClick={() => handleTypeFilter(el.name.toLowerCase(), index)}
@@ -53,7 +53,7 @@ export const BtnFilters: FC<SortI> = ({ date, sort, type, onFilter }) => {
                                 >
                                     <img src={el.icon} alt={`icon ${index}`} />
                                     <span className={styles.btnItem}>{el.name}</span>
-                                </ButtonArt>
+                                </CustomBtn>
                             )}
                         </div>
                     );
