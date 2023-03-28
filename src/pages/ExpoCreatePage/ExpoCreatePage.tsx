@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import styles from "./ExpoCreatePage.module.css";
 import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
 import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
-import errorIcon from "../../assets/icons/Icon9.svg";
+import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
 import Preview from "../../components/PreviewComponent/Preview";
 import { ExpoMainPage } from "./ExpoMainForm.tsx/ExpoCreateMainForm";
 import { ExpoCreateExhibitsPage } from "./ExpoCreateExhibits/ExpoCreateExhibits";
