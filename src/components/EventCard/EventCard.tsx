@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
-import styles from "./StyledCard.module.css";
+import styles from "./EventCard.module.css";
 import { WidgetItem } from "../WidgetItem/WidgetItem";
 import icon1 from "../../assets/icons/addFileIcon.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
@@ -60,7 +60,7 @@ const btnTitle = (status: string) => {
   }
 };
 
-export const StyledCard: React.FunctionComponent<IStyledCardProps> = ({
+export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
   event,
 }) => {
   const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id);

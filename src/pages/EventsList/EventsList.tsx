@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyledCard } from "../../components/EventCard/StyledCard";
+import { EventCard } from "../../components/EventCard/EventCard";
 import { BtnGroupSelect } from '../../components/CustomBtnGroup/CustomBtnGroup';
 import { BtnFilters } from '../../components/Filters/BtnFilters';
 import styles from "./EventsList.module.css";
@@ -133,7 +133,7 @@ export const EventsList: React.FC = () => {
                     {
                         items && items.map((item) => (
                             <div key={item.id} className={styles.grid_list__item_container}>
-                                <StyledCard
+                                <EventCard
                                     event={item}
                                 />
                             </div>
