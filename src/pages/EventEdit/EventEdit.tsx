@@ -10,7 +10,7 @@ import { useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
-import { InfoSingle } from "../../components/ImageSingle/InfoSingle";
+import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import { EventCreatePages } from './EventCreatePage/EventCreatePage';
 import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
@@ -95,7 +95,7 @@ export const EventEdit: React.FC = () => {
           <div className={styles.expo_create__content}>
             <div className={styles.content__header_container} >
               {id && (
-                <InfoSingle
+                <ImageSingle
                   imgField="avatarExpo"
                   textButton={"добавьте фото "}
                   path={`/img/to/event/${event?.id}`}

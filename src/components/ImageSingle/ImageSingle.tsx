@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DragAndDrop from "../DragAndDrop/DragAndDrop";
-import styles from "./InfoSingle.module.css";
+import styles from "./ImageSingle.module.css";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import ImageItem from "../ImageItem/ImageItem";
 import { Spinner } from "reactstrap";
@@ -19,7 +19,7 @@ interface ISingleImageUpload {
   isLoading: boolean;
 }
 
-export const InfoSingle: React.FC<ISingleImageUpload> = ({
+export const ImageSingle: React.FC<ISingleImageUpload> = ({
   imgField,
   title,
   help,

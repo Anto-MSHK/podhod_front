@@ -23,7 +23,6 @@
 }
 
 .cardWidget::-webkit-scrollbar {
-  background-color: none;
   height: 5px;
 }
 

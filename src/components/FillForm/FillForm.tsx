@@ -21,7 +21,7 @@ import { type } from "os";
 import { idText } from "typescript";
 import { useNavigate, useParams } from "react-router-dom";
 import ImagesGallery from "../ImagesGallery/ImagesGallery";
-import { InfoSingle } from "../ImageSingle/InfoSingle";
+import { ImageSingle } from "../ImageSingle/ImageSingle";
 
 interface formType {
   eventName: string;
