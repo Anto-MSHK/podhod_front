@@ -18,7 +18,7 @@ import {
   CreateExhibitPayloadT,
   UpdateExhibitPayloadT,
 } from "../../../app/Types/ExhibitsT";
-import deleteIcon from "../../../assets/icons/Icon6.svg";
+import deleteIcon from "../../../assets/icons/CrossInCircle.svg";
 import { useParams } from "react-router-dom";
 import { exhibitsT } from '../../../app/Types/ExhibitsT';
 

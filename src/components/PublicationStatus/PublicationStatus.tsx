@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./PublicationStatus.module.css";
-import icon5 from "../../assets/icons/Icon5.svg";
-import icon6 from "../../assets/icons/Icon6.svg";
+import icon5 from "../../assets/icons/CheckmarkInСircle.svg";
+import icon6 from "../../assets/icons/CrossInCircle.svg";
 
 interface IPublicationStatusProps {
     status: string;
