@@ -1,47 +1,53 @@
 import * as React from "react";
 import styles from "./InfoTag.module.css";
-import icon5 from "../../assets/icons/CheckmarkInСircle.svg";
-import icon6 from "../../assets/icons/CrossInCircle.svg";
 
-interface IPublicationStatusProps {
+interface IInfoTagProps {
     status: string;
     type: string;
+    color?: string;
+    text?: string;
+    icon?: string;
 }
 
-const setType = (type: string) => {
+const setType = (type: string, color?: string, text?: string, icon?: string) => {
     return (
-        <div className={`${styles.status} ${styles.status_event}`}>{type}</div>
+        <div className={`${styles.status} ${styles.status_event}`} style={{backgroundColor: color}}>
+            {icon && <img src={icon} alt={text} className={styles.status_img}/>}
+            {text || type}
+        </div>
     );
 };
 
-const setStatus = (status: string) => {
+const setStatus = (status: string, type: string, color?: string, text?: string, icon?: string) => {
     if (status === "published")
         return (
-            <div className={`${styles.status} ${styles.status_completed}`}>
-                <img src={icon5} alt="completed" className={styles.status_img}></img>
-                Опубликовано
+            <div className={`${styles.status} ${styles.status_completed}`} style={{backgroundColor: color}}>
+                {setType(type, color, text, icon)}
+                {text || "Опубликовано"}
             </div>
         );
     if (status === "completed")
         return (
-            <div className={`${styles.status} ${styles.status_completed}`}>
-                <img src={icon5} alt="completed" className={styles.status_img}></img>
-                Готово к публикации
+            <div className={`${styles.status} ${styles.status_completed}`} style={{backgroundColor: color}}>
+                {setType(type, color, text, icon)}
+                {text || "Готово к публикации"}
             </div>
         );
     if (status === "draft")
         return (
-            <div className={`${styles.status} ${styles.status_draft}`}>
-                <img src={icon6} alt="draft" className={styles.status_img}></img>
-                Это черновик
+            <div className={`${styles.status} ${styles.status_draft}`} style={{backgroundColor: color}}>
+                {setType(type, color, text, icon)}
+                {text || "Это черновик"}
             </div>
         );
 };
-export const InfoTag: React.FC<IPublicationStatusProps> = (props) => {
+
+export const InfoTag: React.FC<IInfoTagProps> = ({status, type, color, text, icon}) => {
     return (
         <div className={styles.status_container}>
-            {setType(props.type)}
-            {setStatus(props.status)}
+            {setType(type, color, text, icon)}
+            {setStatus(status, type, color, text, icon)}
         </div>
     );
 };
+

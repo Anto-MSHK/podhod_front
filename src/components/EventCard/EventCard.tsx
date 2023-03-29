@@ -2,7 +2,7 @@ import * as React from "react";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import styles from "./EventCard.module.css";
 import { WidgetItem } from "../WidgetItem/WidgetItem";
-import icon1 from "../../assets/icons/addFileIcon.svg";
+import addFileIcon from "../../assets/icons/addFileIcon.svg"
 import icon2 from "../../assets/icons/Wallet.svg";
 import icon3 from "../../assets/icons/SmilingFace.svg";
 import { InfoTag } from "../InfoTag/InfoTag";
@@ -70,7 +70,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
       <div className={styles.card__img_container}>
         {!event.img ? (
           <div>
-            <img className={styles.card__img} src={icon1} alt="123" />
+            <img className={styles.card__img} src={addFileIcon} alt="123" />
             <p
               style={{
                 color: "#A8A8A8",
@@ -94,7 +94,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         )}
       </div>
       <div className={styles.card_status}>
-        <InfoTag type={event.name} status={event.status} />
+        <InfoTag status={event.status} type={event.name}/>
       </div>
       <CardBody className={styles.cardBody} inverse="true">
         <CardTitle tag="h3" className={styles.cardTitle}>
@@ -105,7 +105,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         <CardBody className={styles.cardWidget}>
           <WidgetItem
             info={(event as any).showpieces.length}
-            icon={icon1}
+            icon={addFileIcon}
             description={pluralForm((event as any).showpieces.length)}
           />
           {event.ageLimit && (
