@@ -1,6 +1,6 @@
 .drag_and_drop_wrapper {
-  width: 260px;
-  height: 173px;
+  width: 100%;
+  height: 100%;
   border: 3px solid #a8a8a8;
   border-radius: 20px;
   position: relative;

@@ -67,12 +67,14 @@ export const ImageSingle: React.FC<ISingleImageUpload> = ({
               className={styles.img}
             />
           ) : !isLoading || !id ? (
-            <DragAndDrop
-              field={imgField}
-              type="single"
-              text={textButton}
-              path={path}
-            />
+              <div className={styles.drag_and_drop_container}>
+                <DragAndDrop
+                    field={imgField}
+                    type="single"
+                    text={textButton}
+                    path={path}
+                />
+              </div>
           ) : (
             <div className={styles.img}>
               <Spinner type="grow" className={styles.spinner} />

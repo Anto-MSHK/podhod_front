@@ -45,3 +45,13 @@
   object-fit: cover;
   background-repeat: no-repeat;
 }
+
+
+.drag_and_drop_container {
+  width: 260px;
+  height: 173px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
