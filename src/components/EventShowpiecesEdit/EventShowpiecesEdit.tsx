@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import styles from "./EventCreateExhibits.module.css";
-import { FormInput } from "../../../components/Form/FormInput";
-import { FormContainer } from "../../../components/Form/Form";
+import styles from "./EventShowpiecesEdit.module.css";
+import { FormInput } from "../Form/FormInput";
+import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { CustomBtn } from "../../../components/CustomBtn/CustomBtn";
+import { CustomBtn } from "../CustomBtn/CustomBtn";
 import {
   useFetchExhibitsQuery,
   useAddExhibitMutation,
   useDeleteExhibitMutation,
   useUpdateExhibitMutation,
-} from "../../../app/services/ExhibitsApi";
-import { useAppDispatch } from "../../../app/hooks";
-import { setExhibit } from "../../../app/Slices/ExhibitCreateSlice";
+} from "../../app/services/ExhibitsApi";
+import { useAppDispatch } from "../../app/hooks";
+import { setExhibit } from "../../app/Slices/ExhibitCreateSlice";
 import {
   CreateExhibitPayloadT,
   UpdateExhibitPayloadT,
-} from "../../../app/Types/ExhibitsT";
-import deleteIcon from "../../../assets/icons/CrossInCircle.svg";
+} from "../../app/Types/ExhibitsT";
+import deleteIcon from "../../assets/icons/CrossInCircle.svg";
 import { useParams } from "react-router-dom";
-import { exhibitsT } from '../../../app/Types/ExhibitsT';
+import { exhibitsT } from '../../app/Types/ExhibitsT';
 
 interface formType {
   exhibitName: string;
@@ -28,7 +28,7 @@ interface formType {
   exhibitDescription: string;
 }
 
-export const EventCreateExhibits = () => {
+export const EventShowpiecesEdit = () => {
   const { id: eventId } = useParams();
   const [modal, setModal] = useState(false);
   const { data, isLoading } = useFetchExhibitsQuery(eventId);
