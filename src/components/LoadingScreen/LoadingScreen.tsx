@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useEffect, useState} from "react";
 import { Spinner } from "reactstrap";
 import {inspect} from "util";
 import styles from './LoadingScreen.module.css'
@@ -8,14 +8,21 @@ interface LoadingScreenI {
 }
 
 export const LoadingScreen: FC<LoadingScreenI> = ({ isLoading }) => {
+    const [mounted, setMounted] = useState(true);
 
     useEffect(() => {
-        if (!isLoading) {
+        return () => {
+            setMounted(false);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isLoading && mounted) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [isLoading]);
+    }, [isLoading, mounted]);
 
     return (
         <div className={styles.loading_screen}>

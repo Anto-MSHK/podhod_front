@@ -1,13 +1,3 @@
-.loading_screen {
-    overflow: hidden;
-    scrollbar-width: none; /* Для Firefox */
-    -ms-overflow-style: none; /* Для Edge и IE */
-}
-
-.loading_screen::-webkit-scrollbar {
-    display: none; /* Для Chrome, Safari и Opera */
-}
-
 .spinner {
     width: 100px;
     height: 100px;
