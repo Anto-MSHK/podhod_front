@@ -21,6 +21,7 @@ export type btnGroup = {
 
 interface BtnGroupI extends ButtonGroupProps {
   view: string;
+  type?: string;
   data: btnGroup;
   handleActiveBtn?: (lable: string | number[] | number) => void;
 }
@@ -29,6 +30,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
   view,
   data,
   handleActiveBtn,
+    type
 }) => {
   const [rSelected, setRSelected] = useState<number | null>(0);
   const [cSelected, setCSelected] = useState<number[]>([]);
@@ -127,9 +129,9 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
         <div key={index}>
           <CustomBtn
             className={`${styles.btnItem} ${
-              isActive ? styles.active : styles.deactivate
+                type === 'filter' ? (isActive ? styles.fltActive : styles.fltDeactivate) : (isActive ? styles.active : styles.deactivate)
             }`}
-            color={isActive ? "warning" : undefined}
+            color={type === 'filter' ? (isActive ? 'Primary' : undefined) : (isActive ? 'Warning' : undefined)}
             onClick={combinedOnClick}
             active={isActive}
             icon={el.icon}

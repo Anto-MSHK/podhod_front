@@ -68,7 +68,7 @@ interface Iitems {
 
 
 
-const sort = [{ name: "По дате" }, { name: "По типу" }];
+const sort = [{ name: "По дате", icon: icon10 }, { name: "По типу", icon: icon11 }];
 const handleFilter = (date: string | number, type?: string | undefined) => { };
 
 
@@ -119,13 +119,10 @@ export const EventsList: React.FC = () => {
             <div className={styles.filter}>
                 <CustomBtnGroup view="radio" data={btnData} />
                 <div style={{ margin: "10px 0" }} />
-                <BtnFilters
-                    sort={[
-                        { name: 'По дате', icon: icon10 },
-                        { name: 'По типу', icon: icon11 },
-                    ]}
-                    date={"22.02.2023"}
-                    onFilter={handleFilter}
+                <CustomBtnGroup
+                    data={sort}
+                    view={'radio'}
+                    type={'filter'}
                 />
             </div>
             <div className={styles.content_container}>
