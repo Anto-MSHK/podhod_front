@@ -157,7 +157,7 @@ export const EventEdit: React.FC = () => {
           </div>
         </div>
       ) : (
-        <LoadingScreen />
+        <LoadingScreen isLoading={isLoading}/>
       )}
     </div>
   );
