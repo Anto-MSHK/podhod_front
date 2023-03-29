@@ -3,8 +3,7 @@ import styles from "./EventEdit.module.css";
 import { BtnGroupSelect } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
 import Preview from "../../components/PreviewComponent/Preview";
-import { EventMainForm } from "./EventMain/EventMainForm";
-import { EventCreateExhibits } from "./EventCreateExhibits/EventCreateExhibits";
+import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
 import { useParams } from "react-router-dom";
 import { useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
@@ -12,8 +11,10 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
 import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
-import { EventCreatePages } from './EventCreatePage/EventCreatePage';
+import {EventPageEdit} from '../../components/EventPageEdit/EventPageEdit';
 import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
+import {FillForm}from "../../components/FillForm/FillForm";
+
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -78,13 +79,13 @@ export const EventEdit: React.FC = () => {
   const handleActivePage = () => {
     switch (activeBtn) {
       case 'mainScreen':
-        return <EventMainForm data={event} />
+        return <FillForm  defaultData={event}/>
       case 'exhibits':
-        return <EventCreateExhibits />
+        return <EventShowpiecesEdit />
       case 'settings':
         return null
       case 'pages':
-        return <EventCreatePages />
+        return <EventPageEdit />
     }
   }
 

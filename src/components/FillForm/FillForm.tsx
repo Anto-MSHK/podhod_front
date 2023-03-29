@@ -32,7 +32,7 @@ interface formType {
 interface MainInfoExpoFormI {
   defaultData: EventT | undefined;
 }
-export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
+export const FillForm: React.FC<MainInfoExpoFormI> = ({
   defaultData,
 }) => {
   const { id } = useParams();

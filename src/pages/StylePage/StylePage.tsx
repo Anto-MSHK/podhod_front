@@ -11,7 +11,6 @@ import icon8 from "../../assets/icons/RedСheckMark.svg";
 import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
-import { MainInfoExpoForm } from "../../components/FillForm/FillForm";
 // import { Form } from "../../components/Form/Form";
 import { FormContainer } from "../../components/Form/Form";
 import { FormInput } from "../../components/Form/FormInput";

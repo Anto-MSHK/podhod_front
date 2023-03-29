@@ -1,30 +1,30 @@
 import React, { useState } from "react";
-import styles from "./EventCreatePages.module.css";
-import { FormInput } from "../../../components/Form/FormInput";
-import { FormContainer } from "../../../components/Form/Form";
+import styles from "./EventPageEdit.module.css";
+import { FormInput } from "../Form/FormInput";
+import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig, Field } from "formik";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { CustomBtn } from "../../../components/CustomBtn/CustomBtn";
-import { useAppDispatch } from "../../../app/hooks";
+import { CustomBtn } from "../CustomBtn/CustomBtn";
+import { useAppDispatch } from "../../app/hooks";
 import {
   CreateExhibitPayloadT,
   UpdateExhibitPayloadT,
-} from "../../../app/Types/ExhibitsT";
-import deleteIcon from "../../../assets/icons/CrossInCircle.svg";
+} from "../../app/Types/ExhibitsT";
+import deleteIcon from "../../assets/icons/CrossInCircle.svg";
 import { useParams } from "react-router-dom";
 import {
   useAddPageMutation,
   useDeletePageMutation,
   useFetchPageQuery,
   useUpdatePageMutation,
-} from "../../../app/services/EventPages.Api";
+} from "../../app/services/EventPages.Api";
 import {
   CreateExpoPagePayloadT,
   UpdateExpoPagePayloadT,
   EventPagesT,
-} from "../../../app/Types/EventPageT";
-import { setPage } from "../../../app/Slices/ExpoCreatePageSlice";
+} from "../../app/Types/EventPageT";
+import { setPage } from "../../app/Slices/ExpoCreatePageSlice";
 
 interface formType {
   pageName: string;
@@ -32,7 +32,7 @@ interface formType {
   visibleLogo: boolean;
 }
 
-export const EventCreatePages = () => {
+export const EventPageEdit = () => {
   const { id: eventId } = useParams();
   const [modal, setModal] = useState(false);
   const { data, isLoading } = useFetchPageQuery(eventId);
