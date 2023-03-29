@@ -26,7 +26,7 @@ export const LoadingScreen: FC<LoadingScreenI> = ({ isLoading }) => {
 
     return (
         <div className={styles.loading_screen}>
-            {[...Array(5000)].map((_,index) => (
+            {[...Array(500)].map((_,index) => (
                 <Spinner key={index}
                          type="grow"
                          className={styles.spinner}
