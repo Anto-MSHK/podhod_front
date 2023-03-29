@@ -1,9 +1,6 @@
-import { BtnGroupSelect } from "../../components/ButtonGroup/ButtonGroup";
-import { PublicationStatus } from "../../components/PublicationStatus/PublicationStatus";
-import { Widget } from "../../components/Widget/Widget";
-import { StyledCard } from "../../components/StyledCard/StyledCard";
-import DragAndDrop from "../../components/DragAndDrop/dragAndDrop";
-import ImagesGallery from "../../components/ImagesGallery/imagesGallery";
+import { BtnGroupSelect } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { InfoTag } from "../../components/InfoTag/InfoTag";
+import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
 
 import icon1 from "../../assets/icons/NumberOfExhibits.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
@@ -15,14 +12,14 @@ import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
 import { MainInfoExpoForm } from "../../components/FillForm/FillForm";
-// import { AuthForm } from "../../components/AuthForm/AuthForm";
-import { InfoComponent } from "../../components/InfoComponent/InfoComponent";
-import { FormContainer } from "../../components/AuthForm/Form";
-import { FormInput } from "./../../components/AuthForm/FormInput";
+// import { Form } from "../../components/Form/Form";
+import { FormContainer } from "../../components/Form/Form";
+import { FormInput } from "../../components/Form/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
-import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
+import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
+import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
 
 export const MainPage = () => {
   const btnData = [
@@ -97,11 +94,11 @@ export const MainPage = () => {
               marginBottom: 10,
             }}
           >
-            <Widget info="4" icon={icon1} description="экспоната" />
-            <Widget info="от 250р." icon={icon2} description="платный вход" />
-            <Widget info="6+" icon={icon3} description="возраст" />
-            <Widget icon={icon7} info=" " description="23-26 июля" />
-            <Widget icon={icon4} description="Открытый вход" />
+            <WidgetItem info="4" icon={icon1} description="экспоната" />
+            <WidgetItem info="от 250р." icon={icon2} description="платный вход" />
+            <WidgetItem info="6+" icon={icon3} description="возраст" />
+            <WidgetItem icon={icon7} info=" " description="23-26 июля" />
+            <WidgetItem icon={icon4} description="Открытый вход" />
           </div>
           <div
             style={{
@@ -110,11 +107,11 @@ export const MainPage = () => {
               marginBottom: 10,
             }}
           >
-            <PublicationStatus status="Опубликовано" type="completed" />
-            <PublicationStatus status="Черновик" type="draft" />
-            <PublicationStatus status="Выставка" type="event" />
+            <InfoTag status="Опубликовано" type="completed" />
+            <InfoTag status="Черновик" type="draft" />
+            <InfoTag status="Выставка" type="event" />
           </div>
-          {/*     <StyledCard
+          {/*     <EventCard
                         eventTitle="Экспозиция музея"
                         dateOfCreation="22.02.2023"
                         type='Выставка'
@@ -136,10 +133,10 @@ export const MainPage = () => {
             <div>
               <div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <ButtonArt icon={registerIcon} type="submit">
+                  <CustomBtn icon={registerIcon} type="submit">
                     Зарегистрироваться
-                  </ButtonArt>
-                  <ButtonArt
+                  </CustomBtn>
+                  <CustomBtn
                     icon={loginIcon}
                     iconWidth={25}
                     style={{
@@ -148,7 +145,7 @@ export const MainPage = () => {
                     }}
                   >
                     Выйти
-                  </ButtonArt>
+                  </CustomBtn>
                 </div>
 
                 <FormInput name="email" label="Email" />
@@ -165,21 +162,21 @@ export const MainPage = () => {
       <MyForm />
       <div style={{ display: "flex", gap: "10px" }}>
         <div style={{ width: "300px" }}>
-          <InfoComponent
+          <InfoMessage
             icon={icon9}
             title={"Не может быть опубликовано"}
             desc={"Есть незаполненные поля"}
           />
         </div>
         <div style={{ width: "300px" }}>
-          <InfoComponent
+          <InfoMessage
             icon={icon8}
             title={"Успешно опубликовано"}
             desc={"Ошибок не найдено"}
           />
         </div>
         <div>
-          <InfoComponent
+          <InfoMessage
             iconWidth={100}
             icon={icon7}
             title={"А тут здоровая иконка"}
@@ -187,7 +184,7 @@ export const MainPage = () => {
           />
         </div>
       </div>
-      <InfoComponent
+      <InfoMessage
         iconWidth={50}
         icon={icon4}
         title={"Пример адаптивности"}

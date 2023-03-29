@@ -1,11 +1,11 @@
 import * as React from "react";
 import styles from "./FillForm.module.css";
-import { ButtonArt } from "../ButtonArt/ButtonArt";
+import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { useState, useEffect } from "react";
-import { FormContainer } from "../AuthForm/Form";
+import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig, FormikProps } from "formik";
-import { FormInput } from "../AuthForm/FormInput";
+import { FormInput } from "../Form/FormInput";
 import { useAppDispatch } from "../../app/hooks";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 import {
@@ -20,8 +20,8 @@ import {
 import { type } from "os";
 import { idText } from "typescript";
 import { useNavigate, useParams } from "react-router-dom";
-import ImagesGallery from "../ImagesGallery/imagesGallery";
-import { SingleImageUpload } from "../SingleImageUpload/SingleImageUpload";
+import ImagesGallery from "../ImagesGallery/ImagesGallery";
+import { ImageSingle } from "../ImageSingle/ImageSingle";
 
 interface formType {
   eventName: string;
@@ -131,7 +131,7 @@ export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
             <h2>{`Основная информация`}</h2>
             <div style={{ display: "flex", gap: 15 }}>
               {editing && (
-                <ButtonArt
+                <CustomBtn
                   type="submit"
                   disabled={
                     !editing ||
@@ -140,12 +140,12 @@ export const MainInfoExpoForm: React.FC<MainInfoExpoFormI> = ({
                   }
                 >
                   {editing ? "Сохранить" : "Изменить"}
-                </ButtonArt>
+                </CustomBtn>
               )}
               {id && (
-                <ButtonArt type="button" onClick={toggleEditing}>
+                <CustomBtn type="button" onClick={toggleEditing}>
                   {editing ? "Отмена" : "Редактировать"}
-                </ButtonArt>
+                </CustomBtn>
               )}
             </div>
           </div>

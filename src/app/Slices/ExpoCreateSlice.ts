@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, Action, current } from "@reduxjs/toolkit";
 import { type } from "os";
-import { ExpoCreatePage } from "../../pages/ExpoCreatePage/ExpoCreatePage";
+import { EventEdit } from "../../pages/EventEdit/EventEdit";
 
 export type eventForm = {
   eventName: string;

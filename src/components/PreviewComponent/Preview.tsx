@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Preview.module.css";
 import { useAppSelector } from "../../app/hooks";
-import ImageComponent from "../ImagesGallery/ImageComponent";
+import ImageItem from "../ImageItem/ImageItem";
 import { imageType } from '../../app/Slices/imagesUploadSlice';
 
 interface IPreview {
@@ -39,7 +39,7 @@ const Preview: React.FC<IPreview> = ({backgroundImg}) => {
         {galleryImages &&
           galleryImages.map((image) => (
             <div className={styles.preview_image_container}>
-              <ImageComponent
+              <ImageItem
                 image={image}
                 type="gallery"
                 field="galleryMainPage"
