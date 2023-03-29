@@ -131,7 +131,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
             className={`${styles.btnItem} ${
                 type === 'filter' ? (isActive ? styles.fltActive : styles.fltDeactivate) : (isActive ? styles.active : styles.deactivate)
             }`}
-            color={type === 'filter' ? (isActive ? 'Primary' : undefined) : (isActive ? 'Warning' : undefined)}
+            color={type === 'filter' ? (isActive ? 'primary' : undefined) : (isActive ? 'warning' : undefined)}
             onClick={combinedOnClick}
             active={isActive}
             icon={el.icon}
