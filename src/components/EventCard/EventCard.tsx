@@ -72,7 +72,6 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         {!event.img ? (
           <InfoMessage 
           desc="Добавьте картинку на странице редактирования" 
-          title='Воняешь' 
           icon={icon1} 
           iconPosition = 'top'
           iconWidth={70}/>
