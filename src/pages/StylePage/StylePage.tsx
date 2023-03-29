@@ -166,6 +166,7 @@ export const MainPage = () => {
             icon={icon9}
             title={"Не может быть опубликовано"}
             desc={"Есть незаполненные поля"}
+            iconPosition = "right"
           />
         </div>
         <div style={{ width: "300px" }}>
@@ -173,6 +174,7 @@ export const MainPage = () => {
             icon={icon8}
             title={"Успешно опубликовано"}
             desc={"Ошибок не найдено"}
+            iconPosition = "right"
           />
         </div>
         <div>

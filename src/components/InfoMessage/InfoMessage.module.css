@@ -17,14 +17,18 @@
   margin: 0;
 }
 .card_body{
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   gap: 1em;
 }
-
-.card_body > :nth-child(1){
-  justify-self: end;
+.right_direction {
+  flex-direction: row-reverse;
+  text-align: end;
 }
+.top_direction {
+  flex-direction: column;
+  text-align: center;
+}
+
 
 
 .card_wrapper > img{ 
