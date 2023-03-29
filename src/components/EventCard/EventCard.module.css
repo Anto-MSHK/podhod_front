@@ -67,5 +67,6 @@
 
 .card_status {
   padding: 2%;
+  max-height: 20px;
   position: absolute;
 }

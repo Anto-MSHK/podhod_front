@@ -13,7 +13,7 @@ import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
 import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import { EventCreatePages } from './EventCreatePage/EventCreatePage';
-import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
+import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -148,9 +148,10 @@ export const EventEdit: React.FC = () => {
             </div>
             <div className={styles.InfoComponentWrapper}>
               <InfoMessage
+                style={{ padding: '1rem' }}
                 title={"Не может быть опубликовано"}
                 desc={"Есть незаполненные поля"}
-                icon={errorIcon}
+                icon={errorIcon}    
               />
             </div>
           </div>
