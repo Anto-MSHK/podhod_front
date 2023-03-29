@@ -13,7 +13,7 @@ import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import {EventPageEdit} from '../../components/EventPageEdit/EventPageEdit';
 import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
-import {FillForm}from "../../components/FillForm/FillForm";
+import {EventForm}from "../../components/EventForm/EventForm";
 
 
 const btnData = [
@@ -79,7 +79,7 @@ export const EventEdit: React.FC = () => {
   const handleActivePage = () => {
     switch (activeBtn) {
       case 'mainScreen':
-        return <FillForm  defaultData={event}/>
+        return <EventForm  defaultData={event}/>
       case 'exhibits':
         return <EventShowpiecesEdit />
       case 'settings':
