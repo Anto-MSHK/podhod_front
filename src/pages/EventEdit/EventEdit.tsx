@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./EventEdit.module.css";
-import { BtnGroupSelect } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
 import Preview from "../../components/PreviewComponent/Preview";
 import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
@@ -117,7 +117,7 @@ export const EventEdit: React.FC = () => {
                     : "Создайте новое мероприятие"}
                 </h1>
                 <div className={styles.info__toolbar_container}>
-                  <BtnGroupSelect
+                  <CustomBtnGroup
                     handleActiveBtn={handleActiveBtn}
                     view={"radio"}
                     data={btnData}

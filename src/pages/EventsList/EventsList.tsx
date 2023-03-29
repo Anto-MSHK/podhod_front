@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { EventCard } from "../../components/EventCard/EventCard";
-import { BtnGroupSelect } from '../../components/CustomBtnGroup/CustomBtnGroup';
+import { CustomBtnGroup } from '../../components/CustomBtnGroup/CustomBtnGroup';
 import { BtnFilters } from '../../components/Filters/BtnFilters';
 import styles from "./EventsList.module.css";
 import event1 from "../../assets/pictures/Event1.png";
@@ -117,7 +117,7 @@ export const EventsList: React.FC = () => {
         <div className={styles.wrapper}>
             <div><h1>Мероприятия</h1></div>
             <div className={styles.filter}>
-                <BtnGroupSelect view="radio" data={btnData} />
+                <CustomBtnGroup view="radio" data={btnData} />
                 <div style={{ margin: "10px 0" }} />
                 <BtnFilters
                     sort={[

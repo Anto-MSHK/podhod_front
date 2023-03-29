@@ -25,7 +25,7 @@ interface BtnGroupI extends ButtonGroupProps {
   handleActiveBtn?: (lable: string | number[] | number) => void;
 }
 
-export const BtnGroupSelect: FC<BtnGroupI> = ({
+export const CustomBtnGroup: FC<BtnGroupI> = ({
   view,
   data,
   handleActiveBtn,
