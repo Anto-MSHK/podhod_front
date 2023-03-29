@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
 import { Spinner } from "reactstrap";
-import {inspect} from "util";
 import styles from './LoadingScreen.module.css'
 
 interface LoadingScreenI {
