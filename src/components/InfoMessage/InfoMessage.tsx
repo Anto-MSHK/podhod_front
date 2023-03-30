@@ -35,7 +35,7 @@ export const InfoMessage: FC<InfoMessageT> = ({
 }) => {
 
 
-  const classNameHandler = () => {
+  const iconPostionHandler = () => {
     switch (iconPosition) {
       case 'right':
         return "right_direction"
@@ -47,7 +47,8 @@ export const InfoMessage: FC<InfoMessageT> = ({
         return ''
     }
   }
-  let positionClassName = classNameHandler()
+  let positionClassName = iconPostionHandler()
+  let iconSize = iconWidth ? iconWidth : "30px"
 
   return (
 
@@ -61,8 +62,8 @@ export const InfoMessage: FC<InfoMessageT> = ({
           <CardImg className={styles.card_icon}
             src={icon}
             style={{
-              width: iconWidth ? iconWidth : "30px",
-              height: iconWidth ? iconWidth : "30px",
+              width: iconSize,
+              height: iconSize,
             }}
           >
           </CardImg>
