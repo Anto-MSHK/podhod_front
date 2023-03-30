@@ -68,7 +68,7 @@ export const InfoMessage: FC<InfoMessageT> = ({
           >
           </CardImg>
           {iconDesc &&
-            <CardText>
+          <CardText className={styles.card_icon_desc}>
             {iconDesc}
           </CardText>
           }

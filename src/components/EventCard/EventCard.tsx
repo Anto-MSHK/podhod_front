@@ -110,7 +110,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
             className={styles.widget}
             icon={icon1}
             iconPosition='top'
-            iconDesc={(event as any).showpieces.length}
+            iconDesc={String((event as any).showpieces.length)}
             desc={pluralForm((event as any).showpieces.length)}
           />
           {event.ageLimit && (
