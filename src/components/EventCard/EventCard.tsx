@@ -94,7 +94,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         )}
       </div>
       <div className={styles.card_status}>
-        <InfoTag status={event.status} type={event.name}/>
+        <InfoTag text={event.name}/>
       </div>
       <CardBody className={styles.cardBody} inverse="true">
         <CardTitle tag="h3" className={styles.cardTitle}>
