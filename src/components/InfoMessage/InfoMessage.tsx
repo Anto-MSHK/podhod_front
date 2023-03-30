@@ -67,9 +67,11 @@ export const InfoMessage: FC<InfoMessageT> = ({
             }}
           >
           </CardImg>
-          <CardText>
+          {iconDesc &&
+            <CardText>
             {iconDesc}
           </CardText>
+          }
         </div>
       }
       <div className={styles.card_text_container}>

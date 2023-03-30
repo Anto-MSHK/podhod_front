@@ -95,6 +95,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
             title = {!text ? "Добавить изображение" : text}
             titleTag = 'p'
           />
+          <Input/>
         {/*   <img className={styles.icon} src={addFileIcon} />
           <p>{!text ? "Добавить изображение" : text}</p> */}
         </div>
