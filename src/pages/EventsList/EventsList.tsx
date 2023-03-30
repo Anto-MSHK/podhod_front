@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { EventCard } from "../../components/EventCard/EventCard";
-import { BtnGroupSelect } from '../../components/CustomBtnGroup/CustomBtnGroup';
+import { CustomBtnGroup } from '../../components/CustomBtnGroup/CustomBtnGroup';
 import { BtnFilters } from '../../components/Filters/BtnFilters';
 import styles from "./EventsList.module.css";
 import event1 from "../../assets/pictures/Event1.png";
@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { CustomBtn } from '../../components/CustomBtn/CustomBtn';
 import { useFetchEventsQuery } from '../../app/services/EventsApi';
 import { EventT } from '../../app/Types/EventsT';
-import { date } from "yup";
+import {bool, date} from "yup";
 import icon10 from '../../assets/icons/DateOfEvent.svg'
 import icon11 from '../../assets/icons/DeterminingTheType.svg'
 
@@ -67,8 +67,6 @@ interface Iitems {
 ]; */
 
 
-
-const sort = [{ name: "По дате" }, { name: "По типу" }];
 const handleFilter = (date: string | number, type?: string | undefined) => { };
 
 
@@ -105,6 +103,31 @@ export const EventsList: React.FC = () => {
         }
     };
 
+    const handleSortByDate = (asc: boolean) => {
+        if (items) {
+            const sorted = [...items].sort((a, b) => {
+                const dateA = new Date(a.createdAt);
+                const dateB = new Date(b.createdAt);
+                return asc ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
+            })
+            setItems(sorted);
+        }
+    }
+
+    const handleSortByType = (asc: boolean) => {
+        if (items) {
+            const sorted = [...items].sort((a, b) => {
+                if (a.type === b.type) {
+                    return a.name.localeCompare(b.name);
+                } else {
+                    return asc ? a.type.localeCompare(b.type) : b.type.localeCompare(a.type);
+                }
+            })
+            setItems(sorted);
+        }
+    }
+
+
     const btnData = [
         { name: "Все", onClick: () => handleSort('all') },
         { name: "Активные", onClick: () => handleSort('active') },
@@ -112,20 +135,19 @@ export const EventsList: React.FC = () => {
         { name: "Черновик", onClick: () => handleSort('draft') },
     ];
 
+    const sort = [{ name: "По дате", icon: icon10, onClick: () => {handleSortByDate(true)} }, { name: "По типу", icon: icon11, onClick: () => {handleSortByType(true)} }];
+
     return (
 
         <div className={styles.wrapper}>
             <div><h1>Мероприятия</h1></div>
             <div className={styles.filter}>
-                <BtnGroupSelect view="radio" data={btnData} />
+                <CustomBtnGroup view="radio" data={btnData} />
                 <div style={{ margin: "10px 0" }} />
-                <BtnFilters
-                    sort={[
-                        { name: 'По дате', icon: icon10 },
-                        { name: 'По типу', icon: icon11 },
-                    ]}
-                    date={"22.02.2023"}
-                    onFilter={handleFilter}
+                <CustomBtnGroup
+                    data={sort}
+                    view={'radio'}
+                    type={'filter'}
                 />
             </div>
             <div className={styles.content_container}>
