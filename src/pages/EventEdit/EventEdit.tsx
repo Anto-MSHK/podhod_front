@@ -11,9 +11,9 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
 import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
-import {EventPageEdit} from '../../components/EventPageEdit/EventPageEdit';
-import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
-import {EventForm}from "../../components/EventForm/EventForm";
+import { EventPageEdit } from '../../components/EventPageEdit/EventPageEdit';
+import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
+import { EventForm } from "../../components/EventForm/EventForm";
 
 
 const btnData = [
@@ -39,13 +39,14 @@ export const EventEdit: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
   const { data: event, isLoading, isFetching } = useFetchEventQuery(id);
-  const [activeBtn, setActiveBtn] = useState<string | number | number[]>("mainScreen");
-  const handleActiveBtn = (lable: string | number | number[]) => {
-    setActiveBtn(lable);
-  };
+  const [activeBtn, setActiveBtn] = useState<string | number | number[] | null>("mainScreen");
   const [isImgLoading, setIsImgLoading] = useState(true);
   const dispatch = useAppDispatch();
 
+  const handleActiveBtn = (btn: string | number | number[] | null) => {
+    setActiveBtn(btn);
+  };
+  
   useEffect(() => {
     const handleScroll = () => {
       setTimeout(() => {
@@ -78,14 +79,14 @@ export const EventEdit: React.FC = () => {
 
   const handleActivePage = () => {
     switch (activeBtn) {
-      case 'mainScreen':
-        return <EventForm  defaultData={event}/>
-      case 'exhibits':
-        return <EventShowpiecesEdit />
-      case 'settings':
-        return null
-      case 'pages':
+      case 0:
+        return <EventForm defaultData={event} />
+      case 1:
         return <EventPageEdit />
+      case 2:
+        return <EventShowpiecesEdit />
+      case 3:
+        return null
     }
   }
 

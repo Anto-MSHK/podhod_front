@@ -23,20 +23,24 @@ interface BtnGroupI extends ButtonGroupProps {
   view: string;
   type?: string;
   data: btnGroup;
-  handleActiveBtn?: (lable: string | number[] | number) => void;
+  handleActiveBtn?: (lable: string | number[] | number | null) => void;
 }
 
 export const CustomBtnGroup: FC<BtnGroupI> = ({
   view,
   data,
   handleActiveBtn,
-    type
+  type
 }) => {
   const [rSelected, setRSelected] = useState<number | null>(0);
   const [cSelected, setCSelected] = useState<number[]>([]);
 
   const handleRadioClick = (index: number) => {
     setRSelected(index);
+
+    if (handleActiveBtn) {
+      handleActiveBtn(index);
+    }
   };
   const handleSelectClick = (index: number) => {
     const selectedIndex = cSelected.indexOf(index);
@@ -74,9 +78,6 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
     const combinedOnClick = () => {
       handleClick();
       el.onClick && el.onClick();
-      if (el.lable && handleActiveBtn) {
-        handleActiveBtn(el.lable);
-      }
     };
 
     if (el.splits)

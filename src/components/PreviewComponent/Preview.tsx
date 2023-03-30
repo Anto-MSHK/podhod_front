@@ -8,10 +8,11 @@ interface IPreview {
   backgroundImg?: imageType
 }
 const Preview: React.FC<IPreview> = ({backgroundImg}) => {
-  console.log(backgroundImg);
+  
   const event = useAppSelector((state) => state.eventCreate.event);
   const exhibit = useAppSelector((state) => state.exhibitCreate.exhibit);
   const galleryImages = useAppSelector((state) => state.images.galleryMainPage);
+
   return (
     <div
       className={styles.preview_picture}
