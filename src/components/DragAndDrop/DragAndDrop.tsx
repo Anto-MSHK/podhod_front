@@ -85,18 +85,18 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
             multiple
             onChange={handleChange}
             className={styles.file_input}
-            accept="image/*,.png,.jpg,.web,"
-          />
-          <InfoMessage 
-            style={{gap: 0}}
+            accept="image/*,.png,.jpg,.web,">
+          </Input>
+          <InfoMessage
+            style={{ gap: 0, zIndex: '-1'}}
             iconWidth={70}
-            iconPosition = 'top'
+            iconPosition='top'
             icon={addFileIcon}
-            title = {!text ? "Добавить изображение" : text}
-            titleTag = 'p'
+            title={!text ? "Добавить изображение" : text}
+            titleTag='p'
           />
-          <Input/>
-        {/*   <img className={styles.icon} src={addFileIcon} />
+
+          {/*   <img className={styles.icon} src={addFileIcon} />
           <p>{!text ? "Добавить изображение" : text}</p> */}
         </div>
       )}
