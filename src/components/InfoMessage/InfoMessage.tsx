@@ -9,6 +9,7 @@ type InfoMessageT = {
   className?: string
   title?: string;
   titleTag?: React.ElementType<any>
+  iconDesc?: string
   icon?: string;
   desc?: string;
   descTag?: React.ElementType<any>;
@@ -24,11 +25,13 @@ export const InfoMessage: FC<InfoMessageT> = ({
   desc,
   iconWidth,
   iconPosition,
+  iconDesc,
   descTag,
   titleTag,
   style,
   className,
   backgroundColor,
+
 }) => {
 
 
@@ -48,19 +51,25 @@ export const InfoMessage: FC<InfoMessageT> = ({
 
   return (
 
-    <Card 
-      className={`${styles.card_body} ${positionClassName && styles[positionClassName]} ${className && className}`} 
-      style={{backgroundColor: backgroundColor, ...style}}
-      >
+    <Card
+      className={`${styles.card_body} ${positionClassName && styles[positionClassName]} ${className && className}`}
+      style={{ backgroundColor: backgroundColor, ...style }}
+    >
       {
         icon &&
-        <CardImg className={styles.card_icon}
-          src={icon}
-          style={{
-            width: iconWidth ? iconWidth : "30px",
-            height: iconWidth ? iconWidth : "30px",
-          }} >
-        </CardImg>
+        <div className={styles.card_icon_container}>
+          <CardImg className={styles.card_icon}
+            src={icon}
+            style={{
+              width: iconWidth ? iconWidth : "30px",
+              height: iconWidth ? iconWidth : "30px",
+            }}
+          >
+          </CardImg>
+          <CardText>
+            {iconDesc}
+          </CardText>
+        </div>
       }
       <div className={styles.card_text_container}>
         <CardText tag={titleTag ? titleTag : 'h3'} className={styles.card_text} >

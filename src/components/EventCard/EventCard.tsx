@@ -100,25 +100,48 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         <CardSubtitle tag="p" className="mb-2 min"></CardSubtitle>
 
         <CardBody className={styles.cardWidget}>
-          <WidgetItem
+          {/* <WidgetItem
             info={(event as any).showpieces.length}
             icon={icon1}
             description={pluralForm((event as any).showpieces.length)}
+          /> */}
+
+          <InfoMessage
+            className={styles.widget}
+            icon={icon1}
+            iconPosition='top'
+            iconDesc={(event as any).showpieces.length}
+            desc={pluralForm((event as any).showpieces.length)}
           />
           {event.ageLimit && (
-            <WidgetItem
-              info={event.ageLimit || ""}
+            /*  <WidgetItem
+               info={event.ageLimit || ""}
+               icon={icon3}
+               description="возраст"
+             /> */
+            <InfoMessage
+              className={styles.widget}
               icon={icon3}
-              description="возраст"
+              iconPosition='top'
+              iconDesc={event.ageLimit || ''}
+              desc='возраст'
             />
           )}
           {event.prices.map((price) => (
-            <WidgetItem
+            /* <WidgetItem
               key={price.id}
               info={`от ${price.price}р`}
               icon={icon2}
               description={price.criterion}
+            /> */
+            <InfoMessage
+              className={styles.widget}
+              icon={icon2}
+              iconPosition='top'
+              iconDesc={`от ${price.price}р`}
+              desc={price.criterion}
             />
+
           ))}
         </CardBody>
         <div className={styles.cardButton}>

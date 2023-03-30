@@ -43,6 +43,17 @@
   align-items: center;
   text-align: center;
 }
+.widget{
+  color: #5b88de;
+  padding: 5%;
+  background-color: #171717;
+  border-radius: 10px;
+  min-width: fit-content;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
 .InfoMessage{
    padding: 1px 10px;
    border-radius: 8px;

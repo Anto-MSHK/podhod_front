@@ -9,7 +9,10 @@
   background: none;
   border: none;
 }
-
+.card_icon_container{
+  display: flex;
+  gap: .5rem;
+}
 .card_icon {
   aspect-ratio: 1/1;
   margin: 0 auto;
