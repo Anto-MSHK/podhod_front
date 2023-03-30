@@ -43,7 +43,11 @@
   align-items: center;
   text-align: center;
 }
-
+.InfoMessage{
+   padding: 1px 10px;
+   border-radius: 8px;
+   gap: .5rem
+}
 
 
 .card__img_container > img {

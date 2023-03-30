@@ -12,7 +12,7 @@ import { useGetEventPagesQuery } from "../../app/services/EventsApi";
 import { API_URL } from "../../app/http";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { number as items } from 'yup';
-import { InfoMessage } from "../InfoMessage/InfoMessage";
+import { InfoMessage } from '../InfoMessage/InfoMessage';
 
 interface IStyledCardProps {
   event: EventT;
@@ -70,11 +70,11 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
     <Card className={styles.styledCard_container} color="dark" inverse>
       <div className={styles.card__img_container}>
         {!event.img ? (
-          <InfoMessage 
-          desc="Добавьте картинку на странице редактирования" 
-          icon={icon1} 
-          iconPosition = 'top'
-          iconWidth={70}/>
+          <InfoMessage
+            desc="Добавьте картинку на странице редактирования"
+            icon={icon1}
+            iconPosition='top'
+            iconWidth={70} />
         ) : (
           <img
             className={
@@ -86,11 +86,12 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         )}
       </div>
       <div className={styles.card_status}>
-        <InfoTag type={event.name} status={event.status} />
-        {/* <InfoMessage 
-        style={{backgroundColor: '#5b88de', padding: '.1rem .5rem '}} 
-        desc={event.name} 
-        descTag = 'p'/> */}
+        <InfoMessage
+          className={styles.InfoMessage}
+          desc={event.name}
+          descTag='p'
+          backgroundColor="#5b88de"
+        />
       </div>
       <CardBody className={styles.cardBody} inverse="true">
         <CardTitle tag="h3" className={styles.cardTitle}>
@@ -123,10 +124,10 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         <div className={styles.cardButton}>
           <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
             <CustomBtn
-             onClick={() => {
-               navigate(`/expo/${event.id}`);
-               window.location.reload();
-             }}
+              onClick={() => {
+                navigate(`/expo/${event.id}`);
+                window.location.reload();
+              }}
             >
               Редактировать
             </CustomBtn>

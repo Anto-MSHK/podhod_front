@@ -1,14 +1,13 @@
-.card_wrapper {
-  width: 100%;
-  background: none;
-  border: none;
 
-}
 
 .card_body {
   display: flex;
-  gap: 1em;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
   padding: 0;
+  background: none;
+  border: none;
 }
 
 .card_icon {
