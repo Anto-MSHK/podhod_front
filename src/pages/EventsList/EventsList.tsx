@@ -91,12 +91,6 @@ export const EventsList: React.FC = () => {
                     setItems([...events]);
                     break;
                 case status:
-                   /*  setItems(draftCard.reduce((newArr: Iitems[], items) => {
-                        if (items.status === status) {
-                            newArr.push(items);
-                        }
-                        return newArr;
-                    }, [])) */;
                     setItems(events.filter(item => item.status === status))
                     break;
             }
