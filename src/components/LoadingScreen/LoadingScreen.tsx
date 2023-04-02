@@ -7,14 +7,7 @@ interface LoadingScreenI {
 }
 
 export const LoadingScreen: FC<LoadingScreenI> = ({ isLoading }) => {
-    const [mounted, setMounted] = useState(true);
     const [spinnerCount, setSpinnerCount] = useState(165);
-
-    useEffect(() => {
-        return () => {
-            setMounted(false);
-        };
-    }, []);
 
     useEffect(() => {
         const updateSpinnerCount = () => {
