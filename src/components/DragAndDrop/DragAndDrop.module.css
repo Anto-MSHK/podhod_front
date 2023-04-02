@@ -18,6 +18,8 @@
   text-align: center;
   margin: 10px;
   height: 100%;
+  cursor: inherit;
+  pointer-events: auto;
 }
 
 
