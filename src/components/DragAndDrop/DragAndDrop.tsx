@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import styles from "./DragAndDrop.module.css";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
@@ -37,6 +37,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
     },
     [processImages]
   );
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
