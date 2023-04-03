@@ -4,7 +4,6 @@
   border: 3px solid #a8a8a8;
   border-radius: 20px;
   position: relative;
-  padding: 10px;
   display: flex;
   justify-content: center;
 }
@@ -16,8 +15,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 10px;
   height: 100%;
+  width: 100%;
   cursor: inherit;
   pointer-events: auto;
 }
@@ -28,7 +27,7 @@
   padding: 0;
   font-weight: 700;
   font-size: 24px;
-}
+ }
 
 
 .icon {

@@ -49,7 +49,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
         <div
             {...getRootProps()}
             className={styles.drag_and_drop_area}
-            style={{ cursor: isDragActive ? "inherit" : "not-allowed" }}
+            style={{ cursor: isDragActive ? "inherit" : "pointer" }}
         >
           <input {...getInputProps()} />
           <img className={styles.icon} src={addFileIcon} />
