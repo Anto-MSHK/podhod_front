@@ -9,6 +9,7 @@ import {
   uploadEventImg,
 } from "../../app/Slices/imagesUploadSlice";
 
+
 interface IDragAndDrop {
   type: "gallery" | "single";
   field: ImagesArrayType | SingleType;

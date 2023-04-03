@@ -21,20 +21,26 @@ export type btnGroup = {
 
 interface BtnGroupI extends ButtonGroupProps {
   view: string;
+  type?: string;
   data: btnGroup;
-  handleActiveBtn?: (lable: string | number[] | number) => void;
+  handleActiveBtn?: (lable: string | number[] | number | null) => void;
 }
 
-export const BtnGroupSelect: FC<BtnGroupI> = ({
+export const CustomBtnGroup: FC<BtnGroupI> = ({
   view,
   data,
   handleActiveBtn,
+  type
 }) => {
   const [rSelected, setRSelected] = useState<number | null>(0);
   const [cSelected, setCSelected] = useState<number[]>([]);
 
   const handleRadioClick = (index: number) => {
     setRSelected(index);
+
+    if (handleActiveBtn) {
+      handleActiveBtn(index);
+    }
   };
   const handleSelectClick = (index: number) => {
     const selectedIndex = cSelected.indexOf(index);
@@ -72,9 +78,6 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
     const combinedOnClick = () => {
       handleClick();
       el.onClick && el.onClick();
-      if (el.lable && handleActiveBtn) {
-        handleActiveBtn(el.lable);
-      }
     };
 
     if (el.splits)
@@ -127,9 +130,9 @@ export const BtnGroupSelect: FC<BtnGroupI> = ({
         <div key={index}>
           <CustomBtn
             className={`${styles.btnItem} ${
-              isActive ? styles.active : styles.deactivate
+                type === 'filter' ? (isActive ? styles.fltActive : styles.fltDeactivate) : (isActive ? styles.active : styles.deactivate)
             }`}
-            color={isActive ? "warning" : undefined}
+            color={type === 'filter' ? (isActive ? 'primary' : undefined) : (isActive ? 'warning' : undefined)}
             onClick={combinedOnClick}
             active={isActive}
             icon={el.icon}

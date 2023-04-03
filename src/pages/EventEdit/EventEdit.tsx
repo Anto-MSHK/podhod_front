@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./EventEdit.module.css";
-import { BtnGroupSelect } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
 import Preview from "../../components/PreviewComponent/Preview";
-import { EventMainForm } from "./EventMain/EventMainForm";
-import { EventCreateExhibits } from "./EventCreateExhibits/EventCreateExhibits";
+import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
 import { useParams } from "react-router-dom";
 import { useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
@@ -12,8 +11,10 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
 import { ImageSingle } from "../../components/ImageSingle/ImageSingle";
 import { getEventImg } from "../../app/Slices/imagesUploadSlice";
-import { EventCreatePages } from './EventCreatePage/EventCreatePage';
-import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
+import { EventPageEdit } from '../../components/EventPageEdit/EventPageEdit';
+import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
+import { EventForm } from "../../components/EventForm/EventForm";
+
 
 const btnData = [
   { name: "Основная информация", lable: "mainScreen" },
@@ -38,13 +39,14 @@ export const EventEdit: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
   const { data: event, isLoading, isFetching } = useFetchEventQuery(id);
-  const [activeBtn, setActiveBtn] = useState<string | number | number[]>("mainScreen");
-  const handleActiveBtn = (lable: string | number | number[]) => {
-    setActiveBtn(lable);
-  };
+  const [activeBtn, setActiveBtn] = useState<string | number | number[] | null>("mainScreen");
   const [isImgLoading, setIsImgLoading] = useState(true);
   const dispatch = useAppDispatch();
 
+  const handleActiveBtn = (btn: string | number | number[] | null) => {
+    setActiveBtn(btn);
+  };
+  
   useEffect(() => {
     const handleScroll = () => {
       setTimeout(() => {
@@ -77,14 +79,14 @@ export const EventEdit: React.FC = () => {
 
   const handleActivePage = () => {
     switch (activeBtn) {
-      case 'mainScreen':
-        return <EventMainForm data={event} />
-      case 'exhibits':
-        return <EventCreateExhibits />
-      case 'settings':
+      case 0:
+        return <EventForm defaultData={event} />
+      case 1:
+        return <EventPageEdit />
+      case 2:
+        return <EventShowpiecesEdit />
+      case 3:
         return null
-      case 'pages':
-        return <EventCreatePages />
     }
   }
 
@@ -116,7 +118,7 @@ export const EventEdit: React.FC = () => {
                     : "Создайте новое мероприятие"}
                 </h1>
                 <div className={styles.info__toolbar_container}>
-                  <BtnGroupSelect
+                  <CustomBtnGroup
                     handleActiveBtn={handleActiveBtn}
                     view={"radio"}
                     data={btnData}
@@ -148,9 +150,10 @@ export const EventEdit: React.FC = () => {
             </div>
             <div className={styles.InfoComponentWrapper}>
               <InfoMessage
+                style={{ padding: '1rem' }}
                 title={"Не может быть опубликовано"}
                 desc={"Есть незаполненные поля"}
-                icon={errorIcon}
+                icon={errorIcon}    
               />
             </div>
           </div>
