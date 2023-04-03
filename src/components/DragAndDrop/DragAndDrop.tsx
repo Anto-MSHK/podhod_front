@@ -10,6 +10,7 @@ import {
 import { read } from "fs";
 import { Input } from "reactstrap";
 import { $api } from "../../app/http";
+import { InfoMessage } from "../InfoMessage/InfoMessage";
 
 interface IDragAndDrop {
   type: "gallery" | "single";
@@ -84,10 +85,19 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
             multiple
             onChange={handleChange}
             className={styles.file_input}
-            accept="image/*,.png,.jpg,.web,"
+            accept="image/*,.png,.jpg,.web,">
+          </Input>
+          <InfoMessage
+            style={{ gap: 0, zIndex: '-1'}}
+            iconWidth={70}
+            iconPosition='top'
+            icon={addFileIcon}
+            title={!text ? "Добавить изображение" : text}
+            titleTag='p'
           />
-          <img className={styles.icon} src={addFileIcon} />
-          <p>{!text ? "Добавить изображение" : text}</p>
+
+          {/*   <img className={styles.icon} src={addFileIcon} />
+          <p>{!text ? "Добавить изображение" : text}</p> */}
         </div>
       )}
     </div>

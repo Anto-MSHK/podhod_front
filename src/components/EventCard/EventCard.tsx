@@ -12,6 +12,7 @@ import { useGetEventPagesQuery } from "../../app/services/EventsApi";
 import { API_URL } from "../../app/http";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { number as items } from 'yup';
+import { InfoMessage } from '../InfoMessage/InfoMessage';
 
 interface IStyledCardProps {
   event: EventT;
@@ -69,32 +70,29 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
     <Card className={styles.styledCard_container} color="dark" inverse>
       <div className={styles.card__img_container}>
         {!event.img ? (
-          <div>
-            <img className={styles.card__img} src={addFileIcon} alt="123" />
-            <p
-              style={{
-                color: "#A8A8A8",
-                fontWeight: 600,
-                width: 300,
-                marginTop: 10,
-                textAlign: "center",
-              }}
-            >
-              Добавьте картинку на странице редактирования
-            </p>
-          </div>
+
+          <InfoMessage
+            desc="Добавьте картинку на странице редактирования"
+            icon={icon1}
+            iconPosition='top'
+            iconWidth={70} />
         ) : (
           <img
             className={
               styles.card__img + ` ${event.img.path ? styles.existImg : ""}`
             }
             src={`${API_URL}/${event.img.path}`}
-            alt="123"
+            alt={event.img.description}
           />
         )}
       </div>
       <div className={styles.card_status}>
-        <InfoTag text={event.name}/>
+        <InfoMessage
+          className={styles.InfoMessage}
+          desc={event.name}
+          descTag='p'
+          backgroundColor="#5b88de"
+        />
       </div>
       <CardBody className={styles.cardBody} inverse="true">
         <CardTitle tag="h3" className={styles.cardTitle}>
@@ -103,34 +101,57 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         <CardSubtitle tag="p" className="mb-2 min"></CardSubtitle>
 
         <CardBody className={styles.cardWidget}>
-          <WidgetItem
+          {/* <WidgetItem
             info={(event as any).showpieces.length}
             icon={addFileIcon}
             description={pluralForm((event as any).showpieces.length)}
+          /> */}
+
+          <InfoMessage
+            className={styles.widget}
+            icon={icon1}
+            iconPosition='top'
+            iconDesc={String((event as any).showpieces.length)}
+            desc={pluralForm((event as any).showpieces.length)}
           />
           {event.ageLimit && (
-            <WidgetItem
-              info={event.ageLimit || ""}
+            /*  <WidgetItem
+               info={event.ageLimit || ""}
+               icon={icon3}
+               description="возраст"
+             /> */
+            <InfoMessage
+              className={styles.widget}
               icon={icon3}
-              description="возраст"
+              iconPosition='top'
+              iconDesc={event.ageLimit || ''}
+              desc='возраст'
             />
           )}
           {event.prices.map((price) => (
-            <WidgetItem
+            /* <WidgetItem
               key={price.id}
               info={`от ${price.price}р`}
               icon={icon2}
               description={price.criterion}
+            /> */
+            <InfoMessage
+              className={styles.widget}
+              icon={icon2}
+              iconPosition='top'
+              iconDesc={`от ${price.price}р`}
+              desc={price.criterion}
             />
+
           ))}
         </CardBody>
         <div className={styles.cardButton}>
           <NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
             <CustomBtn
-            /*  onClick={() => {
-               navigate(`/expo/${event.id}`);
-               window.location.reload();
-             }} */
+              onClick={() => {
+                navigate(`/expo/${event.id}`);
+                window.location.reload();
+              }}
             >
               Редактировать
             </CustomBtn>

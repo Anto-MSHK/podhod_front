@@ -1,4 +1,4 @@
-import { BtnGroupSelect } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import { InfoTag } from "../../components/InfoTag/InfoTag";
 import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
 
@@ -68,9 +68,9 @@ export const MainPage = () => {
             ducimus voluptas eveniet minima deserunt.
           </p>
           <p className="min">{`<p>.min`} - микро текст</p>
-          <BtnGroupSelect view="radio" data={btnData} />
+          <CustomBtnGroup view="radio" data={btnData} />
           <div style={{ margin: "10px 0" }} />
-          <BtnGroupSelect view="select" data={btnData} />
+          <CustomBtnGroup view="select" data={btnData} />
           <div style={{ margin: "10px 0" }} />
           <div style={{ display: "flex" }}>
             <div style={{ marginRight: 45 }}>
@@ -163,6 +163,7 @@ export const MainPage = () => {
             icon={icon9}
             title={"Не может быть опубликовано"}
             desc={"Есть незаполненные поля"}
+            iconPosition = "right"
           />
         </div>
         <div style={{ width: "300px" }}>
@@ -170,6 +171,7 @@ export const MainPage = () => {
             icon={icon8}
             title={"Успешно опубликовано"}
             desc={"Ошибок не найдено"}
+            iconPosition = "right"
           />
         </div>
         <div>

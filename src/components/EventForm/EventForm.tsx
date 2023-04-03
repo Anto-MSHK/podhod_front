@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./FillForm.module.css";
+import styles from "./EventForm.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { useState, useEffect } from "react";
 import { FormContainer } from "../Form/Form";
@@ -17,11 +17,7 @@ import {
   EventT,
   UpdateEventPayloadT,
 } from "../../app/Types/EventsT";
-import { type } from "os";
-import { idText } from "typescript";
 import { useNavigate, useParams } from "react-router-dom";
-import ImagesGallery from "../ImagesGallery/ImagesGallery";
-import { ImageSingle } from "../ImageSingle/ImageSingle";
 
 interface formType {
   eventName: string;
@@ -32,7 +28,7 @@ interface formType {
 interface MainInfoExpoFormI {
   defaultData: EventT | undefined;
 }
-export const FillForm: React.FC<MainInfoExpoFormI> = ({
+export const EventForm: React.FC<MainInfoExpoFormI> = ({
   defaultData,
 }) => {
   const { id } = useParams();
