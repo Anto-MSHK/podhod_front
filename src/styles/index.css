@@ -17,6 +17,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
 h1 {
   font-size: 44px;
   font-weight: 600;
