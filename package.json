@@ -77,6 +77,7 @@
     "@types/redux-persist": "~4.3.1",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
+    "react-dropzone": "^14.2.3",
     "webpack": "^5.75.0"
   }
 }
