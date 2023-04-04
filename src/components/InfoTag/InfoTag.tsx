@@ -1,47 +1,28 @@
 import * as React from "react";
 import styles from "./InfoTag.module.css";
-import icon5 from "../../assets/icons/CheckmarkInСircle.svg";
-import icon6 from "../../assets/icons/CrossInCircle.svg";
 
-interface IPublicationStatusProps {
-    status: string;
-    type: string;
+interface IInfoTagProps {
+    color?: string;
+    text?: string;
+    icon?: string;
 }
 
-const setType = (type: string) => {
+const setType = (color?: string, text?: string, icon?: string) => {
     return (
-        <div className={`${styles.status} ${styles.status_event}`}>{type}</div>
+        <div
+            className={`${styles.status} ${styles.status_event}`}
+            style={{ backgroundColor: color }}
+        >
+            {icon && <img src={icon} alt={text} className={styles.status_img} />}
+            {text}
+        </div>
     );
 };
 
-const setStatus = (status: string) => {
-    if (status === "published")
-        return (
-            <div className={`${styles.status} ${styles.status_completed}`}>
-                <img src={icon5} alt="completed" className={styles.status_img}></img>
-                Опубликовано
-            </div>
-        );
-    if (status === "completed")
-        return (
-            <div className={`${styles.status} ${styles.status_completed}`}>
-                <img src={icon5} alt="completed" className={styles.status_img}></img>
-                Готово к публикации
-            </div>
-        );
-    if (status === "draft")
-        return (
-            <div className={`${styles.status} ${styles.status_draft}`}>
-                <img src={icon6} alt="draft" className={styles.status_img}></img>
-                Это черновик
-            </div>
-        );
-};
-export const InfoTag: React.FC<IPublicationStatusProps> = (props) => {
+export const InfoTag: React.FC<IInfoTagProps> = ({ color, text, icon }) => {
     return (
         <div className={styles.status_container}>
-            {setType(props.type)}
-            {setStatus(props.status)}
+            {setType(color, text, icon)}
         </div>
     );
 };

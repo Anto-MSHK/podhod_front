@@ -106,9 +106,7 @@ export const MainPage = () => {
               marginBottom: 10,
             }}
           >
-            <InfoTag status="Опубликовано" type="completed" />
-            <InfoTag status="Черновик" type="draft" />
-            <InfoTag status="Выставка" type="event" />
+
           </div>
           {/*     <EventCard
                         eventTitle="Экспозиция музея"

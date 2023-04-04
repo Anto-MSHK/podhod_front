@@ -2,7 +2,7 @@ import * as React from "react";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import styles from "./EventCard.module.css";
 import { WidgetItem } from "../WidgetItem/WidgetItem";
-import icon1 from "../../assets/icons/addFileIcon.svg";
+import addFileIcon from "../../assets/icons/addFileIcon.svg"
 import icon2 from "../../assets/icons/Wallet.svg";
 import icon3 from "../../assets/icons/SmilingFace.svg";
 import { InfoTag } from "../InfoTag/InfoTag";
@@ -70,6 +70,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
     <Card className={styles.styledCard_container} color="dark" inverse>
       <div className={styles.card__img_container}>
         {!event.img ? (
+
           <InfoMessage
             desc="Добавьте картинку на странице редактирования"
             icon={icon1}
@@ -102,7 +103,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
         <CardBody className={styles.cardWidget}>
           {/* <WidgetItem
             info={(event as any).showpieces.length}
-            icon={icon1}
+            icon={addFileIcon}
             description={pluralForm((event as any).showpieces.length)}
           /> */}
 
