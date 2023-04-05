@@ -5,13 +5,13 @@ import {
 	imageType,
 	ImagesArrayType,
 	SingleType,
-	deleteEventImg,
+	avatarExpoDeleteImg,
 } from "../../app/Slices/imagesUploadSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 interface IImageComponent {
 	image: imageType;
-	field: ImagesArrayType | SingleType;
+	field: SingleType;
 	type: "gallery" | "single";
 	className?: string;
 }
@@ -29,7 +29,9 @@ const ImageItem: React.FC<IImageComponent> = ({
 		setModal(!modal);
 	};
 
-	const delImage = (id: number) => {};
+	const ImgHandler = {
+		avatarExpo: avatarExpoDeleteImg,
+	};
 
 	return (
 		<>
@@ -37,7 +39,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 				<div
 					className={styles.closeIcon}
 					onClick={() => {
-						dispatch(deleteEventImg(`/img/${image.id}`));
+						dispatch(ImgHandler[field](`/img/${image.id}`));
 					}}
 				/>
 				<img
@@ -59,7 +61,10 @@ const ImageItem: React.FC<IImageComponent> = ({
 					<img className={styles.modal_image} src={image.path} />
 				</ModalBody>
 				<ModalFooter>
-					<Button color="secondary" onClick={() => delImage(image.id)}>
+					<Button
+						color="secondary"
+						onClick={() => dispatch(ImgHandler[field](`/img/${image.id}`))}
+					>
 						<p>Удалить изображение</p>
 					</Button>
 				</ModalFooter>

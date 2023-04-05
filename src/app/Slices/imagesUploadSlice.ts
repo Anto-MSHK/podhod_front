@@ -33,7 +33,7 @@ export const getEventImg = createAsyncThunk(
 	},
 );
 
-export const uploadEventImg = createAsyncThunk(
+export const avatarExpoUploadImg = createAsyncThunk(
 	"images/uploadEventImg",
 	async ({ path, formData }: any, thunkAPI) => {
 		const response = await $api.post(path, formData);
@@ -43,7 +43,7 @@ export const uploadEventImg = createAsyncThunk(
 	},
 );
 
-export const deleteEventImg = createAsyncThunk(
+export const avatarExpoDeleteImg = createAsyncThunk(
 	"images/deleteEventImg",
 	async (path: string, thunkAPI) => {
 		await $api.delete(path);
@@ -64,10 +64,10 @@ const imagesUploadSlice = createSlice({
 			if (action.payload === null) state.avatarExpo = undefined;
 			else state.avatarExpo = action.payload;
 		});
-		builder.addCase(uploadEventImg.fulfilled, (state, action) => {
+		builder.addCase(avatarExpoUploadImg.fulfilled, (state, action) => {
 			state.avatarExpo = action.payload;
 		});
-		builder.addCase(deleteEventImg.fulfilled, (state, action) => {
+		builder.addCase(avatarExpoDeleteImg.fulfilled, (state, action) => {
 			state.avatarExpo = undefined;
 		});
 	},

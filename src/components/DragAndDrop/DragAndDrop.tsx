@@ -6,26 +6,37 @@ import { useAppDispatch } from "../../app/hooks";
 import {
 	ImagesArrayType,
 	SingleType,
-	uploadEventImg,
+	avatarExpoUploadImg,
 } from "../../app/Slices/imagesUploadSlice";
 
 interface IDragAndDrop {
 	type: "gallery" | "single";
-	field: ImagesArrayType | SingleType;
+	field: SingleType;
+	description: string;
 	path: string;
 	text?: string;
 }
 
-const DragAndDrop: React.FC<IDragAndDrop> = ({ type, field, text, path }) => {
+const DragAndDrop: React.FC<IDragAndDrop> = ({
+	type,
+	field,
+	description,
+	text,
+	path,
+}) => {
 	const dispatch = useAppDispatch();
+
+	const DragHandler = {
+		avatarExpo: avatarExpoUploadImg,
+	};
 
 	const processImages = useCallback(
 		(images: File[]) => {
 			images.forEach(image => {
 				const formData = new FormData();
 				formData.append("img", image);
-				formData.append("description", "Это главное изображение события");
-				dispatch(uploadEventImg({ path, formData }));
+				formData.append("description", description);
+				dispatch(DragHandler[field]({ path, formData }));
 			});
 		},
 		[dispatch, path],

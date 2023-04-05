@@ -37,9 +37,8 @@ export const EventEdit: React.FC = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const { id } = useParams();
 	const { data: event, isLoading, isFetching } = useFetchEventQuery(id);
-	const [activeBtn, setActiveBtn] = useState<string | number | number[] | null>(
-		"mainScreen",
-	);
+	const [activeBtn, setActiveBtn] =
+		useState<string | number | number[] | null>(0);
 	const [isImgLoading, setIsImgLoading] = useState(true);
 	const dispatch = useAppDispatch();
 
@@ -103,6 +102,7 @@ export const EventEdit: React.FC = () => {
 									textButton={"добавьте фото "}
 									path={`/img/to/event/${event?.id}`}
 									isLoading={isImgLoading}
+									description="Это главное изображение события"
 								/>
 							)}
 

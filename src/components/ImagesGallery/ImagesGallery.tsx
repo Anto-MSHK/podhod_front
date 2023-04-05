@@ -65,14 +65,19 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 								cursor: "pointer",
 							}}
 						>
-							<ImageItem field={imgField} type={"gallery"} image={image} />
+							{/* <ImageItem field={imgField} type={"gallery"} image={image} /> */}
 						</div>
 					))}
 			</div>
 
-			<div className={styles.drag_and_drop}>
-				<DragAndDrop field={imgField} type="gallery" path={path} />
-			</div>
+			{/* <div className={styles.drag_and_drop}>
+				<DragAndDrop
+					field={imgField}
+					type="gallery"
+					path={path}
+					description=""
+				/>
+			</div> */}
 		</div>
 	);
 };

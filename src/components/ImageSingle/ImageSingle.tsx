@@ -17,6 +17,7 @@ interface ISingleImageUpload {
 	textButton?: string;
 	path: string;
 	isLoading: boolean;
+	description?: string;
 }
 
 export const ImageSingle: React.FC<ISingleImageUpload> = ({
@@ -26,27 +27,10 @@ export const ImageSingle: React.FC<ISingleImageUpload> = ({
 	textButton,
 	path,
 	isLoading,
+	description,
 }) => {
 	const { id } = useParams();
 	const image = useAppSelector(state => state.images[imgField]);
-	const dispatch = useAppDispatch();
-	const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-	const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
-
-	const handleDragStart = (index: number) => {
-		setDraggedIndex(index);
-		console.log("draged " + draggedIndex);
-	};
-
-	const handleDragOver = (
-		event: React.DragEvent<HTMLDivElement>,
-		index: number,
-	) => {
-		event.preventDefault();
-		setDragOverIndex(index);
-		console.log();
-		console.log("dragedOver " + dragOverIndex);
-	};
 
 	return (
 		<div className={styles.images_gallery_wrapper}>
@@ -70,6 +54,7 @@ export const ImageSingle: React.FC<ISingleImageUpload> = ({
 						<div className={styles.drag_and_drop_container}>
 							<DragAndDrop
 								field={imgField}
+								description={description || ""}
 								type="single"
 								text={textButton}
 								path={path}

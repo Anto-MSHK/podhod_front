@@ -38,7 +38,7 @@ const Preview: React.FC<IPreview> = ({ backgroundImg }) => {
 				{galleryImages &&
 					galleryImages.map(image => (
 						<div className={styles.preview_image_container}>
-							<ImageItem image={image} type="gallery" field="galleryMainPage" />
+							<ImageItem image={image} type="gallery" field="avatarExpo" />
 						</div>
 					))}
 			</div>
