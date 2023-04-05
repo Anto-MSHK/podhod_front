@@ -25,7 +25,7 @@ interface CustomInputI extends InputProps {
   disabled: boolean;
 }
 interface CustomFormInputI extends FieldConfig {
-  label?: string;
+  lable?: string;
   help?: string;
   name: string;
   type?: InputType;
@@ -68,7 +68,7 @@ export const CustomInput: FC<CustomInputI> = ({
 
 export const FormInput: FC<CustomFormInputI> = ({
   name,
-  label,
+  lable,
   help,
   type,
   children,
@@ -77,7 +77,7 @@ export const FormInput: FC<CustomFormInputI> = ({
 }) => {
   return (
     <FormGroup>
-      <h3>{label}</h3>
+      <h3>{lable}</h3>
       <Field
         disabled={disabled}
         type={type}

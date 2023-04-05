@@ -91,6 +91,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
       type: 'select',
       children: eventOptions,
     },
+
   };
 
   const translate = (key: string) => {
@@ -188,7 +189,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
                     index <= 1 &&
                     <FormInput
                       name={key}
-                      label={value.lable}
+                      lable={value.lable}
                       type={value.type}
                       children={value.children}
                       disabled={!editing}
@@ -199,10 +200,10 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
               <div className={styles.right}>
                 {
                   Object.entries(dictionary).map(([key, value], index) => (
-                    index >= 1 &&
+                    index >= 2 &&
                     <FormInput
                       name={key}
-                      label={value.lable}
+                      lable={value.lable}
                       type={value.type}
                       children={value.children}
                       disabled={!editing}

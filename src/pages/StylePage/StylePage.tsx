@@ -145,10 +145,10 @@ export const MainPage = () => {
                   </CustomBtn>
                 </div>
 
-                <FormInput name="email" label="Email" />
+                <FormInput name="email" lable="Email" />
                 <FormInput
                   name="password"
-                  label="Пароль"
+                  lable="Пароль"
                   help="От 4 до 12 символов"
                 />
               </div>
