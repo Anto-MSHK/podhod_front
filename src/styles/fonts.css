@@ -62,11 +62,11 @@
 	src: local("Gilgory"), url(../assets/fonts/gilroy-thin.ttf) format("truetype");
 	font-weight: 400;
 }
-
+/* 
 @font-face {
 	font-family: "Gilgory";
 	src: local("Gilgory"),
 		url(../assets/fonts/gilroy-thinitalic.ttf) format("truetype");
 	font-weight: 400;
 	font-style: italic;
-}
+} */

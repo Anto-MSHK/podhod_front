@@ -11,7 +11,6 @@
 	align-items: center;
 }
 .header__info_container {
-	margin: 0 0 0 20px;
 	display: flex;
 	flex-direction: column;
 	row-gap: 3rem;
@@ -57,8 +56,8 @@
 }
 .preview__container {
 	margin: 0 auto;
-	background-color: #e74d36;
-	border-radius: 10px;
+	background-color: var(--red_color);
+	border-radius: var(--radius) 10px;
 	height: fit-content;
 	padding: 10px;
 	width: min-content;

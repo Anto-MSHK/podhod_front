@@ -25,7 +25,7 @@ export const CustomBtn: FC<ButtonArtI> = ({
 	iconWidth,
 	disabled,
 	size,
-	color,
+	color = "warning",
 }) => {
 	const customClassName = className ? className : styles.customBtn;
 	const iconElement = icon ? (

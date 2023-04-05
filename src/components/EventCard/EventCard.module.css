@@ -2,6 +2,8 @@
 	display: flex;
 	width: 100%;
 	height: 100%;
+	border-radius: var(--radius);
+	overflow: hidden;
 }
 
 .cardWidget {
@@ -47,7 +49,7 @@
 	color: #5b88de;
 	padding: 5%;
 	background-color: #171717;
-	border-radius: 10px;
+	border-radius: var(--radius);
 	min-width: fit-content;
 	font-weight: 600;
 	justify-content: center;
@@ -56,7 +58,7 @@
 }
 .InfoMessage {
 	padding: 1px 10px;
-	border-radius: 8px;
+	border-radius: var(--radius);
 	gap: 0.5rem;
 }
 

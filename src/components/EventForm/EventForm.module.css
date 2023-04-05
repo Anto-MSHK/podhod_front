@@ -14,7 +14,7 @@
 	height: fit-content;
 
 	background: rgba(226, 226, 226, 0.03);
-	border-radius: 15px;
+	border-radius: var(--radius) ;
 	padding: 1.5%;
 }
 .form_info {

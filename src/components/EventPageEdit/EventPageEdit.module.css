@@ -6,7 +6,7 @@
 }
 
 .pagesDeleteWrapper {
-	border-radius: 15px;
+	border-radius: var(--radius);
 	background-color: #252525;
 	margin-top: 10px;
 	padding: 10px;
@@ -15,7 +15,7 @@
 .pagesListWrapper {
 	width: 100%;
 	height: 100%;
-	border-radius: 15px;
+	border-radius: var(--radius);
 	background-color: #252525;
 	margin-top: 10px;
 	padding: 10px;
@@ -27,11 +27,11 @@
 }
 
 .pagesDeleteWrapper:hover {
-	box-shadow: inset 0 0 0 2px #e74d36;
+	box-shadow: inset 0 0 0 2px var(--red_color);
 }
 
 .modalWrapper {
-	border-radius: 30px;
+	border-radius: var(--radius);
 	border: none !important;
 	height: 100%;
 }

@@ -3,7 +3,7 @@
 	min-width: fit-content;
 	padding: 5%;
 	background-color: #171717;
-	border-radius: 10px;
+	border-radius: var(--radius);
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;

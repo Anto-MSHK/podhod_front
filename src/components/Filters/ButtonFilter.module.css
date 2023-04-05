@@ -8,7 +8,7 @@
 	width: 100%;
 	font-weight: 500;
 	font-size: 18px;
-	border-radius: 10px;
+	border-radius: var(--radius) ;
 	padding-left: 8px;
 }
 

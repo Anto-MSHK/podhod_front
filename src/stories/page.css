@@ -37,7 +37,7 @@ section li {
 
 section .tip {
 	display: inline-block;
-	border-radius: 1em;
+	border-radius: var(--radius);
 	font-size: 11px;
 	line-height: 12px;
 	font-weight: 700;

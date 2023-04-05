@@ -80,7 +80,7 @@ export const InfoMessage: FC<InfoMessageT> = ({
 				<CardText tag={titleTag ? titleTag : "h3"} className={styles.card_text}>
 					{title}
 				</CardText>
-				<CardText tag={descTag ? descTag : "p"} className={styles.card_text}>
+				<CardText tag={descTag ? descTag : "p"} className={styles.card_desc}>
 					{desc}
 				</CardText>
 			</div>

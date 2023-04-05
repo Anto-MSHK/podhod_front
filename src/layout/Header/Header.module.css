@@ -4,7 +4,7 @@
 	height: 70px;
 	justify-content: space-between;
 	background-color: #ffffff;
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 var(--radius) var(--radius);
 	padding: 20px;
 	align-items: center;
 	text-align: center;
@@ -15,7 +15,7 @@
 }
 
 .header__logo {
-	color: #e74d36;
+	color: var(--red_color);
 	margin: 0px 10px;
 	font-weight: 700;
 	text-decoration: none;

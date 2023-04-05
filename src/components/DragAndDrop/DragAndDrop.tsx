@@ -63,13 +63,13 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({
 			<div {...getRootProps()} className={styles.drag_and_drop_area}>
 				<input {...getInputProps()} />
 				<img className={styles.icon} src={addFileIcon} />
-				<p>
+				<h3>
 					{!isDragActive
 						? !text
 							? "Добавить изображение"
 							: text
 						: "Отпустите файл"}
-				</p>
+				</h3>
 			</div>
 		</div>
 	);

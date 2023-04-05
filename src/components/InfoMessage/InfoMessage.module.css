@@ -27,6 +27,14 @@
 .card_text {
 	padding: 0;
 	margin: 0;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+.card_desc {
+	padding: 0;
+	margin: 0;
+	color: var(--gray_color);
+	font-weight: 600;
 }
 
 .right_direction {

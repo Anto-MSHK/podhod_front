@@ -3,16 +3,16 @@
 	display: flex;
 	justify-content: center;
 	color: white !important;
-	background-color: var(--main_btn_color) !important;
-	border: 1px solid var(--main_btn_color) !important;
-	border-radius: 10px;
+	background-color: var(--orange_color) !important;
+	border: 1px solid var(--orange_color-hover) !important;
+	border-radius: var(--radius);
 	font-weight: 500;
 	font-size: 18px;
 	align-items: center;
 	text-align: center;
 }
 .customBtn:hover {
-	background-color: var(--main_btn_color_hover) !important;
+	background-color: var(--orange_color-hover) !important;
 }
 
 .disabled {
@@ -25,7 +25,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	border-radius: 10px;
+	border-radius: var(--radius);
 }
 
 .imageWrapper {

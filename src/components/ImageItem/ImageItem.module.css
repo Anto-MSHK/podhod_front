@@ -27,7 +27,7 @@
 	margin: auto;
 }
 .modal_image_wrapper {
-	color: #a8a8a8;
+	color: var(--gray_color);
 }
 .modal_image_container {
 	padding: 0px;

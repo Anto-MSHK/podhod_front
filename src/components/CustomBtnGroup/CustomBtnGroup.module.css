@@ -8,7 +8,7 @@
 	width: 100%;
 	font-weight: 500;
 	font-size: 18px;
-	border-radius: 10px;
+	border-radius: var(--radius);
 }
 
 .dropItem {
@@ -56,9 +56,9 @@
  */
 
 .fltActive {
-	color: #a7c5ff !important;
-	background-color: #5b88de !important;
-	border: 1px solid #5b88de !important;
+	color: white !important;
+	background-color: var(--blue_color) !important;
+	border: 1px solid var(--blue_color) !important;
 }
 
 .fltDeactivate {

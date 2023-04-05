@@ -2,14 +2,22 @@
 @import url("./normalize.css");
 
 :root {
-	--main_btn_color: #df791a;
-	--main_btn_color_hover: #e9a362;
+	--gray_color: #a8a8a8;
+	--orange_color: #df791a;
+	--orange_color-hover: #c46b18;
+	--green_color: #48b653;
+	--green_color-hover: #3e9c48;
+	--blue_color: #5b88de;
+	--blue_color-hover: #5179c4;
+	--red_color: #e74d36;
+	--red_color-hover: #cf4530;
+	--radius: 10px;
 }
 
 body {
 	display: grid;
 	margin: 0;
-	font-weight: 400;
+	font-weight: 500;
 	background-color: #1e1e1e;
 	color: white;
 	font-family: "Gilgory";
@@ -26,22 +34,26 @@ body.no-scrollbar {
 	scrollbar-width: none;
 }
 
+option {
+	font-weight: 500;
+}
+
 h1 {
-	font-size: 44px;
-	font-weight: 600;
-	margin: 20px 0 10px 0;
+	font-size: 38px;
+	font-weight: 700;
+	margin: 15px 0 10px 0;
 }
 
 h2 {
-	font-size: 34px;
+	font-size: 32px;
 	font-weight: 600;
-	margin: 15px 0 8px 0;
+	margin: 10px 0 8px 0;
 }
 
 h3 {
 	font-size: 24px;
 	font-weight: 600;
-	margin: 15px 0 5px 0;
+	margin: 10px 0 5px 0;
 }
 
 p {

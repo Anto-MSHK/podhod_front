@@ -77,7 +77,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 						desc="Добавьте картинку на странице редактирования"
 						icon={addFileIcon}
 						iconPosition="top"
-						iconWidth={70}
+						iconWidth={55}
 					/>
 				) : (
 					<img
@@ -90,12 +90,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 				)}
 			</div>
 			<div className={styles.card_status}>
-				<InfoMessage
-					className={styles.InfoMessage}
-					desc={event.name}
-					descTag="p"
-					backgroundColor="#5b88de"
-				/>
+				<InfoTag text={event.name} />
 			</div>
 			<CardBody className={styles.cardBody} inverse="true">
 				<CardTitle tag="h3" className={styles.cardTitle}>

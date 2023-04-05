@@ -59,7 +59,7 @@ export const CustomInput: FC<CustomInputI> = ({
 			>
 				{children ? children : undefined}
 			</Input>
-			<FormFeedback invalid="true" tag="h3">
+			<FormFeedback invalid="true" tag="h2">
 				{form.touched[`${field.name}`] ? form.errors[`${field.name}`] : ""}
 			</FormFeedback>
 		</div>
