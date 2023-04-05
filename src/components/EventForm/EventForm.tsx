@@ -67,27 +67,27 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
   };
 
   type FormInputDataT = {
-    lable: string,
+    label: string,
     type: InputType,
     children?: JSX.Element | JSX.Element[],
   }
 
   const dictionary: Record<string, FormInputDataT> = {
     eventName: {
-      lable: "Название",
+      label: "Название",
       type: 'text',
     },
     description: {
-      lable: "Описание",
+      label: "Описание",
       type: 'textarea',
     },
     age: {
-      lable: "Возраст",
+      label: "Возраст",
       type: 'select',
       children: agesOptions,
     },
     eventType: {
-      lable: "Тип события",
+      label: "Тип события",
       type: 'select',
       children: eventOptions,
     },
@@ -189,7 +189,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
                     index <= 1 &&
                     <FormInput
                       name={key}
-                      lable={value.lable}
+                      label={value.label}
                       type={value.type}
                       children={value.children}
                       disabled={!editing}
@@ -203,7 +203,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
                     index >= 2 &&
                     <FormInput
                       name={key}
-                      lable={value.lable}
+                      label={value.label}
                       type={value.type}
                       children={value.children}
                       disabled={!editing}

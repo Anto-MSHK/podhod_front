@@ -173,11 +173,11 @@ export const EventShowpiecesEdit = () => {
               >
                 <div>
                   <div>
-                    <FormInput name="exhibitName" lable="Название:" />
-                    <FormInput name="exhibitShort" lable="Короткое описание:" />
+                    <FormInput name="exhibitName" label="Название:" />
+                    <FormInput name="exhibitShort" label="Короткое описание:" />
                     <FormInput
                       name="exhibitDescription"
-                      lable="Полное описание:"
+                      label="Полное описание:"
                       type={"textarea"}
                     />
                   </div>

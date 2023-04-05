@@ -176,15 +176,15 @@ export const EventPageEdit = () => {
               >
                 <div>
                   <div>
-                    <FormInput name="pageName" lable="Название:" />
+                    <FormInput name="pageName" label="Название:" />
                     <FormInput
                       name="pageDescription"
-                      lable="Полное описание:"
+                      label="Полное описание:"
                       type={"textarea"}
                     />
                     <FormInput
                       name="visibleLogo"
-                      lable="Показывать логотип"
+                      label="Показывать логотип"
                       type="checkbox"
                     />
                   </div>

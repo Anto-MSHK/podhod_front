@@ -150,13 +150,13 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
               <div className={styles.left}>
                 <FormInput
                   name="eventName"
-                  lable="Название:"
+                  label="Название:"
                   disabled={!editing}
                 />
 
                 <FormInput
                   name="description"
-                  lable="Описание:"
+                  label="Описание:"
                   type="textarea"
                   disabled={!editing}
                 />
@@ -164,7 +164,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
               <div className={styles.right}>
                 <FormInput
                   name="age"
-                  lable="Возраст:"
+                  label="Возраст:"
                   type="select"
                   disabled={!editing}
                 >
@@ -172,7 +172,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
                 </FormInput>
                 <FormInput
                   name="eventType"
-                  lable="Тип события:"
+                  label="Тип события:"
                   type="select"
                   disabled={!editing}
                 >

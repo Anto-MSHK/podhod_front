@@ -81,12 +81,12 @@ const Auth = () => {
                             <div className={styles.auth_form_container}>
                                 {
                                     authPageState === 'registration'
-                                    && <FormInput name="organizationName" lable="Название организации" />
+                                    && <FormInput name="organizationName" label="Название организации" />
                                 }
-                                <FormInput name="email" lable="Email" />
+                                <FormInput name="email" label="Email" />
                                 <FormInput
                                     name="password"
-                                    lable="Пароль"
+                                    label="Пароль"
                                     help={formik.getFieldMeta('password').error ? "От 4 до 12 символов" : ''}
                                 />
                             </div>
