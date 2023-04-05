@@ -18,6 +18,7 @@ import {
   UpdateEventPayloadT,
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
+import { InputType } from "reactstrap/types/lib/Input";
 
 interface formType {
   eventName: string;
@@ -33,20 +34,20 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
 }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const Options = [
+  const EventTypeOptions = [
     { name: "Выставка", value: "exhibition" },
     { name: "Ярмарка", value: "fair" },
     { name: "Промо-выставка", value: "promo-exhibition" },
   ];
   const ages = [0, 6, 12, 16, 18];
-  const agesOption = ages.map((age, index) => {
+  const agesOptions = ages.map((age, index) => {
     return (
       <option key={index} value={age + "+"}>
         {age + "+"}
       </option>
     );
   });
-  const options = Options.map((elements, index) => {
+  const eventOptions = EventTypeOptions.map((elements, index) => {
     return (
       <option key={index} value={elements.value}>
         {elements.name}
@@ -56,12 +57,47 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
   const dispatch = useAppDispatch();
   const [addEvent, { isError }] = useAddEventMutation();
   const [updateEvent, { isError: isErrorUpdate }] = useUpdateEventMutation();
+
   const handleAddEvent = async (event: CreateEventPayloadT) => {
     return await addEvent(event).unwrap();
   };
+
   const handleUpdateEvent = async (event: UpdateEventPayloadT) => {
     await updateEvent(event).unwrap();
   };
+
+  type FormInputDataT = {
+    label: string,
+    type: InputType,
+    children?: JSX.Element | JSX.Element[],
+  }
+
+  const dictionary: Record<string, FormInputDataT> = {
+    eventName: {
+      label: "Название",
+      type: 'text',
+    },
+    description: {
+      label: "Описание",
+      type: 'textarea',
+    },
+    age: {
+      label: "Возраст",
+      type: 'select',
+      children: agesOptions,
+    },
+    eventType: {
+      label: "Тип события",
+      type: 'select',
+      children: eventOptions,
+    },
+
+  };
+
+  const translate = (key: string) => {
+    return dictionary[key] || key;
+  };
+
   const formConfig: FormikConfig<formType> = {
     initialValues: {
       eventName: defaultData ? defaultData.name : "",
@@ -100,7 +136,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
       form.setSubmitting(false);
       dispatch(setEvent(values));
       setEditing(false);
-    
+
     },
   };
   const schemaConfig: Yup.ObjectShape = {
@@ -148,36 +184,32 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({
           <div className={styles.form}>
             <div className={styles.form_info}>
               <div className={styles.left}>
-                <FormInput
-                  name="eventName"
-                  label="Название:"
-                  disabled={!editing}
-                />
-
-                <FormInput
-                  name="description"
-                  label="Описание:"
-                  type="textarea"
-                  disabled={!editing}
-                />
+                {
+                  Object.entries(dictionary).map(([key, value], index) => (
+                    index <= 1 &&
+                    <FormInput
+                      name={key}
+                      label={value.label}
+                      type={value.type}
+                      children={value.children}
+                      disabled={!editing}
+                    />
+                  ))
+                }
               </div>
               <div className={styles.right}>
-                <FormInput
-                  name="age"
-                  label="Возраст:"
-                  type="select"
-                  disabled={!editing}
-                >
-                  {agesOption}
-                </FormInput>
-                <FormInput
-                  name="eventType"
-                  label="Тип события:"
-                  type="select"
-                  disabled={!editing}
-                >
-                  {options}
-                </FormInput>
+                {
+                  Object.entries(dictionary).map(([key, value], index) => (
+                    index >= 2 &&
+                    <FormInput
+                      name={key}
+                      label={value.label}
+                      type={value.type}
+                      children={value.children}
+                      disabled={!editing}
+                    />
+                  ))
+                }
               </div>
             </div>
           </div>

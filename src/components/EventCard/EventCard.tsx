@@ -3,6 +3,7 @@ import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import styles from "./EventCard.module.css";
 import { WidgetItem } from "../WidgetItem/WidgetItem";
 import addFileIcon from "../../assets/icons/addFileIcon.svg"
+import exhibits from '../../assets/icons/NumberOfExhibits.svg'
 import icon2 from "../../assets/icons/Wallet.svg";
 import icon3 from "../../assets/icons/SmilingFace.svg";
 import { InfoTag } from "../InfoTag/InfoTag";
@@ -35,8 +36,6 @@ export const pluralForm = (items: number) => {
   if (items == undefined) {
     return `экспонатов`;
   }
-
-
   if (items % 10 == 1 && items % 100 != 11) {
     return `экспонат`;
   } else if (2 <= items % 10 && items % 10 <= 4 && (items % 100 < 10 || items % 100 >= 20)) {
@@ -73,7 +72,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 
           <InfoMessage
             desc="Добавьте картинку на странице редактирования"
-            icon={icon1}
+            icon={addFileIcon}
             iconPosition='top'
             iconWidth={70} />
         ) : (
@@ -109,7 +108,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 
           <InfoMessage
             className={styles.widget}
-            icon={icon1}
+            icon={exhibits}
             iconPosition='top'
             iconDesc={String((event as any).showpieces.length)}
             desc={pluralForm((event as any).showpieces.length)}
