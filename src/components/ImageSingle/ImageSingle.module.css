@@ -1,57 +1,56 @@
 .ImgGalleryWrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
 }
 .ImgGalleryTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
 }
 
 .ImgGalleryTitle p {
-  font-weight: 500;
-  font-size: medium;
-  color: #ababab;
-  text-align: end;
+	font-weight: 500;
+	font-size: medium;
+	color: #ababab;
+	text-align: end;
 }
 .media_wrapper {
-  background-color: rgba(226, 226, 226, 0.03);
-  padding: 1vmax;
-  border-radius: 15px;
+	background-color: rgba(226, 226, 226, 0.03);
+	padding: 1vmax;
+	border-radius: 15px;
 }
 
 .img {
-  width: 260px;
-  height: 150px;
-  border: 3px solid #a8a8a8;
-  border-radius: 20px;
-  position: relative;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
-  background-repeat: no-repeat;
+	width: 260px;
+	height: 150px;
+	border: 3px solid #a8a8a8;
+	border-radius: 20px;
+	position: relative;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	object-fit: cover;
+	background-repeat: no-repeat;
 }
 
 .spinner {
-  width: 100%;
-  height: 100%;
-  color: #242424;
-  border-radius: 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
-  background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	color: #242424;
+	border-radius: 20px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	object-fit: cover;
+	background-repeat: no-repeat;
 }
 
-
 .drag_and_drop_container {
-  width: 260px;
-  height: 173px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
+	width: 260px;
+	height: 173px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
 }

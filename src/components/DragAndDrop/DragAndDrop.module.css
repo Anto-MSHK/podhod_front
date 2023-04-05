@@ -1,44 +1,42 @@
 .drag_and_drop_wrapper {
-  width: 100%;
-  height: 100%;
-  border: 3px solid #a8a8a8;
-  border-radius: 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
+	width: 100%;
+	height: 100%;
+	border: 3px solid #a8a8a8;
+	border-radius: 20px;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
 .drag_and_drop_area {
-  color: #a8a8a8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  cursor: inherit;
-  pointer-events: auto;
+	color: #a8a8a8;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	cursor: inherit;
+	pointer-events: auto;
 }
 
-
-.drag_and_drop_area p{
-  margin: 0;
-  padding: 0;
-  font-weight: 700;
-  font-size: 24px;
- }
-
+.drag_and_drop_area p {
+	margin: 0;
+	padding: 0;
+	font-weight: 700;
+	font-size: 24px;
+}
 
 .icon {
-  width: 64px;
-  height: 64px;
+	width: 64px;
+	height: 64px;
 }
 .drag_and_drop_wrapper input {
-  cursor: pointer;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  position: absolute;
+	cursor: pointer;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	position: absolute;
 }

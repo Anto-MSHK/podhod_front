@@ -7,18 +7,18 @@ import { EventEdit } from "./pages/EventEdit/EventEdit";
 import { EventsList } from "./pages/EventsList/EventsList";
 
 function App() {
-  return (
-    <Layout>
-      <Routes>
-        <Route element={<MainPage />} path="/"></Route>
-        <Route element={<TestPage />} path="/redux-test"></Route>
-        <Route element={<Auth />} path="/registration"></Route>
-        <Route element={<EventEdit />} path="/expo/"></Route>
-        <Route element={<EventEdit />} path="/expo/:id"></Route>
-        <Route element={<EventsList />} path="/event"></Route>
-      </Routes>
-    </Layout>
-  );
+	return (
+		<Layout>
+			<Routes>
+				<Route element={<MainPage />} path="/"></Route>
+				<Route element={<TestPage />} path="/redux-test"></Route>
+				<Route element={<Auth />} path="/registration"></Route>
+				<Route element={<EventEdit />} path="/expo/"></Route>
+				<Route element={<EventEdit />} path="/expo/:id"></Route>
+				<Route element={<EventsList />} path="/event"></Route>
+			</Routes>
+		</Layout>
+	);
 }
 
 export default App;

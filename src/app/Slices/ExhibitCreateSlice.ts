@@ -1,33 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type exhibitForm = {
-    exhibitName: string;
-    exhibitShort: string;
-    exhibitDescription: string;
-}
-
+	exhibitName: string;
+	exhibitShort: string;
+	exhibitDescription: string;
+};
 
 type imagesUploadSliceT = {
-    exhibit: exhibitForm | undefined;
-}
-
+	exhibit: exhibitForm | undefined;
+};
 
 const initialState: imagesUploadSliceT = {
-    exhibit: undefined
-}
-
+	exhibit: undefined,
+};
 
 const ExhibitCreateSlice = createSlice({
-    name: 'exhibitCreate',
-    initialState,
-    reducers: {
-        setExhibit(state, action: PayloadAction<exhibitForm>) {
-            state.exhibit = action.payload
-        },
+	name: "exhibitCreate",
+	initialState,
+	reducers: {
+		setExhibit(state, action: PayloadAction<exhibitForm>) {
+			state.exhibit = action.payload;
+		},
+	},
+});
 
-    },
-})
-
-export const { setExhibit } = ExhibitCreateSlice.actions
-export default ExhibitCreateSlice.reducer
+export const { setExhibit } = ExhibitCreateSlice.actions;
+export default ExhibitCreateSlice.reducer;
