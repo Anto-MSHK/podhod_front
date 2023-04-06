@@ -1,11 +1,11 @@
-.loading_screen{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.loading_screen {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 .spinner {
-    width: 100px;
-    height: 100px;
-    color: #1a1a1a;
-    margin-top: -5px;
+	width: 100px;
+	height: 100px;
+	color: #1a1a1a;
+	margin-top: -5px;
 }

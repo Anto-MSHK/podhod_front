@@ -6,23 +6,23 @@ import * as Yup from "yup";
 import { Formik, FormikProps, Form } from "formik";
 
 interface FormContainerI {
-  children: (formik: FormikProps<any>) => JSX.Element;
-  formConfig: FormikConfig<any>;
-  schemaConfig: Yup.ObjectShape;
+	children: (formik: FormikProps<any>) => JSX.Element;
+	formConfig: FormikConfig<any>;
+	schemaConfig: Yup.ObjectShape;
 }
 export const FormContainer: FC<FormContainerI> = ({
-  children,
-  schemaConfig,
-  formConfig,
+	children,
+	schemaConfig,
+	formConfig,
 }) => {
-  const schema = Yup.object().shape(schemaConfig);
-  return (
-    <Formik
-      initialValues={formConfig.initialValues}
-      validationSchema={schema}
-      onSubmit={formConfig.onSubmit}
-    >
-      {(formik: FormikProps<any>) => <Form>{children(formik)}</Form>}
-    </Formik>
-  );
+	const schema = Yup.object().shape(schemaConfig);
+	return (
+		<Formik
+			initialValues={formConfig.initialValues}
+			validationSchema={schema}
+			onSubmit={formConfig.onSubmit}
+		>
+			{(formik: FormikProps<any>) => <Form>{children(formik)}</Form>}
+		</Formik>
+	);
 };
