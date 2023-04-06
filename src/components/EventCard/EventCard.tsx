@@ -4,8 +4,8 @@ import styles from "./EventCard.module.css";
 import { WidgetItem } from "../WidgetItem/WidgetItem";
 import addFileIcon from "../../assets/icons/addFileIcon.svg";
 import exhibits from "../../assets/icons/NumberOfExhibits.svg";
-import icon2 from "../../assets/icons/Wallet.svg";
-import icon3 from "../../assets/icons/SmilingFace.svg";
+import wallet from "../../assets/icons/Wallet.svg";
+import smile from "../../assets/icons/SmilingFace.svg";
 import { InfoTag } from "../InfoTag/InfoTag";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { EventT } from "../../app/Types/EventsT";
@@ -18,13 +18,13 @@ import { InfoMessage } from "../InfoMessage/InfoMessage";
 interface IStyledCardProps {
 	event: EventT;
 	/*    eventTitle: string;
-       image?: string;
-       dateOfCreation: string;
-       type: string;
-       status: string;
-       numberOfExhibits: string,
-       entryCost: string,
-       ageRestriction: string, */
+	   image?: string;
+	   dateOfCreation: string;
+	   type: string;
+	   status: string;
+	   numberOfExhibits: string,
+	   entryCost: string,
+	   ageRestriction: string, */
 }
 enum EventStatus {
 	draft = "draft",
@@ -63,11 +63,33 @@ const btnTitle = (status: string) => {
 			return "Нажми на меня";
 	}
 };
+type WidgetsT = { iconDesc: string, desc: string, icon: string }
+
 
 export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 	event,
 }) => {
 	const { data: eventPages, isLoading } = useGetEventPagesQuery(event.id);
+	const widgets: Record<string, WidgetsT> = {
+		exhibits: {
+			iconDesc: String((event as any).showpieces.length),
+			desc: pluralForm((event as any).showpieces.length),
+			icon: exhibits,
+		},
+		ageLimit: {
+			iconDesc: event.ageLimit as string,
+			desc: "возраст",
+			icon: smile,
+		},
+	}
+
+	event.prices.forEach((price, index) => widgets[`price${index}`] = {
+		iconDesc: `от ${price.price}р`,
+		desc: price.criterion,
+		icon: wallet,
+	})
+
+
 	const navigate = useNavigate();
 	return (
 		<Card className={styles.styledCard_container} color="dark" inverse>
@@ -97,50 +119,19 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 					{event.name}
 				</CardTitle>
 				<CardSubtitle tag="p" className="mb-2 min"></CardSubtitle>
-
 				<CardBody className={styles.cardWidget}>
-					{/* <WidgetItem
-            info={(event as any).showpieces.length}
-            icon={addFileIcon}
-            description={pluralForm((event as any).showpieces.length)}
-          /> */}
+					{
+						Object.entries(widgets).map(([key, value], index) => (
+							<InfoMessage
+								className={styles.widget}
+								icon={value.icon}
+								iconPosition="top"
+								iconDesc={value.iconDesc}
+								desc={value.desc}
 
-					<InfoMessage
-						className={styles.widget}
-						icon={exhibits}
-						iconPosition="top"
-						iconDesc={String((event as any).showpieces.length)}
-						desc={pluralForm((event as any).showpieces.length)}
-					/>
-					{event.ageLimit && (
-						/*  <WidgetItem
-               info={event.ageLimit || ""}
-               icon={icon3}
-               description="возраст"
-             /> */
-						<InfoMessage
-							className={styles.widget}
-							icon={icon3}
-							iconPosition="top"
-							iconDesc={event.ageLimit || ""}
-							desc="возраст"
-						/>
-					)}
-					{event.prices.map(price => (
-						/* <WidgetItem
-              key={price.id}
-              info={`от ${price.price}р`}
-              icon={icon2}
-              description={price.criterion}
-            /> */
-						<InfoMessage
-							className={styles.widget}
-							icon={icon2}
-							iconPosition="top"
-							iconDesc={`от ${price.price}р`}
-							desc={price.criterion}
-						/>
-					))}
+							/>
+						))
+					}
 				</CardBody>
 				<div className={styles.cardButton}>
 					<NavLink to={`/expo/${event.id}`} style={{ textDecoration: "none" }}>
