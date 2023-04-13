@@ -1,0 +1,42 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+}
+
+.imageWrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid #FFFFFF;
+    margin-right: 16px;
+    box-shadow: 0px 0px 7px 2px rgba(255, 255, 255, 0.25);
+}
+.imageWrapper:last-child {
+    margin-right: 0;
+}
+
+.imageWrapper:hover {
+    transform: scale(1.05);
+}
+
+.imageWrapper.selected {
+    border: 2px solid #FFD600;
+    transform: scale(1.2);
+    transform-origin: center;
+    max-height: 90px;
+    margin-bottom: 0;
+    filter: drop-shadow(0px 0px 4px #FFD600);
+}
+
+.image {
+    display: block;
+    width: 130px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
