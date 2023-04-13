@@ -40,7 +40,7 @@ export const CustomBtn: FC<ButtonArtI> = ({
 	return (
 		<div className={styles.custom_btn_container}>
 			<Button
-				className={customClassName}
+				className={`${styles.customBtn} ${className}`}
 				onClick={onClick}
 				type={type}
 				active={active}

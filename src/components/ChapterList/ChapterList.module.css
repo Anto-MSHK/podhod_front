@@ -1,0 +1,59 @@
+
+
+.chapter_card_container{
+    padding: 1rem;
+}
+.chapter_card_title{
+	display: flex;
+	justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.chapter_item_title{
+	display: flex;
+	justify-content: space-between;
+}
+.chapter_card_content{
+    padding: 1.1rem;
+}
+
+.add_block_btn_container{
+	display: flex;
+	align-items: end;
+	gap: .5rem;
+}
+.tool__btn {
+	border-radius: var(--radius);
+	background-color: transparent !important ;
+	border: 2px solid transparent  !important;
+	padding: 10px;
+}
+.tool__btn:hover{
+	box-shadow: inset 0 0 0 2px #df791a;
+	background-color: transparent !important ;
+	border: 2px solid transparent  !important;
+}
+.item:hover {
+	box-shadow: inset 0 0 0 2px #df791a;
+}
+.item {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	width: 100%;
+	max-height: 100px;
+	text-align: center;
+	justify-content: space-between;
+	border-radius: var(--radius);
+	background-color: #252525;
+	margin-top: 1rem;
+	padding: 1rem;
+	font-weight: 600;
+	border: 2px solid transparent;
+	color: white
+}
+
+.modalWrapper{
+    background-color: #252525;
+    padding: 1rem;
+    border-radius: var(--radius);
+}

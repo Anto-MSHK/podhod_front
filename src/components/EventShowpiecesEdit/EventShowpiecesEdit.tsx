@@ -4,7 +4,7 @@ import { FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Card, CardHeader, CardBody, CardText, CardFooter } from "reactstrap";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import {
 	useFetchExhibitsQuery,
@@ -19,8 +19,14 @@ import {
 	UpdateExhibitPayloadT,
 } from "../../app/Types/ExhibitsT";
 import deleteIcon from "../../assets/icons/CrossInCircle.svg";
+import editIcon from '../../assets/icons/RedСheckMark.svg'
+
 import { useParams } from "react-router-dom";
 import { exhibitsT } from "../../app/Types/ExhibitsT";
+import { useFetchChaptersQuery } from "../../app/services/ChapterApi";
+import { ChapterList } from "../ChapterList/ChapterList";
+import { InfoMessage } from "../InfoMessage/InfoMessage";
+
 
 interface formType {
 	exhibitName: string;
@@ -31,7 +37,13 @@ interface formType {
 export const EventShowpiecesEdit = () => {
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
+
 	const { data, isLoading } = useFetchExhibitsQuery(eventId);
+	const [chapterConf, setChapterConf] = useState({
+		eventId: eventId as string,
+		showpieceId: data ? data[0].id : '0',
+	})
+	const { data: showpiece, isLoading: isChaptersLoading } = useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
 	const [updateExhibit] = useUpdateExhibitMutation();
 	const [deleteExhibit] = useDeleteExhibitMutation();
@@ -45,6 +57,14 @@ export const EventShowpiecesEdit = () => {
 		setEditingExhibit(exhibit);
 		toggle();
 	};
+
+	const сhangeShowPiece = (showPieceId: string) => {
+
+		setChapterConf({
+			eventId: eventId as string,
+			showpieceId: showPieceId,
+		})
+	}
 
 	const handleAddExhibit = (values: formType) => {
 		console.log("Submitting form...", values);
@@ -122,29 +142,47 @@ export const EventShowpiecesEdit = () => {
 					Создать экспонат
 				</CustomBtn>
 			</div>
-			<div>
-				{!isLoading &&
-					data &&
-					data.map((el: exhibitsT) => {
-						return (
-							<div key={el.id} className={styles.mainCreateExhibitWrapper}>
-								<div
-									className={styles.exhibitsListWrapper}
-									onClick={() => handleEditExhibit(el)}
+			<div className={styles.list_container}>
+				<div className={`${styles.showpiece_list} ${styles['showpieces']}`}>
+					{!isLoading &&
+						data &&
+						data.map((el: exhibitsT) => {
+							return (
+								<button
+									key={el.id}
+									className={styles.item}
+									onClick={() => сhangeShowPiece(el.id)}
 								>
-									<div>{el.name}</div>
-								</div>
-								<div
-									className={styles.exhibitsDeleteWrapper}
-									onClick={() => {
-										handleDeleteExhibit(el.id);
-									}}
-								>
-									<img src={deleteIcon} />
-								</div>
-							</div>
-						);
-					})}
+									<h3>{el.name}</h3>
+									<div
+										className={styles.item_tool_btns}
+									>
+										<CustomBtn className={styles.tool__btn}
+											onClick={() => handleEditExhibit(el)}
+										>
+											<img src={editIcon} />
+										</CustomBtn>
+										<CustomBtn className={styles.tool__btn}
+											onClick={() => {
+												handleDeleteExhibit(el.id);
+											}}
+										>
+											<img src={deleteIcon} />
+										</CustomBtn>
+									</div>
+								</button>
+							);
+						})}
+				</div>
+				<div className={`${styles.showpiece_list} ${styles['chapters']}` }>
+				 {
+					showpiece 
+					?
+					<ChapterList showpiece={showpiece} eventId={eventId as string}/>
+					:
+					<InfoMessage title="Ошибка"/>
+				 }	
+				</div>
 			</div>
 			<Modal
 				isOpen={modal}
