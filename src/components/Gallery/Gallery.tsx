@@ -44,15 +44,16 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
     });
 
     const handleImageClick = useCallback((index: number) => {
-        setActiveIndex((prevActiveIndex) => (index === prevActiveIndex ? -1 : index));
+        setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
     }, []);
+
 
     useEffect(() => {
         localStorage.setItem('activeIndex', activeIndex.toString());
     }, [activeIndex]);
 
     const galleryImages = useMemo(() => {
-        return images?.map((image, index) => (
+        return images ? images.map((image, index) => (
             <GalleryImage
                 key={image.src}
                 {...image}
@@ -61,8 +62,9 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
                 imageNumber={index + 1}
                 className={className}
             />
-        ));
+        )) : null;
     }, [images, activeIndex, handleImageClick, className]);
+
 
     return (
         <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
