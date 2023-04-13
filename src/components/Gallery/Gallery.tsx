@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, MouseEvent } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import styles from './Gallery.module.css';
 
 interface ImageProps {
@@ -38,11 +38,18 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
 });
 
 export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
-    const [activeIndex, setActiveIndex] = useState<number>(-1);
+    const [activeIndex, setActiveIndex] = useState<number>(() => {
+        const storedIndex = localStorage.getItem('activeIndex');
+        return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
+    });
 
     const handleImageClick = useCallback((index: number) => {
         setActiveIndex((prevActiveIndex) => (index === prevActiveIndex ? -1 : index));
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('activeIndex', activeIndex.toString());
+    }, [activeIndex]);
 
     const galleryImages = useMemo(() => {
         return images?.map((image, index) => (
