@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo, MouseEvent } from 'react';
 import styles from './Gallery.module.css';
 
 interface ImageProps {
@@ -6,24 +6,60 @@ interface ImageProps {
     alt: string;
 }
 
-export const Gallery: React.FC<{ images: ImageProps[] }> = ({ images }) => {
-    const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+interface GalleryProps {
+    images: ImageProps[];
+    className?: string;
+}
 
-    const handleImageClick = (index: number) => {
-        setSelectedImageIndex(index === selectedImageIndex ? null : index);
-    };
+interface GalleryImageProps extends ImageProps {
+    isActive: boolean;
+    onClick: (index: number) => void;
+    imageNumber: number;
+    className?: string;
+}
+
+const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className }) => {
+    const handleClick = useCallback(() => {
+        onClick(imageNumber - 1);
+    }, [onClick, imageNumber]);
 
     return (
-        <div className={styles.gallery}>
-            {images.map((image, index) => (
-                <div
-                    key={image.src}
-                    className={`${styles.imageWrapper} ${index === selectedImageIndex ? styles.selected : ''}`}
-                    onClick={() => handleImageClick(index)}
-                >
-                    <img src={image.src} alt={image.alt} className={styles.image} />
-                </div>
-            ))}
+        <figure
+            className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${className}`}
+            onClick={handleClick}
+            aria-label={`Image ${imageNumber}`}
+            role="button"
+            tabIndex={0}
+            data-isactive={isActive}
+        >
+            <img src={src} alt={alt} className={styles.image} />
+        </figure>
+    );
+});
+
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
+    const [activeIndex, setActiveIndex] = useState<number>(-1);
+
+    const handleImageClick = useCallback((index: number) => {
+        setActiveIndex((prevActiveIndex) => (index === prevActiveIndex ? -1 : index));
+    }, []);
+
+    const galleryImages = useMemo(() => {
+        return images?.map((image, index) => (
+            <GalleryImage
+                key={image.src}
+                {...image}
+                isActive={index === activeIndex}
+                onClick={handleImageClick}
+                imageNumber={index + 1}
+                className={className}
+            />
+        ));
+    }, [images, activeIndex, handleImageClick, className]);
+
+    return (
+        <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
+            {galleryImages}
         </div>
     );
 };
