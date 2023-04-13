@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;
-    background-color: #f0f0f0;
+    background-color: var(--orange_color);
     position: relative;
     z-index: 100;
     border-radius: 0 0 15px 15px;
@@ -21,7 +21,7 @@
 }
 
 .left {
-    justify-content: flex-start;
+    justify-content: flex-start
 }
 
 .center {
@@ -31,4 +31,11 @@
 
 .right {
     justify-content: flex-end;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 767px) {
+    .container {
+        padding: 8px 12px;
+    }
 }
