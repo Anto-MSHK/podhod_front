@@ -30,9 +30,10 @@ export type AddChapterReqT = {
     showpieceId: string,
 };
 
-type DeleteExhibitReqT = {
+type DeleteСhapterReqT = {
 	id: string;
 	eventId: string;
+	showpieceId: string
 };
 
 export const chaptersApi = createApi({
@@ -40,14 +41,16 @@ export const chaptersApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${API_URL}`,
 	}),
-	tagTypes: ["Chapters"],
+	tagTypes: ["Chapters, Pages"],
 	endpoints: builder => ({
 		fetchChapters: builder.query<exhibitsT, GetChaptersReqT>({
 			query: ({eventId, showpieceId}) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
 			}),
-
+			providesTags: ['Chapters, Pages']
+		
 		}),
+		
 
 		addChapter: builder.mutation<null, AddChapterReqT>({
 			query: ({ eventId, body, showpieceId }) => ({
@@ -55,7 +58,9 @@ export const chaptersApi = createApi({
 				method: "POST",
 				body: body,
 			}),
-			invalidatesTags: [{ type: "Chapters", id: "LIST" }],
+			
+			invalidatesTags: ['Chapters, Pages'],
+			
 		}),
 		/* updateExhibit: builder.mutation<null, UpdateExhibitReqT>({
 			query: ({ body, eventId, id }) => ({
@@ -64,18 +69,19 @@ export const chaptersApi = createApi({
 				body,
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
-		}),
-		deleteExhibit: builder.mutation<null, DeleteExhibitReqT>({
-			query: ({ id, eventId }) => ({
-				url: `/${eventId}/showpieces/${id}`,
+		}), */
+		deleteChapter: builder.mutation<null, DeleteСhapterReqT>({
+			query: ({ id, eventId, showpieceId }) => ({
+				url: `/${eventId}/showpieces/${showpieceId}/chapter/${id}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: (result, error, id) => [{ type: "Pages", id: "LIST" }],
-		}), */
+			invalidatesTags: ['Chapters, Pages'],
+		}),
 	}),
 });
 
 export const {
 	useFetchChaptersQuery,
     useAddChapterMutation,
+	useDeleteChapterMutation,
 } = chaptersApi;

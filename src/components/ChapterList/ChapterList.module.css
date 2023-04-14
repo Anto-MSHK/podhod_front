@@ -7,16 +7,20 @@
 	display: flex;
 	justify-content: space-between;
     margin-bottom: 2rem;
+	
 }
+
 .chapter_item_title{
 	display: flex;
 	justify-content: space-between;
 }
+
+
 .chapter_card_content{
     padding: 1.1rem;
 }
 
-.add_block_btn_container{
+.btn_container{
 	display: flex;
 	align-items: end;
 	gap: .5rem;

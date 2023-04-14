@@ -41,7 +41,7 @@ export const EventShowpiecesEdit = () => {
 	const { data, isLoading } = useFetchExhibitsQuery(eventId);
 	const [chapterConf, setChapterConf] = useState({
 		eventId: eventId as string,
-		showpieceId: data ? data[0].id : '0',
+		showpieceId: data?.length ? data[0].id : '0',
 	})
 	const { data: showpiece, isLoading: isChaptersLoading } = useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
