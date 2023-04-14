@@ -204,9 +204,7 @@ export const MainPage = () => {
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
 				<Head
-					leftElement={{
-						type: 'back',
-					}}
+					leftElement={<CustomBtn>Назад</CustomBtn>}
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={true}
@@ -214,19 +212,14 @@ export const MainPage = () => {
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
 				<Head
-					leftElement={{
-						type: 'menu',
-					}}
-					centerElement={''}
+					leftElement={<CustomBtn>Меню</CustomBtn>}
+					centerElement={' '}
 					isTransparent={false}
-					backgroundColor={'#df791a'}
 				/>
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
 				<Head
-					leftElement={{
-						type: 'back',
-					}}
+					leftElement={<CustomBtn>Назад</CustomBtn>}
 					centerElement={<h3>История написания</h3>}
 					isTransparent={false}
 					backgroundColor={'#df791a'}
