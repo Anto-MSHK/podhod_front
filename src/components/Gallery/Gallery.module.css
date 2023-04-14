@@ -25,10 +25,10 @@
 }
 
 .imageWrapper.selected {
+    transition: all .2s ease-out;
     border: 2px solid #FFD600;
-    transform: scale(1.2);
+    transform: scale(1.2) translateY(-6px);
     transform-origin: center;
-    max-height: 90px;
     margin-bottom: 0;
     filter: drop-shadow(0px 0px 4px #FFD600);
 }
