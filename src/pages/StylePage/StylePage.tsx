@@ -20,6 +20,10 @@ import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
+import CustomCard from "../../components/CustomCard/CustomCard";
+import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import ImageItem from "../../components/ImageItem/ImageItem";
+
 
 export const MainPage = () => {
 	const btnData = [
@@ -59,6 +63,7 @@ export const MainPage = () => {
 		<div>
 			<div style={{ display: "flex" }}>
 				<div style={{ marginRight: 40, width: "40%" }}>
+
 					<h1>{`<h1>`} - Заголовок 1</h1>
 					<h2>{`<h2>`} - Заголовок 2</h2>
 					<h3>{`<h3>`} - Заголовок 3</h3>
@@ -194,6 +199,38 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
+			<CustomCard title="sadadas">
+					<img style={{width: '100px'}} src={icon1}></img>
+					<CardBody>
+					<CardTitle tag="h1">
+						Card title
+					</CardTitle>
+					<CardSubtitle
+						className="mb-2 text-muted"
+						tag="h6"
+					>
+						Card subtitle
+					</CardSubtitle>
+					<CardText>
+						Some quick example text to build on the card title and make up the bulk of the card‘s content.
+					</CardText>
+					<CustomBtn>
+						Button
+					</CustomBtn>
+				</CardBody>
+				</CustomCard>
+			<Card
+				style={{
+					width: '18rem',
+					height: 'fit-content'
+				}}
+			>
+				<img
+					alt="Sample"
+					src="https://picsum.photos/300/200"
+				/>
+			
+			</Card>
 
 		</div>
 	);

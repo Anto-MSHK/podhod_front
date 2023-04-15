@@ -10,7 +10,23 @@
 	font-size: 18px;
 	align-items: center;
 	text-align: center;
+	gap: .5rem;
 }
+
+.customBtn.icon_left{
+	flex-direction: row;
+}
+.customBtn.icon_right{
+	flex-direction: row-reverse;
+}
+.customBtn.icon_top{
+	flex-direction: column;
+}
+.customBtn.icon_bottom{
+	flex-direction: column-reverse;
+}
+
+
 .customBtn:hover {
 	background-color: var(--orange_color-hover) !important;
 }
@@ -31,5 +47,4 @@
 .imageWrapper {
 	width: 30px;
 	height: 30px;
-	margin-right: 10px;
 }

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Button, ButtonProps } from "reactstrap";
 import styles from "./CustomBtn.module.css";
-
+var classNames = require('classnames');
 interface ButtonArtI extends ButtonProps {
 	className?: string;
 	style?: React.CSSProperties;
@@ -12,6 +12,7 @@ interface ButtonArtI extends ButtonProps {
 	iconWidth?: number;
 	disabled?: boolean;
 	color?: string;
+	iconPosition?: 'top' | 'left' | 'right' | 'bottom'
 }
 
 export const CustomBtn: FC<ButtonArtI> = ({
@@ -26,8 +27,16 @@ export const CustomBtn: FC<ButtonArtI> = ({
 	disabled,
 	size,
 	color = "warning",
+	iconPosition = 'left',
+
 }) => {
-	const customClassName = className ? className : styles.customBtn;
+	
+
+	const classes = classNames(
+		styles.customBtn,
+		styles[`icon_${iconPosition}`],
+		styles[className],
+	  )
 	const iconElement = icon ? (
 		<img
 			className={styles.imageWrapper}
@@ -36,11 +45,12 @@ export const CustomBtn: FC<ButtonArtI> = ({
 			alt={""}
 		/>
 	) : null;
-
+/* 
+	`${styles.customBtn} ${styles[`icon_${iconPosition}`]} ${className}` */
 	return (
 		<div className={styles.custom_btn_container}>
 			<Button
-				className={`${styles.customBtn} ${className}`}
+			
 				onClick={onClick}
 				type={type}
 				active={active}
@@ -48,6 +58,7 @@ export const CustomBtn: FC<ButtonArtI> = ({
 				disabled={disabled}
 				size={size}
 				color={color}
+				className={classes}
 			>
 				{iconElement}
 				{children}
