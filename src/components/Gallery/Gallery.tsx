@@ -9,6 +9,7 @@ interface ImageProps {
 interface GalleryProps {
     images: ImageProps[];
     className?: string;
+    scrollLocked?: boolean;
 }
 
 interface GalleryImageProps extends ImageProps {
@@ -37,7 +38,7 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
     );
 });
 
-export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false }) => {
     const [activeIndex, setActiveIndex] = useState<number>(() => {
         const storedIndex = localStorage.getItem('activeIndex');
         return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
@@ -46,7 +47,6 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
     const handleImageClick = useCallback((index: number) => {
         setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
     }, []);
-
 
     useEffect(() => {
         localStorage.setItem('activeIndex', activeIndex.toString());
@@ -64,6 +64,15 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
             />
         )) : null;
     }, [images, activeIndex, handleImageClick, className]);
+
+    useEffect(() => {
+        if (scrollLocked) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [scrollLocked]);
+
 
 
     return (

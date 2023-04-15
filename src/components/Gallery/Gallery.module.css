@@ -13,6 +13,9 @@
 .gallery::-webkit-scrollbar {
     display: none;
 }
+.scroll-locked {
+    overflow: hidden;
+}
 
 .gallery-container {
     display: flex;

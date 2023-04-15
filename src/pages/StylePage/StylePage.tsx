@@ -80,7 +80,7 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images}/>
+					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
