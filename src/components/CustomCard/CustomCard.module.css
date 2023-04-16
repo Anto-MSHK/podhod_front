@@ -8,6 +8,6 @@
 }
 
 
-.custom_card .outline{
+.custom_card.outline{
     border: 2px solid var(--dark_gray_border_color);
 }

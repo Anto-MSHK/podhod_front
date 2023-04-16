@@ -1,20 +1,23 @@
+.chapter_list_wrapper{
+	display: flex;
 
+}
 
 .chapter_card_container{
     padding: 0;
 	margin: 0;
+	border: 2px solid black 
 }
 
 .btn_wrapper{
-	background-color: transparent !important;
-	border: 2px solid transparent  !important;
+	background-color: transparent /* !important */;
+	border: 2px solid transparent  /* !important */;
 }
-
 
 .btn_wrapper:hover{
 	box-shadow: inset 0 0 0 2px #df791a;
-	border: 2px solid transparent  !important;
-	background-color: transparent !important;
+	border: 2px solid transparent  /* !important */;
+	background-color: transparent /* !important */;
 }
 .btn_container{
 	display: flex;
@@ -23,18 +26,18 @@
 }
 .tool__btn {
 	border-radius: var(--radius);
-	background-color: transparent !important ;
-	border: 2px solid transparent  !important;
+	background-color: transparent /* !important */ ;
+	border: 2px solid transparent  /* !important */;
 	padding: 10px;
 }
 
-.tool__btn p {
+.tool__btn p{
 	margin: 0;
 }
 .tool__btn:hover{
 	box-shadow: inset 0 0 0 2px #df791a;
-	background-color: transparent !important ;
-	border: 2px solid transparent  !important;
+	background-color: transparent /* !important */ ;
+	border: 2px solid transparent  /* !important */;
 }
 .card_title{
 	padding: 1rem;
@@ -45,7 +48,10 @@
 	align-items: center;
 }
 .card_body{
-	width: 100%
+	width: 100%;
+	height: fit-content;
+	border-radius: 0 0 var(--radius) var(--radius);
+
 }
 
 .modalWrapper{

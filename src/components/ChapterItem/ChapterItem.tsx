@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import styles from './ChapterItem.module.css'
 import { CustomBtn } from '../CustomBtn/CustomBtn'
-import { CardBody, CardTitle } from 'reactstrap'
+import { Card, CardBody, CardTitle, Collapse } from 'reactstrap'
 import editIcon from '../../assets/icons/editIcon.svg'
 import CustomCard from '../CustomCard/CustomCard'
 import { ChapterT } from '../../app/Types/ChapterT'
 import { useDeleteChapterMutation } from '../../app/services/ChapterApi'
 import { BlockItem } from '../BlockItem/BlockItem'
+import CustomListItem from '../CustomListItem/CustomListItem'
 
 type ChapterItemT = {
     chapter: ChapterT,
@@ -29,42 +30,40 @@ const ChapterItem: React.FC<ChapterItemT> = ({ chapter, showpieceId, eventId }) 
     }
 
     return (
-
-        <CustomCard className={styles.chapter_card_container} outline   >
-
-            <div className={styles.card_title}>
-                <CardTitle >
-                    <h3>
-                        {chapter.title}
-                    </h3>
-                    <p>{chapter.description}</p>
-                </CardTitle>
-                <div className={styles.btn_container}>
-                    <CustomBtn className={styles.tool__btn} iconPosition='top' icon={editIcon} >
-                        <p className="min">Добавить блок</p>
-                    </CustomBtn>
-                    <CustomBtn className={styles.tool__btn} onClick={() => handleDeleteChapter(String(chapter.id), showpieceId)} icon={editIcon}
-                        iconPosition='right'
-                    >
-                        <p className="min">Удалить раздел</p>
-                    </CustomBtn>
-                    <CustomBtn onClick={() => setIsChapterShow(!isChapterShown)}>Открыть</CustomBtn>
-                </div>
-            </div>
+        <CustomListItem dropdownItems={[
             {
-                isChapterShown
-                    &&
-                    <CardBody className={styles.card_body}>
+                text: 'Редактировать',
+                onClick: () => { },
+            },
+            {
+                text: 'Удалить',
+                onClick: () => handleDeleteChapter(String(chapter.id), showpieceId),
+            },
+        ]}
+            className={styles.chapter_list_wrapper}
+            title={chapter.title}
+            subTitle={chapter.description}
+            extra={<CustomBtn onClick={() => setIsChapterShow(!isChapterShown)}>Открыть</CustomBtn>}
 
-                        {
+        >
+
+            <Collapse isOpen={isChapterShown}>
+                <CustomCard className={styles.card_body} outline>
+                    {
+                        chapter.blocks.length ?
                             chapter.blocks.map((block, index) => (
-                                <BlockItem block={block}/>
+                                <BlockItem block={block} />
                             ))
-                        }
+                            :
+                            <div style={{textAlign: 'center'}}>
+                                <h1>Блоков не найдено</h1>
+                            </div>
+                    }
+                </CustomCard>
+            </Collapse>
 
-                    </CardBody>
-            }
-        </CustomCard>
+
+        </CustomListItem>
     )
 }
 

@@ -4,7 +4,7 @@ import { FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Card, CardHeader, CardBody, CardText, CardFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, ListGroup } from "reactstrap";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import {
 	useFetchExhibitsQuery,
@@ -18,14 +18,13 @@ import {
 	CreateExhibitPayloadT,
 	UpdateExhibitPayloadT,
 } from "../../app/Types/ExhibitsT";
-import deleteIcon from "../../assets/icons/CrossInCircle.svg";
-import editIcon from '../../assets/icons/RedСheckMark.svg'
-
 import { useParams } from "react-router-dom";
 import { exhibitsT } from "../../app/Types/ExhibitsT";
 import { useFetchChaptersQuery } from "../../app/services/ChapterApi";
 import { ChapterList } from "../ChapterList/ChapterList";
 import { InfoMessage } from "../InfoMessage/InfoMessage";
+import CustomCard from "../CustomCard/CustomCard";
+import CustomListItem from "../CustomListItem/CustomListItem";
 
 
 interface formType {
@@ -143,46 +142,39 @@ export const EventShowpiecesEdit = () => {
 				</CustomBtn>
 			</div>
 			<div className={styles.list_container}>
-				<div className={`${styles.showpiece_list} ${styles['showpieces']}`}>
+				<ListGroup className={`${styles.showpiece_list} ${styles['showpieces']}`}>
 					{!isLoading &&
 						data &&
 						data.map((el: exhibitsT) => {
 							return (
-								<button
-									key={el.id}
-									className={styles.item}
+								<CustomListItem title={el.name}
+									className={styles.list_item}
 									onClick={() => сhangeShowPiece(el.id)}
+									badgeText={el.chapters ? el.chapters.length : '0'}
+									dropdownItems={[
+										{
+											text: 'Редактировать',
+											onClick: () => handleEditExhibit(el),
+										},
+										{
+											text: 'Удалить',
+											onClick: () => handleDeleteExhibit(el.id),
+										},
+									]}
 								>
-									<h3>{el.name}</h3>
-									<div
-										className={styles.item_tool_btns}
-									>
-										<CustomBtn className={styles.tool__btn}
-											onClick={() => handleEditExhibit(el)}
-										>
-											<img src={editIcon} />
-										</CustomBtn>
-										<CustomBtn className={styles.tool__btn}
-											onClick={() => {
-												handleDeleteExhibit(el.id);
-											}}
-										>
-											<img src={deleteIcon} />
-										</CustomBtn>
-									</div>
-								</button>
-							);
+								</CustomListItem>
+							)
 						})}
-				</div>
-				<div className={`${styles.showpiece_list} ${styles['chapters']}` }>
-				 {
-					showpiece 
-					?
-					<ChapterList showpiece={showpiece} eventId={eventId as string}/>
-					:
-					<InfoMessage title="Ошибка"/>
-				 }	
-				</div>
+				</ListGroup>
+				<CustomCard className={`${styles.showpiece_list} ${styles['chapters']}`}>
+					{
+						showpiece
+							?
+							<ChapterList showpiece={showpiece} eventId={eventId as string} />
+							:
+							<InfoMessage title="Ошибка" />
+					}
+				</CustomCard>
 			</div>
 			<Modal
 				isOpen={modal}

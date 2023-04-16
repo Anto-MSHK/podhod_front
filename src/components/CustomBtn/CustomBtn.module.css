@@ -2,9 +2,9 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	color: white !important;
-	background-color: var(--orange_color) !important;
-	border: 1px solid var(--orange_color-hover) !important;
+	color: white /* !important */;
+	background-color: var(--orange_color) /* !important */;
+	border: 1px solid var(--orange_color-hover) /* !important */;
 	border-radius: var(--radius);
 	font-weight: 500;
 	font-size: 18px;
@@ -21,6 +21,7 @@
 }
 .customBtn.icon_top{
 	flex-direction: column;
+	
 }
 .customBtn.icon_bottom{
 	flex-direction: column-reverse;
@@ -28,7 +29,11 @@
 
 
 .customBtn:hover {
-	background-color: var(--orange_color-hover) !important;
+	background-color: var(--orange_color-hover) ;
+}
+
+.customBtn:active{
+	background-color:var(--orange_color) ;
 }
 
 .disabled {
