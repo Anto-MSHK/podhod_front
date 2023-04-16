@@ -3,17 +3,19 @@ import { EventPage } from "../../pages/MobilePreview/EventPage/EventPage";
 import { ExhibitPage } from "../../pages/MobilePreview/ExhibitPage/ExhibitPage";
 import { ChapterPage } from "../../pages/MobilePreview/ChapterPage/ChapterPage";
 import { PreviewLayout } from "../PreviewLayout/PreviewLayout";
-export const PreviewSwitcher = () => {
 
-	let type = 'EventPage'
+interface IPreviewSwitcher {
+	selectedPageType: string;
+}
 
+export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }) => {
 	const renderPage = () => {
-		switch (type) {
-			case 'EventPage':
+		switch (selectedPageType) {
+			case "EventPage":
 				return <EventPage />;
-			case 'ExhibitPage':
+			case "ExhibitPage":
 				return <ExhibitPage />;
-			case 'ChapterPage':
+			case "ChapterPage":
 				return <ChapterPage />;
 			default:
 				return <EventPage />;

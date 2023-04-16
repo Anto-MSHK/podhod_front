@@ -16,13 +16,13 @@ import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
 const btnData = [
-	{ name: "Основная информация", lable: "mainScreen" },
+	{ name: "Основная информация", lable: "mainScreen", type: 'EventPage' },
 	{
 		name: "Страницы",
 		lable: "pages",
-		/*   splits: [{ title: "Дополнительная страница", label: "any" }], */
+		type: 'ChapterPage'
 	},
-	{ name: "Экспонаты", lable: "exhibits" },
+	{ name: "Экспонаты", lable: "exhibits", type: 'ExhibitPage' },
 	{ name: "Настройки", lable: "settings" },
 ];
 
@@ -31,6 +31,7 @@ const typesEvent = {
 	fair: "ярмарка",
 	"promo-exhibition": "промо-выставка",
 };
+
 export const EventEdit: React.FC = () => {
 	const eventSlice = useAppSelector(state => state.eventCreate.event);
 	const backgroundImage = useAppSelector(state => state.images.avatarExpo);
@@ -90,6 +91,16 @@ export const EventEdit: React.FC = () => {
 		}
 	};
 
+	const [selectedPageType, setSelectedPageType] = useState<string>("EventPage");
+
+	useEffect(() => {
+		if (typeof activeBtn === "number") {
+			setSelectedPageType(btnData[activeBtn]?.type || "EventPage");
+		}
+	}, [activeBtn]);
+
+
+
 	return (
 		<div>
 			{(!isLoading && event) || !id ? (
@@ -145,7 +156,7 @@ export const EventEdit: React.FC = () => {
 									предпросмотр
 								</h3>
 							</div>
-							<Preview backgroundImg={backgroundImage} />
+							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
 						</div>
 						<div className={styles.InfoComponentWrapper}>
 							<InfoMessage
