@@ -54,11 +54,11 @@ h3 {
 }
 
 .item.active {
-    background-color: #bbbbbb;
+    outline: 2px solid var(--orange_color);
 }
 
 .item.action:hover {
-    background-color: var(--orange_color);
+    outline: 2px .5 var(--orange_color);
 }
 
 .dropDown_container {

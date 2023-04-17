@@ -4,20 +4,23 @@ import styles from './CustomListItem.module.css'
 import CustomCard from '../CustomCard/CustomCard';
 var classNames = require('classnames')
 
+
+export interface ListDropDownItemsI
+    {
+        text: string,
+        onClick: () => void
+    }
+
 export interface CustomListItemI extends ListGroupItemProps{
-    title: string,
+    title?: string,
     subTitle?: string,
     badgeText?: string | number,
-    onClick?: () => void;
     extra?: JSX.Element;
     tag?: React.ElementType<any>;
     className?: string;
     active?: boolean;
     action?: boolean;
-    dropdownItems?: {
-        text: string,
-        onClick: () => void
-    }[]
+    dropdownItems?:ListDropDownItemsI[],
 }
 
 const CustomListItem: React.FC<CustomListItemI> = (props) => {
@@ -42,9 +45,14 @@ const CustomListItem: React.FC<CustomListItemI> = (props) => {
         styles.item,
     )
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen((prevState) => !prevState);
-
+   
+    /* const handleClick = () => {
+       if (active) {
+           setIsActive(true)
+       }s
+         return onClick
+    } */
 
     return (
         <ListGroupItem

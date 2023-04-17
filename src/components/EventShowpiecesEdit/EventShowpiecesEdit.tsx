@@ -4,7 +4,7 @@ import { FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
-import { Modal, ModalHeader, ModalBody, ModalFooter, ListGroup } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, ListGroup, DropdownItemProps } from "reactstrap";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import {
 	useFetchExhibitsQuery,
@@ -24,8 +24,8 @@ import { useFetchChaptersQuery } from "../../app/services/ChapterApi";
 import { ChapterList } from "../ChapterList/ChapterList";
 import { InfoMessage } from "../InfoMessage/InfoMessage";
 import CustomCard from "../CustomCard/CustomCard";
-import CustomListItem from "../CustomListItem/CustomListItem";
-import ListMenuItemT from "../ListMenu/ListMenuItem";
+import { CustomListItemI, ListDropDownItemsI } from "../CustomListItem/CustomListItem";
+import CustomListMenu, { CustomMenuItemT, MenuClickInfo } from "../CustomListMenu/CustomListMenu";
 
 
 interface formType {
@@ -34,10 +34,11 @@ interface formType {
 	exhibitDescription: string;
 }
 
+
 export const EventShowpiecesEdit = () => {
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
-
+	const [currentItem, setCurrenstItem] = useState('')
 	const { data, isLoading } = useFetchExhibitsQuery(eventId);
 	const [chapterConf, setChapterConf] = useState({
 		eventId: eventId as string,
@@ -59,11 +60,14 @@ export const EventShowpiecesEdit = () => {
 	};
 
 	const сhangeShowPiece = (showPieceId: string) => {
-
 		setChapterConf({
 			eventId: eventId as string,
 			showpieceId: showPieceId,
 		})
+	}
+	const handleMenuSelect = (e: MenuClickInfo) => {
+		setCurrenstItem(e.key)
+		сhangeShowPiece(e.key)
 	}
 
 	const handleAddExhibit = (values: formType) => {
@@ -100,6 +104,36 @@ export const EventShowpiecesEdit = () => {
 		console.log("delete...");
 		await deleteExhibit({ id, eventId: eventId as string }).unwrap();
 	};
+
+	function getItem(
+		title: string,
+		key: React.Key,
+		id: string,
+		subTitle?: string,
+		dropdownItems?: ListDropDownItemsI[],
+	): CustomMenuItemT {
+		return {
+			title,
+			key,
+			id,
+			subTitle,
+			dropdownItems,
+		} as CustomMenuItemT
+	}
+
+	const menuItems: CustomListItemI[] | undefined = data?.map((item, index) => {
+		const dropDownItems: ListDropDownItemsI[] = [
+			{
+				text: 'Редактировать',
+				onClick: () => handleEditExhibit(item),
+			},
+			{
+				text: 'Удалить',
+				onClick: () => handleDeleteExhibit(item.id),
+			},
+		]
+		return getItem(item.name, item.id, item.id, item.short, dropDownItems)
+	})
 
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
@@ -143,47 +177,13 @@ export const EventShowpiecesEdit = () => {
 				</CustomBtn>
 			</div>
 			<div className={styles.list_container}>
-				<ListGroup className={`${styles.showpiece_list} ${styles['showpieces']}`}>
-					{!isLoading &&
-						data &&
-						data.map((el: exhibitsT) => {
-							return (
-								<ListMenuItemT
-									title={el.name}
-									className={styles.list_item}
-									onClick={() => сhangeShowPiece(el.id)}
-									badgeText={el.chapters ? el.chapters.length : '0'}
-									dropdownItems={[
-										{
-											text: 'Редактировать',
-											onClick: () => handleEditExhibit(el),
-										},
-										{
-											text: 'Удалить',
-											onClick: () => handleDeleteExhibit(el.id),
-										},
-									]}
-								>
-								</ListMenuItemT>
-							)
-						})}
-					{/* <CustomListItem title={el.name}
-									className={styles.list_item}
-									onClick={() => сhangeShowPiece(el.id)}
-									badgeText={el.chapters ? el.chapters.length : '0'}
-									dropdownItems={[
-										{
-											text: 'Редактировать',
-											onClick: () => handleEditExhibit(el),
-										},
-										{
-											text: 'Удалить',
-											onClick: () => handleDeleteExhibit(el.id),
-										},
-									]}
-								>
-								</CustomListItem> */}
-				</ListGroup>
+				<CustomListMenu
+					className={styles.showpiece_list}
+					onClick={handleMenuSelect}
+					selectedKey={currentItem}
+					items={menuItems?.length ? menuItems : []}
+				/>
+
 				<CustomCard className={`${styles.showpiece_list} ${styles['chapters']}`}>
 					{
 						showpiece
