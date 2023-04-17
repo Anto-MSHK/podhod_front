@@ -4,7 +4,7 @@ import styles from './CustomListItem.module.css'
 import CustomCard from '../CustomCard/CustomCard';
 var classNames = require('classnames')
 
-interface CustomListItemI extends ListGroupItemProps{
+export interface CustomListItemI extends ListGroupItemProps{
     title: string,
     subTitle?: string,
     badgeText?: string | number,

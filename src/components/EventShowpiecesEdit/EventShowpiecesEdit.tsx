@@ -25,6 +25,7 @@ import { ChapterList } from "../ChapterList/ChapterList";
 import { InfoMessage } from "../InfoMessage/InfoMessage";
 import CustomCard from "../CustomCard/CustomCard";
 import CustomListItem from "../CustomListItem/CustomListItem";
+import ListMenuItemT from "../ListMenu/ListMenuItem";
 
 
 interface formType {
@@ -147,7 +148,8 @@ export const EventShowpiecesEdit = () => {
 						data &&
 						data.map((el: exhibitsT) => {
 							return (
-								<CustomListItem title={el.name}
+								<ListMenuItemT
+									title={el.name}
 									className={styles.list_item}
 									onClick={() => сhangeShowPiece(el.id)}
 									badgeText={el.chapters ? el.chapters.length : '0'}
@@ -162,9 +164,25 @@ export const EventShowpiecesEdit = () => {
 										},
 									]}
 								>
-								</CustomListItem>
+								</ListMenuItemT>
 							)
 						})}
+					{/* <CustomListItem title={el.name}
+									className={styles.list_item}
+									onClick={() => сhangeShowPiece(el.id)}
+									badgeText={el.chapters ? el.chapters.length : '0'}
+									dropdownItems={[
+										{
+											text: 'Редактировать',
+											onClick: () => handleEditExhibit(el),
+										},
+										{
+											text: 'Удалить',
+											onClick: () => handleDeleteExhibit(el.id),
+										},
+									]}
+								>
+								</CustomListItem> */}
 				</ListGroup>
 				<CustomCard className={`${styles.showpiece_list} ${styles['chapters']}`}>
 					{
