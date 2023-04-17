@@ -12,6 +12,8 @@ import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
 // import { Form } from "../../components/Form/Form";
+import { FiArrowRight } from 'react-icons/fi';
+import { MdFavorite } from 'react-icons/md';
 import { FormContainer } from "../../components/Form/Form";
 import { FormInput } from "../../components/Form/FormInput";
 import * as Yup from "yup";
@@ -21,6 +23,7 @@ import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import {Gallery} from "../../components/Gallery/Gallery";
 import React from "react";
+import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
 
 const images = [
 	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 1' },
@@ -76,6 +79,12 @@ export const MainPage = () => {
 						ducimus voluptas eveniet minima deserunt.
 					</p>
 					<Gallery images={images}/>
+					<div>
+						<ButtonArt text="Перейти к выставке" size="small" variant="arrow" onClick={() => console.log('Clicked')}/>
+						<ButtonArt text="Узнать больше" size="normal" variant="text" onClick={() => console.log('Clicked')}/>
+						<ButtonArt size="normal" variant="icon" icon={icon2} onClick={() => console.log('Clicked')} />
+						<ButtonArt size="small" variant="textAndIcon" text="Поиск" icon={icon1} onClick={() => console.log('Clicked')}/>
+					</div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />

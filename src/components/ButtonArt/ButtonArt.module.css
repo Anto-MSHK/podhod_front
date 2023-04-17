@@ -1,0 +1,117 @@
+.button {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.normal {
+    padding: 11px 22px;
+    font-size: 16px;
+}
+
+.small {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.arrow {
+    background-color: black;
+    color: white;
+    outline-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    order: 3;
+    width: 70%;
+    position: relative;
+    z-index: 1;
+}
+
+.arrowLine {
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2px;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 9px;
+    left: 8%;
+}
+
+.icon {
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+}
+
+.icon img {
+    height: 16px;
+    margin: 5px;
+    width: 16px;
+}
+
+.textAndIcon img {
+    height: 16px;
+    margin-right: 5px;
+    width: 16px;
+}
+
+.text {
+    order: 1;
+    color: black;
+    margin-right: 15px;
+}
+
+.textAndIcon {
+    color: black;
+    order: 1;
+}
+
+.arrowContainer {
+    order: 2;
+    width: 100%;
+    position: relative;
+}
+
+.arrowContainer::before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    height: 2px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 2;
+    transform: translateY(-50%);
+}
+
+.button:not(:empty) .arrowLine {
+    display: block;
+    max-width: 90%;
+}
+
+.button:not(:empty) .arrow {
+    width: 100%;
+}
+
+.button:empty .arrow {
+    justify-content: flex-end;
+    width: 100%;
+}
