@@ -22,11 +22,13 @@ import {
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
 import { eventPagesApi } from "./services/EventPages.Api";
+import { blocksApi } from "./services/BlockApi";
 
 const rootReducer = combineReducers({
 	[eventsApi.reducerPath]: eventsApi.reducer,
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
+	[blocksApi.reducerPath]: blocksApi.reducer,
 	counter: counterReducer,
 	images: imagesUploadReducer,
 	eventCreate: ExpoCreateReducer,
@@ -50,6 +52,7 @@ export const store = configureStore({
 			eventsApi.middleware,
 			exhibitsApi.middleware,
 			eventPagesApi.middleware,
+			blocksApi.middleware,
 		]),
 });
 
