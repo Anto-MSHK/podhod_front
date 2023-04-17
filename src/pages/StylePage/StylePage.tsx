@@ -19,6 +19,7 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
+import { TextBlockForm } from "../../components/TextBlockForm/TextBlockForm";
 
 export const MainPage = () => {
 	const btnData = [
@@ -193,6 +194,7 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
+			<TextBlockForm id="56"/>
 		</div>
 	);
 };

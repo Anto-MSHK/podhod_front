@@ -5,7 +5,7 @@ import { Layout } from "./layout/Layout";
 import Auth from "./pages/Auth/Auth";
 import { EventEdit } from "./pages/EventEdit/EventEdit";
 import { EventsList } from "./pages/EventsList/EventsList";
-import { TextBlock } from "./components/TextBlock/TextBlock";
+import { TextBlockForm } from "./components/TextBlockForm/TextBlockForm";
 
 function App() {
 	return (
@@ -17,7 +17,7 @@ function App() {
 				<Route element={<EventEdit />} path="/expo/"></Route>
 				<Route element={<EventEdit />} path="/expo/:id"></Route>
 				<Route element={<EventsList />} path="/event"></Route>
-				<Route element={<TextBlock buttonLabel={undefined} className={undefined}/>} path="/textblock"></Route>
+
 			</Routes>
 		</Layout>
 	);

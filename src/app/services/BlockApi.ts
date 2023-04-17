@@ -10,12 +10,17 @@ import {
 	CreateEventPayloadT,
 } from "../Types/EventsT";
 
-type ChapterT = {
-    title: string
+type BlockT = {
+	id?: string,
+    title: string,
+	type: string,
+	content: {
+		description: string,
+	}
 }
-type AddEventReqT = {
+type AddBlockReqT = {
     chapterId: string,
-    body: ChapterT
+    body: BlockT,
 }
 
 
@@ -28,7 +33,7 @@ export const blocksApi = createApi({
 	}),
 	endpoints: builder => ({
 
-		addBlock: builder.mutation<any, AddEventReqT>({
+		addBlock: builder.mutation<any, AddBlockReqT>({
 			query: ({chapterId, body}) => ({
 				url: `/${chapterId}/block`,
 				method: "POST",
@@ -38,4 +43,4 @@ export const blocksApi = createApi({
 	}),
 });
 
-const {useAddBlockMutation} = blocksApi
+export const {useAddBlockMutation} = blocksApi
