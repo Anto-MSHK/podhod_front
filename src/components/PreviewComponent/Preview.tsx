@@ -17,11 +17,11 @@ const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType }) => {
 	return (
 		<div
 			className={styles.preview_picture}
-			style={{
+			style={selectedPageType === 'EventPage' ? {
 				backgroundImage: backgroundImg
 					? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`
 					: "none",
-			}}
+			} : {backgroundImage: "none"}}
 		>
 			<PreviewSwitcher selectedPageType={selectedPageType} />
 		</div>
