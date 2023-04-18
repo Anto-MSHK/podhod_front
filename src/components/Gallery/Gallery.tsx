@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef, RefObject } from 'react';
 import styles from './Gallery.module.css';
+import {CarouselIndicators} from 'reactstrap';
 
 interface ImageProps {
     src: string;
@@ -10,6 +11,8 @@ interface GalleryProps {
     images: ImageProps[];
     className?: string;
     scrollLocked?: boolean;
+    indicators?: boolean
+
 }
 
 interface GalleryImageProps extends ImageProps {
@@ -17,6 +20,7 @@ interface GalleryImageProps extends ImageProps {
     onClick: (index: number) => void;
     imageNumber: number;
     className?: string;
+
 }
 
 const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className }) => {
@@ -32,21 +36,35 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
             role="button"
             tabIndex={0}
             data-isactive={isActive}
+            id={`image-${imageNumber}`}
         >
             <img src={src} alt={alt} className={styles.image} />
         </figure>
     );
 });
 
-export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false }) => {
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false, indicators }) => {
     const [activeIndex, setActiveIndex] = useState<number>(() => {
         const storedIndex = localStorage.getItem('activeIndex');
         return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
     });
 
+
+    const galleryRef = useRef(null)
+
+
     const handleImageClick = useCallback((index: number) => {
         setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
     }, []);
+
+    const handleCarouselIndicatorClick = useCallback((index: number) => {
+        handleImageClick(index)
+        const el = document.getElementById(`image-${index}`)
+        console.log(el)
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+        }
+    }, [])
 
     useEffect(() => {
         localStorage.setItem('activeIndex', activeIndex.toString());
@@ -55,7 +73,7 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
     const galleryImages = useMemo(() => {
         return images ? images.map((image, index) => (
             <GalleryImage
-                key={image.src}
+                key={image.src + index}
                 {...image}
                 isActive={index === activeIndex}
                 onClick={handleImageClick}
@@ -77,7 +95,19 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
 
     return (
         <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
-            {galleryImages}
+            <div className={styles.gallery_container} ref={galleryRef}>
+                {galleryImages}
+            </div>
+            {
+                indicators &&
+                <CarouselIndicators
+                    className={styles.carousel_indicators}
+                    items={galleryImages ? galleryImages : []}
+                    activeIndex={activeIndex}
+                    onClickHandler={handleCarouselIndicatorClick}
+                />
+            }
+
         </div>
     );
 };
