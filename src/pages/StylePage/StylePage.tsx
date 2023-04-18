@@ -199,12 +199,12 @@ export const MainPage = () => {
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={false}
-					backgroundColor={'#df791a'}
+			
 				/>
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
 				<Head
-					leftElement={<CustomBtn>Назад</CustomBtn>}
+					leftElement={<CustomBtn onClick={() => (alert('Назад'))}>Назад</CustomBtn>}
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={true}
@@ -212,9 +212,10 @@ export const MainPage = () => {
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
 				<Head
-					leftElement={<CustomBtn>Меню</CustomBtn>}
+					leftElement={<CustomBtn onClick={() => (alert('Меню'))}>Меню</CustomBtn>}
 					centerElement={' '}
 					isTransparent={false}
+					style={{backgroundColor: 'var(--gray_color)'}}
 				/>
 			</div>
 			<div style={{marginTop: 50, width: '30%'}}>
@@ -222,7 +223,6 @@ export const MainPage = () => {
 					leftElement={<CustomBtn>Назад</CustomBtn>}
 					centerElement={<h3>История написания</h3>}
 					isTransparent={false}
-					backgroundColor={'#df791a'}
 				/>
 			</div>
 		</div>

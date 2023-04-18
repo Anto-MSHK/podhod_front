@@ -1,36 +1,40 @@
 import React from 'react';
 import styles from './Head.module.css';
-
+var classNames = require('classnames')
 interface HeadProps {
 	leftElement?: React.ReactNode;
 	centerElement?: React.ReactNode;
 	rightElement?: React.ReactNode;
 	isTransparent?: boolean;
-	backgroundColor?: string;
+	style?: React.CSSProperties,
 	centerStyle?: React.CSSProperties;
 	rightStyle?: React.CSSProperties;
+	className?: string,
 }
 
 const Head: React.FC<HeadProps> = ({
-																		 leftElement,
-																		 centerElement,
-																		 rightElement,
-																		 isTransparent = false,
-																		 backgroundColor = 'var(--gray_color)',
-																		 centerStyle,
-																		 rightStyle,
-																	 }) => {
+	className,
+	leftElement,
+	centerElement,
+	rightElement,
+	isTransparent = false,
+	centerStyle,
+	rightStyle,
+	style
+}) => {
 	if (!centerElement) {
 		console.error('Center element is not defined in Head component');
 		return null;
 	}
 
-	const headerStyle = {
-		backgroundColor: isTransparent ? 'transparent' : backgroundColor,
-	};
+	let classes = classNames(
+		className,
+		styles.container,
+		{[styles.transparent]: isTransparent},
+	)
 
 	return (
-		<header className={styles.container} style={headerStyle}>
+		<header className={classes} style={style}>
 			<div className={styles.left}>{leftElement}</div>
 			<div className={styles.center} style={centerStyle}>
 				{centerElement}
