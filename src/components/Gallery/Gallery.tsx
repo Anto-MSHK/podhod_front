@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
 
 interface ImageProps {
@@ -65,18 +65,18 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
         )) : null;
     }, [images, activeIndex, handleImageClick, className]);
 
+    const galleryRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         if (scrollLocked) {
-            document.body.style.overflow = 'hidden';
+            galleryRef.current?.classList.add(styles.scrollLocked);
         } else {
-            document.body.style.overflow = 'auto';
+            galleryRef.current?.classList.remove(styles.scrollLocked);
         }
     }, [scrollLocked]);
 
-
-
     return (
-        <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
+        <div ref={galleryRef} className={`${styles.gallery} ${className}`} aria-label="Gallery">
             {galleryImages}
         </div>
     );
