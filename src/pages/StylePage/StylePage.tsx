@@ -19,6 +19,7 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
+import Head from "../../components/Head/Head";
 
 export const MainPage = () => {
 	const btnData = [
@@ -193,6 +194,37 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={false}
+			
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert('Назад'))}>Назад</CustomBtn>}
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={true}
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert('Меню'))}>Меню</CustomBtn>}
+					centerElement={' '}
+					isTransparent={false}
+					style={{backgroundColor: 'var(--gray_color)'}}
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn>Назад</CustomBtn>}
+					centerElement={<h3>История написания</h3>}
+					isTransparent={false}
+				/>
+			</div>
 		</div>
 	);
 };
