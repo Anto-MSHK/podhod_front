@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: flex-end;
     order: 3;
-    width: 70%;
+    width: 50%;
     position: relative;
     z-index: 1;
 }
@@ -74,12 +74,10 @@
 
 .text {
     order: 1;
-    color: black;
     margin-right: 15px;
 }
 
 .textAndIcon {
-    color: black;
     order: 1;
 }
 
