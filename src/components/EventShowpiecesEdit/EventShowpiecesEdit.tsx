@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./EventShowpiecesEdit.module.css";
 import { CustomInput, FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
@@ -11,6 +11,7 @@ import {
 	ModalFooter,
 	ListGroup,
 	DropdownItemProps,
+	Spinner,
 } from "reactstrap";
 
 import {
@@ -40,7 +41,9 @@ import CustomListMenu, {
 	MenuClickInfo,
 } from "../CustomListMenu/CustomListMenu";
 import plusIcon from "../../assets/icons/plusIcon.svg";
+import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
+import { ChapterForm } from "../ChapterForm/ChapterForm";
 
 interface formType {
 	exhibitName: string;
@@ -49,6 +52,9 @@ interface formType {
 }
 
 export const EventShowpiecesEdit = () => {
+	const [modalChapter, setModalChapter] = useState(false);
+	const toggleChapter = () => setModalChapter(!modalChapter);
+
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
 	const [currentItem, setCurrenstItem] = useState("");
@@ -57,8 +63,11 @@ export const EventShowpiecesEdit = () => {
 		eventId: eventId as string,
 		showpieceId: data?.length ? data[0].id : "0",
 	});
-	const { data: showpiece, isLoading: isChaptersLoading } =
-		useFetchChaptersQuery(chapterConf);
+	const {
+		data: showpiece,
+		isLoading: isChaptersLoading,
+		isFetching: isChaptersFetching,
+	} = useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
 	const [updateExhibit] = useUpdateExhibitMutation();
 	const [deleteExhibit] = useDeleteExhibitMutation();
@@ -146,8 +155,17 @@ export const EventShowpiecesEdit = () => {
 				onClick: () => handleDeleteExhibit(item.id),
 			},
 		];
+
 		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
 	});
+
+	useEffect(() => {
+		if (menuItems && menuItems?.length > 0) setCurrenstItem(menuItems[0].key);
+		setChapterConf({
+			eventId: eventId as string,
+			showpieceId: data?.length ? data[0].id : "0",
+		});
+	}, [data]);
 
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
@@ -183,9 +201,9 @@ export const EventShowpiecesEdit = () => {
 		<div className={styles.main_page_form_wrapper}>
 			{showpiece ? (
 				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
-					<div>
+					<div style={{ maxWidth: 300 }}>
 						<div className={styles.form_header}>
-							<CustomInput placeholder="Найти экспонат..." />
+							<CustomInput placeholder={"Найти экспонат..."} />
 						</div>
 						<CustomListMenu
 							className={styles.showpiece_list}
@@ -204,28 +222,17 @@ export const EventShowpiecesEdit = () => {
 							Новый экспонат
 						</CustomBtn>
 					</div>
-					<div
-						style={{
-							backgroundColor: "white",
-							top: 0,
-							bottom: 0,
-							padding: 1,
-							margin: "0 15px",
-							borderRadius: 10,
-						}}
-					/>
+					<div className={styles.form_divider} />
 					<div style={{ width: "100%" }}>
 						<div className={styles.form_header}>
-							<h2 style={{ margin: 0 }}>
+							<h2 style={{ marginTop: -6, fontSize: 28 }}>
 								{showpiece?.name}
-								<p className="min" style={{ marginTop: -5 }}>
+								<p className="min" style={{ marginTop: -2, marginBottom: 0 }}>
 									экспонат
 								</p>
 							</h2>
 							<CustomBtn
-								onClick={() => {
-									setModal(true);
-								}}
+								onClick={() => setModalChapter(true)}
 								iconWidth={20}
 								icon={plusIcon}
 							>
@@ -235,18 +242,60 @@ export const EventShowpiecesEdit = () => {
 						<div className={styles.form_content}></div>
 						<CustomCard
 							className={`${styles.showpiece_list} ${styles["chapters"]}`}
+							style={{ backgroundColor: "#363535", padding: "1rem" }}
 						>
-							<ChapterList showpiece={showpiece} eventId={eventId as string} />
+							{showpiece &&
+							showpiece.chapters &&
+							showpiece.chapters?.length > 0 ? (
+								<ChapterList
+									showpiece={showpiece}
+									eventId={eventId as string}
+								/>
+							) : isChaptersFetching ? (
+								<div className={styles.img}>
+									<Spinner type="grow" className={styles.spinner} />
+								</div>
+							) : (
+								<InfoMessage
+									title="Создайте первую главу о вашем экспонате!"
+									icon={descIcon}
+									iconPosition="top"
+									iconWidth={100}
+									style={{ padding: 40 }}
+								/>
+							)}
 						</CustomCard>
 					</div>
+					<Modal
+						isOpen={modalChapter}
+						toggle={toggleChapter}
+						size={"xl"}
+						contentClassName={styles.modalWrapper}
+						className={styles.modal}
+						backdropClassName={styles.modalModal}
+					>
+						{eventId && (
+							<ChapterForm
+								eventId={eventId}
+								showPieceId={chapterConf.showpieceId}
+							/>
+						)}
+					</Modal>
+				</div>
+			) : isChaptersLoading ? (
+				<div className={styles.img}>
+					<Spinner type="grow" className={styles.spinner} />
 				</div>
 			) : (
 				<CustomBtn
 					onClick={() => {
 						setModal(true);
 					}}
+					icon={plusIcon}
+					iconWidth={20}
+					style={{ marginTop: 15 }}
 				>
-					Создать экспонат
+					Создайте первый экспонат
 				</CustomBtn>
 			)}
 			<Modal

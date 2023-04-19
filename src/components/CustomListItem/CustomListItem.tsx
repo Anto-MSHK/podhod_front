@@ -29,8 +29,8 @@ export interface ListDropDownItemsI {
 }
 
 export interface CustomListItemI extends ListGroupItemProps {
-	title?: string;
-	subTitle?: string;
+	title?: any;
+	subTitle?: any;
 	badgeText?: string | number;
 	extra?: JSX.Element;
 	tag?: React.ElementType<any>;
@@ -86,9 +86,17 @@ const CustomListItem: React.FC<CustomListItemI> = props => {
 				className={styles.card_container + ` ${active ? "active" : ""}`}
 			>
 				<CardHeader className={styles.card_header}>
-					<div>
+					<div style={{ width: "100%" }}>
 						<CardTitle className={styles.card_title_container} tag={"h3"}>
-							<h3 className={styles.card_title}>{title}</h3>
+							<h3
+								className={styles.card_title}
+								style={{
+									lineHeight: "25px",
+									fontWeight: !active ? 500 : 700,
+								}}
+							>
+								{title}
+							</h3>
 							{badgeText && (
 								<Badge className={styles.badge} pill>
 									{badgeText}
@@ -96,7 +104,15 @@ const CustomListItem: React.FC<CustomListItemI> = props => {
 							)}
 						</CardTitle>
 						{subTitle && (
-							<CardSubtitle tag={"p"} className={styles.card_subTitle}>
+							<CardSubtitle
+								tag={"p"}
+								className={styles.card_subTitle + ` ${!active ? "min" : ""}`}
+								style={{
+									marginTop: "5px",
+									color: !active ? "#a3a3a3" : undefined,
+									lineHeight: "17px",
+								}}
+							>
 								{subTitle}
 							</CardSubtitle>
 						)}

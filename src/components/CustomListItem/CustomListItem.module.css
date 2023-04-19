@@ -31,7 +31,9 @@ h3 {
 .card_title {
 	width: max-content;
 	word-wrap: inherit;
-	max-width: 230px;
+	width: fit-content;
+	overflow-wrap: anywhere;
+	margin: 0;
 }
 
 .card_title_container {
@@ -67,6 +69,7 @@ h3 {
 .dropDown_container {
 	display: flex;
 	gap: 1rem;
+	align-items: center;
 }
 
 .dropDown {

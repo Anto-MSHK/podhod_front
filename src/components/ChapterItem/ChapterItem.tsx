@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ChapterItem.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
-import { Card, CardBody, CardTitle, Collapse } from "reactstrap";
+import { Card, CardBody, CardTitle, Collapse, Modal } from "reactstrap";
 import editIcon from "../../assets/icons/editIcon.svg";
 import CustomCard from "../CustomCard/CustomCard";
 import { ChapterT } from "../../app/Types/ChapterT";
@@ -50,7 +50,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 			]}
 			className={styles.chapter_list_wrapper}
 			title={chapter.title}
-			subTitle={chapter.description}
+			subTitle={<p className="min">{chapter.description}</p>}
 			extra={
 				<CustomBtn
 					style={{ width: "45px" }}
@@ -64,8 +64,8 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					{chapter.blocks.length ? (
 						chapter.blocks.map((block, index) => <BlockItem block={block} />)
 					) : (
-						<div style={{ textAlign: "center" }}>
-							<h1>Блоков не найдено</h1>
+						<div style={{ textAlign: "center", padding: 15 }}>
+							<h2>Блоков не найдено</h2>
 						</div>
 					)}
 				</CustomCard>

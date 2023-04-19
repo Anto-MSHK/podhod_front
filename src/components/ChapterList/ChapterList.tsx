@@ -25,26 +25,13 @@ export const ChapterList: React.FC<ChapterListT> = ({ showpiece, eventId }) => {
 				{showpiece?.chapters &&
 					showpiece.chapters.map((chapter, index) => (
 						<ChapterItem
-							key={chapter.id + index}
+							key={chapter.id + index + chapter.title}
 							chapter={chapter}
 							showpieceId={showpiece.id}
 							eventId={eventId}
 						/>
 					))}
 			</ListGroup>
-			<Modal
-				isOpen={modal}
-				toggle={toggle}
-				size={"xl"}
-				contentClassName={styles.modalWrapper}
-				className={styles.modal}
-				backdropClassName={styles.modalModal}
-				/* 	onClosed={() => {
-                    setEditingExhibit(null);
-                }} */
-			>
-				<ChapterForm eventId={eventId} showPieceId={showpiece.id} />
-			</Modal>
 		</div>
 	);
 };
