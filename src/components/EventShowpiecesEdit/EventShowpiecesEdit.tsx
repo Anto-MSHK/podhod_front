@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import styles from "./EventShowpiecesEdit.module.css";
-import { FormInput } from "../Form/FormInput";
+import { CustomInput, FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
-import { Modal, ModalHeader, ModalBody, ModalFooter, ListGroup, DropdownItemProps } from "reactstrap";
-import { CustomBtn } from "../CustomBtn/CustomBtn";
+import {
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	ListGroup,
+	DropdownItemProps,
+} from "reactstrap";
+
 import {
 	useFetchExhibitsQuery,
 	useAddExhibitMutation,
@@ -24,9 +31,16 @@ import { useFetchChaptersQuery } from "../../app/services/ChapterApi";
 import { ChapterList } from "../ChapterList/ChapterList";
 import { InfoMessage } from "../InfoMessage/InfoMessage";
 import CustomCard from "../CustomCard/CustomCard";
-import { CustomListItemI, ListDropDownItemsI } from "../CustomListItem/CustomListItem";
-import CustomListMenu, { CustomMenuItemT, MenuClickInfo } from "../CustomListMenu/CustomListMenu";
-
+import {
+	CustomListItemI,
+	ListDropDownItemsI,
+} from "../CustomListItem/CustomListItem";
+import CustomListMenu, {
+	CustomMenuItemT,
+	MenuClickInfo,
+} from "../CustomListMenu/CustomListMenu";
+import plusIcon from "../../assets/icons/plusIcon.svg";
+import { CustomBtn } from "./../CustomBtn/CustomBtn";
 
 interface formType {
 	exhibitName: string;
@@ -34,17 +48,17 @@ interface formType {
 	exhibitDescription: string;
 }
 
-
 export const EventShowpiecesEdit = () => {
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
-	const [currentItem, setCurrenstItem] = useState('')
+	const [currentItem, setCurrenstItem] = useState("");
 	const { data, isLoading } = useFetchExhibitsQuery(eventId);
 	const [chapterConf, setChapterConf] = useState({
 		eventId: eventId as string,
-		showpieceId: data?.length ? data[0].id : '0',
-	})
-	const { data: showpiece, isLoading: isChaptersLoading } = useFetchChaptersQuery(chapterConf);
+		showpieceId: data?.length ? data[0].id : "0",
+	});
+	const { data: showpiece, isLoading: isChaptersLoading } =
+		useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
 	const [updateExhibit] = useUpdateExhibitMutation();
 	const [deleteExhibit] = useDeleteExhibitMutation();
@@ -63,12 +77,12 @@ export const EventShowpiecesEdit = () => {
 		setChapterConf({
 			eventId: eventId as string,
 			showpieceId: showPieceId,
-		})
-	}
+		});
+	};
 	const handleMenuSelect = (e: MenuClickInfo) => {
-		setCurrenstItem(e.key)
-		сhangeShowPiece(e.key)
-	}
+		setCurrenstItem(e.key);
+		сhangeShowPiece(e.key);
+	};
 
 	const handleAddExhibit = (values: formType) => {
 		console.log("Submitting form...", values);
@@ -118,22 +132,22 @@ export const EventShowpiecesEdit = () => {
 			id,
 			subTitle,
 			dropdownItems,
-		} as CustomMenuItemT
+		} as CustomMenuItemT;
 	}
 
 	const menuItems: CustomListItemI[] | undefined = data?.map((item, index) => {
 		const dropDownItems: ListDropDownItemsI[] = [
 			{
-				text: 'Редактировать',
+				text: "Редактировать",
 				onClick: () => handleEditExhibit(item),
 			},
 			{
-				text: 'Удалить',
+				text: "Удалить",
 				onClick: () => handleDeleteExhibit(item.id),
 			},
-		]
-		return getItem(item.name, item.id, item.id, item.short, dropDownItems)
-	})
+		];
+		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
+	});
 
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
@@ -167,7 +181,66 @@ export const EventShowpiecesEdit = () => {
 
 	return (
 		<div className={styles.main_page_form_wrapper}>
-			<div>
+			{showpiece ? (
+				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
+					<div>
+						<div className={styles.form_header}>
+							<CustomInput placeholder="Найти экспонат..." />
+						</div>
+						<CustomListMenu
+							className={styles.showpiece_list}
+							onClick={handleMenuSelect}
+							selectedKey={currentItem}
+							items={menuItems?.length ? menuItems : []}
+						/>
+						<CustomBtn
+							onClick={() => {
+								setModal(true);
+							}}
+							icon={plusIcon}
+							iconWidth={20}
+							style={{ marginTop: 15 }}
+						>
+							Новый экспонат
+						</CustomBtn>
+					</div>
+					<div
+						style={{
+							backgroundColor: "white",
+							top: 0,
+							bottom: 0,
+							padding: 1,
+							margin: "0 15px",
+							borderRadius: 10,
+						}}
+					/>
+					<div style={{ width: "100%" }}>
+						<div className={styles.form_header}>
+							<h2 style={{ margin: 0 }}>
+								{showpiece?.name}
+								<p className="min" style={{ marginTop: -5 }}>
+									экспонат
+								</p>
+							</h2>
+							<CustomBtn
+								onClick={() => {
+									setModal(true);
+								}}
+								iconWidth={20}
+								icon={plusIcon}
+							>
+								Добавить главу
+							</CustomBtn>
+						</div>
+						<div className={styles.form_content}></div>
+						<CustomCard
+							className={`${styles.showpiece_list} ${styles["chapters"]}`}
+						>
+							<ChapterList showpiece={showpiece} eventId={eventId as string} />
+						</CustomCard>
+					</div>
+				</div>
+			) : (
 				<CustomBtn
 					onClick={() => {
 						setModal(true);
@@ -175,25 +248,7 @@ export const EventShowpiecesEdit = () => {
 				>
 					Создать экспонат
 				</CustomBtn>
-			</div>
-			<div className={styles.list_container}>
-				<CustomListMenu
-					className={styles.showpiece_list}
-					onClick={handleMenuSelect}
-					selectedKey={currentItem}
-					items={menuItems?.length ? menuItems : []}
-				/>
-
-				<CustomCard className={`${styles.showpiece_list} ${styles['chapters']}`}>
-					{
-						showpiece
-							?
-							<ChapterList showpiece={showpiece} eventId={eventId as string} />
-							:
-							<InfoMessage title="Ошибка" />
-					}
-				</CustomCard>
-			</div>
+			)}
 			<Modal
 				isOpen={modal}
 				toggle={toggle}

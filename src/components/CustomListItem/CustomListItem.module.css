@@ -1,114 +1,117 @@
 .item {
-    padding: 0;
-    border-radius: var(--radius);
-    color: white;
-
+	padding: 0;
+	border-radius: var(--radius);
+	color: white;
+	cursor: pointer;
 }
 
 .item.list-group-item {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 .card_container {
-    padding: 0;
+	padding: 0;
 }
 
 .card_header {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    gap: 1rem;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+	align-items: center;
+	gap: 1rem;
 }
 
 .card_header p,
 h1,
 h2,
 h3 {
-    margin: 0;
+	margin: 0;
 }
 
 .card_title {
-    width: max-content;
-    word-wrap:  inherit;
-    max-width: 230px;
+	width: max-content;
+	word-wrap: inherit;
+	max-width: 230px;
 }
 
-.card_title_container{
-    display: flex;
-    margin: 0;
-    text-align: start;
-    align-items: center;
-    gap: .5rem;
- 
+.card_title_container {
+	display: flex;
+	margin: 0;
+	text-align: start;
+	align-items: center;
+	gap: 0.5rem;
 }
 
 .card_subTitle {
-    display: flex;
-    text-align: start;
+	display: flex;
+	text-align: start;
 }
 
 .badge {
-    background-color: var(--orange_color) !important;
-    max-height: 30px;
+	background-color: var(--orange_color) !important;
+	max-height: 30px;
 }
 
 .item.active {
-    outline: 2px solid var(--orange_color);
+	outline: 2px solid var(--orange_color);
+	background-color: var(--orange_color);
 }
+/* .item:hover {
+	outline: 2px solid white;
+} */
 
 .item.action:hover {
-    outline: 2px .5 var(--orange_color);
+	outline: 2px 0.5 var(--orange_color);
 }
 
 .dropDown_container {
-    display: flex;
-    gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }
 
 .dropDown {
-    color: white;
+	color: white;
 }
 
 .dropDown_toggle {
-    display: flex;
-    color: white;
-    background-color: transparent;
-    border: transparent;
-
+	display: flex;
+	color: white;
+	background-color: transparent;
+	border: transparent;
 }
 
 .dropDown_toggle.btn_secondary {
-    display: flex;
-    padding: 0;
+	display: flex;
+	padding: 0;
 }
 
 .dropDown_toggle.btn_secondary:hover {
-    background-color: transparent;
-
+	background-color: transparent;
 }
 
 .dropDown__btn_text {
-    display: flex;
+	opacity: 0.7;
+	display: flex;
 }
-.dropDown__btn_text:hover{
-    opacity: .5;
+.dropDown__btn_text:hover {
+	opacity: 1;
 }
 
 .dropDown_menu {
-    background-color: var(--dark_gray_color);
+	background-color: var(--dark_gray_color);
 }
 
 .dropDown_item {
-    color: white;
+	color: white;
 }
 
 .dropDown_item:hover {
-    background-color: var(--orange_color);
-    color: white;
+	background-color: var(--orange_color);
+	color: white;
 }
 
 .content {
-    background-color: var(--dark_gray_border_color);
-    border-radius: 0 0 var(--radius) var(--radius);
+	background-color: var(--dark_gray_border_color);
+
+	border-radius: 0 0 var(--radius) var(--radius);
 }

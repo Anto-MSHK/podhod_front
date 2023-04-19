@@ -1,63 +1,56 @@
-import React, { useState } from 'react'
-import styles from './ChapterList.module.css'
-import { exhibitsT } from '../../app/Types/ExhibitsT'
-import { CustomBtn } from '../CustomBtn/CustomBtn'
-import { Button, ListGroup, Modal } from 'reactstrap'
-import { ChapterForm } from '../ChapterForm/ChapterForm'
-import { useDeleteChapterMutation } from '../../app/services/ChapterApi'
-import ChapterItem from '../ChapterItem/ChapterItem'
-import editIcon from '../../assets/icons/editIcon.svg'
-import CustomCard from '../CustomCard/CustomCard'
-import CustomListItem from '../CustomListItem/CustomListItem'
+import React, { useState } from "react";
+import styles from "./ChapterList.module.css";
+import { exhibitsT } from "../../app/Types/ExhibitsT";
+import { CustomBtn } from "../CustomBtn/CustomBtn";
+import { Button, ListGroup, Modal } from "reactstrap";
+import { ChapterForm } from "../ChapterForm/ChapterForm";
+import { useDeleteChapterMutation } from "../../app/services/ChapterApi";
+import ChapterItem from "../ChapterItem/ChapterItem";
+import editIcon from "../../assets/icons/editIcon.svg";
+import CustomCard from "../CustomCard/CustomCard";
+import CustomListItem from "../CustomListItem/CustomListItem";
 
 type ChapterListT = {
-    showpiece: exhibitsT
-    eventId: string
-}
+	showpiece: exhibitsT;
+	eventId: string;
+};
 
 export const ChapterList: React.FC<ChapterListT> = ({ showpiece, eventId }) => {
+	const [modal, setModal] = useState(false);
+	const toggle = () => setModal(!modal);
 
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
-
-
-    return (
-        <CustomListItem title={showpiece.name}
-            dropdownItems={[{
-                text: 'Добавить раздел',
-                onClick: () => setModal(true)
-            }]}
-            className={styles.chapter_card_container}
-        >
-            <ListGroup className={styles.chapters_container}>
-                {
-                    showpiece?.chapters && showpiece.chapters.map((chapter, index) => (
-                        <ChapterItem key={chapter.id + index} chapter={chapter} showpieceId={showpiece.id} eventId={eventId} />))
-
-                }
-            </ListGroup>
-            <Modal
-                isOpen={modal}
-                toggle={toggle}
-                size={"xl"}
-                contentClassName={styles.modalWrapper}
-                className={styles.modal}
-                backdropClassName={styles.modalModal}
-            /* 	onClosed={() => {
+	return (
+		<div>
+			<ListGroup className={styles.chapters_container}>
+				{showpiece?.chapters &&
+					showpiece.chapters.map((chapter, index) => (
+						<ChapterItem
+							key={chapter.id + index}
+							chapter={chapter}
+							showpieceId={showpiece.id}
+							eventId={eventId}
+						/>
+					))}
+			</ListGroup>
+			<Modal
+				isOpen={modal}
+				toggle={toggle}
+				size={"xl"}
+				contentClassName={styles.modalWrapper}
+				className={styles.modal}
+				backdropClassName={styles.modalModal}
+				/* 	onClosed={() => {
                     setEditingExhibit(null);
                 }} */
-            >
-                <ChapterForm eventId={eventId} showPieceId={showpiece.id} />
+			>
+				<ChapterForm eventId={eventId} showPieceId={showpiece.id} />
+			</Modal>
+		</div>
+	);
+};
 
-            </Modal>
-        </CustomListItem>
-    )
-}
-
-
-
-
-{/* <div className={styles.chapter_card_content}>
+{
+	/* <div className={styles.chapter_card_content}>
                           <CustomBtn className={`${styles.chapter_item_title} ${styles.tool__btn}`}
                               onClick={() => setIsChapterShow(!isChapterShown)}
                           >
@@ -79,8 +72,10 @@ export const ChapterList: React.FC<ChapterListT> = ({ showpiece, eventId }) => {
                                       <p className="min">Удалить раздел</p>
                                   </CustomBtn>
                               </div>
-                          </CustomBtn> */}
-{/*  {
+                          </CustomBtn> */
+}
+{
+	/*  {
                               isChapterShown
                                   ?
                                   <div>
@@ -116,4 +111,5 @@ export const ChapterList: React.FC<ChapterListT> = ({ showpiece, eventId }) => {
                                   :
                                   null
                           }
-                      </div>  */}
+                      </div>  */
+}

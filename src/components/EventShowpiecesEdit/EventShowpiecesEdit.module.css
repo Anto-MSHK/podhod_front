@@ -1,22 +1,36 @@
-
-.list_container{
+.list_container {
 	display: flex;
 	gap: 1rem;
 }
-.list_item{
+.list_item {
 	border: 2px solid var(--dark_gray_border_color);
 	border-radius: var(--radius);
 	cursor: pointer;
 }
-.showpiece_list{
+.showpiece_list {
 	border-radius: var(--radius);
 	background-color: var(--dark_gray_color);
-	padding: 1rem;
-	margin-top: 1rem;
-	gap: .5em;
+
+	gap: 0.5em;
 }
 
+.main_form_wrapper {
+	border-radius: var(--radius);
+	padding: 1rem;
+	background-color: var(--dark_gray_color);
+}
 
+.form_header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	width: 100%;
+	gap: 10px;
+}
+
+.form_content {
+	background-color: var(--dark_gray_color);
+}
 .showpiece_list.showpieces {
 	width: 40%;
 }
@@ -24,15 +38,12 @@
 	width: 100%;
 }
 
-
 .showpiece_item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	column-gap: 10px;
 }
-
-
 
 .item {
 	display: flex;
@@ -48,9 +59,8 @@
 	padding: 1rem;
 	font-weight: 600;
 	border: 2px solid transparent;
-	color: white
+	color: white;
 }
-
 
 .item_tool_btns {
 	display: flex;
@@ -61,15 +71,14 @@
 .tool__btn {
 	border-radius: var(--radius);
 	background-color: transparent !important ;
-	border: 2px solid transparent  !important;
+	border: 2px solid transparent !important;
 	padding: 10px;
 }
-.tool__btn:hover{
+.tool__btn:hover {
 	box-shadow: inset 0 0 0 2px #df791a;
 	background-color: transparent !important ;
-	border: 2px solid transparent  !important;
+	border: 2px solid transparent !important;
 }
-
 
 .item:hover {
 	box-shadow: inset 0 0 0 2px #df791a;
@@ -78,14 +87,6 @@
 .exhibitsDeleteWrapper:hover {
 	box-shadow: inset 0 0 0 2px var(--red_color);
 }
-
-
-
-
-
-
-
-
 
 .modalWrapper {
 	border-radius: var(--radius);
