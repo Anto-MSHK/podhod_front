@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: var(--orange_color);
+    position: relative;
+    z-index: 100;
+    border-radius: 0 0 15px 15px;
+}
+
+.container.transparent {
+    background-color: transparent;
+}
+
+.left,
+.center,
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.left {
+    justify-content: flex-start
+}
+
+.center {
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 767px) {
+    .container {
+        padding: 8px 12px;
+    }
+}
