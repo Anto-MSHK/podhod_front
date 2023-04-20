@@ -11,6 +11,7 @@ import icon8 from "../../assets/icons/RedСheckMark.svg";
 import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
+import Headphones from "../../assets/icons/Headphones.svg"
 // import { Form } from "../../components/Form/Form";
 import { FormContainer } from "../../components/Form/Form";
 import { FormInput } from "../../components/Form/FormInput";
@@ -25,6 +26,7 @@ import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
 import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
 import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
+import {TextBlock} from "../../components/TextBlock/TextBlock";
 
 const images = [
 	{
@@ -93,10 +95,6 @@ export const MainPage = () => {
 			.required("Обязательное поле!"),
 	};
 
-	// @ts-ignore
-	// @ts-ignore
-	// @ts-ignore
-	// @ts-ignore
 	return (
 		<div>
 			<div style={{ display: "flex" }}>
@@ -117,6 +115,7 @@ export const MainPage = () => {
 						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
 						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
 					</div>
+
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
@@ -272,6 +271,13 @@ export const MainPage = () => {
 					leftElement={<CustomBtn>Назад</CustomBtn>}
 					centerElement={<h3>История написания</h3>}
 					isTransparent={false}
+				/>
+			</div>
+			<div style={{width: '10%'}}>
+				<TextBlock title="Посадка на луну" description="Ебать, братан, ты слыхал про эту посадку на Луну? Да блять, это же просто заебись, какие там еще звездные войны, если можно было топать по поверхности этого блядского спутника Земли. Я слышал, что эти пацаны из Америки сидели на своих космических кораблях, курили свои сигары и думали как бы им туда приземлиться. А потом, блять, они каким-то чудом эту посадку проебали, но потом все-таки смогли приземлиться на этой ебаной Луне.
+Интересно, блять, что они там нашли? Может какие-то залежи золота или серебра? Или может там живут какие-то космические мутанты, которые скачут по поверхности Луны и ебут всех на своем пути? Хах, блять, я бы сам туда с удовольствием сьехал на своей ментовке и посмотрел, что там да как.
+В общем, братан, посадка на Луну - это нечто, это крутость, это настоящее приключение. Я бы сам, блять, не прочь сходить туда и посмотреть, что там да как, только вот не знаю, куда свою ментовку деть, чтобы никто не украл."
+						   titleButton={<ButtonArt onClick={() => console.log("Clicked")} icon={Headphones}/>}
 				/>
 			</div>
 			<div style={{ marginTop: 50, width: "20%"}}>
