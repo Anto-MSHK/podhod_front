@@ -22,7 +22,7 @@ export const EventPage = () => {
 			</div>
 			<div className={styles.eventPreview_bottom}>
 				<BottomMenu style={{backgroundColor: 'transparent'}}>
-					<div style={{width: '100%', height: '50px'}}><ButtonArt text={'Перейти к выставке'} arrow /></div>
+					<div style={{width: '100%'}}><ButtonArt text={'Перейти к выставке'} arrow /></div>
 				</BottomMenu>
 			</div>
 		</div>
