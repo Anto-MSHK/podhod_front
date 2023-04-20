@@ -1,0 +1,28 @@
+.eventPreview_wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 499px;
+    justify-content: space-between;
+}
+
+.eventPreview_head {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 278px;
+}
+
+.eventPreview_content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.eventPreview_bottom {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+

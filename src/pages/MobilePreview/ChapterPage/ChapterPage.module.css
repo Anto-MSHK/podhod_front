@@ -16,7 +16,6 @@
 .chapterPreview_bottom {
     display: flex;
     justify-content: center;
-    text-align: center;
 }
 
 .bottom_wrapper {
@@ -24,16 +23,13 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
+    width: 100%;
 }
 
 .bottom_leftContainer {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    width: 80%;
-}
-
-.bottom_rightContainer {
-    display: flex;
+    width: 100%;
 }
 

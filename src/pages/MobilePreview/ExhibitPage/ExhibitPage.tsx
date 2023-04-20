@@ -31,8 +31,8 @@ export const ExhibitPage = () => {
 							</div>
 						</div>
 						<div className={styles.bottom_rightContainer}>
-							<div style={{ width: "35px", height: '35px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>
-							<div style={{ width: "35px", height: '35px' }}><ButtonArt round icon={crossIcon} onClick={() => console.log("Clicked")} /></div>
+							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>
+							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={crossIcon} onClick={() => console.log("Clicked")} /></div>
 						</div>
 					</div>
 				</BottomMenu>

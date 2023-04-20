@@ -25,10 +25,9 @@ export const ChapterPage = () => {
 							<div>
 								<h5>Далее: Луноход-1</h5>
 							</div>
-							<div style={{width: '100%', height: '50px'}}><ButtonArt text={'Перейти'} arrow /></div>
-						</div>
-						<div className={styles.bottom_rightContainer}>
-							<Gallery images={images}/>
+							<div style={{width: '100%', height: '50px'}}>
+								<ButtonArt text={'Перейти'} arrow />
+							</div>
 						</div>
 					</div>
 				</BottomMenu>
