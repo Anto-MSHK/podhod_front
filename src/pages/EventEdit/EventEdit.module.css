@@ -61,4 +61,14 @@
 	height: fit-content;
 	padding: 8px;
 	width: min-content;
+	cursor: grab;
+}
+
+.preview__container:active {
+	cursor: grabbing;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
