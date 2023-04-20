@@ -42,7 +42,7 @@ export const EventEdit: React.FC = () => {
 		useState<string | number | number[] | null>(0);
 	const [isImgLoading, setIsImgLoading] = useState(true);
 	const dispatch = useAppDispatch();
-	const [dragStartX, setDragStartX] = useState(null);
+	const [dragStartX, setDragStartX] = useState<number | null>(null);
 	const handleActiveBtn = (btn: string | number | number[] | null) => {
 		setActiveBtn(btn);
 	};
@@ -99,33 +99,26 @@ export const EventEdit: React.FC = () => {
 		}
 	}, [activeBtn]);
 
-	const handleDragStart = (e: any) => {
+	const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
 		setDragStartX(e.clientX);
 	};
 
-	const handleDragMove = (e: any) => {
+	const handleDragMove = (e: React.MouseEvent) => {
 		if (dragStartX === null) return;
 		const dragOffset = e.clientX - dragStartX;
+
 		if (dragOffset < -50) {
-			if (typeof activeBtn === 'number') {
-				setActiveBtn(activeBtn + 1);
-			} else if (Array.isArray(activeBtn)) {
-				setActiveBtn([...activeBtn, activeBtn.length]);
-			} else {
-				setActiveBtn(0);
-			}
+			const newActiveBtn = (activeBtn as number ?? 0) + 1;
+			setActiveBtn(newActiveBtn > 3 ? 0 : newActiveBtn);
 			setDragStartX(null);
 		} else if (dragOffset > 50) {
-			if (typeof activeBtn === 'number') {
-				setActiveBtn(activeBtn - 1);
-			} else if (Array.isArray(activeBtn)) {
-				setActiveBtn(activeBtn.slice(0, -1));
-			} else {
-				setActiveBtn(0);
-			}
+			const newActiveBtn = (activeBtn as number ?? 0) - 1;
+			setActiveBtn(newActiveBtn < 0 ? 3 : newActiveBtn);
 			setDragStartX(null);
 		}
 	};
+
+
 
 
 
@@ -167,6 +160,7 @@ export const EventEdit: React.FC = () => {
 										handleActiveBtn={handleActiveBtn}
 										view={"radio"}
 										data={btnData}
+										activeBtn={activeBtn as number}
 									/>
 								</div>
 							</div>
