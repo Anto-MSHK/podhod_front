@@ -1,15 +1,16 @@
 .eventPreview_wrapper {
     display: flex;
     flex-direction: column;
-    height: 499px;
+    height: 680px;
     justify-content: space-between;
+    width: 100%;
 }
 
 .eventPreview_head {
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 278px;
+    width: 100%;
 }
 
 .eventPreview_content {

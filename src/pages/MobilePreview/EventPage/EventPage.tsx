@@ -14,13 +14,14 @@ export const EventPage = () => {
 							centerElement={<img style={{width: '120px', height: '30px'}} src={logoExample} />}
 							rightElement={<div style={{ width: "35px", height: '35px' }}><ButtonArt round text={'6+'} onClick={() => console.log("Clicked")} /></div>}
 							isTransparent={true}
+							style={{width: '100%'}}
 				/>
 			</div>
 			<div className={styles.eventPreview_content}>
 				<h1>1</h1>
 			</div>
 			<div className={styles.eventPreview_bottom}>
-				<BottomMenu>
+				<BottomMenu style={{backgroundColor: 'transparent'}}>
 					<div style={{width: '100%', height: '50px'}}><ButtonArt text={'Перейти к выставке'} arrow /></div>
 				</BottomMenu>
 			</div>

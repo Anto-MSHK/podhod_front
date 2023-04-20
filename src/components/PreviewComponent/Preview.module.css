@@ -1,12 +1,11 @@
 .preview_picture {
 	display: flex;
 	flex-direction: column;
-	width: 7.4cm;
-	height: 13.2cm;
+	width: 335px;
+	height: 680px;
 	border: 1px solid var(--red_color);
 	border-radius: var(--radius);
 	margin: 0 auto;
-
 	background-size: cover;
 	background-position: 50% 50%;
 	background-color: #1e1e1e;

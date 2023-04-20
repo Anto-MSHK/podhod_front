@@ -19,7 +19,7 @@ export const ChapterPage = () => {
 				<h1>2</h1>
 			</div>
 			<div className={styles.chapterPreview_bottom}>
-				<BottomMenu>
+				<BottomMenu style={{borderRadius: 'var(--radius)'}}>
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
@@ -27,6 +27,11 @@ export const ChapterPage = () => {
 							</div>
 							<div style={{width: '100%', height: '50px'}}>
 								<ButtonArt text={'Перейти'} arrow />
+							</div>
+						</div>
+						<div>
+							<div className={styles.bottom_rightContainer}>
+								<Gallery images={images} />
 							</div>
 						</div>
 					</div>

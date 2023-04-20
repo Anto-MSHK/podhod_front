@@ -13,14 +13,14 @@ export const ExhibitPage = () => {
 				<Head leftElement={<h3>Первый запуск</h3>}
 							centerElement={' '}
 							isTransparent={false}
-							style={{backgroundColor: 'var(--blue_color)'}}
+							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: 'var(--radius)'}}
 				/>
 			</div>
 			<div className={styles.exhibitPreview_content}>
 				<h1>3</h1>
 			</div>
 			<div className={styles.exhibitPreview_bottom}>
-				<BottomMenu>
+				<BottomMenu style={{borderRadius: 'var(--radius)'}}>
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>

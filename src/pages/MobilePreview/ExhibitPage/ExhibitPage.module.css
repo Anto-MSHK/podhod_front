@@ -1,15 +1,16 @@
 .exhibitPreview_wrapper {
     display: flex;
     flex-direction: column;
-    height: 499px;
+    height: 680px;
     justify-content: space-between;
+    width: 100%;
 }
 
 .exhibitPreview_head {
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 278px;
+    width: 335px;
 }
 
 .exhibitPreview_content {
@@ -31,7 +32,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
-    width: 293px;
+    width: 100%;
     padding: 0 5px;
 }
 

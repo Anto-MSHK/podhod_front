@@ -150,12 +150,12 @@ export const EventEdit: React.FC = () => {
 						<div className={styles.content_wrapper}>{handleActivePage()}</div>
 					</div>
 					<div ref={containerRef} className={styles.preview_wrapper} style={{}}>
+						<div>
+							<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
+								Предпросмотр
+							</h3>
+						</div>
 						<div className={styles.preview__container}>
-							<div>
-								<h3 style={{ margin: "0 0 10px 0", textAlign: "center" }}>
-									предпросмотр
-								</h3>
-							</div>
 							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
 						</div>
 						<div className={styles.InfoComponentWrapper}>

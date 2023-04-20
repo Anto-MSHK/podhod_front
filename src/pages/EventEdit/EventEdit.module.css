@@ -57,8 +57,8 @@
 .preview__container {
 	margin: 0 auto;
 	background-color: var(--red_color);
-	border-radius: var(--radius) 10px;
+	border-radius: 15px;
 	height: fit-content;
-	padding: 10px;
+	padding: 8px;
 	width: min-content;
 }
