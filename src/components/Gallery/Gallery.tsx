@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
 
 interface ImageProps {
@@ -9,6 +9,7 @@ interface ImageProps {
 interface GalleryProps {
     images: ImageProps[];
     className?: string;
+    scrollLocked?: boolean;
 }
 
 interface GalleryImageProps extends ImageProps {
@@ -37,7 +38,7 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
     );
 });
 
-export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false }) => {
     const [activeIndex, setActiveIndex] = useState<number>(() => {
         const storedIndex = localStorage.getItem('activeIndex');
         return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
@@ -46,7 +47,6 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
     const handleImageClick = useCallback((index: number) => {
         setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
     }, []);
-
 
     useEffect(() => {
         localStorage.setItem('activeIndex', activeIndex.toString());
@@ -65,9 +65,18 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '' }) => {
         )) : null;
     }, [images, activeIndex, handleImageClick, className]);
 
+    const galleryRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (scrollLocked) {
+            galleryRef.current?.classList.add(styles.scrollLocked);
+        } else {
+            galleryRef.current?.classList.remove(styles.scrollLocked);
+        }
+    }, [scrollLocked]);
 
     return (
-        <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
+        <div ref={galleryRef} className={`${styles.gallery} ${className}`} aria-label="Gallery">
             {galleryImages}
         </div>
     );
