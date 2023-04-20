@@ -16,13 +16,13 @@ import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
 const btnData = [
-	{ name: "Основная информация", lable: "mainScreen", type: 'EventPage' },
+	{ name: "Основная информация", lable: "mainScreen", type: "EventPage" },
 	{
 		name: "Страницы",
 		lable: "pages",
-		type: 'ChapterPage'
+		type: "ChapterPage",
 	},
-	{ name: "Экспонаты", lable: "exhibits", type: 'ExhibitPage' },
+	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitPage" },
 	{ name: "Настройки", lable: "settings" },
 ];
 
@@ -42,26 +42,26 @@ export const EventEdit: React.FC = () => {
 		useState<string | number | number[] | null>(0);
 	const [isImgLoading, setIsImgLoading] = useState(true);
 	const dispatch = useAppDispatch();
-
+	const [dragStartX, setDragStartX] = useState(null);
 	const handleActiveBtn = (btn: string | number | number[] | null) => {
 		setActiveBtn(btn);
 	};
 
-/*	useEffect(() => {
-		const handleScroll = () => {
-			setTimeout(() => {
-				if (containerRef.current && window.scrollY > 90) {
-					containerRef.current.style.transform = `translateY(${
-						window.scrollY - 90
-					}px)`;
-				} else if (containerRef.current && window.scrollY < 90) {
-					containerRef.current.style.transform = `translateY(0px)`;
-				}
-			}, 100);
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);*/
+	/*	useEffect(() => {
+			const handleScroll = () => {
+				setTimeout(() => {
+					if (containerRef.current && window.scrollY > 90) {
+						containerRef.current.style.transform = `translateY(${
+							window.scrollY - 90
+						}px)`;
+					} else if (containerRef.current && window.scrollY < 90) {
+						containerRef.current.style.transform = `translateY(0px)`;
+					}
+				}, 100);
+			};
+			window.addEventListener("scroll", handleScroll);
+			return () => window.removeEventListener("scroll", handleScroll);
+		}, []);*/
 
 	useEffect(() => {
 		if (event) {
@@ -99,7 +99,40 @@ export const EventEdit: React.FC = () => {
 		}
 	}, [activeBtn]);
 
+	const handleDragStart = (e: any) => {
+		setDragStartX(e.clientX);
+	};
 
+	const handleDragMove = (e: any) => {
+		if (dragStartX === null) return;
+		const dragOffset = e.clientX - dragStartX;
+		if (dragOffset < -50) {
+			if (typeof activeBtn === 'number') {
+				setActiveBtn(activeBtn + 1);
+			} else if (Array.isArray(activeBtn)) {
+				setActiveBtn([...activeBtn, activeBtn.length]);
+			} else {
+				setActiveBtn(0);
+			}
+			setDragStartX(null);
+		} else if (dragOffset > 50) {
+			if (typeof activeBtn === 'number') {
+				setActiveBtn(activeBtn - 1);
+			} else if (Array.isArray(activeBtn)) {
+				setActiveBtn(activeBtn.slice(0, -1));
+			} else {
+				setActiveBtn(0);
+			}
+			setDragStartX(null);
+		}
+	};
+
+
+
+
+	const handleDragEnd = () => {
+		setDragStartX(null);
+	};
 
 	return (
 		<div>
@@ -155,7 +188,12 @@ export const EventEdit: React.FC = () => {
 								Предпросмотр
 							</h3>
 						</div>
-						<div className={styles.preview__container}>
+						<div
+							className={styles.preview__container}
+							onMouseDown={handleDragStart}
+							onMouseMove={handleDragMove}
+							onMouseUp={handleDragEnd}
+						>
 							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
 						</div>
 						<div className={styles.InfoComponentWrapper}>
