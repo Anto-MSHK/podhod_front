@@ -24,6 +24,7 @@ import React from "react";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
 import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
+import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
 
 const images = [
 	{
@@ -35,6 +36,27 @@ const images = [
 		alt: "Image 2",
 	},
 	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},{
 		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
 		alt: "Image 4",
 	},
@@ -88,8 +110,7 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images} scrollLocked={true} className="gallery"/>
-					<Gallery images={images}/>
+					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<div>
 						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
@@ -253,8 +274,8 @@ export const MainPage = () => {
 					isTransparent={false}
 				/>
 			</div>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<BottomMenu>
+			<div style={{ marginTop: 50, width: "20%"}}>
+				<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}  >
 					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
 				</BottomMenu>
