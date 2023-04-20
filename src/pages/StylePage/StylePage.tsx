@@ -19,7 +19,25 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import Head from "../../components/Head/Head";
+import { Gallery } from "../../components/Gallery/Gallery";
+import React from "react";
+import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
+
+const images = [
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 1",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 2",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},
+];
+
 
 export const MainPage = () => {
 	const btnData = [
@@ -68,6 +86,52 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
+					<Gallery images={images} />
+					<div style={{ width: "60%" }}>
+						<ButtonArt
+							text="Перейти к выставке"
+							size="normal"
+							variant="arrow"
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							text="Перейти к выставке"
+							size="small"
+							variant="arrow"
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							text="Узнать больше"
+							size="normal"
+							variant="text"
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							text="Узнать больше"
+							size="small"
+							variant="text"
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							size="normal"
+							variant="icon"
+							icon={icon2}
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							size="small"
+							variant="icon"
+							icon={icon1}
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							size="normal"
+							variant="textAndIcon"
+							text="Поиск"
+							icon={icon1}
+							onClick={() => console.log("Clicked")}
+						/>
+					</div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />

@@ -25,12 +25,18 @@ import {
 	EventPagesT,
 } from "../../app/Types/EventPageT";
 import { setPage } from "../../app/Slices/ExpoCreatePageSlice";
+import {Gallery} from "../Gallery/Gallery";
+import imageItem from "../ImageItem/ImageItem";
+import addFileIcon from '../../assets/icons/addFileIcon.svg'
+import imageForAuth from '../../assets/pictures/imageForAuth.png'
 
 interface formType {
 	pageName: string;
 	pageDescription: string;
 	visibleLogo: boolean;
 }
+
+
 
 export const EventPageEdit = () => {
 	const { id: eventId } = useParams();

@@ -1,0 +1,110 @@
+.button {
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 10px;
+	cursor: pointer;
+	display: flex;
+	font-size: 16px;
+	font-weight: 650;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	overflow: hidden;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.normal {
+	padding: 13px 13px;
+	font-size: 14px;
+}
+
+.small {
+	padding: 10px 10px;
+	font-size: 12px;
+}
+
+.arrow {
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	order: 3;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+}
+
+.arrow img {
+	position: absolute;
+	right: -8px;
+}
+
+.arrowLine {
+	width: (100% - 8px);
+	flex-wrap: nowrap;
+	height: 2px;
+	background-color: white;
+	border-radius: 10px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+	left: 0;
+	flex-grow: 1;
+	margin-left: 10px;
+}
+
+.icon {
+	color: white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	right: 0;
+}
+
+.icon.small {
+	width: 30px;
+	height: 30px;
+}
+
+.icon.small .textAndIcon img {
+	width: 12px;
+	height: 12px;
+}
+
+.textAndIcon img,
+.icon img {
+	max-height: 16px;
+	max-width: 16px;
+	justify-content: center;
+}
+
+.textAndIcon img {
+	padding: 0 0 1px 0;
+	margin-left: 10px;
+}
+
+.icon img {
+	margin-left: 0px;
+}
+
+.text {
+	order: 1;
+}
+
+.textAndIcon {
+	order: 1;
+}
+
+.arrowContainer {
+	order: 2;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
