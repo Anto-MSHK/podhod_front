@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Preview.module.css";
 import { useAppSelector } from "../../app/hooks";
-import ImageItem from "../ImageItem/ImageItem";
 import { imageType } from "../../app/Slices/imagesUploadSlice";
 import { PreviewSwitcher } from "../PreviewSwitcher/PreviewSwitcher";
 
