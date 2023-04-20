@@ -55,8 +55,7 @@
 
 .image {
     display: block;
-    width: 130px;
-    height: 90px;
+    height: 80px;
     object-fit: cover;
     border-radius: 8px;
     transform-origin: center center;

@@ -6,6 +6,8 @@ const styles = {
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: '100%',
+		backgroundColor: '#161616',
+		borderRadius: '15px 15px 0 0'
 	},
 	childContainer: {
 		display: 'flex',
@@ -13,7 +15,7 @@ const styles = {
 		alignItems: 'center',
 		width: '100%',
 		gap: '10px',
-		padding: '5px'
+		padding: '10px'
 	},
 };
 
