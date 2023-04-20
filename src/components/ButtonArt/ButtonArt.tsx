@@ -1,27 +1,34 @@
 import styles from './ButtonArt.module.css';
 import Arrow from '../../assets/icons/Arrow.svg';
+import React from 'react';
+var classNames = require('classnames')
 
-type ButtonSize = 'normal' | 'small';
-type ButtonVariant = 'arrow' | 'text' | 'icon' | 'textAndIcon';
 
 interface ButtonProps {
-    size: ButtonSize;
-    variant: ButtonVariant;
-    onClick: () => void;
+    arrow?: boolean;
+    round?: boolean;
     text?: string;
     icon?: string;
+    className?: string,
+    onClick: () => void;
 }
 
-export const ButtonArt = ({ size, variant, onClick, text, icon }: ButtonProps) => {
-    const buttonClassName = `${styles.button} ${styles[size]} ${styles[variant]}`;
+export const ButtonArt: React.FC<ButtonProps> = ({  round = false, arrow = false, onClick, text, icon, className = '' }) => {
 
-    if (variant === 'arrow') {
+    const classes = classNames(
+        className,
+        styles.button_wrapper,
+        { [styles.arrow]: arrow },
+        { [styles.round]: round },
+    )
+
+    if (arrow) {
         return (
-            <button className={`${styles.button_wrapper} ${styles.arrow}`}>
+            <button className={classes}>
                 <span className={styles.button_text}>{text}</span>
                 <div className={styles.arrow_container}>
                     <div className={styles.arrow_line_container}>
-                        <hr className={styles.arrow_line} style={{ flexGrow:'1', borderTop: "2px solid white", color: 'white', backgroundColor: 'white' }} />
+                        <hr className={styles.arrow_line} />
                         <img src={Arrow} className={styles.arrow_tip} alt="arrow" />
                     </div>
                     <div className={styles.arrow_tip_container} >
@@ -32,11 +39,11 @@ export const ButtonArt = ({ size, variant, onClick, text, icon }: ButtonProps) =
     }
 
     return (
-        <button className={buttonClassName} onClick={onClick}>
-            <span className={styles.textAndIcon}>
+        <button className={classes} onClick={onClick}>
+            <div className={styles.button_container}>
                 {text && <span className={styles.text}>{text}</span>}
-                <img src={icon} alt="icon" />
-            </span>
+                {icon && <img src={icon} className={styles.icon} alt="icon" />}
+            </div>
         </button>
     );
 };

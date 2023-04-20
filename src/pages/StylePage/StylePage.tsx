@@ -80,10 +80,10 @@ export const MainPage = () => {
 					</p>
 					<Gallery images={images}/>
 					<div>
-						<ButtonArt text="Перейти к промо-выставке" size="small" variant="arrow" onClick={() => console.log('Clicked')}/>
-						<ButtonArt text="Узнать больше" size="normal" variant="text" onClick={() => console.log('Clicked')}/>
-						<ButtonArt size="normal" variant="icon" icon={icon2} onClick={() => console.log('Clicked')} />
-						<ButtonArt size="small" variant="textAndIcon" text="Поиск" icon={icon1} onClick={() => console.log('Clicked')}/>
+						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log('Clicked')}/>
+						<ButtonArt text="Узнать больше"  onClick={() => console.log('Clicked')}/>
+						<div style={{width: '50px'}}><ButtonArt  round icon={icon2} onClick={() => console.log('Clicked')} /></div>
+						<ButtonArt  text="Поиск" icon={icon1} onClick={() => console.log('Clicked')}/>
 					</div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />

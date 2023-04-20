@@ -1,65 +1,63 @@
-/* .button {
+.button_wrapper {
+    display: flex;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     border: 1px solid white;
-    border-radius: 10px;
     padding: 1rem;
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    justify-content: space-around;
-    align-items: center;
-} */
-
-.button_wrapper{
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    align-items: center;
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    padding: .5rem;
     height: 100%;
     width: 100%;
 }
-.button_wrapper.arrow{
+.button_container{
+    display: flex;
+    gap: .5rem;
+}
+.button_wrapper.round {
+    border-radius: 50%;
+}
+
+.button_wrapper.arrow {
     background-color: black;
     color: white;
     outline-color: #FFFFFF;
     justify-content: space-between;
+    gap: 1rem;
 }
-.button_text{
+.button_text {
     width: fit-content;
 }
-.arrow_container{
+.arrow_container {
     display: flex;
     align-items: center;
     flex-grow: 1;
 }
-.arrow_line_container{
+
+.arrow_line_container {
     display: flex;
     flex-grow: 1;
     position: relative;
 }
-.arrow_tip{
+.arrow_tip {
     position: absolute;
-    right: -7px;
-    top: 20%;
-    
-}
-
-/* .arrowLine {
-    height: 2px;
-    background-color: white;
-    border-radius: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    align-self: center;
-    
-} */
-.arrow_tip{
+    right: -9px;
+    top: 18%;
 
 }
+
+
+
+.arrow_line {
+    flex-grow: 1;
+    border: 1px solid white; /* Убираем границу для браузера Firefox */
+    color: white; /* Цвет линии для остальных браузеров */
+    background-color: white; /* Цвет линии для браузера Firefox и Opera */
+    border-bottom-width: 0;
+    opacity: 1;
+}
+
 .normal {
     padding: 11px 22px;
     font-size: 16px;
@@ -70,78 +68,13 @@
     font-size: 14px;
 }
 
-/* .arrow {
-    background-color: black;
-    color: white;
-    outline-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    order: 3;
-    width: 50%;
-    position: relative;
-    z-index: 1;
-} */
-
-
 .icon {
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1%;
+    aspect-ratio: 1/1;
+    width: 20px;
+    height: 20px;
 }
 
-.icon img {
-    height: 16px;
-    margin: 5px;
-    width: 16px;
-}
 
-.textAndIcon img {
-    height: 16px;
-    width: 16px;
-}
 
-.text {
-    order: 1;
-    margin-right: 15px;
-}
 
-.textAndIcon {
-    order: 1;
-}
 
-/* .arrowContainer {
-    order: 2;
-    width: 100%;
-    position: relative;
-} */
-
-/* .arrowContainer::before {
-    content: '';
-    display: block;
-    position: absolute;
-    right: calc(100% + 10px);
-    top: 50%;
-    height: 2px;
-    background-color: white;
-    border-radius: 10px;
-    z-index: 2;
-    transform: translateY(-50%);
-} */
-
-/* .button:not(:empty) .arrowLine {
-    display: block;
-    max-width: 90%;
-}
-
-.button:not(:empty) .arrow {
-    width: 100%;
-}
-
-.button:empty .arrow {
-    justify-content: flex-end;
-    width: 100%;
-} */
