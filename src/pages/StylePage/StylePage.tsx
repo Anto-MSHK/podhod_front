@@ -22,6 +22,8 @@ import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { Gallery } from "../../components/Gallery/Gallery";
 import React from "react";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
+import Head from "../../components/Head/Head";
+import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
 
 const images = [
 	{
@@ -86,12 +88,12 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images}/>
+					<Gallery images={images} />
 					<div>
-						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log('Clicked')}/>
-						<ButtonArt text="Узнать больше"  onClick={() => console.log('Clicked')}/>
-						<div style={{width: '50px'}}><ButtonArt  round icon={icon2} onClick={() => console.log('Clicked')} /></div>
-						<ButtonArt  text="Поиск" icon={icon1} onClick={() => console.log('Clicked')}/>
+						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
+						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
+						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
+						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
 					</div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
@@ -219,36 +221,42 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
-			<div style={{marginTop: 50, width: '30%'}}>
+			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={false}
-			
+
 				/>
 			</div>
-			<div style={{marginTop: 50, width: '30%'}}>
+			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={<CustomBtn onClick={() => (alert('Назад'))}>Назад</CustomBtn>}
+					leftElement={<CustomBtn onClick={() => (alert("Назад"))}>Назад</CustomBtn>}
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={true}
 				/>
 			</div>
-			<div style={{marginTop: 50, width: '30%'}}>
+			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={<CustomBtn onClick={() => (alert('Меню'))}>Меню</CustomBtn>}
-					centerElement={' '}
+					leftElement={<CustomBtn onClick={() => (alert("Меню"))}>Меню</CustomBtn>}
+					centerElement={" "}
 					isTransparent={false}
-					style={{backgroundColor: 'var(--gray_color)'}}
+					style={{ backgroundColor: "var(--gray_color)" }}
 				/>
 			</div>
-			<div style={{marginTop: 50, width: '30%'}}>
+			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
 					leftElement={<CustomBtn>Назад</CustomBtn>}
 					centerElement={<h3>История написания</h3>}
 					isTransparent={false}
 				/>
+			</div>
+			<div style={{ marginTop: 50, width: "30%" }}>
+				<BottomMenu>
+					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
+					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
+				</BottomMenu>
 			</div>
 		</div>
 	);
