@@ -13,7 +13,7 @@ export const ExhibitPage = () => {
 				<Head leftElement={<h3>Первый запуск</h3>}
 							centerElement={' '}
 							isTransparent={false}
-							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: 'var(--radius)'}}
+							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: '10px 10px 0 0'}}
 				/>
 			</div>
 			<div className={styles.exhibitPreview_content}>
