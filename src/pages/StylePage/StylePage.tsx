@@ -12,8 +12,6 @@ import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
 // import { Form } from "../../components/Form/Form";
-import { FiArrowRight } from 'react-icons/fi';
-import { MdFavorite } from 'react-icons/md';
 import { FormContainer } from "../../components/Form/Form";
 import { FormInput } from "../../components/Form/FormInput";
 import * as Yup from "yup";
@@ -21,15 +19,25 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import {Gallery} from "../../components/Gallery/Gallery";
+import { Gallery } from "../../components/Gallery/Gallery";
 import React from "react";
-import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
+import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 
 const images = [
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 1' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 2' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4' },
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 1",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 2",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+	},
 ];
+
 
 export const MainPage = () => {
 	const btnData = [
@@ -211,6 +219,37 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={false}
+			
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert('Назад'))}>Назад</CustomBtn>}
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={true}
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert('Меню'))}>Меню</CustomBtn>}
+					centerElement={' '}
+					isTransparent={false}
+					style={{backgroundColor: 'var(--gray_color)'}}
+				/>
+			</div>
+			<div style={{marginTop: 50, width: '30%'}}>
+				<Head
+					leftElement={<CustomBtn>Назад</CustomBtn>}
+					centerElement={<h3>История написания</h3>}
+					isTransparent={false}
+				/>
+			</div>
 		</div>
 	);
 };
