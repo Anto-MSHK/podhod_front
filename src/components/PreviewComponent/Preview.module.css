@@ -116,7 +116,7 @@
 	margin: 0;
 }
 
-.slideEnter {
+.forward .slideEnter {
 	position: absolute;
 	top: 0;
 	left: 100%;
@@ -125,12 +125,39 @@
 	transition: all 300ms ease-out;
 }
 
-.slideEnterActive {
+.forward .slideEnterActive {
 	left: 0;
 	opacity: 1;
 }
 
-.slideExit {
+.forward .slideExit {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opacity: 1;
+	transition: opacity 1ms ease-out;
+}
+
+.forward .slideExitActive {
+	opacity: 0;
+}
+
+.backward .slideEnter {
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	opacity: 0;
+	transition: all 300ms ease-out;
+}
+
+.backward .slideEnterActive {
+	left: 0;
+	opacity: 1;
+}
+
+.backward .slideExit {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -139,11 +166,10 @@
 	transition: all 300ms ease-out;
 }
 
-.slideExitActive {
-	left: -100%;
+.backward .slideExitActive {
+	left: 100%;
 	opacity: 0;
 }
-
 
 
 
