@@ -2,11 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 16px;
-    background-color: var(--orange_color);
-    position: relative;
-    z-index: 100;
+    text-align: center;
+    background-color: var(--gray_color);
     border-radius: 0 0 15px 15px;
+    width: 280px;
+    padding: 8px;
 }
 
 .container.transparent {
@@ -21,21 +21,17 @@
 }
 
 .left {
-    justify-content: flex-start
+    justify-content: flex-start;
+    text-align: center;
 }
 
 .center {
     justify-content: center;
-    flex-grow: 1;
+    text-align: center;
 }
 
 .right {
     justify-content: flex-end;
+    text-align: center;
 }
 
-/* Responsive styles for mobile devices */
-@media (max-width: 767px) {
-    .container {
-        padding: 8px 12px;
-    }
-}

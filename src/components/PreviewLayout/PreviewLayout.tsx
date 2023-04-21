@@ -1,37 +1,15 @@
 import React from "react";
+import { BottomMenu } from "../BottomMenu/BottomMenu";
+import { ButtonArt } from "../ButtonArt/ButtonArt";
+import Head from "../Head/Head";
+import backArrow from '../../assets/icons/backArrow.svg'
+import logoExample from '../../assets/pictures/logoExample.png'
+
 
 export const PreviewLayout = ({children} : any) => {
 	return (
-		<div style={{
-			display: 'flex',
-			flexDirection: 'column',
-			height: '459px',
-			justifyContent: 'space-between'
-		}}>
-			<div style={{
-				display: 'flex',
-				justifyContent: 'center',
-				textAlign: 'center'
-			}}>
-				<h1>Тут шапка</h1>
-			</div>
-			<div style={{
-				flexGrow: 1,
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				textAlign: 'center'
-			}}>
-				{children}
-			</div>
-			<div style={{
-				display: 'flex',
-				justifyContent: 'center',
-				textAlign: 'center'
-			}}>
-				<h1>Тут bottomMenu</h1>
-			</div>
+		<div>
+			{children}
 		</div>
-
 	);
 };
