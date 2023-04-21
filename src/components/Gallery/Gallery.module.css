@@ -44,6 +44,16 @@
     transform: scale(1.05);
 }
 
+.imageWrapper.disabled:hover {
+    transform: none;
+    cursor: default;
+}
+
+.gallery.disabled .imageWrapper:hover {
+    transform: none;
+    cursor: default;
+}
+
 .imageWrapper.selected {
     transition: all .2s ease-out;
     border: 2px solid #FFD600;

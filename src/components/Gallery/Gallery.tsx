@@ -18,16 +18,17 @@ interface GalleryImageProps extends ImageProps {
     onClick: (index: number) => void;
     imageNumber: number;
     className?: string;
+    isDisabled?: boolean; // добавить isDisabled prop
 }
 
-const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className }) => {
+const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className, isDisabled }) => {
     const handleClick = useCallback(() => {
         onClick(imageNumber - 1);
     }, [onClick, imageNumber]);
 
     return (
       <figure
-        className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${className}`}
+        className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${isDisabled ? styles.disabled : ''} ${className}`}
         onClick={handleClick}
         aria-label={`Image ${imageNumber}`}
         role="button"
@@ -55,12 +56,26 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
         localStorage.setItem('activeIndex', activeIndex.toString());
     }, [activeIndex]);
 
+    useEffect(() => {
+        if (scrollLocked) {
+            galleryRef.current?.classList.add(styles.scrollLocked);
+        } else {
+            galleryRef.current?.classList.remove(styles.scrollLocked);
+        }
+
+        if (isDisabled) {
+            galleryRef.current?.classList.add(styles.disabled);
+        } else {
+            galleryRef.current?.classList.remove(styles.disabled);
+        }
+    }, [scrollLocked, isDisabled]);
+
     const galleryImages = useMemo(() => {
         return images ? images.map((image, index) => (
           <GalleryImage
             key={image.src}
             {...image}
-            isActive={index === activeIndex}
+            isActive={isDisabled ? false : index === activeIndex}
             onClick={isDisabled ? emptyFunction : handleImageClick} // использовать пустую функцию, если isDisabled передан
             imageNumber={index + 1}
             className={className}
