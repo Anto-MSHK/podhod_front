@@ -1,31 +1,14 @@
 import React from 'react';
-
-const styles = {
-	bottomMenu: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: '100%',
-		backgroundColor: '#1a1a1a',
-	},
-	childContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: '100%',
-		gap: '10px',
-		padding: '5px'
-	},
-};
-
+import styles from './BottomMenu.module.css'
 interface BottomMenuI {
 	children: React.ReactNode;
+	style?: React.CSSProperties;
 }
 
-export const BottomMenu: React.FC<BottomMenuI> = ({ children }) => {
+export const BottomMenu: React.FC<BottomMenuI> = ({ children, style }) => {
 	return (
-		<div style={styles.bottomMenu}>
-			<div style={styles.childContainer}>{children}</div>
+		<div className={styles.bottomMenu} style={style}>
+			<div className={styles.childContainer}>{children}</div>
 		</div>
 	);
 };

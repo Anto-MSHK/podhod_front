@@ -10,7 +10,7 @@ interface ButtonProps {
     text?: string;
     icon?: string;
     className?: string,
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export const ButtonArt: React.FC<ButtonProps> = ({  round = false, arrow = false, onClick, text, icon, className = '' }) => {
