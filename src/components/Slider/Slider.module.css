@@ -2,29 +2,6 @@
     display: flex;
     flex-direction: column;
 }
-.slider{
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-
-}
-
-.slider.carousel-inner {
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-    gap: 1rem;
-}
-xs
-.image_container{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    float: none;
-}
-.image_caption{
-   
-}
 .gallery_container::-webkit-scrollbar {
     display: none;
 }

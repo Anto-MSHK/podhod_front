@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect, useRef, RefObject } from 'react';
 import styles from './Gallery.module.css';
-import { Carousel, CarouselCaption, CarouselIndicators, CarouselItem } from 'reactstrap';
+import {CarouselIndicators} from 'reactstrap';
 
 interface ImageProps {
     src: string;
@@ -16,14 +16,14 @@ interface GalleryProps {
 }
 
 interface GalleryImageProps extends ImageProps {
-    isActive?: boolean;
+    isActive: boolean;
     onClick: (index: number) => void;
     imageNumber: number;
     className?: string;
 
 }
 
-const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive =false, onClick, imageNumber, className }) => {
+const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className }) => {
     const handleClick = useCallback(() => {
         onClick(imageNumber - 1);
     }, [onClick, imageNumber]);
@@ -44,21 +44,6 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
 });
 
 export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false, indicators }) => {
-
-    const [animating, setAnimating] = useState(false);
-
-    const next = () => {
-        if (animating) return;
-        const nextIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
-        setActiveIndex(nextIndex);
-    };
-
-    const previous = () => {
-        if (animating) return;
-        const nextIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1;
-        setActiveIndex(nextIndex);
-    };
-
     const [activeIndex, setActiveIndex] = useState<number>(() => {
         const storedIndex = localStorage.getItem('activeIndex');
         return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
@@ -86,44 +71,16 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
     }, [activeIndex]);
 
     const galleryImages = useMemo(() => {
-        if (!images) {
-            return null
-        }
-
-        if (indicators) {
-            return (
-                images.map((image, index) => (
-                    <CarouselItem key={image.src}
-                        onExiting={() => setAnimating(true)}
-                        onExited={() => setAnimating(false)}
-                        className={styles.image_container}
-                    >
-                        <CarouselCaption 
-                        className={styles.image_caption}
-                        captionText={image.alt} />
-                        <GalleryImage
-                            key={image.src + index}
-                            {...image}
-                            onClick={handleImageClick}
-                            imageNumber={index + 1}
-                            className={styles.image}
-                        />
-                    </CarouselItem>
-                )))
-        }
-
-        return (
-            images.map((image, index) => (
-                <GalleryImage
-                    key={image.src + index}
-                    {...image}
-                    onClick={handleImageClick}
-                    imageNumber={index + 1}
-                    isActive={index === activeIndex}
-                    className={styles.image}
-                />
-            )))
-
+        return images ? images.map((image, index) => (
+            <GalleryImage
+                key={image.src + index}
+                {...image}
+                isActive={index === activeIndex}
+                onClick={handleImageClick}
+                imageNumber={index + 1}
+                className={className}
+            />
+        )) : null;
     }, [images, activeIndex, handleImageClick, className]);
 
     useEffect(() => {
@@ -134,32 +91,10 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
         }
     }, [scrollLocked]);
 
-    if (indicators) {
-        return (
-            <Carousel className={`${styles.slider}`}
-                aria-label="Gallery"
-                activeIndex={activeIndex}
-                next={next}
-                previous={previous}
-            >
-                {galleryImages}
-                {
-                    indicators &&
-                    <CarouselIndicators
-                        className={styles.carousel_indicators}
-                        items={galleryImages ? galleryImages : []}
-                        activeIndex={activeIndex}
-                        onClickHandler={handleCarouselIndicatorClick}
-                    />
-                }
 
-            </Carousel>
-        )
-    }
 
     return (
         <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
-
             <div className={styles.gallery_container} ref={galleryRef}>
                 {galleryImages}
             </div>
