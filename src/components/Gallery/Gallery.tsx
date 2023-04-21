@@ -94,7 +94,7 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
     }, [scrollLocked]);
 
     return (
-      <div ref={galleryRef} className={`${styles.gallery} ${className}`} aria-label="Gallery">
+      <div ref={galleryRef} className={`${styles.gallery}`}>
           {galleryImages}
       </div>
     );

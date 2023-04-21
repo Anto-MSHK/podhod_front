@@ -9,7 +9,7 @@ interface BottomMenuI {
 
 export const BottomMenu: React.FC<BottomMenuI> = ({ children, style, gallery }) => {
 	return (
-		<div className={styles.bottomMenu} style={style}>
+		<div className={styles.bottomMenu}>
 			{gallery ? (
 				<div className={styles.gallery}>{gallery}</div>
 			) : null}

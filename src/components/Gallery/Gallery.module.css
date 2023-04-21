@@ -3,27 +3,19 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: 16px;
-    margin-bottom: 16px;
     align-items: flex-start;
     white-space: nowrap;
     overflow-x: auto;
-    padding-top: 3%;
+    padding-top: 5%;
     padding-left: 16px;
 }
+
 .gallery::-webkit-scrollbar {
     display: none;
 }
 
 .scrollLocked {
     overflow: hidden;
-}
-
-
-.gallery-container {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    flex-shrink: 0;
 }
 
 .imageWrapper {
