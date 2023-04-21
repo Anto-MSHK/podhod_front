@@ -31,7 +31,7 @@ export const ChapterPage = () => {
 						</div>
 						<div>
 							<div className={styles.bottom_rightContainer}>
-								<Gallery images={images} />
+								<Gallery images={images} isDisabled={true} />
 							</div>
 						</div>
 					</div>

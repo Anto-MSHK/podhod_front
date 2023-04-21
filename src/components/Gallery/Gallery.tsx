@@ -10,6 +10,7 @@ interface GalleryProps {
     images: ImageProps[];
     className?: string;
     scrollLocked?: boolean;
+    isDisabled?: boolean; // добавить isDisabled prop
 }
 
 interface GalleryImageProps extends ImageProps {
@@ -25,20 +26,20 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
     }, [onClick, imageNumber]);
 
     return (
-        <figure
-            className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${className}`}
-            onClick={handleClick}
-            aria-label={`Image ${imageNumber}`}
-            role="button"
-            tabIndex={0}
-            data-isactive={isActive}
-        >
-            <img src={src} alt={alt} className={styles.image} />
-        </figure>
+      <figure
+        className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${className}`}
+        onClick={handleClick}
+        aria-label={`Image ${imageNumber}`}
+        role="button"
+        tabIndex={0}
+        data-isactive={isActive}
+      >
+          <img src={src} alt={alt} className={styles.image} />
+      </figure>
     );
 });
 
-export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false }) => {
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false, isDisabled = false }) => { // добавить isDisabled в деструктуризацию props
     const [activeIndex, setActiveIndex] = useState<number>(() => {
         const storedIndex = localStorage.getItem('activeIndex');
         return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
@@ -48,22 +49,24 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
         setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
     }, []);
 
+    const emptyFunction = useCallback(() => {}, []);
+
     useEffect(() => {
         localStorage.setItem('activeIndex', activeIndex.toString());
     }, [activeIndex]);
 
     const galleryImages = useMemo(() => {
         return images ? images.map((image, index) => (
-            <GalleryImage
-                key={image.src}
-                {...image}
-                isActive={index === activeIndex}
-                onClick={handleImageClick}
-                imageNumber={index + 1}
-                className={className}
-            />
+          <GalleryImage
+            key={image.src}
+            {...image}
+            isActive={index === activeIndex}
+            onClick={isDisabled ? emptyFunction : handleImageClick} // использовать пустую функцию, если isDisabled передан
+            imageNumber={index + 1}
+            className={className}
+          />
         )) : null;
-    }, [images, activeIndex, handleImageClick, className]);
+    }, [images, activeIndex, handleImageClick, className, isDisabled, emptyFunction]);
 
     const galleryRef = useRef<HTMLDivElement>(null);
 
@@ -76,8 +79,8 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
     }, [scrollLocked]);
 
     return (
-        <div ref={galleryRef} className={`${styles.gallery} ${className}`} aria-label="Gallery">
-            {galleryImages}
-        </div>
+      <div ref={galleryRef} className={`${styles.gallery} ${className}`} aria-label="Gallery">
+          {galleryImages}
+      </div>
     );
 };
