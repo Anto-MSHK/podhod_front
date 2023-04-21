@@ -3,21 +3,18 @@ import styles from './BottomMenu.module.css';
 
 interface BottomMenuI {
 	children: React.ReactNode;
+	style?: React.CSSProperties;
 	gallery?: React.ReactNode;
 }
 
-export const BottomMenu: React.FC<BottomMenuI> = ({ gallery, children }) => {
+export const BottomMenu: React.FC<BottomMenuI> = ({ children, style, gallery }) => {
 	return (
-		<div className={styles.bottomMenu}>
+		<div className={styles.bottomMenu} style={style}>
 			{gallery ? (
-					<div className={styles.gallery}>
-						{gallery}
-				</div>
+				<div className={styles.gallery}>{gallery}</div>
 			) : null}
 			<div className={styles.content}>
-				<div className={styles.childContainer}>
-					{children}
-				</div>
+				<div className={styles.childContainer}>{children}</div>
 			</div>
 		</div>
 	);

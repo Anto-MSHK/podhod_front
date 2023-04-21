@@ -1,0 +1,48 @@
+.chapterPreview_wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 680px;
+    justify-content: space-between;
+}
+
+.chapterPreview_content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.chapterPreview_bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.chapterPreview_bottom{
+    display: flex;
+    justify-content: center;
+}
+
+.bottom_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.bottom_leftContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.bottom_rightContainer img{
+    width: 100px;
+    height: 75px;
+}
+
+.bottom_rightContainer {
+    height: 85px;
+}
