@@ -30,10 +30,7 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActi
       <figure
         className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${isDisabled ? styles.disabled : ''} ${className}`}
         onClick={handleClick}
-        aria-label={`Image ${imageNumber}`}
         role="button"
-        tabIndex={0}
-        data-isactive={isActive}
       >
           <img src={src} alt={alt} className={styles.image} />
       </figure>

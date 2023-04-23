@@ -32,33 +32,18 @@ const images = [
 		alt: "Image 1",
 	},
 	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Manoel.jpg/275px-Manoel.jpg",
 		alt: "Image 2",
 	},
 	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Manul_kitten.jpg/300px-Manul_kitten.jpg",
+		alt: "Image 3",
+	},{
+		src: "https://theology.education/storage/articles/d0450f9603254e299d0ad3220789f1db.jpg",
 		alt: "Image 4",
 	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
+		src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ57F3CrhbcKSllSqdqKUuHJpery1TCMCt3ic-7fL3ZLhUJNljWqeSHoYleOFTMJU-7HB4&usqp=CAU",
+		alt: "Image 5",
 	},
 ];
 
@@ -274,7 +259,7 @@ export const MainPage = () => {
 					isTransparent={false}
 				/>
 			</div>
-			<div style={{ marginTop: 50, width: "20%"}}>
+			<div style={{ marginTop: 50, width: "35%"}}>
 				<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}  >
 					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
