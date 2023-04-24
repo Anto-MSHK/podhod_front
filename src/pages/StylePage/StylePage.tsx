@@ -21,12 +21,18 @@ import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { Gallery } from "../../components/Gallery/Gallery";
-import React from "react";
+import React, {useState} from "react";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
 import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
 import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
 import {TextBlock} from "../../components/TextBlock/TextBlock";
+import {PriceForm} from "../../components/PriceForm/PriceForm";
+
+interface Price {
+	criterion: string;
+	price: number;
+}
 
 const images = [
 	{
@@ -95,6 +101,12 @@ export const MainPage = () => {
 			.required("Обязательное поле!"),
 	};
 
+	const [prices, setPrices] = useState<Price[]>([]);
+
+	const handlePriceAdded = (newPrice: Price) => {
+		setPrices([...prices, newPrice]);
+	};
+
 	return (
 		<div>
 			<div style={{ display: "flex" }}>
@@ -108,6 +120,16 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
+					<div>
+						<PriceForm onPriceAdded={handlePriceAdded} />
+
+						{prices.map((price, index) => (
+							<div key={index}>
+								<span>{price.criterion}: </span>
+								<span>{price.price} руб.</span>
+							</div>
+						))}
+					</div>
 					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<div>
 						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
