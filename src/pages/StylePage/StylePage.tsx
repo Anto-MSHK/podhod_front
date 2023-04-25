@@ -124,7 +124,7 @@ export const MainPage = () => {
 						<PriceForm onPriceAdded={handlePriceAdded} />
 
 						{prices.map((price, index) => (
-							<div key={index}>
+							<div style={{fontWeight: 'bold', marginLeft: '50px', display:'flex'}} key={index}>
 								<span>{price.criterion}: </span>
 								<span>{price.price} руб.</span>
 							</div>
