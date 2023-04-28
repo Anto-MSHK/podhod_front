@@ -1,30 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Preview.module.css";
 import { useAppSelector } from "../../app/hooks";
-import ImageItem from "../ImageItem/ImageItem";
 import { imageType } from "../../app/Slices/imagesUploadSlice";
 import { PreviewSwitcher } from "../PreviewSwitcher/PreviewSwitcher";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface IPreview {
 	backgroundImg?: imageType;
 	selectedPageType: string;
 }
+
 const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType }) => {
-	const event = useAppSelector(state => state.eventCreate.event);
-	const exhibit = useAppSelector(state => state.exhibitCreate.exhibit);
-	const galleryImages = useAppSelector(state => state.images.galleryMainPage);
+	const [prevSelectedPageType, setPrevSelectedPageType] = useState(selectedPageType);
+
+	useEffect(() => {
+		setPrevSelectedPageType(selectedPageType);
+	}, [selectedPageType]);
+
+	const isForward = () => {
+		const pagesOrder = ["EventPage", "ChapterPage", "ExhibitPage"];
+		return (
+			pagesOrder.indexOf(selectedPageType) > pagesOrder.indexOf(prevSelectedPageType)
+		);
+	};
 
 	return (
 		<div
 			className={styles.preview_picture}
-			style={selectedPageType === 'EventPage' ? {
-				backgroundImage: backgroundImg
-					? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`
-					: "none",
-			} : {backgroundImage: "none"}}
+			style={
+				selectedPageType === "EventPage"
+					? {
+						backgroundImage: backgroundImg
+							? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`
+							: "none",
+					}
+					: { backgroundImage: "none" }
+			}
 		>
-			<PreviewSwitcher selectedPageType={selectedPageType} />
+			<TransitionGroup className={`${styles.transitionGroup} ${isForward() ? styles.forward : styles.backward}`}>
+				<CSSTransition
+					key={selectedPageType}
+					timeout={300}
+					classNames={{
+						enter: styles.slideEnter,
+						enterActive: styles.slideEnterActive,
+						exit: styles.slideExit,
+						exitActive: styles.slideExitActive,
+					}}
+				>
+					<PreviewSwitcher selectedPageType={selectedPageType} />
+				</CSSTransition>
+			</TransitionGroup>
 		</div>
 	);
 };
+
 export default Preview;
