@@ -42,3 +42,17 @@
     width: 48px;
     height: 48px;
 }
+
+.textAndDelete {
+    font-weight: bold;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.delete {
+    width: 15px;
+    height: 15px;
+    margin-bottom: 25px;
+    margin-left: 5px;
+}
