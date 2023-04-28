@@ -33,6 +33,7 @@ interface CustomFormInputI extends FieldConfig {
 	placeholder?: string;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onBlur?: (event: React.FocusEvent<any>) => void;
+	onFocus?: (event: React.FocusEvent<any>) => void;
 }
 
 export const CustomInput: FC<CustomInputI> = ({
@@ -44,10 +45,12 @@ export const CustomInput: FC<CustomInputI> = ({
 	placeholder,
 	onChange,
 	onBlur,
+	onFocus,
 }) => {
 	return (
 		<div>
 			<Input
+				onFocus={onFocus}
 				onBlur={onBlur}
 				onChange={onChange}
 				disabled={disabled}
