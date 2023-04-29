@@ -1,9 +1,11 @@
+import { ChapterT } from "./ChapterT";
+
 export type exhibitsT = {
 	id: string;
 	name: string;
 	short?: string;
 	description?: string;
-	chapters?: {}[];
+	chapters?: ChapterT[];
 };
 
 export type CreateExhibitPayloadT = {
