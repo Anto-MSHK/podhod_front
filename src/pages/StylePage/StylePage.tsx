@@ -24,6 +24,7 @@ import React from "react";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
 import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
+import { TextBox } from "../../components/TextBox/TextBox";
 
 const images = [
 	{
@@ -39,6 +40,13 @@ const images = [
 		alt: "Image 4",
 	},
 ];
+
+const textBoxData = {
+	extra: <InfoTag text={'test'} />,
+	title: 'Название',
+	shortDesc: 'Краткое описание',
+	desc: 'Описание'
+}
 
 
 export const MainPage = () => {
@@ -258,6 +266,9 @@ export const MainPage = () => {
 					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
 				</BottomMenu>
+			</div>
+			<div style={{ marginTop: 50, width: "30%" }}>
+					<TextBox data={textBoxData} />
 			</div>
 		</div>
 	);
