@@ -1,113 +1,69 @@
-import React, { useState, useCallback, useMemo, useEffect, useRef, RefObject } from 'react';
-import styles from './Gallery.module.css';
-import {CarouselIndicators} from 'reactstrap';
+import React, { useState, useEffect } from "react";
+import styles from "./Slider.module.css";
 
-interface ImageProps {
-    src: string;
-    alt: string;
-}
+type SliderT = {
+	images: {
+		src: string;
+		alt?: string;
+		caption?: string;
+	}[];
+};
 
-interface GalleryProps {
-    images: ImageProps[];
-    className?: string;
-    scrollLocked?: boolean;
-    indicators?: boolean
+export const Slider: React.FC<SliderT> = ({ images }) => {
+	const [activeIndex, setActiveIndex] = useState(0);
 
-}
+	useEffect(() => {
+		const slideEl = document.getElementById(`slide-${activeIndex}`);
+		slideEl?.scrollIntoView({
+			block: "nearest",
+			inline: "center",
+			behavior: "smooth",
+		});
+	}, [activeIndex]);
 
-interface GalleryImageProps extends ImageProps {
-    isActive: boolean;
-    onClick: (index: number) => void;
-    imageNumber: number;
-    className?: string;
+	const goToIndex = (newIndex: number) => {
+		setActiveIndex(newIndex);
+	};
 
-}
+	const indicators = images.map((item, index) => {
+		return (
+			<div
+				id={`indicator-${index}`}
+				onClick={() => goToIndex(index)}
+				className={`${styles.indicator} ${
+					activeIndex === index ? styles.active : ""
+				}`}
+				key={item.src + index}
+			></div>
+		);
+	});
 
-const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className }) => {
-    const handleClick = useCallback(() => {
-        onClick(imageNumber - 1);
-    }, [onClick, imageNumber]);
+	const slides = images.map((item, index) => {
+		/* let captionText = item.caption?.split() */
+		return (
+			<div
+				className={styles.slide_container}
+				id={`slide-${index}`}
+				onClick={() => goToIndex(index)}
+				key={item.src + index}
+			>
+				<img className={styles.image} alt={item.alt} src={item.src}></img>
 
-    return (
-        <figure
-            className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${className}`}
-            onClick={handleClick}
-            aria-label={`Image ${imageNumber}`}
-            role="button"
-            tabIndex={0}
-            data-isactive={isActive}
-            id={`image-${imageNumber}`}
-        >
-            <img src={src} alt={alt} className={styles.image} />
-        </figure>
-    );
-});
+				{item.caption && (
+					<div className={styles.slide_caption}>
+						<p className={styles.caption_text}>{item.caption}</p>
+					</div>
+				)}
+			</div>
+		);
+	});
 
-export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false, indicators }) => {
-    const [activeIndex, setActiveIndex] = useState<number>(() => {
-        const storedIndex = localStorage.getItem('activeIndex');
-        return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
-    });
-
-
-    const galleryRef = useRef(null)
-
-
-    const handleImageClick = useCallback((index: number) => {
-        setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
-    }, []);
-
-    const handleCarouselIndicatorClick = useCallback((index: number) => {
-        handleImageClick(index)
-        const el = document.getElementById(`image-${index}`)
-        console.log(el)
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-        }
-    }, [])
-
-    useEffect(() => {
-        localStorage.setItem('activeIndex', activeIndex.toString());
-    }, [activeIndex]);
-
-    const galleryImages = useMemo(() => {
-        return images ? images.map((image, index) => (
-            <GalleryImage
-                key={image.src + index}
-                {...image}
-                isActive={index === activeIndex}
-                onClick={handleImageClick}
-                imageNumber={index + 1}
-                className={className}
-            />
-        )) : null;
-    }, [images, activeIndex, handleImageClick, className]);
-
-    useEffect(() => {
-        if (scrollLocked) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }, [scrollLocked]);
-
-
-
-    return (
-        <div className={`${styles.gallery} ${className}`} aria-label="Gallery">
-            <div className={styles.gallery_container} ref={galleryRef}>
-                {galleryImages}
-            </div>
-            {
-                indicators &&
-                <CarouselIndicators
-                    className={styles.carousel_indicators}
-                    items={galleryImages ? galleryImages : []}
-                    activeIndex={activeIndex}
-                    onClickHandler={handleCarouselIndicatorClick}
-                />
-            }
-
-        </div>
-    );
+	return (
+		<div className={styles.slider_wrapper}>
+			<div className={styles.slides_container}>{slides}</div>
+			{images.length > 1 && (
+				<div className={styles.indicators_container}>{indicators}</div>
+			)}
+		</div>
+	);
 };
