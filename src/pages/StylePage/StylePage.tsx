@@ -19,27 +19,10 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import { Gallery } from "../../components/Gallery/Gallery";
-import React from "react";
-import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
-import Head from "../../components/Head/Head";
-import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
-
-const images = [
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 1",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 2",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},
-];
-
+import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
+import CustomCard from "../../components/CustomCard/CustomCard";
+import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import ImageItem from "../../components/ImageItem/ImageItem";
 
 export const MainPage = () => {
 	const btnData = [
@@ -88,14 +71,7 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images} scrollLocked={true} className="gallery"/>
-					<Gallery images={images}/>
-					<div>
-						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
-						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
-						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
-						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
-					</div>
+
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
@@ -222,43 +198,28 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<Head
-					centerElement={<h3>Название</h3>}
-					rightElement={<h5>6+</h5>}
-					isTransparent={false}
-
-				/>
-			</div>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<Head
-					leftElement={<CustomBtn onClick={() => (alert("Назад"))}>Назад</CustomBtn>}
-					centerElement={<h3>Название</h3>}
-					rightElement={<h5>6+</h5>}
-					isTransparent={true}
-				/>
-			</div>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<Head
-					leftElement={<CustomBtn onClick={() => (alert("Меню"))}>Меню</CustomBtn>}
-					centerElement={" "}
-					isTransparent={false}
-					style={{ backgroundColor: "var(--gray_color)" }}
-				/>
-			</div>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<Head
-					leftElement={<CustomBtn>Назад</CustomBtn>}
-					centerElement={<h3>История написания</h3>}
-					isTransparent={false}
-				/>
-			</div>
-			<div style={{ marginTop: 50, width: "30%" }}>
-				<BottomMenu>
-					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
-					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
-				</BottomMenu>
-			</div>
+			<CustomCard title="sadadas">
+				<img style={{ width: "100px" }} src={icon1}></img>
+				<CardBody>
+					<CardTitle tag="h1">Card title</CardTitle>
+					<CardSubtitle className="mb-2 text-muted" tag="h6">
+						Card subtitle
+					</CardSubtitle>
+					<CardText>
+						Some quick example text to build on the card title and make up the
+						bulk of the card‘s content.
+					</CardText>
+					<CustomBtn>Button</CustomBtn>
+				</CardBody>
+			</CustomCard>
+			<Card
+				style={{
+					width: "18rem",
+					height: "fit-content",
+				}}
+			>
+				<img alt="Sample" src="https://picsum.photos/300/200" />
+			</Card>
 		</div>
 	);
 };
