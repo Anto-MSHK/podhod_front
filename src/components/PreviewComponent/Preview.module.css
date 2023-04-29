@@ -1,18 +1,17 @@
 .preview_picture {
 	display: flex;
 	flex-direction: column;
-	width: 7.4cm;
-	height: 13.2cm;
+	width: 335px;
+	height: 680px;
 	border: 1px solid var(--red_color);
 	border-radius: var(--radius);
 	margin: 0 auto;
-
 	background-size: cover;
 	background-position: 50% 50%;
-
-	padding: 15px;
-	background-color: #2e2e2e;
+	background-color: #1e1e1e;
 	gap: 10px;
+	position: relative;
+	overflow: hidden;
 }
 
 .preview_picture__header {
@@ -116,3 +115,61 @@
 .preview_picture__move_btn p {
 	margin: 0;
 }
+
+.forward .slideEnter {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: all 300ms ease-out;
+}
+
+.forward .slideEnterActive {
+	left: 0;
+	opacity: 1;
+}
+
+.forward .slideExit {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opacity: 1;
+	transition: opacity 1ms ease-out;
+}
+
+.forward .slideExitActive {
+	opacity: 0;
+}
+
+.backward .slideEnter {
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	opacity: 0;
+	transition: all 300ms ease-out;
+}
+
+.backward .slideEnterActive {
+	left: 0;
+	opacity: 1;
+}
+
+.backward .slideExit {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opacity: 1;
+	transition: all 300ms ease-out;
+}
+
+.backward .slideExitActive {
+	left: 100%;
+	opacity: 0;
+}
+
+
+

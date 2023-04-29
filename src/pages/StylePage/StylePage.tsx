@@ -24,7 +24,6 @@ import CustomCard from "../../components/CustomCard/CustomCard";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import ImageItem from "../../components/ImageItem/ImageItem";
 
-
 export const MainPage = () => {
 	const btnData = [
 		{ name: "Все" },
@@ -63,7 +62,6 @@ export const MainPage = () => {
 		<div>
 			<div style={{ display: "flex" }}>
 				<div style={{ marginRight: 40, width: "40%" }}>
-
 					<h1>{`<h1>`} - Заголовок 1</h1>
 					<h2>{`<h2>`} - Заголовок 2</h2>
 					<h3>{`<h3>`} - Заголовок 3</h3>
@@ -73,6 +71,7 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
+
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
@@ -200,38 +199,27 @@ export const MainPage = () => {
 				}
 			/>
 			<CustomCard title="sadadas">
-					<img style={{width: '100px'}} src={icon1}></img>
-					<CardBody>
-					<CardTitle tag="h1">
-						Card title
-					</CardTitle>
-					<CardSubtitle
-						className="mb-2 text-muted"
-						tag="h6"
-					>
+				<img style={{ width: "100px" }} src={icon1}></img>
+				<CardBody>
+					<CardTitle tag="h1">Card title</CardTitle>
+					<CardSubtitle className="mb-2 text-muted" tag="h6">
 						Card subtitle
 					</CardSubtitle>
 					<CardText>
-						Some quick example text to build on the card title and make up the bulk of the card‘s content.
+						Some quick example text to build on the card title and make up the
+						bulk of the card‘s content.
 					</CardText>
-					<CustomBtn>
-						Button
-					</CustomBtn>
+					<CustomBtn>Button</CustomBtn>
 				</CardBody>
-				</CustomCard>
+			</CustomCard>
 			<Card
 				style={{
-					width: '18rem',
-					height: 'fit-content'
+					width: "18rem",
+					height: "fit-content",
 				}}
 			>
-				<img
-					alt="Sample"
-					src="https://picsum.photos/300/200"
-				/>
-			
+				<img alt="Sample" src="https://picsum.photos/300/200" />
 			</Card>
-
 		</div>
 	);
 };

@@ -16,13 +16,13 @@ import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
 const btnData = [
-	{ name: "Основная информация", lable: "mainScreen" },
+	{ name: "Основная информация", lable: "mainScreen", type: "EventPage" },
 	{
 		name: "Страницы",
 		lable: "pages",
-		/*   splits: [{ title: "Дополнительная страница", label: "any" }], */
+		type: "ChapterPage",
 	},
-	{ name: "Экспонаты", lable: "exhibits" },
+	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitPage" },
 	{ name: "Настройки", lable: "settings" },
 ];
 
@@ -31,6 +31,7 @@ const typesEvent = {
 	fair: "ярмарка",
 	"promo-exhibition": "промо-выставка",
 };
+
 export const EventEdit: React.FC = () => {
 	const eventSlice = useAppSelector(state => state.eventCreate.event);
 	const backgroundImage = useAppSelector(state => state.images.avatarExpo);
@@ -41,26 +42,26 @@ export const EventEdit: React.FC = () => {
 		useState<string | number | number[] | null>(0);
 	const [isImgLoading, setIsImgLoading] = useState(true);
 	const dispatch = useAppDispatch();
-
+	const [dragStartX, setDragStartX] = useState<number | null>(null);
 	const handleActiveBtn = (btn: string | number | number[] | null) => {
 		setActiveBtn(btn);
 	};
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setTimeout(() => {
-				if (containerRef.current && window.scrollY > 90) {
-					containerRef.current.style.transform = `translateY(${
-						window.scrollY - 90
-					}px)`;
-				} else if (containerRef.current && window.scrollY < 90) {
-					containerRef.current.style.transform = `translateY(0px)`;
-				}
-			}, 100);
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+	/*	useEffect(() => {
+			const handleScroll = () => {
+				setTimeout(() => {
+					if (containerRef.current && window.scrollY > 90) {
+						containerRef.current.style.transform = `translateY(${
+							window.scrollY - 90
+						}px)`;
+					} else if (containerRef.current && window.scrollY < 90) {
+						containerRef.current.style.transform = `translateY(0px)`;
+					}
+				}, 100);
+			};
+			window.addEventListener("scroll", handleScroll);
+			return () => window.removeEventListener("scroll", handleScroll);
+		}, []);*/
 
 	useEffect(() => {
 		if (event) {
@@ -88,6 +89,42 @@ export const EventEdit: React.FC = () => {
 			case 3:
 				return null;
 		}
+	};
+
+	const [selectedPageType, setSelectedPageType] = useState<string>("EventPage");
+
+	useEffect(() => {
+		if (typeof activeBtn === "number") {
+			setSelectedPageType(btnData[activeBtn]?.type || "EventPage");
+		}
+	}, [activeBtn]);
+
+	const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+		setDragStartX(e.clientX);
+	};
+
+	const handleDragMove = (e: React.MouseEvent) => {
+		if (dragStartX === null) return;
+		const dragOffset = e.clientX - dragStartX;
+
+		if (dragOffset < -50) {
+			const newActiveBtn = (activeBtn as number ?? 0) + 1;
+			setActiveBtn(newActiveBtn > 3 ? 0 : newActiveBtn);
+			setDragStartX(null);
+		} else if (dragOffset > 50) {
+			const newActiveBtn = (activeBtn as number ?? 0) - 1;
+			setActiveBtn(newActiveBtn < 0 ? 3 : newActiveBtn);
+			setDragStartX(null);
+		}
+	};
+
+
+
+
+
+
+	const handleDragEnd = () => {
+		setDragStartX(null);
 	};
 
 	return (
@@ -123,6 +160,7 @@ export const EventEdit: React.FC = () => {
 										handleActiveBtn={handleActiveBtn}
 										view={"radio"}
 										data={btnData}
+										activeBtn={activeBtn as number}
 									/>
 								</div>
 							</div>
@@ -139,13 +177,18 @@ export const EventEdit: React.FC = () => {
 						<div className={styles.content_wrapper}>{handleActivePage()}</div>
 					</div>
 					<div ref={containerRef} className={styles.preview_wrapper} style={{}}>
-						<div className={styles.preview__container}>
-							<div>
-								<h3 style={{ margin: "0 0 10px 0", textAlign: "center" }}>
-									предпросмотр
-								</h3>
-							</div>
-							<Preview backgroundImg={backgroundImage} />
+						<div>
+							<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
+								Предпросмотр
+							</h3>
+						</div>
+						<div
+							className={styles.preview__container}
+							onMouseDown={handleDragStart}
+							onMouseMove={handleDragMove}
+							onMouseUp={handleDragEnd}
+						>
+							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
 						</div>
 						<div className={styles.InfoComponentWrapper}>
 							<InfoMessage

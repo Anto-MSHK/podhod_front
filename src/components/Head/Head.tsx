@@ -1,78 +1,39 @@
-import React from 'react';
-import { CustomBtn } from '../CustomBtn/CustomBtn';
-import styles from './Head.module.css';
-
-interface ElementProps {
-	type: 'back' | 'menu' | 'custom';
-	content?: React.ReactNode;
-	onClick?: () => void;
-	customStyle?: React.CSSProperties;
-}
-
+import React from "react";
+import styles from "./Head.module.css";
+var classNames = require("classnames");
 interface HeadProps {
-	leftElement?: ElementProps;
+	leftElement?: React.ReactNode;
 	centerElement?: React.ReactNode;
 	rightElement?: React.ReactNode;
 	isTransparent?: boolean;
-	backgroundColor?: string;
+	style?: React.CSSProperties;
 	centerStyle?: React.CSSProperties;
 	rightStyle?: React.CSSProperties;
+	className?: string;
 }
 
 const Head: React.FC<HeadProps> = ({
+	className,
 	leftElement,
 	centerElement,
 	rightElement,
 	isTransparent = false,
-	backgroundColor = 'var(--header-bg-color, #f0f0f0)',
 	centerStyle,
 	rightStyle,
+	style,
 }) => {
 	if (!centerElement) {
-		console.error('Center element is not defined in Head component');
+		console.error("Center element is not defined in Head component");
 		return null;
 	}
 
-	const headerStyle = {
-		backgroundColor: isTransparent ? 'transparent' : backgroundColor,
-	};
-
-	const renderElement = (elementProps: ElementProps) => {
-		const { type, content, onClick, customStyle } = elementProps;
-
-		const handleClick = () => {
-			if (onClick) onClick();
-		};
-
-		switch (type) {
-			case 'back':
-				return (
-					<CustomBtn style={customStyle} onClick={handleClick}>
-						Назад
-					</CustomBtn>
-				);
-			case 'menu':
-				return (
-					<CustomBtn style={customStyle} onClick={handleClick}>
-						Меню
-					</CustomBtn>
-				);
-			case 'custom':
-				return (
-					<div style={customStyle} onClick={handleClick}>
-						{content}
-					</div>
-				);
-			default:
-				return null;
-		}
-	};
-
-	const left = leftElement ? renderElement(leftElement) : null;
+	let classes = classNames(className, styles.container, {
+		[styles.transparent]: isTransparent,
+	});
 
 	return (
-		<header className={styles.container} style={headerStyle}>
-			<div className={styles.left}>{left}</div>
+		<header className={classes} style={style}>
+			<div className={styles.left}>{leftElement}</div>
 			<div className={styles.center} style={centerStyle}>
 				{centerElement}
 			</div>

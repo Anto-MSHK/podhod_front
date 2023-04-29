@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
 	Button,
 	ButtonGroup,
@@ -24,6 +24,7 @@ interface BtnGroupI extends ButtonGroupProps {
 	type?: string;
 	data: btnGroup;
 	handleActiveBtn?: (lable: string | number[] | number | null) => void;
+	activeBtn?: number;
 }
 
 export const CustomBtnGroup: FC<BtnGroupI> = ({
@@ -31,6 +32,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 	data,
 	handleActiveBtn,
 	type,
+	activeBtn
 }) => {
 	const [rSelected, setRSelected] = useState<number | null>(0);
 	const [cSelected, setCSelected] = useState<number[]>([]);
@@ -57,6 +59,12 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 		}
 	};
 
+	useEffect(() => {
+		if (handleActiveBtn && activeBtn !== null && activeBtn !== undefined) {
+			handleActiveBtn(activeBtn);
+		}
+	}, [activeBtn, handleActiveBtn]);
+
 	const renderButton = (
 		el: {
 			name: string;
@@ -68,7 +76,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 		index: number,
 	) => {
 		const isActive =
-			view === "radio" ? rSelected === index : cSelected.includes(index);
+			view === "radio" ? activeBtn === index : cSelected.includes(index);
 
 		const handleClick =
 			view === "radio"
