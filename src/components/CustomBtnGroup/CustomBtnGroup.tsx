@@ -137,6 +137,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 			return (
 				<div key={index}>
 					<CustomBtn
+				
 						className={`${styles.btnItem} ${
 							type === "filter"
 								? isActive

@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./EventShowpiecesEdit.module.css";
-import { FormInput } from "../Form/FormInput";
+import { CustomInput, FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { CustomBtn } from "../CustomBtn/CustomBtn";
+import {
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	ListGroup,
+	DropdownItemProps,
+	Spinner,
+} from "reactstrap";
+
 import {
 	useFetchExhibitsQuery,
 	useAddExhibitMutation,
@@ -18,9 +26,24 @@ import {
 	CreateExhibitPayloadT,
 	UpdateExhibitPayloadT,
 } from "../../app/Types/ExhibitsT";
-import deleteIcon from "../../assets/icons/CrossInCircle.svg";
 import { useParams } from "react-router-dom";
 import { exhibitsT } from "../../app/Types/ExhibitsT";
+import { useFetchChaptersQuery } from "../../app/services/ChapterApi";
+import { ChapterList } from "../ChapterList/ChapterList";
+import { InfoMessage } from "../InfoMessage/InfoMessage";
+import CustomCard from "../CustomCard/CustomCard";
+import {
+	CustomListItemI,
+	ListDropDownItemsI,
+} from "../CustomListItem/CustomListItem";
+import CustomListMenu, {
+	CustomMenuItemT,
+	MenuClickInfo,
+} from "../CustomListMenu/CustomListMenu";
+import plusIcon from "../../assets/icons/plusIcon.svg";
+import descIcon from "../../assets/icons/descIcon.svg";
+import { CustomBtn } from "./../CustomBtn/CustomBtn";
+import { ChapterForm } from "../ChapterForm/ChapterForm";
 
 interface formType {
 	exhibitName: string;
@@ -29,9 +52,22 @@ interface formType {
 }
 
 export const EventShowpiecesEdit = () => {
+	const [modalChapter, setModalChapter] = useState(false);
+	const toggleChapter = () => setModalChapter(!modalChapter);
+
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
+	const [currentItem, setCurrenstItem] = useState("");
 	const { data, isLoading } = useFetchExhibitsQuery(eventId);
+	const [chapterConf, setChapterConf] = useState({
+		eventId: eventId as string,
+		showpieceId: data?.length ? data[0].id : "0",
+	});
+	const {
+		data: showpiece,
+		isLoading: isChaptersLoading,
+		isFetching: isChaptersFetching,
+	} = useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
 	const [updateExhibit] = useUpdateExhibitMutation();
 	const [deleteExhibit] = useDeleteExhibitMutation();
@@ -44,6 +80,17 @@ export const EventShowpiecesEdit = () => {
 		console.log(exhibit);
 		setEditingExhibit(exhibit);
 		toggle();
+	};
+
+	const сhangeShowPiece = (showPieceId: string) => {
+		setChapterConf({
+			eventId: eventId as string,
+			showpieceId: showPieceId,
+		});
+	};
+	const handleMenuSelect = (e: MenuClickInfo) => {
+		setCurrenstItem(e.key);
+		сhangeShowPiece(e.key);
 	};
 
 	const handleAddExhibit = (values: formType) => {
@@ -81,6 +128,45 @@ export const EventShowpiecesEdit = () => {
 		await deleteExhibit({ id, eventId: eventId as string }).unwrap();
 	};
 
+	function getItem(
+		title: string,
+		key: React.Key,
+		id: string,
+		subTitle?: string,
+		dropdownItems?: ListDropDownItemsI[],
+	): CustomMenuItemT {
+		return {
+			title,
+			key,
+			id,
+			subTitle,
+			dropdownItems,
+		} as CustomMenuItemT;
+	}
+
+	const menuItems: CustomListItemI[] | undefined = data?.map((item, index) => {
+		const dropDownItems: ListDropDownItemsI[] = [
+			{
+				text: "Редактировать",
+				onClick: () => handleEditExhibit(item),
+			},
+			{
+				text: "Удалить",
+				onClick: () => handleDeleteExhibit(item.id),
+			},
+		];
+
+		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
+	});
+
+	useEffect(() => {
+		if (menuItems && menuItems?.length > 0) setCurrenstItem(menuItems[0].key);
+		setChapterConf({
+			eventId: eventId as string,
+			showpieceId: data?.length ? data[0].id : "0",
+		});
+	}, [data]);
+
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
 			exhibitName:
@@ -113,39 +199,105 @@ export const EventShowpiecesEdit = () => {
 
 	return (
 		<div className={styles.main_page_form_wrapper}>
-			<div>
+			{showpiece ? (
+				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
+					<div style={{ maxWidth: 300 }}>
+						<div className={styles.form_header}>
+							<CustomInput placeholder={"Найти экспонат..."} />
+						</div>
+						<CustomListMenu
+							className={styles.showpiece_list}
+							onClick={handleMenuSelect}
+							selectedKey={currentItem}
+							items={menuItems?.length ? menuItems : []}
+						/>
+						<CustomBtn
+							onClick={() => {
+								setModal(true);
+							}}
+							icon={plusIcon}
+							iconWidth={20}
+							style={{ marginTop: 15 }}
+						>
+							Новый экспонат
+						</CustomBtn>
+					</div>
+					<div className={styles.form_divider} />
+					<div style={{ width: "100%" }}>
+						<div className={styles.form_header}>
+							<h2 style={{ marginTop: -6, fontSize: 28 }}>
+								{showpiece?.name}
+								<p className="min" style={{ marginTop: -2, marginBottom: 0 }}>
+									экспонат
+								</p>
+							</h2>
+							<CustomBtn
+								onClick={() => setModalChapter(true)}
+								iconWidth={20}
+								icon={plusIcon}
+							>
+								Добавить главу
+							</CustomBtn>
+						</div>
+						<div className={styles.form_content}></div>
+						<CustomCard
+							className={`${styles.showpiece_list} ${styles["chapters"]}`}
+							style={{ backgroundColor: "#363535", padding: "1rem" }}
+						>
+							{showpiece &&
+							showpiece.chapters &&
+							showpiece.chapters?.length > 0 ? (
+								<ChapterList
+									showpiece={showpiece}
+									eventId={eventId as string}
+								/>
+							) : isChaptersFetching ? (
+								<div className={styles.img}>
+									<Spinner type="grow" className={styles.spinner} />
+								</div>
+							) : (
+								<InfoMessage
+									title="Создайте первую главу о вашем экспонате!"
+									icon={descIcon}
+									iconPosition="top"
+									iconWidth={100}
+									style={{ padding: 40 }}
+								/>
+							)}
+						</CustomCard>
+					</div>
+					<Modal
+						isOpen={modalChapter}
+						toggle={toggleChapter}
+						size={"xl"}
+						contentClassName={styles.modalWrapper}
+						className={styles.modal}
+						backdropClassName={styles.modalModal}
+					>
+						{eventId && (
+							<ChapterForm
+								eventId={eventId}
+								showPieceId={chapterConf.showpieceId}
+							/>
+						)}
+					</Modal>
+				</div>
+			) : isChaptersLoading ? (
+				<div className={styles.img}>
+					<Spinner type="grow" className={styles.spinner} />
+				</div>
+			) : (
 				<CustomBtn
 					onClick={() => {
 						setModal(true);
 					}}
+					icon={plusIcon}
+					iconWidth={20}
+					style={{ marginTop: 15 }}
 				>
-					Создать экспонат
+					Создайте первый экспонат
 				</CustomBtn>
-			</div>
-			<div>
-				{!isLoading &&
-					data &&
-					data.map((el: exhibitsT) => {
-						return (
-							<div key={el.id} className={styles.mainCreateExhibitWrapper}>
-								<div
-									className={styles.exhibitsListWrapper}
-									onClick={() => handleEditExhibit(el)}
-								>
-									<div>{el.name}</div>
-								</div>
-								<div
-									className={styles.exhibitsDeleteWrapper}
-									onClick={() => {
-										handleDeleteExhibit(el.id);
-									}}
-								>
-									<img src={deleteIcon} />
-								</div>
-							</div>
-						);
-					})}
-			</div>
+			)}
 			<Modal
 				isOpen={modal}
 				toggle={toggle}
