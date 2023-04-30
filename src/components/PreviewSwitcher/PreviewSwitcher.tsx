@@ -11,15 +11,16 @@ interface IPreviewSwitcher {
 
 export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }) => {
 	const eventSlice = useAppSelector((state) => state.eventCreate.event);
-
+	const selectedExhibit = useAppSelector((state) => state.selectedExhibit.exhibit);
+	const selectedPage = useAppSelector((state) => state.selectedPage.selectedPage)
 	const renderPage = () => {
 		switch (selectedPageType) {
 			case "EventPage":
 				return <EventPage data={eventSlice} />;
 			case "ExhibitPage":
-				return <ExhibitPage />;
+				return <ChapterPage data={selectedExhibit}/>;
 			case "ChapterPage":
-				return <ChapterPage />;
+				return <ExhibitPage data={selectedPage}/>;
 			default:
 				return <EventPage data={eventSlice} />;
 		}

@@ -18,6 +18,8 @@
     display: flex;
     align-items: center;
     padding: 10px;
+    max-width: 340px;
+    flex-wrap: wrap;
 }
 
 .eventPreview_bottom {

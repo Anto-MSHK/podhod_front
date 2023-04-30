@@ -29,7 +29,7 @@ export const EventPage: FC<IEventPage> = ({data}) => {
 
 	const eventData = {
 		extra: <h5>{data?.eventType && isEventType(data.eventType) ? typesEvent[data.eventType] : null}</h5>,
-		title: `"${data?.eventName}"`,
+		title: `"${data && data.eventName ? data.eventName : 'Создайте новое мероприятие'}"`,
 		desc: data?.description,
 	};
 
@@ -42,7 +42,7 @@ export const EventPage: FC<IEventPage> = ({data}) => {
 			<div className={styles.eventPreview_head}>
 				<Head leftElement={<div style={{ width: "35px", height: '35px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>}
 							centerElement={<img style={{width: '120px', height: '30px'}} src={logoExample} />}
-							rightElement={<div style={{ width: "35px", height: '35px' }}><ButtonArt round text={data?.age} onClick={() => console.log("Clicked")} /></div>}
+							rightElement={<div style={{ width: "35px", height: '35px' }}><ButtonArt round text={data && data.age ? data.age : '?'} onClick={() => console.log("Clicked")} /></div>}
 							isTransparent={true}
 							style={{width: '100%'}}
 				/>
