@@ -12,6 +12,7 @@ import {
 	UpdateExhibitPayloadT,
 } from "../../app/Types/ExhibitsT";
 import deleteIcon from "../../assets/icons/CrossInCircle.svg";
+import editIcon from '../../assets/icons/editIcon.svg'
 import { useParams } from "react-router-dom";
 import {
 	useAddPageMutation,
@@ -29,6 +30,7 @@ import {Gallery} from "../Gallery/Gallery";
 import imageItem from "../ImageItem/ImageItem";
 import addFileIcon from '../../assets/icons/addFileIcon.svg'
 import imageForAuth from '../../assets/pictures/imageForAuth.png'
+import { setSelectedPage } from "../../app/Slices/SelectedPageSlice";
 
 interface formType {
 	pageName: string;
@@ -49,6 +51,10 @@ export const EventPageEdit = () => {
 	const dispatch = useAppDispatch();
 
 	const toggle = () => setModal(!modal);
+
+	const handleSelectPage = (page: EventPagesT) => {
+		dispatch(setSelectedPage(page));
+	}
 
 	const handleEditPage = (page: EventPagesT) => {
 		setEditingPage(page);
@@ -135,9 +141,16 @@ export const EventPageEdit = () => {
 							<div key={el.id} className={styles.mainCreatePageWrapper}>
 								<div
 									className={styles.pagesListWrapper}
-									onClick={() => handleEditPage(el)}
+									onClick={() => handleSelectPage(el)}
 								>
 									<div>{el.name}</div>
+								</div>
+								<div className={styles.pagesDeleteWrapper}
+									onClick={() => {
+										handleEditPage(el);
+									}}
+								>
+								<img src={editIcon} style={{width: '21px', height: '21px'}}/>
 								</div>
 								<div
 									className={styles.pagesDeleteWrapper}

@@ -44,6 +44,7 @@ import plusIcon from "../../assets/icons/plusIcon.svg";
 import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
+import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
 
 interface formType {
 	exhibitName: string;
@@ -91,6 +92,9 @@ export const EventShowpiecesEdit = () => {
 	const handleMenuSelect = (e: MenuClickInfo) => {
 		setCurrenstItem(e.key);
 		сhangeShowPiece(e.key);
+
+		const selectedExhibit = data?.find((exhibit) => exhibit.id === e.key);
+		dispatch(setSelectedExhibit(selectedExhibit || null));
 	};
 
 	const handleAddExhibit = (values: formType) => {

@@ -4,7 +4,7 @@ import './TextBox.module.css'
 interface ITextBox {
 	data: {
 		extra?: any,
-		title: string | undefined,
+		title?: string | undefined,
 		shortDesc?: string | undefined,
 		desc: string | undefined
 	},
