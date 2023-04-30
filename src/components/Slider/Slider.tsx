@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
+var classNames = require('classnames')
 
 type SliderT = {
 	images: {
@@ -11,7 +12,10 @@ type SliderT = {
 
 export const Slider: React.FC<SliderT> = ({ images }) => {
 	const [activeIndex, setActiveIndex] = useState(0);
-
+	const captionClassName = classNames(
+		styles.slide_caption,
+		{[styles.single]: images.length <= 1},
+	)
 	useEffect(() => {
 		const slideEl = document.getElementById(`slide-${activeIndex}`);
 		slideEl?.scrollIntoView({
@@ -50,7 +54,7 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 				<img className={styles.image} alt={item.alt} src={item.src}></img>
 
 				{item.caption && (
-					<div className={styles.slide_caption}>
+					<div className={captionClassName}>
 						<p className={styles.caption_text}>{item.caption}</p>
 					</div>
 				)}

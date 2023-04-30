@@ -1,7 +1,7 @@
 import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import { InfoTag } from "../../components/InfoTag/InfoTag";
 import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
-import { Slider } from "../../components/Slider/Slider"; 
+import { Slider } from "../../components/Slider/Slider";
 import icon1 from "../../assets/icons/NumberOfExhibits.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
 import icon3 from "../../assets/icons/SmilingFace.svg";
@@ -19,32 +19,107 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import {Gallery} from "../../components/Gallery/Gallery";
+import { Gallery } from "../../components/Gallery/Gallery";
 import React from "react";
 
 const image = [
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 1', caption: 'Кошька' }
-]
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 1",
+		caption: "Кошька",
+	},
+];
 const images = [
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 1', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 2', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	{ src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG", alt: 'Image 4', caption: 'Кошька' },
-	
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 1",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 2",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 4",
+		caption: "Кошька",
+	},
 ];
 
 export const MainPage = () => {
@@ -94,14 +169,11 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<div style={{width: '500px', height: '200px'}}>
+					<div style={{ width: "500px", height: "200px" }}>
+						<Slider images={image} />
+					</div>
 
-					<Slider images={image}/>
-					</div>
-					{/* <Gallery images={images} scrollLocked={false} className="gallery"/> */}
-					<div style={{width: '200px'}}>
-			{/* 		<Gallery images={images} indicators scrollLocked={false} className="gallery"/> */}
-					</div>
+					<div style={{ width: "200px" }}></div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
