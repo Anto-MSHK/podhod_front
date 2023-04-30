@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
-import styles from './ChapterPage.module.css'
+import styles from './ExhibitsPreview.module.css'
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import { ImageSingle } from "../../../components/ImageSingle/ImageSingle";
@@ -22,7 +22,7 @@ interface IChapterPage {
 	data?: exhibitsT | null;
 }
 
-export const ChapterPage: FC<IChapterPage> = ({data}) => {
+export const ExhibitsPreview: FC<IChapterPage> = ({data}) => {
 
 	const ExhibitData = {
 		title: data?.name,
@@ -50,7 +50,7 @@ export const ChapterPage: FC<IChapterPage> = ({data}) => {
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h5>Далее: Луноход-1</h5>
+								<h5>Далее:</h5>
 							</div>
 							<div style={{width: '100%', height: '50px'}}>
 								<ButtonArt text={'Перейти'} arrow />

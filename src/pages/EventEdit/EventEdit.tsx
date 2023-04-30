@@ -16,13 +16,13 @@ import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
 const btnData = [
-	{ name: "Основная информация", lable: "mainScreen", type: "EventPage" },
+	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
 	{
 		name: "Страницы",
 		lable: "pages",
-		type: "ChapterPage",
+		type: "PagesPreview",
 	},
-	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitPage" },
+	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitsPreview" },
 	{ name: "Настройки", lable: "settings" },
 ];
 
@@ -92,11 +92,11 @@ export const EventEdit: React.FC = () => {
 		}
 	};
 
-	const [selectedPageType, setSelectedPageType] = useState<string>("EventPage");
+	const [selectedPageType, setSelectedPageType] = useState<string>("EventPreview");
 
 	useEffect(() => {
 		if (typeof activeBtn === "number") {
-			setSelectedPageType(btnData[activeBtn]?.type || "EventPage");
+			setSelectedPageType(btnData[activeBtn]?.type || "EventPreview");
 		}
 	}, [activeBtn]);
 
@@ -110,18 +110,14 @@ export const EventEdit: React.FC = () => {
 
 		if (dragOffset < -50) {
 			const newActiveBtn = (activeBtn as number ?? 0) + 1;
-			setActiveBtn(newActiveBtn > 3 ? 0 : newActiveBtn);
+			setActiveBtn(newActiveBtn > 2 ? 0 : newActiveBtn);
 			setDragStartX(null);
 		} else if (dragOffset > 50) {
 			const newActiveBtn = (activeBtn as number ?? 0) - 1;
-			setActiveBtn(newActiveBtn < 0 ? 3 : newActiveBtn);
+			setActiveBtn(newActiveBtn < 0 ? 2 : newActiveBtn);
 			setDragStartX(null);
 		}
 	};
-
-
-
-
 
 
 	const handleDragEnd = () => {
@@ -157,12 +153,14 @@ export const EventEdit: React.FC = () => {
 										: "Создайте новое мероприятие"}
 								</h1>
 								<div className={styles.info__toolbar_container}>
-									<CustomBtnGroup
-										handleActiveBtn={handleActiveBtn}
-										view={"radio"}
-										data={btnData}
-										activeBtn={activeBtn as number}
-									/>
+									{event && (
+										<CustomBtnGroup
+											handleActiveBtn={handleActiveBtn}
+											view={"radio"}
+											data={btnData}
+											activeBtn={activeBtn as number}
+										/>
+									)}
 								</div>
 							</div>
 						</div>
@@ -178,27 +176,34 @@ export const EventEdit: React.FC = () => {
 						<div className={styles.content_wrapper}>{handleActivePage()}</div>
 					</div>
 					<div ref={containerRef} className={styles.preview_wrapper} style={{}}>
-						<div>
-							<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
-								Предпросмотр
-							</h3>
-						</div>
-						<div
-							className={styles.preview__container}
-							onMouseDown={handleDragStart}
-							onMouseMove={handleDragMove}
-							onMouseUp={handleDragEnd}
-						>
-							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
-						</div>
-						<div className={styles.InfoComponentWrapper}>
-							<InfoMessage
-								style={{ padding: "1rem" }}
-								title={"Не может быть опубликовано"}
-								desc={"Есть незаполненные поля"}
-								icon={errorIcon}
-							/>
-						</div>
+						{
+							event && activeBtn !== 3 &&(
+								<div>
+									<div>
+										<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
+											Предпросмотр
+										</h3>
+									</div>
+
+									<div
+										className={styles.preview__container}
+										onMouseDown={handleDragStart}
+										onMouseMove={handleDragMove}
+										onMouseUp={handleDragEnd}
+									>
+										<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
+									</div>
+									<div className={styles.InfoComponentWrapper}>
+										<InfoMessage
+											style={{ padding: "1rem" }}
+											title={"Не может быть опубликовано"}
+											desc={"Есть незаполненные поля"}
+											icon={errorIcon}
+										/>
+									</div>
+								</div>
+							)
+						}
 					</div>
 				</div>
 			) : (

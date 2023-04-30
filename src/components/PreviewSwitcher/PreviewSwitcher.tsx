@@ -1,8 +1,7 @@
 import React from "react";
-import { EventPage } from "../../pages/MobilePreview/EventPage/EventPage";
-import { ExhibitPage } from "../../pages/MobilePreview/ExhibitPage/ExhibitPage";
-import { ChapterPage } from "../../pages/MobilePreview/ChapterPage/ChapterPage";
-import { PreviewLayout } from "../PreviewLayout/PreviewLayout";
+import { EventPreview } from "../../pages/MobilePreview/EventPreview/EventPreview";
+import { PagesPreview } from "../../pages/MobilePreview/PagesPreview/PagesPreview";
+import { ExhibitsPreview } from "../../pages/MobilePreview/ExhibitsPreview/ExhibitsPreview";
 import { useAppSelector } from "../../app/hooks";
 
 interface IPreviewSwitcher {
@@ -15,20 +14,20 @@ export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }
 	const selectedPage = useAppSelector((state) => state.selectedPage.selectedPage)
 	const renderPage = () => {
 		switch (selectedPageType) {
-			case "EventPage":
-				return <EventPage data={eventSlice} />;
-			case "ExhibitPage":
-				return <ChapterPage data={selectedExhibit}/>;
-			case "ChapterPage":
-				return <ExhibitPage data={selectedPage}/>;
+			case "EventPreview":
+				return <EventPreview data={eventSlice} />;
+			case "PagesPreview":
+				return <PagesPreview data={selectedPage}/>;
+			case "ExhibitsPreview":
+				return <ExhibitsPreview data={selectedExhibit}/>;
 			default:
-				return <EventPage data={eventSlice} />;
+				return <EventPreview data={eventSlice} />;
 		}
 	};
 
 	return (
 		<div>
-			<PreviewLayout>{renderPage()}</PreviewLayout>
+			{renderPage()}
 		</div>
 	);
 };

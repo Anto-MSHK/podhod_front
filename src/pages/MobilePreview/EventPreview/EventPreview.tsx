@@ -4,7 +4,7 @@ import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
 import logoExample from "../../../assets/pictures/logoExample.png";
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
-import styles from './EventPage.module.css'
+import styles from './EventPreview.module.css'
 import { EventT } from "../../../app/Types/EventsT";
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { eventForm } from "../../../app/Slices/ExpoCreateSlice";
@@ -13,7 +13,7 @@ interface IEventPage {
 	data: eventForm | undefined;
 }
 
-export const EventPage: FC<IEventPage> = ({data}) => {
+export const EventPreview: FC<IEventPage> = ({data}) => {
 
 	type EventType = 'exhibition' | 'fair' | 'promo-exhibition';
 

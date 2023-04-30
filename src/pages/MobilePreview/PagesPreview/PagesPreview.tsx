@@ -4,9 +4,7 @@ import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
 import crossIcon from '../../../assets/icons/BlackCrossInCircle.svg'
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
-import styles from './ExhibitPage.module.css'
-import { exhibitForm } from "../../../app/Slices/ExhibitCreateSlice";
-import { pageForm } from "../../../app/Slices/ExpoCreatePageSlice";
+import styles from './PagesPreview.module.css'
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { EventPagesT } from "../../../app/Types/EventPageT";
 
@@ -15,7 +13,7 @@ interface IExhibitPage {
 	data?: EventPagesT | null;
 }
 
-export const ExhibitPage: FC<IExhibitPage> = ({data}) => {
+export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 
 	const pageData = {
 		desc: data?.description
