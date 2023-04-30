@@ -28,7 +28,8 @@ xs
 .gallery_container::-webkit-scrollbar {
     display: none;
 }
-.scroll-locked {
+
+.scrollLocked {
     overflow: hidden;
 }
 .carousel_indicators{
@@ -62,6 +63,16 @@ xs
 
 .imageWrapper:hover {
     transform: scale(1.05);
+}
+
+.imageWrapper.disabled:hover {
+    transform: none;
+    cursor: default;
+}
+
+.gallery.disabled .imageWrapper:hover {
+    transform: none;
+    cursor: default;
 }
 
 .imageWrapper.selected {

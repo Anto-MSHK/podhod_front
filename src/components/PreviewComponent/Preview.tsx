@@ -1,53 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Preview.module.css";
 import { useAppSelector } from "../../app/hooks";
-import ImageItem from "../ImageItem/ImageItem";
 import { imageType } from "../../app/Slices/imagesUploadSlice";
+import { PreviewSwitcher } from "../PreviewSwitcher/PreviewSwitcher";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface IPreview {
 	backgroundImg?: imageType;
+	selectedPageType: string;
 }
-const Preview: React.FC<IPreview> = ({ backgroundImg }) => {
-	const event = useAppSelector(state => state.eventCreate.event);
-	const exhibit = useAppSelector(state => state.exhibitCreate.exhibit);
-	const galleryImages = useAppSelector(state => state.images.galleryMainPage);
+
+const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType }) => {
+	const [prevSelectedPageType, setPrevSelectedPageType] = useState(selectedPageType);
+
+	useEffect(() => {
+		setPrevSelectedPageType(selectedPageType);
+	}, [selectedPageType]);
+
+	const isForward = () => {
+		const pagesOrder = ["EventPage", "ChapterPage", "ExhibitPage"];
+		return (
+			pagesOrder.indexOf(selectedPageType) > pagesOrder.indexOf(prevSelectedPageType)
+		);
+	};
 
 	return (
 		<div
 			className={styles.preview_picture}
-			style={{
-				backgroundImage: backgroundImg
-					? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`
-					: "none",
-			}}
+			style={
+				selectedPageType === "EventPage"
+					? {
+						backgroundImage: backgroundImg
+							? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`
+							: "none",
+					}
+					: { backgroundImage: "none" }
+			}
 		>
-			<div className={styles.preview_picture__header}>
-				<div className={styles.preview_picture__age}>
-					<p>{event?.age}</p>
-				</div>
-			</div>
-			<div className={styles.preview_picture__content}>
-				<div className={styles.preview_picture__event_name}>
-					<h2>{event?.eventName}</h2>
-				</div>
-				<div className={styles.preview_picture__description}>
-					<p>{event?.description}</p>
-				</div>
-			</div>
-			<div className={styles.preview_images}>
-				{galleryImages &&
-					galleryImages.map(image => (
-						<div className={styles.preview_image_container}>
-							<ImageItem image={image} type="gallery" field="avatarExpo" />
-						</div>
-					))}
-			</div>
-			<div className={styles.preview_picture__footer}>
-				<div className={styles.preview_picture__move_btn}>
-					<p>Перейти к выставке --{`>`}</p>
-				</div>
-			</div>
+			<TransitionGroup className={`${styles.transitionGroup} ${isForward() ? styles.forward : styles.backward}`}>
+				<CSSTransition
+					key={selectedPageType}
+					timeout={300}
+					classNames={{
+						enter: styles.slideEnter,
+						enterActive: styles.slideEnterActive,
+						exit: styles.slideExit,
+						exitActive: styles.slideExitActive,
+					}}
+				>
+					<PreviewSwitcher selectedPageType={selectedPageType} />
+				</CSSTransition>
+			</TransitionGroup>
 		</div>
 	);
 };
+
 export default Preview;

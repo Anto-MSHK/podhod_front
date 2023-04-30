@@ -16,16 +16,22 @@
 		"classnames": "^2.3.2",
 		"filelist": "^1.0.4",
 		"formik": "^2.2.9",
+		"map-to-css-modules": "^1.0.6",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-draggable": "^4.4.5",
+		"react-icons": "^4.8.0",
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.8.1",
 		"react-scripts": "5.0.1",
+
+		"react-transition-group": "^4.4.5",
 		"reactstrap": "^9.1.6",
+
 		"redux-persist": "^6.0.0",
 		"typescript": "^4.9.5",
 		"web-vitals": "^2.1.4",
+		"yarn": "^1.22.19",
 		"yup": "^1.0.1"
 	},
 	"scripts": {
@@ -75,6 +81,7 @@
 		"@storybook/preset-create-react-app": "^4.1.2",
 		"@storybook/react": "^6.5.16",
 		"@storybook/testing-library": "^0.0.13",
+		"@types/react-transition-group": "^4.4.5",
 		"@types/redux-persist": "~4.3.1",
 		"babel-plugin-named-exports-order": "^0.0.2",
 		"prop-types": "^15.8.1",
