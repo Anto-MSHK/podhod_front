@@ -30,9 +30,9 @@ export const ChapterPage = () => {
 							</div>
 						</div>
 						<div>
-							<div className={styles.bottom_rightContainer}>
+							{/* <div className={styles.bottom_rightContainer}>
 								<Gallery images={images} isDisabled={true} />
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</BottomMenu>

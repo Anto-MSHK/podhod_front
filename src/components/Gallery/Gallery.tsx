@@ -57,19 +57,7 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
         localStorage.setItem('activeIndex', activeIndex.toString());
     }, [activeIndex]);
 
-    useEffect(() => {
-        if (scrollLocked) {
-            galleryRef.current?.classList.add(styles.scrollLocked);
-        } else {
-            galleryRef.current?.classList.remove(styles.scrollLocked);
-        }
 
-        if (isDisabled) {
-            galleryRef.current?.classList.add(styles.disabled);
-        } else {
-            galleryRef.current?.classList.remove(styles.disabled);
-        }
-    }, [scrollLocked, isDisabled]);
 
     const galleryImages = useMemo(() => {
         return images ? images.map((image, index) => (
@@ -83,15 +71,6 @@ export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scroll
             />
         )) : null;
     }, [images, activeIndex, handleImageClick, className]);
-
-    useEffect(() => {
-        if (scrollLocked) {
-            galleryRef.current?.classList.add(styles.scrollLocked);
-        } else {
-            galleryRef.current?.classList.remove(styles.scrollLocked);
-        }
-    }, [scrollLocked]);
-
 
 
     return (

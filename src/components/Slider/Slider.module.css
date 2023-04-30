@@ -44,12 +44,28 @@
     max-height: 50px;
     text-align: center;
 }
+
 .slide_caption.single {
+    display: flex;
+    border-radius: var(--radius);
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
+    right: 10px;
     background-color: white;
     text-align: center;
+    height: 40px;
+    width: 45px;
+    align-items: center;
+    justify-content: center;
 }
+
+.caption_icon {
+    width: 70%;
+    height: 70%;
+    filter: invert(100%);
+}
+
+
 
 
 .indicators_container {
