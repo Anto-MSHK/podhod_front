@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
-import scaleIcon from "../../assets/icons/blackScaleIcon.svg";
+import scaleIcon from "../../assets/icons/scaleIcon.svg";
 var classNames = require("classnames");
 
 type SliderT = {
