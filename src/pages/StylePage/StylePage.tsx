@@ -86,7 +86,7 @@ export const MainPage = () => {
 					</p>
 					<div style={{width: '500px', height: '200px'}}>
 
-					<Slider images={image}/>
+					<Slider images={images}/>
 					</div>
 					{/* <Gallery images={images} scrollLocked={false} className="gallery"/> */}
 					<p className="min">{`<p>.min`} - микро текст</p>

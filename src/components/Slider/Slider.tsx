@@ -56,7 +56,7 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 				{item.caption && (
 					<div className={captionClassName}>
 						{images.length <= 1 && (
-								<img className={styles.caption_icon} src={scaleIcon} alt="" />
+							<img className={styles.caption_icon} src={scaleIcon} alt="" />
 						)}
 						{images.length > 1 && (
 							<p className={styles.caption_text}>{item.caption}</p>
