@@ -19,7 +19,7 @@ export type EventT = {
 	createdAt: string;
 	updateAt: string;
 	prices: PriceT[];
-	type: "exhibition" | "fair" | "promo-exhibition";
+	type: string;
 	img: {
 		id: number;
 		description: string;

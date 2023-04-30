@@ -4,13 +4,14 @@ import { useAppSelector } from "../../app/hooks";
 import { imageType } from "../../app/Slices/imagesUploadSlice";
 import { PreviewSwitcher } from "../PreviewSwitcher/PreviewSwitcher";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { EventT } from "../../app/Types/EventsT";
 
 interface IPreview {
 	backgroundImg?: imageType;
 	selectedPageType: string;
 }
 
-const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType }) => {
+const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType}) => {
 	const [prevSelectedPageType, setPrevSelectedPageType] = useState(selectedPageType);
 
 	useEffect(() => {
@@ -48,7 +49,7 @@ const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType }) => {
 						exitActive: styles.slideExitActive,
 					}}
 				>
-					<PreviewSwitcher selectedPageType={selectedPageType} />
+					<PreviewSwitcher selectedPageType={selectedPageType}  />
 				</CSSTransition>
 			</TransitionGroup>
 		</div>

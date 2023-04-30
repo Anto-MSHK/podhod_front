@@ -16,9 +16,8 @@
 .eventPreview_content {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    padding: 10px;
 }
 
 .eventPreview_bottom {

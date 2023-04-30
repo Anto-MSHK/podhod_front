@@ -7,7 +7,7 @@ var classNames = require('classnames')
 interface ButtonProps {
     arrow?: boolean;
     round?: boolean;
-    text?: string;
+    text?: string | undefined | null;
     icon?: string;
     className?: string,
     onClick?: () => void;
