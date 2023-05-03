@@ -16,9 +16,12 @@ export const selectedExhibitSlice = createSlice({
 		setSelectedExhibit: (state, action: PayloadAction<exhibitsT | null>) => {
 			state.exhibit = action.payload;
 		},
+		clearSelectedExhibit: (state) => {
+			state.exhibit = null;
+		},
 	},
 });
 
-export const { setSelectedExhibit } = selectedExhibitSlice.actions;
+export const { setSelectedExhibit, clearSelectedExhibit } = selectedExhibitSlice.actions;
 
 export default selectedExhibitSlice.reducer;

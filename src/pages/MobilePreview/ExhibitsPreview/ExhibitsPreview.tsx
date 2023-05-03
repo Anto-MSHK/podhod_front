@@ -1,15 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import styles from './ExhibitsPreview.module.css'
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
 import { Gallery } from "../../../components/Gallery/Gallery";
-import { ImageSingle } from "../../../components/ImageSingle/ImageSingle";
 import Head from "../../../components/Head/Head";
 import backArrow from "../../../assets/icons/backArrow.svg";
-import logoExample from "../../../assets/pictures/logoExample.png";
-import { exhibitForm } from "../../../app/Slices/ExhibitCreateSlice";
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { exhibitsT } from "../../../app/Types/ExhibitsT";
+import { useDispatch } from "react-redux";
+import { clearSelectedExhibit } from '../../../app/Slices/SelectedExhibitSlice';
 
 const images = [
 	{
@@ -24,6 +23,15 @@ interface IChapterPage {
 
 export const ExhibitsPreview: FC<IChapterPage> = ({data}) => {
 
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			dispatch(clearSelectedExhibit());
+		};
+	}, [dispatch]);
+
+
 	const ExhibitData = {
 		title: data?.name,
 		shortDesc: data?.short,
@@ -37,7 +45,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({data}) => {
 		<div className={styles.chapterPreview_wrapper}>
 			<div className={styles.chapterPreview_head}>
 				<Head leftElement={<div style={{ width: "35px", height: '35px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>}
-							centerElement={' '}
+							centerElement={<h3>{data ? ' ' : 'Выберите экспонат'}</h3>}
 							isTransparent={true}
 							style={{width: '100%'}}
 				/>

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
@@ -7,6 +7,8 @@ import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
 import styles from './PagesPreview.module.css'
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { EventPagesT } from "../../../app/Types/EventPageT";
+import { clearSelectedPage } from "../../../app/Slices/SelectedPageSlice";
+import { useDispatch } from "react-redux";
 
 
 interface IExhibitPage {
@@ -15,6 +17,14 @@ interface IExhibitPage {
 
 export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			dispatch(clearSelectedPage());
+		};
+	}, [dispatch]);
+
 	const pageData = {
 		desc: data?.description
 	}
@@ -22,7 +32,7 @@ export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 	return (
 		<div className={styles.exhibitPreview_wrapper}>
 			<div className={styles.exhibitPreview_head}>
-				<Head leftElement={<h3>{data?.name}</h3>}
+				<Head leftElement={<h3>{data ? data.name : 'Выберите страницу'}</h3>}
 							centerElement={' '}
 							isTransparent={false}
 							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: '10px 10px 0 0'}}
