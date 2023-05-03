@@ -116,11 +116,17 @@ export const EventPageEdit = () => {
 		},
 	};
 
+	const sortedData = data?.slice().sort((a, b) => {
+		return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+	});
+
+
 	const schemaConfig: Yup.ObjectShape = {
 		pageName: Yup.string().required("Обязательное поле!"),
 		pageDescription: Yup.string(),
 		visibleLogo: Yup.boolean(),
 	};
+
 
 	return (
 		<div className={styles.main_page_form_wrapper}>
@@ -135,8 +141,8 @@ export const EventPageEdit = () => {
 			</div>
 			<div>
 				{!isLoading &&
-					data &&
-					data.map((el: EventPagesT, index) => {
+					sortedData &&
+					sortedData.map((el: EventPagesT, index) => {
 						return (
 							<div key={el.id} className={styles.mainCreatePageWrapper}>
 								<div

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
-import crossIcon from '../../../assets/icons/BlackCrossInCircle.svg'
+import nextArrow from '../../../assets/icons/nextArrow.svg'
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
 import styles from './PagesPreview.module.css'
 import { TextBox } from "../../../components/TextBox/TextBox";
@@ -42,22 +42,28 @@ export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 				<TextBox data={pageData} />
 			</div>
 			<div className={styles.exhibitPreview_bottom}>
+				{data &&
 				<BottomMenu style={{borderRadius: 'var(--radius)'}}>
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h3>Луноход 1</h3>
+								<h3>Опубликовано</h3>
 							</div>
 							<div>
-								<h5 style={{color: 'gray'}}>1970 год</h5>
+								<h5 style={{color: 'gray'}}>
+									{
+										new Date(data.updatedAt).toLocaleString('ru', { day: '2-digit', month: '2-digit', year: 'numeric'}).replace(/[,\.]/g, ' ').replace(/(\d{4})\s/, '$1.').replace(/\s/g, '.')
+									}
+								</h5>
 							</div>
 						</div>
 						<div className={styles.bottom_rightContainer}>
 							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>
-							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={crossIcon} onClick={() => console.log("Clicked")} /></div>
+							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={nextArrow} onClick={() => console.log("Clicked")} /></div>
 						</div>
 					</div>
 				</BottomMenu>
+				}
 			</div>
 		</div>
 	);
