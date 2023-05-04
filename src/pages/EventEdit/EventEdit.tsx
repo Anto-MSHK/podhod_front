@@ -118,11 +118,6 @@ export const EventEdit: React.FC = () => {
 		}
 	};
 
-
-
-
-
-
 	const handleDragEnd = () => {
 		setDragStartX(null);
 	};

@@ -11,9 +11,10 @@ interface ButtonProps {
     icon?: string;
     className?: string,
     onClick?: () => void;
+    disabled?: boolean;
 }
 
-export const ButtonArt: React.FC<ButtonProps> = ({  round = false, arrow = false, onClick, text, icon, className = '' }) => {
+export const ButtonArt: React.FC<ButtonProps> = ({ disabled, round = false, arrow = false, onClick, text, icon, className = '' }) => {
 
     const classes = classNames(
         className,

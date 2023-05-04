@@ -8,23 +8,19 @@
     font-size: 24px;
     font-weight: bold;
     display: flex;
-    padding-left: 8%;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 83%;
 }
 
 .inputRow {
     display: flex;
-    justify-content: center;
-    width: 100%;
 }
 
 .buttonRow {
     margin-right: 15px;
     display: flex;
     width: 40%;
-
 }
 
 .buttonArt {
@@ -34,11 +30,10 @@
 
 .textAndDelete {
     font-weight: bold;
-    margin-left: 15%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 15%;
+    margin-right: 21%;
 }
 
 .delete {

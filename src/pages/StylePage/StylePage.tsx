@@ -28,6 +28,7 @@ import {BottomMenu} from "../../components/BottomMenu/BottomMenu";
 import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
 import {TextBlock} from "../../components/TextBlock/TextBlock";
 import {PriceForm} from "../../components/PriceForm/PriceForm";
+import ImagesGallery from "../../components/ImagesGallery/ImagesGallery";
 
 interface Price {
     criterion: string;
