@@ -6,6 +6,7 @@ export type exhibitsT = {
 	short?: string;
 	description?: string;
 	chapters?: ChapterT[];
+	imgs?: [{id: string, path: string, description: string}];
 };
 
 export type CreateExhibitPayloadT = {
