@@ -15,8 +15,11 @@ export const ImgBlock: FC<ImgBlockI> = ({ imgs }) => {
 	return (
 		<div
 			style={{
-				margin: "-30px -10px -20px -10px",
-			
+				height: "100%",
+				overflowY: "auto",
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
 			}}
 		>
 			<Gallery images={images} isDisabled />

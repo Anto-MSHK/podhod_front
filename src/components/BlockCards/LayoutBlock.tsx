@@ -72,7 +72,7 @@ export const LayoutBlock: FC<LayoutBlockI> = ({ title, type, data }) => {
 				</h5>
 				<InfoTag text={curTypeText} color={themes[type].infoColor} />
 			</ListGroupItemHeading>
-			<ListGroupItemText style={{ color: themes[type].text }}>
+			<ListGroupItemText style={{ color: themes[type].text, display: "grid" }}>
 				{curBlock}
 			</ListGroupItemText>
 		</ListGroupItem>

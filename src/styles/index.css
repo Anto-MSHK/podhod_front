@@ -97,3 +97,23 @@ p.regular-italic {
 	font-weight: 500;
 	font-style: italic;
 }
+
+::-webkit-scrollbar {
+	width: 12px; /* ширина скроллбара */
+	height: 12px; /* высота горизонтального скроллбара */
+}
+
+/* Стиль для ползунка скроллбара */
+::-webkit-scrollbar-thumb {
+	background-color: #e7e7e7; /* цвет ползунка */
+	border-radius: 6px; /* закругление углов ползунка */
+}
+
+/* Стиль для полосы, по которой движется ползунок */
+::-webkit-scrollbar-track {
+	background-color: #f1f1f16f; /* цвет полосы */
+	border-radius: 6px; /* закругление углов полосы */
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #ffffff; /* цвет ползунка при наведении */
+}
