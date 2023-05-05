@@ -9,6 +9,7 @@ import { useDeleteChapterMutation } from "../../app/services/ChapterApi";
 import { BlockItem } from "../BlockItem/BlockItem";
 import CustomListItem from "../CustomListItem/CustomListItem";
 import scaleIcon from "../../assets/icons/scaleIcon.svg";
+import { LayoutBlock } from "../BlockCards/LayoutBlock";
 type ChapterItemT = {
 	chapter: ChapterT;
 	showpieceId: string;
@@ -38,16 +39,6 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 
 	return (
 		<CustomListItem
-			dropdownItems={[
-				{
-					text: "Редактировать",
-					onClick: () => {},
-				},
-				{
-					text: "Удалить",
-					onClick: () => handleDeleteChapter(String(chapter.id), showpieceId),
-				},
-			]}
 			className={styles.chapter_list_wrapper}
 			title={chapter.title}
 			subTitle={<p className="min">{chapter.description}</p>}
@@ -61,8 +52,14 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 		>
 			<Collapse isOpen={isChapterShown}>
 				<CustomCard className={styles.card_body} outline>
-					{chapter.blocks.length ? (
-						chapter.blocks.map((block, index) => <BlockItem block={block} />)
+					{chapter.blocks.length > 0 ? (
+						chapter.blocks.map((block, index) => (
+							<LayoutBlock
+								title={block.title}
+								type={block.type}
+								data={(block as any)[`${block.type}Block`]}
+							/>
+						))
 					) : (
 						<div style={{ textAlign: "center", padding: 15 }}>
 							<h2>Блоков не найдено</h2>

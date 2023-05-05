@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: "root",
 	storage,
-	blacklist: ["events", "eventCreate", "images"],
+	blacklist: ["events", "eventCreate", "images", "chapters"],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

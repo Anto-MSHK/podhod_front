@@ -3,7 +3,7 @@
 	color: #ffffff;
 	font-weight: 600;
 	display: flex;
-	width: 100%;
+	/* width: 100%; */
 	justify-content: space-between;
 }
 

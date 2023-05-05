@@ -1,33 +1,32 @@
-import { imageType } from "../Slices/imagesUploadSlice"
+import { imageType } from "../Slices/imagesUploadSlice";
 
 export type ChapterT = {
-    id: number,
-    title: string,
-    description: string,
-    blocks: BlockT[],
-    createdAt: string,
-    updatedAt: string,
-}
+	id: number;
+	title: string;
+	description: string;
+	blocks: BlockT[];
+	createdAt: string;
+	updatedAt: string;
+};
 
 export type BlockT = {
-    id: number,
-    title: string,
-    type: BlockTypes,
-    textBlock: TextBlockT,
-    imgBlock: ImgBlockT,
-    createdAt: string,
-    updatedAt: string,
+	id: number;
+	title: string;
+	type: BlockTypes;
+	textBlock: TextBlockT;
+	imgBlock: ImgBlockT;
+	createdAt: string;
+	updatedAt: string;
+};
 
-}
+export type TextBlockT = {
+	id: number;
+	description: string;
+	withAudio: boolean;
+};
 
-type TextBlockT = {
-    id: number,
-    description: string,
-    withAudio: boolean,
-}
-
-type ImgBlockT = {
-    id: number,
-    imgs: imageType[],
-}
-type BlockTypes  = 'text' | 'img'
+export type ImgBlockT = {
+	id: number;
+	imgs: imageType[];
+};
+export type BlockTypes = "text" | "img";
