@@ -50,6 +50,8 @@
 	width: 100%;
 	height: fit-content;
 	border-radius: 0 0 var(--radius) var(--radius);
+	padding: 10px;
+	gap: 10px;
 }
 
 .modalWrapper {
