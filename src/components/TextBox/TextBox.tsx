@@ -1,13 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import './TextBox.module.css'
 
 interface ITextBox {
 	data: {
-		extra?: React.ReactNode | JSX.Element | string,
-		title: string,
-		shortDesc?: string,
-		desc: string
-	}
+		extra?: any,
+		title?: string | undefined,
+		shortDesc?: string | undefined,
+		desc: string | undefined
+	},
+	children?: ReactNode;
 }
 
 export const TextBox: FC<ITextBox> = ({data}) => {

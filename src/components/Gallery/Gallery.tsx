@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
+import exp from "constants";
 
-interface ImageProps {
+export interface ImageProps {
     src: string;
     alt: string;
 }
