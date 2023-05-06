@@ -8,6 +8,12 @@
 	border: 2px solid black;
 }
 
+.custombtn{
+	display: flex;
+	gap: 10px;
+}
+
+
 .btn_wrapper {
 	background-color: transparent /* !important */;
 	border: 2px solid transparent /* !important */;

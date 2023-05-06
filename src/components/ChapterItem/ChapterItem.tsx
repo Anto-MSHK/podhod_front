@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ChapterItem.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { Card, CardBody, CardTitle, Collapse, Modal } from "reactstrap";
-import editIcon from "../../assets/icons/editIcon.svg";
+import plusIcon from "../../assets/icons/plusIcon.svg";
 import CustomCard from "../CustomCard/CustomCard";
 import { ChapterT } from "../../app/Types/ChapterT";
 import { useDeleteChapterMutation } from "../../app/services/ChapterApi";
@@ -10,6 +10,7 @@ import { BlockItem } from "../BlockItem/BlockItem";
 import CustomListItem from "../CustomListItem/CustomListItem";
 import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { LayoutBlock } from "../BlockCards/LayoutBlock";
+import { BlockForm } from "../BlockForm/BlockForm";
 type ChapterItemT = {
 	chapter: ChapterT;
 	showpieceId: string;
@@ -37,18 +38,27 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 		}
 	};
 
+	const modal = useState(false);
+	const toggle = () => modal[1](prev => !prev);
+
 	return (
 		<CustomListItem
-			className={styles.chapter_list_wrapper}
-			title={chapter.title}
-			subTitle={<p className="min">{chapter.description}</p>}
-			extra={
-				<CustomBtn
-					style={{ width: "45px" }}
-					onClick={() => setIsChapterShow(!isChapterShown)}
-					icon={scaleIcon}
-				></CustomBtn>
-			}
+		className={styles.chapter_list_wrapper}
+		title={chapter.title}
+		subTitle={<p className="min">{chapter.description}</p>}
+		extra={
+		<div className={styles.custombtn}>
+			<CustomBtn
+				style={{ width: "45px" }}
+				onClick={() => toggle()}
+				icon={plusIcon}
+			></CustomBtn>
+			<CustomBtn
+				style={{ width: "45px" }}
+				onClick={() => setIsChapterShow(!isChapterShown)}
+				icon={scaleIcon}
+			></CustomBtn></div>
+		}
 		>
 			<Collapse isOpen={isChapterShown}>
 				<CustomCard className={styles.card_body} outline>
@@ -67,6 +77,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					)}
 				</CustomCard>
 			</Collapse>
+		<BlockForm  id={""+chapter.id} modal={modal}/>
 		</CustomListItem>
 	);
 };

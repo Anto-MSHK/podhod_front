@@ -45,6 +45,7 @@ import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
 import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
+import { CustomBtnGroup } from "../CustomBtnGroup/CustomBtnGroup";
 
 interface formType {
 	exhibitName: string;
@@ -195,6 +196,13 @@ export const EventShowpiecesEdit = () => {
 		},
 	};
 
+	const btnData = [
+		{ name: "Текст", onClick: () =>  {} },
+		{ name: "Картинка", onClick: () => {}},
+		
+	];
+
+
 	const schemaConfig: Yup.ObjectShape = {
 		exhibitName: Yup.string().required("Обязательное поле!"),
 		exhibitShort: Yup.string().required("Обязательное поле!"),
@@ -270,6 +278,7 @@ export const EventShowpiecesEdit = () => {
 							)}
 						</CustomCard>
 					</div>
+					
 					<Modal
 						isOpen={modalChapter}
 						toggle={toggleChapter}
@@ -318,9 +327,12 @@ export const EventShowpiecesEdit = () => {
 					setEditingExhibit(null);
 				}}
 			>
+				
 				<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+					
 					{formik => (
 						<>
+						
 							<ModalHeader
 								style={{ backgroundColor: "#1E1E1E", color: "white" }}
 							>
@@ -346,7 +358,7 @@ export const EventShowpiecesEdit = () => {
 							<ModalFooter
 								style={{ backgroundColor: "#1E1E1E", color: "white" }}
 							>
-								<CustomBtn color="primary" type="submit">
+								<CustomBtn onClick={()=>{}} color="primary" type="submit">
 									Сохранить
 								</CustomBtn>
 								<CustomBtn onClick={toggle}>Отменить</CustomBtn>
