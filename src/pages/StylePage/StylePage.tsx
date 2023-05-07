@@ -122,7 +122,7 @@ export const MainPage = () => {
                         ducimus voluptas eveniet minima deserunt.
                     </p>
                     <div>
-                        <PriceForm onPriceAdded={handlePriceAdded}/>
+                        <PriceForm onPriceAdded={handlePriceAdded} />
                     </div>
                     <Gallery images={images} scrollLocked={false} className="gallery"/>
                     <div>

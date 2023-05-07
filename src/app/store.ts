@@ -22,8 +22,10 @@ import {
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
 import { eventPagesApi } from "./services/EventPages.Api";
+import { pricesApi } from "./services/PricesApi";
 
 const rootReducer = combineReducers({
+	[pricesApi.reducerPath]: pricesApi.reducer,
 	[eventsApi.reducerPath]: eventsApi.reducer,
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
@@ -50,6 +52,7 @@ export const store = configureStore({
 			eventsApi.middleware,
 			exhibitsApi.middleware,
 			eventPagesApi.middleware,
+			pricesApi.middleware,
 		]),
 });
 

@@ -1,6 +1,12 @@
 import { type } from "os";
 
-type PriceT = {
+export type PricesT =
+	{
+		criterion: string;
+		price: number;
+	};
+
+export type PriceT = {
 	id?: number;
 	criterion: string;
 	price: number;

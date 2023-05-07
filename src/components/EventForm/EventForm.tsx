@@ -16,10 +16,12 @@ import {
 	CreateEventPayloadT,
 	EventT,
 	UpdateEventPayloadT,
+	PriceT, PricesT,
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
 import { PriceForm } from "../PriceForm/PriceForm";
+import { useUpdatePricesMutation } from "../../app/services/PricesApi";
 
 interface formType {
 	eventName: string;
@@ -60,23 +62,21 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const dispatch = useAppDispatch();
 	const [addEvent, { isError }] = useAddEventMutation();
 	const [updateEvent, { isError: isErrorUpdate }] = useUpdateEventMutation();
+	const [updatePrices] = useUpdatePricesMutation();
 	const [prices, setPrices] = useState<Price[]>([]);
 
-	const handlePriceAdded = useCallback(
-			(newPrice: Price) => {
-				setPrices((prevPrices) => [...prevPrices, newPrice]);
-			},
-			[]
-	);
+	const handlePriceAdded = async (price: PricesT) => {
+		setPrices((prevPrices) => [...prevPrices, price]);
+	};
 
 	const handleAddEvent = async (event: CreateEventPayloadT) => {
 		return await addEvent(event).unwrap();
-
 	};
 
 	const handleUpdateEvent = async (event: UpdateEventPayloadT) => {
 		await updateEvent(event).unwrap();
 	};
+
 
 	type FormInputDataT = {
 		label: string;
@@ -223,7 +223,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 							</div>
 						</div>
 						<div>
-						<PriceForm onPriceAdded={handlePriceAdded} />
+							<PriceForm onPriceAdded={handlePriceAdded} disabled={!editing} eventId={id} />
 						</div>
 					</div>
 					<div>
@@ -231,6 +231,5 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 				</div>
 			)}
 		</FormContainer>
-
 	);
 };

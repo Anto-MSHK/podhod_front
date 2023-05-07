@@ -12,6 +12,7 @@ interface ButtonProps {
     className?: string,
     onClick?: () => void;
     disabled?: boolean;
+    type?: string;
 }
 
 export const ButtonArt: React.FC<ButtonProps> = ({ disabled, round = false, arrow = false, onClick, text, icon, className = '' }) => {
