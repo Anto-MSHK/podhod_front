@@ -14,6 +14,7 @@ import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import { EventPageEdit } from "../../components/EventPageEdit/EventPageEdit";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
+import { EventScheduleFrom } from "../../components/EventScheduleForm/EventScheduleFrom";
 
 const btnData = [
 	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
@@ -82,7 +83,10 @@ export const EventEdit: React.FC = () => {
 	const handleActivePage = () => {
 		switch (activeBtn) {
 			case 0:
-				return <EventForm defaultData={event} />;
+				return <div>
+						<EventForm defaultData={event} />
+						<EventScheduleFrom/>
+					</div>
 			case 1:
 				return <EventPageEdit />;
 			case 2:

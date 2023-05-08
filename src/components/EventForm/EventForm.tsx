@@ -19,6 +19,7 @@ import {
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
+import { EventScheduleFrom } from "../EventScheduleForm/EventScheduleFrom";
 
 interface formType {
 	eventName: string;
@@ -152,65 +153,67 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	};
 
 	return (
-		<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
-			{formik => (
-				<div className={styles.fillForm_container}>
-					<div className={styles.asd}>
-						<h2>{`Основная информация`}</h2>
-						<div style={{ display: "flex", gap: 15 }}>
-							{editing && (
-								<CustomBtn
-									type="submit"
-									disabled={
-										!editing ||
-										formik.isSubmitting ||
-										Object.keys(formik.errors).length > 0
-									}
-								>
-									{editing ? "Сохранить" : "Изменить"}
-								</CustomBtn>
-							)}
-							{id && (
-								<CustomBtn type="button" onClick={toggleEditing}>
-									{editing ? "Отмена" : "Редактировать"}
-								</CustomBtn>
-							)}
-						</div>
-					</div>
-					<div className={styles.form}>
-						<div className={styles.form_info}>
-							<div className={styles.left}>
-								{Object.entries(dictionary).map(
-									([key, value], index) =>
-										index <= 1 && (
-											<FormInput
-												name={key}
-												label={value.label}
-												type={value.type}
-												children={value.children}
-												disabled={!editing}
-											/>
-										),
+		<div>
+			<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+				{formik => (
+					<div className={styles.fillForm_container}>
+						<div className={styles.asd}>
+							<h2>{`Основная информация`}</h2>
+							<div style={{ display: "flex", gap: 15 }}>
+								{editing && (
+									<CustomBtn
+										type="submit"
+										disabled={
+											!editing ||
+											formik.isSubmitting ||
+											Object.keys(formik.errors).length > 0
+										}
+									>
+										{editing ? "Сохранить" : "Изменить"}
+									</CustomBtn>
 								)}
-							</div>
-							<div className={styles.right}>
-								{Object.entries(dictionary).map(
-									([key, value], index) =>
-										index >= 2 && (
-											<FormInput
-												name={key}
-												label={value.label}
-												type={value.type}
-												children={value.children}
-												disabled={!editing}
-											/>
-										),
+								{id && (
+									<CustomBtn type="button" onClick={toggleEditing}>
+										{editing ? "Отмена" : "Редактировать"}
+									</CustomBtn>
 								)}
 							</div>
 						</div>
+						<div className={styles.form}>
+							<div className={styles.form_info}>
+								<div className={styles.left}>
+									{Object.entries(dictionary).map(
+										([key, value], index) =>
+											index <= 1 && (
+												<FormInput
+													name={key}
+													label={value.label}
+													type={value.type}
+													children={value.children}
+													disabled={!editing}
+												/>
+											),
+									)}
+								</div>
+								<div className={styles.right}>
+									{Object.entries(dictionary).map(
+										([key, value], index) =>
+											index >= 2 && (
+												<FormInput
+													name={key}
+													label={value.label}
+													type={value.type}
+													children={value.children}
+													disabled={!editing}
+												/>
+											),
+									)}
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			)}
-		</FormContainer>
+				)}
+			</FormContainer>
+		</div>
 	);
 };

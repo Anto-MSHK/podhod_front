@@ -1,0 +1,32 @@
+.form_wrapper{
+    width: max-content;
+}
+
+.content_container{
+    width: min-content;
+}
+
+.title{
+     width: 150px; 
+     text-align: end; 
+     margin: 0;
+}
+.apply_checkbox_container{
+    display: flex;
+    text-align: start;
+}
+.nonWorkingDays_container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.nonWorkingDay_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.remove_nonWorkingDay_btn{
+    width: 50px;
+}

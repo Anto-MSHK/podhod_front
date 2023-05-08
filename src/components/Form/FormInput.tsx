@@ -41,10 +41,12 @@ export const CustomInput: FC<CustomInputI> = ({
 	children,
 	disabled,
 	placeholder,
+	title,
 }) => {
 	return (
 		<div style={{ width: "100%" }}>
 			<Input
+				title = {title}
 				disabled={disabled}
 				type={type}
 				{...field}
@@ -59,7 +61,7 @@ export const CustomInput: FC<CustomInputI> = ({
 					form.touched[`${field.name}`] &&
 					form.errors[`${field.name}`] !== undefined
 				}
-				className={styles.AuthInputElements}
+				className={`${styles.AuthInputElements}`}
 				placeholder={placeholder}
 			>
 				{children ? children : undefined}
@@ -82,6 +84,7 @@ export const FormInput: FC<CustomFormInputI> = ({
 	value,
 	disabled,
 }) => {
+
 	return (
 		<FormGroup>
 			<h3>{label}</h3>
