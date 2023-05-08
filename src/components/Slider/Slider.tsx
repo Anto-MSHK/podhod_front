@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
-import scaleIcon from "../../assets/icons/scaleIcon.svg";
-var classNames = require("classnames");
+/* import scaleIcon from "../../assets/icons/scaleIcon.svg";
+ */var classNames = require("classnames");
 
 type SliderT = {
 	images: {
@@ -29,7 +29,7 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 		setActiveIndex(newIndex);
 	};
 
-	const indicators = images.map((item, index) => {
+	/* const indicators = images.map((item, index) => {
 		return (
 			<div
 				id={`indicator-${index}`}
@@ -40,10 +40,9 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 				key={item.src + index}
 			></div>
 		);
-	});
+	}); */
 
 	const slides = images.map((item, index) => {
-		/* let captionText = item.caption?.split() */
 		return (
 			<div
 				className={styles.slide_container}
@@ -55,12 +54,7 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 
 				{item.caption && (
 					<div className={captionClassName}>
-						{images.length <= 1 && (
-							<img className={styles.caption_icon} src={scaleIcon} alt="" />
-						)}
-						{images.length > 1 && (
-							<p className={styles.caption_text}>{item.caption}</p>
-						)}
+						<p className={styles.caption_text}>{item.caption}</p>
 					</div>
 				)}
 			</div>
@@ -70,9 +64,9 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 	return (
 		<div className={styles.slider_wrapper}>
 			<div className={styles.slides_container}>{slides}</div>
-			{images.length > 1 && (
+		{/* 	{images.length > 1 && (
 				<div className={styles.indicators_container}>{indicators}</div>
-			)}
+			)} */}
 		</div>
 	);
 };
