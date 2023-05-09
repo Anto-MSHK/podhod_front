@@ -14,6 +14,7 @@ interface IImageComponent {
 	field: SingleType;
 	type: "gallery" | "single";
 	className?: string;
+	style?: React.CSSProperties | undefined;
 }
 
 const ImageItem: React.FC<IImageComponent> = ({
@@ -21,6 +22,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 	type,
 	field,
 	className,
+	style,
 }) => {
 	const [modal, setModal] = useState(false);
 	const dispatch = useAppDispatch();
@@ -45,7 +47,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 				<img
 					className={className ? className : styles.image}
 					src={image.path}
-					style={{ cursor: "pointer" }}
+					style={{ cursor: "pointer", ...style }}
 					alt=""
 				/>
 			</div>

@@ -15,6 +15,7 @@ interface IDragAndDrop {
 	description: string;
 	path: string;
 	text?: string;
+	style?: React.CSSProperties | undefined;
 }
 
 const DragAndDrop: React.FC<IDragAndDrop> = ({
@@ -23,6 +24,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({
 	description,
 	text,
 	path,
+	style,
 }) => {
 	const dispatch = useAppDispatch();
 
@@ -59,7 +61,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({
 	});
 
 	return (
-		<div className={styles.drag_and_drop_wrapper}>
+		<div className={styles.drag_and_drop_wrapper} style={style}>
 			<div {...getRootProps()} className={styles.drag_and_drop_area}>
 				<input {...getInputProps()} />
 				<img className={styles.icon} src={addFileIcon} />
