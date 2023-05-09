@@ -9,7 +9,7 @@ import imagesUploadReducer from "./Slices/imagesUploadSlice";
 import ExpoCreateReducer from "./Slices/ExpoCreateSlice";
 import ExhibitCreateReducer from "./Slices/ExhibitCreateSlice";
 import selectedExhibitReducer from "./Slices/SelectedExhibitSlice";
-import selectedPageReducer from '../app/Slices/SelectedPageSlice'
+import selectedPageReducer from "../app/Slices/SelectedPageSlice";
 import { eventsApi } from "./services/EventsApi";
 import storage from "redux-persist/es/storage";
 import {
@@ -44,7 +44,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: "root",
 	storage,
-	blacklist: ["events", "eventCreate", "images", "chapters", ],
+	blacklist: ["events", "eventCreate", "images", "chapters", "blocks"],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

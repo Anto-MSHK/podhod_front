@@ -130,6 +130,7 @@ export const MainPage = () => {
 				{/* <ImagesGallery /> */}
 				<div style={{ margin: "10px 0" }} />
 			</div>
+
 			<div>{/* <MainInfoExpoForm /> */}</div>
 			<div style={{ marginTop: "10px", marginBottom: "10px" }}>
 				<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>

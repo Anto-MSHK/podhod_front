@@ -30,7 +30,7 @@ export const CustomBtn: FC<ButtonArtI> = ({
 
 	return (
 		<div className={styles.custom_btn_container}>
-			<Button {...props} className={classes}>
+			<Button {...props} className={classes} color="warning">
 				{iconElement}
 				{props.children}
 			</Button>

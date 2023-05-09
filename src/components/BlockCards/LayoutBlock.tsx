@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
 	Card,
 	CardBody,
@@ -14,9 +14,13 @@ import { InfoTag } from "../InfoTag/InfoTag";
 import { BlockTypes, ImgBlockT, TextBlockT } from "../../app/Types/ChapterT";
 import { TextBlock } from "./TextBlock/TextBlock";
 import { ImgBlock } from "./TextBlock/ImgBlock";
+import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
+import { useDeleteBlockMutation } from "../../app/services/ChapterApi";
 
 interface LayoutBlockI {
 	title: string;
+	chapterId: number;
+	blockId: number;
 	type: BlockTypes;
 	data: TextBlockT | ImgBlockT;
 }
@@ -36,9 +40,42 @@ const themes = {
 	},
 };
 
-export const LayoutBlock: FC<LayoutBlockI> = ({ title, type, data }) => {
+export const LayoutBlock: FC<LayoutBlockI> = ({
+	title,
+	type,
+	data,
+	chapterId,
+	blockId,
+}) => {
 	let curBlock = undefined;
 	let curTypeText = undefined;
+	const [deleteChapter] = useDeleteBlockMutation();
+
+	const isOpenState = useState(false);
+	const dropdownItems: ListDropDownItemsI[] = [
+		// {
+		// 	text: "Редактировать",
+		// 	onClick: () => handleEditExhibit(item),
+		// },
+		{
+			text: "Удалить",
+			onClick: () => handleDeleteChapter(data.id, chapterId),
+		},
+	];
+
+	const handleDeleteChapter = async (id: number, chapterId: number) => {
+		try {
+			console.log(chapterId + " " + id);
+			const payload = await deleteChapter({
+				chapterId: "" + chapterId,
+				blockId: "" + blockId,
+			}).unwrap();
+			console.log(payload);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	switch (type) {
 		case "text":
 			curBlock = <TextBlock {...(data as TextBlockT)} />;
@@ -70,7 +107,12 @@ export const LayoutBlock: FC<LayoutBlockI> = ({ title, type, data }) => {
 				>
 					{title}
 				</h5>
-				<InfoTag text={curTypeText} color={themes[type].infoColor} />
+				<div
+					style={{ display: "flex", gap: 15, height: 40, alignItems: "center" }}
+				>
+					<InfoTag text={curTypeText} color={themes[type].infoColor} />
+					<DropDown items={dropdownItems} isOpenState={isOpenState} />
+				</div>
 			</ListGroupItemHeading>
 			<ListGroupItemText style={{ color: themes[type].text, display: "grid" }}>
 				{curBlock}
