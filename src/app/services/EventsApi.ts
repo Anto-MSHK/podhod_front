@@ -1,3 +1,4 @@
+import { UpdateEventTimes } from './../Types/EventsT';
 import { API_URL } from "../http";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -9,6 +10,7 @@ import {
 	ImgT,
 	CreateEventPayloadT,
 	UpdateEventPayloadT,
+	UpdateEventCalendarPayload,
 } from "../Types/EventsT";
 
 export const eventsApi = createApi({
@@ -51,6 +53,20 @@ export const eventsApi = createApi({
 				body: data,
 			}),
 		}),
+		updateEventCalendar: builder.mutation<EventT, UpdateEventCalendarPayload>({
+			query: data => ({
+				url: `/events/${data.id}/times/calendar`,
+				method: "PATCH",
+				body: data.body,
+			}),
+		}),
+		updateEventTimes: builder.mutation<EventT, UpdateEventTimes>({
+			query: data => ({
+				url: `/events/${data.id}/times`,
+				method: "PATCH",
+				body: data.body,
+			}),
+		}),
 	}),
 });
 
@@ -61,4 +77,7 @@ export const {
 	useGetPageImgQuery,
 	useAddEventMutation,
 	useUpdateEventMutation,
+	useUpdateEventCalendarMutation,
+	useUpdateEventTimesMutation,
+
 } = eventsApi;

@@ -222,7 +222,6 @@ export const MainPage = () => {
 			>
 				<img alt="Sample" src="https://picsum.photos/300/200" />
 			</Card>
-			<EventScheduleFrom></EventScheduleFrom>
 		</div>
 		
 	);

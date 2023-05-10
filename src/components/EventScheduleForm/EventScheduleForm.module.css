@@ -11,9 +11,12 @@
      text-align: end; 
      margin: 0;
 }
-.apply_checkbox_container{
+.applyAll_date_container{
     display: flex;
     text-align: start;
+}
+.applyAll_date_checkbox{
+    display: flex;
 }
 .nonWorkingDays_container{
     display: flex;

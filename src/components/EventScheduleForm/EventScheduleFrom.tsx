@@ -6,53 +6,30 @@ import { FieldArray, FormikConfig } from "formik";
 import * as Yup from "yup";
 import { InputType } from "reactstrap/types/lib/Input";
 import styles from "./EventScheduleForm.module.css";
+import { useParams } from "react-router-dom";
+import {
+	useUpdateEventCalendarMutation,
+	useUpdateEventTimesMutation,
+} from "../../app/services/EventsApi";
+import { EventTimeT } from "../../app/Types/EventsT";
 
 type FormInputDataT = {
 	label: string;
 	type: InputType;
 	children?: JSX.Element | JSX.Element[];
 };
-type Props = {};
-interface formType {
-	monday: {
+type EventScheduleFormProps = {
+	defaultData: EventTimeT;
+};
+
+interface formType extends EventTimeT {
+	applyToAllDate: {
+		applyToAll: boolean;
 		from: string;
 		to: string;
+		isWeekend: boolean;
 	};
-	tuesday: {
-		from: string;
-		to: string;
-	};
-	thursday: {
-		from: string;
-		to: string;
-	};
-	friday: {
-		from: string;
-		to: string;
-	};
-	saturday: {
-		from: string;
-		to: string;
-	};
-	wednesday: {
-		from: string;
-		to: string;
-	};
-	date: {
-		from: string;
-		to: string;
-	};
-	nonWorkingDays: string[];
-	checked: string[];
 }
-/* 
-Monday ['манди]: понедельник
-Tuesday ['тйу:зди]: вторник
-Wednesday ['уэнзди]: среда
-Thursday ['сэ:зди]: четверг
-Friday ['фрайди]: пятница
-Saturday ['сэтэди]: суббота
-Sunday ['санди]: воскресенье */
 
 const dictionary: Record<string, FormInputDataT> = {
 	monday: {
@@ -79,87 +56,142 @@ const dictionary: Record<string, FormInputDataT> = {
 		label: "Суббота",
 		type: "time",
 	},
+	sunday: {
+		label: "Воскресенье",
+		type: "time",
+	},
 };
 const schemaConfig: Yup.ObjectShape = {
-	/* monday: Yup.string(),
-	tuesday: Yup.string(),
-	wednesday: Yup.string(),
-	thursday: Yup.string(),
-    friday: Yup.string(), */
-	date: Yup.object().required(),
+	days: Yup.object().required(),
+	startDate: Yup.date().required(),
+	endDate: Yup.date().required(),
 };
 
-export const EventScheduleFrom: React.FC<Props> = (props: Props) => {
+export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
+	defaultData,
+}) => {
+	const { id } = useParams();
+	const [updateEventCalendar, { isError: isErrorUpdate }] =
+		useUpdateEventCalendarMutation();
+	const [updateEventTimes] = useUpdateEventTimesMutation();
+
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
-			friday: {
+			days: defaultData.days,
+			startDate: defaultData.startDate,
+			endDate: defaultData.endDate,
+			nonWorkingDays: defaultData.nonWorkingDays,
+			applyToAllDate: {
+				applyToAll: false,
 				from: "",
 				to: "",
+				isWeekend: false,
 			},
-			monday: {
-				from: "",
-				to: "",
-			},
-			saturday: {
-				from: "",
-				to: "",
-			},
-			wednesday: {
-				from: "",
-				to: "",
-			},
-			thursday: {
-				from: "",
-				to: "",
-			},
-			tuesday: {
-				from: "",
-				to: "",
-			},
-			date: {
-				from: "",
-				to: "",
-			},
-			checked: [],
-			nonWorkingDays: [],
 		},
 		onSubmit: async (values, form) => {
 			console.log(values);
+			let calendar = {
+				startDate: values.startDate,
+				endDate: values.endDate,
+				nonWorkingDays: values.nonWorkingDays,
+			};
+
+			try {
+				const payload = await updateEventCalendar({
+					id: id as string,
+					body: calendar,
+				}).unwrap();
+				console.log("fulfilled", payload);
+			} catch (error) {
+				console.log("rejected", error);
+			}
+
+			try {
+				let payload;
+				if (values.applyToAllDate.applyToAll) {
+					payload = await updateEventTimes({
+						id: id as string,
+						body: {
+							applyToAll: values.applyToAllDate.applyToAll,
+							dayOfWeek: "monday",
+							from: values.applyToAllDate.from,
+							to: values.applyToAllDate.to,
+							isWeekend: values.applyToAllDate.isWeekend,
+						},
+					});
+				} else {
+					const daysWeek = Object.entries(values.days).map(([key, value]) => {
+						return {
+							dayOfWeek: key,
+							...value,
+							applyToAll: false,
+						};
+					});
+
+					for (const day of daysWeek) {
+						payload = await updateEventTimes({ id: id as string, body: day });
+						console.log("fulfilled", payload);
+					}
+				}
+			} catch (error) {
+				console.log("rejected", error);
+			}
 		},
 	};
 
 	return (
 		<div className={styles.form_wrapper}>
 			<h2>Время работы:</h2>
-			<div className={styles.apply_checkbox_container}>
-				<p>Применить для всех?</p>
-				<CustomInput type="checkbox" />
-			</div>
+
 			<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
 				{formik => (
 					<div className={styles.content_container}>
-						{Object.entries(dictionary).map(([key, value], index) => (
-							<div
-								key={key}
-								style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-							>
-								<h3 className={styles.title}>{value.label}</h3>
-
-								<FormInput name={`${key}.from`} type={value.type} />
-								<FormInput name={`${key}.to`} type={value.type} />
+						<div className={styles.applyAll_date_container}>
+							<div className={styles.applyAll_date_checkbox}>
+								<label>Применить для всех дней недели?</label>
 								<FormInput
-									help="Выходной?"
-									name="checked"
+									name="applyToAllDate.applyToAll"
 									type="checkbox"
-									value={key}
 								/>
 							</div>
-						))}
+							<FormInput name={`applyToAllDate.from`} type="time" />
+							<FormInput name={`applyToAllDate.to`} type="time" />
+							<FormInput
+								help="Выходной?"
+								name={`applyToAllDate.isWeekend`}
+								type="checkbox"
+							/>
+						</div>
+						{
+						!formik.values.applyToAllDate.applyToAll && (
+							<div className={styles.weekDaysList}>
+								{Object.entries(dictionary).map(([key, value], index) => (
+									<div
+										key={key}
+										style={{
+											display: "flex",
+											alignItems: "center",
+											gap: "1rem",
+										}}
+									>
+										<h3 className={styles.title}>{value.label}</h3>
+
+										<FormInput name={`days.${key}.from`} type={value.type} />
+										<FormInput name={`days.${key}.to`} type={value.type} />
+										<FormInput
+											help="Выходной?"
+											name={`days.${key}.isWeekend`}
+											type="checkbox"
+										/>
+									</div>
+								))}
+							</div>
+						)}
 
 						<h2>Даты:</h2>
 						<div>
-							<FormInput name={`date.from`} type="date" />
-							<FormInput name={"date.to"} type="date" />
+							<FormInput name={`startDate`} type="date" />
+							<FormInput name={"endDate"} type="date" />
 						</div>
 
 						<h2>Не рабочие дни:</h2>
@@ -167,20 +199,23 @@ export const EventScheduleFrom: React.FC<Props> = (props: Props) => {
 							<FieldArray name="nonWorkingDays">
 								{({ insert, remove, push }) => (
 									<div className={styles.nonWorkingDays_container}>
-										<CustomBtn
-											type="button"
-											onClick={() => push('')}
-										>
+										<CustomBtn type="button" onClick={() => push("")}>
 											Добавить нерабочий день
 										</CustomBtn>
 										{formik.values.nonWorkingDays.map(
 											(day: string, index: number) => (
-												<div className={styles.nonWorkingDay_container}  key={index}>
-													<div >
-														<FormInput name={`nonWorkingDays.${index}`} type="date" />
+												<div
+													className={styles.nonWorkingDay_container}
+													key={index + day}
+												>
+													<div>
+														<FormInput
+															name={`nonWorkingDays.${index}`}
+															type="date"
+														/>
 													</div>
 
-													<div >
+													<div>
 														<CustomBtn
 															type="button"
 															className={styles.remove_nonWorkingDay_btn}
