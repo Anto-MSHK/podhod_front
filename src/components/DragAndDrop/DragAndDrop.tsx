@@ -7,11 +7,12 @@ import {
 	ImagesArrayType,
 	SingleType,
 	avatarExpoUploadImg,
+	imgBlockUploadImg,
 } from "../../app/Slices/imagesUploadSlice";
 
 interface IDragAndDrop {
 	type: "gallery" | "single";
-	field: SingleType;
+	field: SingleType | ImagesArrayType;
 	description: string;
 	path: string;
 	text?: string;
@@ -30,13 +31,14 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({
 
 	const DragHandler = {
 		avatarExpo: avatarExpoUploadImg,
+		galleryImgBlock: imgBlockUploadImg,
 	};
 
 	const processImages = useCallback(
 		(images: File[]) => {
 			images.forEach(image => {
 				const formData = new FormData();
-				formData.append("img", image);
+				formData.append(type === "gallery" ? "gallery" : "img", image);
 				formData.append("description", description);
 				dispatch(DragHandler[field]({ path, formData }));
 			});

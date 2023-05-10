@@ -6,12 +6,13 @@ import {
 	ImagesArrayType,
 	SingleType,
 	avatarExpoDeleteImg,
+	imgBlockDeleteImg,
 } from "../../app/Slices/imagesUploadSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 interface IImageComponent {
 	image: imageType;
-	field: SingleType;
+	field: SingleType | ImagesArrayType;
 	type: "gallery" | "single";
 	className?: string;
 	style?: React.CSSProperties | undefined;
@@ -33,6 +34,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 
 	const ImgHandler = {
 		avatarExpo: avatarExpoDeleteImg,
+		galleryImgBlock: imgBlockDeleteImg,
 	};
 
 	return (

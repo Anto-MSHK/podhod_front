@@ -10,7 +10,7 @@ import { BlockItem } from "../BlockItem/BlockItem";
 import CustomListItem from "../CustomListItem/CustomListItem";
 import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { LayoutBlock } from "../BlockCards/LayoutBlock";
-import { BlockForm } from "../BlockForm/BlockForm";
+import { LayoutForm } from "../BlockForms/LayoutForm";
 import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
 type ChapterItemT = {
 	chapter: ChapterT;
@@ -93,7 +93,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					)}
 				</CustomCard>
 			</Collapse>
-			<BlockForm id={"" + chapter.id} modal={modal} />
+			<LayoutForm id={"" + chapter.id} modal={modal} />
 		</CustomListItem>
 	);
 };

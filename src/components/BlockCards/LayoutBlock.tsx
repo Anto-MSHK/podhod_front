@@ -13,7 +13,7 @@ import {
 import { InfoTag } from "../InfoTag/InfoTag";
 import { BlockTypes, ImgBlockT, TextBlockT } from "../../app/Types/ChapterT";
 import { TextBlock } from "./TextBlock/TextBlock";
-import { ImgBlock } from "./TextBlock/ImgBlock";
+import { ImgBlock } from "./ImgBlock/ImgBlock";
 import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
 import { useDeleteBlockMutation } from "../../app/services/ChapterApi";
 
