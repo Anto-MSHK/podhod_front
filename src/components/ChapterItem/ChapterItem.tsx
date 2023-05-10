@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ChapterItem.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { Card, CardBody, CardTitle, Collapse, Modal } from "reactstrap";
-import editIcon from "../../assets/icons/editIcon.svg";
+import plusIcon from "../../assets/icons/plusIcon.svg";
 import CustomCard from "../CustomCard/CustomCard";
 import { ChapterT } from "../../app/Types/ChapterT";
 import { useDeleteChapterMutation } from "../../app/services/ChapterApi";
@@ -10,6 +10,8 @@ import { BlockItem } from "../BlockItem/BlockItem";
 import CustomListItem from "../CustomListItem/CustomListItem";
 import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { LayoutBlock } from "../BlockCards/LayoutBlock";
+import { LayoutForm } from "../BlockForms/LayoutForm";
+import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
 type ChapterItemT = {
 	chapter: ChapterT;
 	showpieceId: string;
@@ -24,6 +26,17 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 	const [isChapterShown, setIsChapterShow] = useState(false);
 	const [deleteChapter] = useDeleteChapterMutation();
 
+	const dropdownItems: ListDropDownItemsI[] = [
+		// {
+		// 	text: "Редактировать",
+		// 	onClick: () => handleEditExhibit(item),
+		// },
+		{
+			text: "Удалить",
+			onClick: () => handleDeleteChapter("" + chapter.id, showpieceId),
+		},
+	];
+
 	const handleDeleteChapter = async (id: string, showpieceId: string) => {
 		try {
 			const payload = await deleteChapter({
@@ -37,17 +50,28 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 		}
 	};
 
+	const modal = useState(false);
+	const toggle = () => modal[1](prev => !prev);
+	const isOpenState = useState(false);
 	return (
 		<CustomListItem
 			className={styles.chapter_list_wrapper}
 			title={chapter.title}
 			subTitle={<p className="min">{chapter.description}</p>}
 			extra={
-				<CustomBtn
-					style={{ width: "45px" }}
-					onClick={() => setIsChapterShow(!isChapterShown)}
-					icon={scaleIcon}
-				></CustomBtn>
+				<div className={styles.custombtn}>
+					<CustomBtn
+						style={{ width: "45px" }}
+						onClick={() => toggle()}
+						icon={plusIcon}
+					></CustomBtn>
+					<CustomBtn
+						style={{ width: "45px" }}
+						onClick={() => setIsChapterShow(!isChapterShown)}
+						icon={scaleIcon}
+					></CustomBtn>
+					<DropDown items={dropdownItems} isOpenState={isOpenState} />
+				</div>
 			}
 		>
 			<Collapse isOpen={isChapterShown}>
@@ -55,6 +79,8 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					{chapter.blocks.length > 0 ? (
 						chapter.blocks.map((block, index) => (
 							<LayoutBlock
+								chapterId={chapter.id}
+								blockId={block.id}
 								title={block.title}
 								type={block.type}
 								data={(block as any)[`${block.type}Block`]}
@@ -67,6 +93,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					)}
 				</CustomCard>
 			</Collapse>
+			<LayoutForm id={"" + chapter.id} modal={modal} />
 		</CustomListItem>
 	);
 };

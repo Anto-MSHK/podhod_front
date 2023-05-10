@@ -8,12 +8,10 @@ import {
 } from "../Types/ExhibitsT";
 import { ChapterT } from "../Types/ChapterT";
 
-
-
-type GetChaptersReqT= {
-    eventId:string,
-    showpieceId: string,
-}
+type GetChaptersReqT = {
+	eventId: string;
+	showpieceId: string;
+};
 
 type UpdateExhibitReqT = {
 	id: string;
@@ -23,17 +21,34 @@ type UpdateExhibitReqT = {
 
 export type AddChapterReqT = {
 	body: {
-        title: string,
-        description: string,
-    };
-    eventId:string,
-    showpieceId: string,
+		title: string;
+		description: string;
+	};
+	eventId: string;
+	showpieceId: string;
 };
 
 type DeleteСhapterReqT = {
 	id: string;
 	eventId: string;
-	showpieceId: string
+	showpieceId: string;
+};
+type DeleteBlockReqT = {
+	chapterId: string;
+	blockId: string;
+};
+
+type BlockT = {
+	id?: string;
+	title: string;
+	type: string;
+	content: {
+		description: string;
+	};
+};
+type AddBlockReqT = {
+	chapterId: string;
+	body: BlockT;
 };
 
 export const chaptersApi = createApi({
@@ -41,16 +56,14 @@ export const chaptersApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${API_URL}`,
 	}),
-	tagTypes: ["Chapters, Pages"],
+	tagTypes: ["Chapters"],
 	endpoints: builder => ({
 		fetchChapters: builder.query<exhibitsT, GetChaptersReqT>({
-			query: ({eventId, showpieceId}) => ({
+			query: ({ eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
 			}),
-			providesTags: ['Chapters, Pages']
-		
+			providesTags: result => [{ type: "Chapters", id: result?.id }],
 		}),
-		
 
 		addChapter: builder.mutation<null, AddChapterReqT>({
 			query: ({ eventId, body, showpieceId }) => ({
@@ -58,9 +71,17 @@ export const chaptersApi = createApi({
 				method: "POST",
 				body: body,
 			}),
-			
-			invalidatesTags: ['Chapters, Pages'],
-			
+
+			invalidatesTags: ["Chapters"],
+		}),
+
+		addBlock: builder.mutation<any, AddBlockReqT>({
+			query: ({ chapterId, body }) => ({
+				url: `/${chapterId}/block`,
+				method: "POST",
+				body: body,
+			}),
+			invalidatesTags: ["Chapters"],
 		}),
 		/* updateExhibit: builder.mutation<null, UpdateExhibitReqT>({
 			query: ({ body, eventId, id }) => ({
@@ -75,13 +96,23 @@ export const chaptersApi = createApi({
 				url: `/${eventId}/showpieces/${showpieceId}/chapter/${id}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ['Chapters, Pages'],
+			invalidatesTags: ["Chapters"],
+		}),
+
+		deleteBlock: builder.mutation<null, DeleteBlockReqT>({
+			query: ({ chapterId, blockId }) => ({
+				url: `/${chapterId}/block/${blockId}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["Chapters"],
 		}),
 	}),
 });
 
 export const {
 	useFetchChaptersQuery,
-    useAddChapterMutation,
+	useAddBlockMutation,
+	useAddChapterMutation,
 	useDeleteChapterMutation,
+	useDeleteBlockMutation,
 } = chaptersApi;
