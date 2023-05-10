@@ -11,7 +11,8 @@ import {
 	useUpdateEventCalendarMutation,
 	useUpdateEventTimesMutation,
 } from "../../app/services/EventsApi";
-import { EventTimeT } from "../../app/Types/EventsT";
+import { EventTimeT, EventWeekDayT } from "../../app/Types/EventsT";
+import removeIcon from '../../assets/icons/CrossInCircle.svg'
 
 type FormInputDataT = {
 	label: string;
@@ -19,7 +20,7 @@ type FormInputDataT = {
 	children?: JSX.Element | JSX.Element[];
 };
 type EventScheduleFormProps = {
-	defaultData: EventTimeT;
+	defaultData?: EventTimeT;
 };
 
 interface formType extends EventTimeT {
@@ -77,10 +78,18 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
-			days: defaultData.days,
-			startDate: defaultData.startDate,
-			endDate: defaultData.endDate,
-			nonWorkingDays: defaultData.nonWorkingDays,
+			days: defaultData?.days || {
+				friday: {} as EventWeekDayT,
+				monday: {} as EventWeekDayT,
+				saturday: {} as EventWeekDayT,
+				sunday: {} as EventWeekDayT,
+				thursday: {} as EventWeekDayT,
+				tuesday: {} as EventWeekDayT,
+				wednesday: {} as EventWeekDayT,
+			},
+			startDate: defaultData?.startDate || "",
+			endDate: defaultData?.endDate || "",
+			nonWorkingDays: defaultData?.nonWorkingDays || [],
 			applyToAllDate: {
 				applyToAll: false,
 				from: "",
@@ -143,102 +152,114 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 		<div className={styles.form_wrapper}>
 			<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
 				{formik => (
-					<div>
-						<CustomBtn type="submit">Сохранить</CustomBtn>
-						<div className={styles.content_container}>
-							<div className={styles.weekDays_container}>
-								<div>
-									<h2>Время работы:</h2>
-									<div className={styles.applyAll_date_checkbox}>
-										<label>Применить для всех дней недели?</label>
-										<FormInput
-											name="applyToAllDate.applyToAll"
-											type="checkbox"
-										/>
-									</div>
-									<div className={styles.applyToAll_date_inputs}>
-										<FormInput name={`applyToAllDate.from`} type="time" />
-										<FormInput name={`applyToAllDate.to`} type="time" />
-										<FormInput
-											help="Выходной?"
-											name={`applyToAllDate.isWeekend`}
-											type="checkbox"
-										/>
-									</div>
+					<div className={styles.content_container}>
+						<div className={styles.weekDays_container}>
+							<h2>Время работы:</h2>
+							<div className={styles.applyToAllDate_container}>
+								<div className={styles.applyAll_date_checkbox}>
+									<FormInput name="applyToAllDate.applyToAll" type="checkbox" />
+									<p>Применить для всех дней недели?</p>
 								</div>
-								{!formik.values.applyToAllDate.applyToAll && (
-									<div className={styles.weekDaysList}>
-										{Object.entries(dictionary).map(([key, value], index) => (
-											<div
-												key={key}
-												style={{
-													display: "flex",
-													alignItems: "center",
-													gap: "1rem",
-												}}
-											>
-												<h3 className={styles.title}>{value.label}</h3>
+								<div className={styles.applyToAll_date_inputs}>
+									<FormInput
+										name={`applyToAllDate.from`}
+										type="time"
+										help="Время начала работы мероприяти"
+									/>
+									<FormInput
+										name={`applyToAllDate.to`}
+										type="time"
+										help="Время конца работы мероприятия"
+									/>
+									<FormInput
+										help="Выходной?"
+										name={`applyToAllDate.isWeekend`}
+										type="checkbox"
+									/>
+								</div>
+							</div>
+							{!formik.values.applyToAllDate.applyToAll && (
+								<div className={styles.weekDaysList}>
+									{Object.entries(dictionary).map(([key, value], index) => (
+										<div
+											key={key}
+											style={{
+												display: "flex",
+												alignItems: "center",
+												gap: "1rem",
+											}}
+										>
+											<h3 className={styles.title}>{value.label}</h3>
 
-												<FormInput
-													name={`days.${key}.from`}
-													type={value.type}
-												/>
-												<FormInput name={`days.${key}.to`} type={value.type} />
-												<FormInput
-													help="Выходной?"
-													name={`days.${key}.isWeekend`}
-													type="checkbox"
-												/>
-											</div>
-										))}
+											<FormInput name={`days.${key}.from`} type={value.type} />
+											<FormInput name={`days.${key}.to`} type={value.type} />
+											<FormInput
+												help="Выходной?"
+												name={`days.${key}.isWeekend`}
+												type="checkbox"
+											/>
+										</div>
+									))}
+								</div>
+							)}
+						</div>
+
+						<div className={styles.dates_container}>
+							<h2>Даты:</h2>
+							<FormInput
+								name={`startDate`}
+								type="date"
+								help="Дата начала мероприятия"
+							/>
+							<FormInput
+								name={"endDate"}
+								type="date"
+								help="Дата конца мероприятия"
+							/>
+						</div>
+
+						<div className={styles.nonWorkingDays_block}>
+							<h2>Нерабочие дни:</h2>
+							<FieldArray name="nonWorkingDays">
+								{({ insert, remove, push }) => (
+									<div className={styles.nonWorkingDays_container}>
+										{formik.values.nonWorkingDays.map(
+											(day: string, index: number) => (
+												<div
+													className={styles.nonWorkingDay_container}
+													key={index + day}
+												>
+													<div className={styles.nonWorkingDay_input}>
+														<FormInput
+															name={`nonWorkingDays.${index}`}
+															type="date"
+														/>
+													</div>
+
+													<CustomBtn
+														type="button"
+														className={styles.remove_nonWorkingDay_btn}
+														onClick={() => remove(index)}
+														icon={removeIcon}
+														iconWidth={25}
+													/>
+												</div>
+											),
+										)}
+										<CustomBtn
+											className={styles.add_nonWorkingDay_btn}
+											type="button"
+											onClick={() => push("")}
+										>
+											Добавить нерабочий день
+										</CustomBtn>
 									</div>
 								)}
-							</div>
-
-							<div className={styles.dates_container}>
-								<h2>Даты:</h2>
-								<FormInput name={`startDate`} type="date" />
-								<FormInput name={"endDate"} type="date" />
-							</div>
-
-							<div>
-								<h2>Нерабочие дни:</h2>
-								<FieldArray name="nonWorkingDays">
-									{({ insert, remove, push }) => (
-										<div className={styles.nonWorkingDays_container}>
-											<CustomBtn type="button" onClick={() => push("")}>
-												Добавить нерабочий день
-											</CustomBtn>
-											{formik.values.nonWorkingDays.map(
-												(day: string, index: number) => (
-													<div
-														className={styles.nonWorkingDay_container}
-														key={index + day}
-													>
-														<div>
-															<FormInput
-																name={`nonWorkingDays.${index}`}
-																type="date"
-															/>
-														</div>
-
-														<div>
-															<CustomBtn
-																type="button"
-																className={styles.remove_nonWorkingDay_btn}
-																onClick={() => remove(index)}
-															>
-																X
-															</CustomBtn>
-														</div>
-													</div>
-												),
-											)}
-										</div>
-									)}
-								</FieldArray>
-							</div>
+							</FieldArray>
 						</div>
+						<CustomBtn className={styles.submit_btn} type="submit">
+							Сохранить
+						</CustomBtn>
 					</div>
 				)}
 			</FormContainer>
