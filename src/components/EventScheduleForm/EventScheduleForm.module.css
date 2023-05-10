@@ -1,9 +1,15 @@
 .form_wrapper{
-    width: max-content;
+    width: 100%;
+    min-width: 600px ;
+    margin: 0 auto;
 }
 
+
 .content_container{
-    width: min-content;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .title{
@@ -11,12 +17,20 @@
      text-align: end; 
      margin: 0;
 }
-.applyAll_date_container{
-    display: flex;
-    text-align: start;
+.weekDays_container{
+    width: 40%;
+}
+.dates_container{
+    width: 40%;
 }
 .applyAll_date_checkbox{
     display: flex;
+    gap: 1rem;
+}
+.applyToAll_date_inputs{
+    display: flex;
+    gap: 1rem;
+    margin: 0 auto;
 }
 .nonWorkingDays_container{
     display: flex;
