@@ -89,17 +89,21 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 	const checkApplyToAll = (days: DaysOfWeekT): boolean => {
 		const fromValues: string[] = [];
 		const toValues: string[] = [];
+		const isWeekendArray: boolean[] = [];
 
 		Object.entries(days).forEach(([_day, dayData]) => {
 			fromValues.push(dayData.from);
 			toValues.push(dayData.to);
+			isWeekendArray.push(dayData.isWeekend);
 		});
 
 		const allFromEqual = fromValues.every((val) => val === fromValues[0]);
 		const allToEndEqual = toValues.every((val) => val === toValues[0]);
+		const noWeekendDays = isWeekendArray.every((val) => !val);
 
-		return allFromEqual && allToEndEqual;
+		return allFromEqual && allToEndEqual && noWeekendDays;
 	};
+
 
 
 	const defaultDays: DaysOfWeekT = defaultData?.days || {
@@ -116,18 +120,18 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 
 
 	const formConfig: FormikConfig<formType> = {
-			initialValues: {
-				days: defaultDays,
-				startDate: defaultData?.startDate || "",
-				endDate: defaultData?.endDate || "",
-				nonWorkingDays: defaultData?.nonWorkingDays || [],
-				applyToAllDate: {
-					applyToAll: applyToAll,
-					from: applyToAll ? defaultDays.monday.from : "",
-					to: applyToAll ? defaultDays.monday.to : "",
-					isWeekend: false,
-				},
+		initialValues: {
+			days: defaultDays,
+			startDate: defaultData?.startDate || "",
+			endDate: defaultData?.endDate || "",
+			nonWorkingDays: defaultData?.nonWorkingDays || [],
+			applyToAllDate: {
+				applyToAll: applyToAll,
+				from: applyToAll ? defaultDays.monday.from : "",
+				to: applyToAll ? defaultDays.monday.to : "",
+				isWeekend: false,
 			},
+		},
 		onSubmit: async (values, form) => {
 			console.log(values);
 			let calendar = {
