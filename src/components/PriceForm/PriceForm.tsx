@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonArt } from "../ButtonArt/ButtonArt";
 import styles from "./PriceForm.module.css";
 import { Formik } from "formik";
@@ -9,6 +9,8 @@ import Plus from "../../assets/icons/Plus.svg";
 import axios from "axios";
 import { useUpdatePricesMutation } from "../../app/services/PricesApi";
 import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+import { useFetchEventQuery } from "../../app/services/EventsApi";
 
 interface Price {
 	criterion: string;
@@ -16,7 +18,6 @@ interface Price {
 }
 
 interface Props {
-	onPriceAdded: (price: Price, prices: Price[]) => void;
 	disabled?: boolean;
 	eventId?: string;
 }
@@ -32,14 +33,21 @@ const schema = Yup.object({
 
 export const PriceForm: React.FC<Props> = ({
 																						 disabled,
-																						 onPriceAdded,
 																						 eventId,
 																					 }) => {
+
 	const { id } = useParams<{ id: string }>();
+	const { data , refetch} = useFetchEventQuery(id);
 	const [criterion, setCriterion] = useState("");
 	const [price, setPrice] = useState(0);
 	const [prices, setPrices] = useState<Price[]>([]);
 	const [updatePricesMutation] = useUpdatePricesMutation();
+
+	useEffect(() => {
+		if (data) {
+			setPrices(data.prices || []);
+		}
+	}, [data, refetch]);
 
 	const handleCriterionChange = (
 		event: React.ChangeEvent<HTMLInputElement>
@@ -52,40 +60,67 @@ export const PriceForm: React.FC<Props> = ({
 	};
 
 	const handleAddPrice = async (eventId: string | undefined, values: any) => {
-		// Extract criterion and price from the form values
 		const { criterion, price } = values;
+
+		try {
+			await schema.validate({ criterion, price }, { abortEarly: false });
+		} catch (error) {
+			console.error("Validation error:", error);
+			return;
+		}
 
 		const newPrice = { criterion, price };
 		const updatedPrices = [...prices, newPrice];
+
+		if (eventId) {
+			const allPrices = [...prices, newPrice];
+			try {
+				await updatePricesMutation({ id: eventId, prices: allPrices });
+				setPrices(allPrices);
+				refetch();
+			} catch (error) {
+				console.error(error);
+				return;
+			}
+		}
 		setPrices(updatedPrices);
-		onPriceAdded(newPrice, updatedPrices);
 		setCriterion("");
 		setPrice(0);
+	};
+
+	const handleDeletePrice = async (priceToDelete: Price) => {
+		const updatedPrices = prices.filter(
+			(p: Price) =>
+				!(p.criterion === priceToDelete.criterion && p.price === priceToDelete.price)
+		);
+
 		if (eventId) {
 			try {
 				await updatePricesMutation({ id: eventId, prices: updatedPrices });
+				setPrices(updatedPrices);
+				refetch();
 			} catch (error) {
 				console.error(error);
+				return;
 			}
 		}
-		console.log(updatedPrices);
+		setPrices(updatedPrices);
 	};
 
+	useEffect(() => {
+		console.log("Prices have been updated:", prices);
+	}, [prices]);
 
-	const handleDeletePrice = (priceToDelete: Price) => {
-		const updatedPrices = prices.filter(
-			(p: Price) =>
-				p.criterion !== priceToDelete.criterion || p.price !== priceToDelete.price
-		);
-		setPrices(updatedPrices);
-		onPriceAdded(priceToDelete, updatedPrices);
+	const handleSubmit = async (values: any, resetForm: () => void) => {
+		handleAddPrice(eventId, values);
+		resetForm();
 	};
 
 	return (
 		<div className={styles.container}>
 			<Formik
 				initialValues={{ criterion: "", price: "" }}
-				onSubmit={(values) => handleAddPrice(eventId, values)}
+				onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
 				validationSchema={schema}
 			>
 				{(formik) => (
@@ -93,7 +128,7 @@ export const PriceForm: React.FC<Props> = ({
 						<div className={styles.title}>
 							<h2 className={styles.title__text}>Цены</h2>
 							<div className={styles.buttonArt}>
-								<ButtonArt icon={Plus} onClick={() => handleAddPrice(eventId, formik.values)} />
+								<ButtonArt icon={Plus} onClick={() => handleSubmit(formik.values, formik.resetForm)} type="submit" />
 							</div>
 						</div>
 						<div className={styles.inputRow}>
@@ -125,7 +160,7 @@ export const PriceForm: React.FC<Props> = ({
 					</div>
 				)}
 				</Formik>
-				{prices.map((price: Price, index: number) => (
+				{data && data.prices?.map((price: Price, index: number) => (
 					<div className={styles.textAndDelete} key={index}>
 						<span>{price.criterion}: {price.price} руб.</span>
 						<div className={styles.delete}>

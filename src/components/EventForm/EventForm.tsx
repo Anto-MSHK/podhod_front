@@ -65,9 +65,9 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const [updatePrices] = useUpdatePricesMutation();
 	const [prices, setPrices] = useState<Price[]>([]);
 
-	const handlePriceAdded = async (price: PricesT) => {
-		setPrices((prevPrices) => [...prevPrices, price]);
-	};
+	// const handlePriceAdded = async (price: PricesT) => {
+	// 	setPrices((prevPrices) => [...prevPrices, price]);
+	// };
 
 	const handleAddEvent = async (event: CreateEventPayloadT) => {
 		return await addEvent(event).unwrap();
@@ -223,7 +223,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 							</div>
 						</div>
 						<div>
-							<PriceForm onPriceAdded={handlePriceAdded} disabled={!editing} eventId={id} />
+							<PriceForm disabled={!editing} eventId={id} />
 						</div>
 					</div>
 					<div>

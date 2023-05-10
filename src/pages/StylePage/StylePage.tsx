@@ -121,9 +121,6 @@ export const MainPage = () => {
                         tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
                         ducimus voluptas eveniet minima deserunt.
                     </p>
-                    <div>
-                        <PriceForm onPriceAdded={handlePriceAdded} />
-                    </div>
                     <Gallery images={images} scrollLocked={false} className="gallery"/>
                     <div>
                         <ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")}/>
