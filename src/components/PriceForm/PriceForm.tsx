@@ -6,10 +6,8 @@ import * as Yup from "yup";
 import { FormInput } from "../Form/FormInput";
 import Delete from "../../assets/icons/Delete.svg";
 import Plus from "../../assets/icons/Plus.svg";
-import axios from "axios";
-import { useUpdatePricesMutation } from "../../app/services/PricesApi";
+import { useUpdatePricesMutation } from "../../app/services/EventsApi";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
 import { useFetchEventQuery } from "../../app/services/EventsApi";
 
 interface Price {
@@ -106,10 +104,6 @@ export const PriceForm: React.FC<Props> = ({
 		}
 		setPrices(updatedPrices);
 	};
-
-	useEffect(() => {
-		console.log("Prices have been updated:", prices);
-	}, [prices]);
 
 	const handleSubmit = async (values: any, resetForm: () => void) => {
 		handleAddPrice(eventId, values);

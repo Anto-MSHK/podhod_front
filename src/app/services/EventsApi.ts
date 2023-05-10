@@ -8,7 +8,7 @@ import {
 	EventStateResponse,
 	ImgT,
 	CreateEventPayloadT,
-	UpdateEventPayloadT,
+	UpdateEventPayloadT, PriceT, PricesT,
 } from "../Types/EventsT";
 
 export const eventsApi = createApi({
@@ -51,6 +51,13 @@ export const eventsApi = createApi({
 				body: data,
 			}),
 		}),
+		updatePrices: builder.mutation<PriceT, { id: string, prices: PricesT[] }>({
+			query: ({ id, prices }) => ({
+				url: `/events/${id}/prices`,
+				method: "PATCH",
+				body: prices,
+			}),
+		}),
 	}),
 });
 
@@ -61,4 +68,5 @@ export const {
 	useGetPageImgQuery,
 	useAddEventMutation,
 	useUpdateEventMutation,
+	useUpdatePricesMutation
 } = eventsApi;

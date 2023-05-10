@@ -19,7 +19,6 @@ import * as Yup from "yup";
 import {useFormik, FormikConfig} from "formik";
 import {CustomBtn} from "../../components/CustomBtn/CustomBtn";
 import {MyForm} from "./Test";
-import {InfoMessage} from "../../components/InfoMessage/InfoMessage";
 import {Gallery} from "../../components/Gallery/Gallery";
 import React, {useState} from "react";
 import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
@@ -29,6 +28,7 @@ import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
 import {TextBlock} from "../../components/TextBlock/TextBlock";
 import {PriceForm} from "../../components/PriceForm/PriceForm";
 import ImagesGallery from "../../components/ImagesGallery/ImagesGallery";
+import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 
 interface Price {
     criterion: string;
@@ -295,11 +295,11 @@ export const MainPage = () => {
                 />
             </div>
             <div style={{marginTop: 50, width: "20%"}}>
-                <BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}>
-                    <ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")}/>
-                    <div style={{width: "50px"}}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")}/>
-                    </div>
-                </BottomMenu>
+                {/*<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}>*/}
+                {/*    <ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")}/>*/}
+                {/*    <div style={{width: "50px"}}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")}/>*/}
+                {/*    </div>*/}
+                {/*</BottomMenu>*/}
             </div>
         </div>
     );

@@ -21,7 +21,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
 import { PriceForm } from "../PriceForm/PriceForm";
-import { useUpdatePricesMutation } from "../../app/services/PricesApi";
+import { useUpdatePricesMutation } from "../../app/services/EventsApi";
 
 interface formType {
 	eventName: string;
@@ -221,9 +221,6 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 										),
 								)}
 							</div>
-						</div>
-						<div>
-							<PriceForm disabled={!editing} eventId={id} />
 						</div>
 					</div>
 					<div>
