@@ -32,6 +32,16 @@ interface formType extends EventTimeT {
 	};
 }
 
+type DaysOfWeekT = {
+	monday: EventWeekDayT;
+	tuesday: EventWeekDayT;
+	wednesday: EventWeekDayT;
+	thursday: EventWeekDayT;
+	friday: EventWeekDayT;
+	saturday: EventWeekDayT;
+	sunday: EventWeekDayT;
+};
+
 const dictionary: Record<string, FormInputDataT> = {
 	monday: {
 		label: "Понедельник",
@@ -68,7 +78,7 @@ const schemaConfig: Yup.ObjectShape = {
 	endDate: Yup.date().required(),
 };
 
-export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
+export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 	defaultData,
 }) => {
 	const { id } = useParams();
@@ -76,27 +86,48 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 		useUpdateEventCalendarMutation();
 	const [updateEventTimes] = useUpdateEventTimesMutation();
 
+	const checkApplyToAll = (days: DaysOfWeekT): boolean => {
+		const fromValues: string[] = [];
+		const toValues: string[] = [];
+
+		Object.entries(days).forEach(([_day, dayData]) => {
+			fromValues.push(dayData.from);
+			toValues.push(dayData.to);
+		});
+
+		const allFromEqual = fromValues.every((val) => val === fromValues[0]);
+		const allToEndEqual = toValues.every((val) => val === toValues[0]);
+
+		return allFromEqual && allToEndEqual;
+	};
+
+
+	const defaultDays: DaysOfWeekT = defaultData?.days || {
+		friday: {} as EventWeekDayT,
+		monday: {} as EventWeekDayT,
+		saturday: {} as EventWeekDayT,
+		sunday: {} as EventWeekDayT,
+		thursday: {} as EventWeekDayT,
+		tuesday: {} as EventWeekDayT,
+		wednesday: {} as EventWeekDayT,
+	};
+
+	const applyToAll: boolean = checkApplyToAll(defaultDays);
+
+
 	const formConfig: FormikConfig<formType> = {
-		initialValues: {
-			days: defaultData?.days || {
-				friday: {} as EventWeekDayT,
-				monday: {} as EventWeekDayT,
-				saturday: {} as EventWeekDayT,
-				sunday: {} as EventWeekDayT,
-				thursday: {} as EventWeekDayT,
-				tuesday: {} as EventWeekDayT,
-				wednesday: {} as EventWeekDayT,
+			initialValues: {
+				days: defaultDays,
+				startDate: defaultData?.startDate || "",
+				endDate: defaultData?.endDate || "",
+				nonWorkingDays: defaultData?.nonWorkingDays || [],
+				applyToAllDate: {
+					applyToAll: applyToAll,
+					from: applyToAll ? defaultDays.monday.from : "",
+					to: applyToAll ? defaultDays.monday.to : "",
+					isWeekend: false,
+				},
 			},
-			startDate: defaultData?.startDate || "",
-			endDate: defaultData?.endDate || "",
-			nonWorkingDays: defaultData?.nonWorkingDays || [],
-			applyToAllDate: {
-				applyToAll: false,
-				from: "",
-				to: "",
-				isWeekend: false,
-			},
-		},
 		onSubmit: async (values, form) => {
 			console.log(values);
 			let calendar = {
@@ -158,23 +189,18 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 							<div className={styles.applyToAllDate_container}>
 								<div className={styles.applyAll_date_checkbox}>
 									<FormInput name="applyToAllDate.applyToAll" type="checkbox" />
-									<p>Применить для всех дней недели?</p>
+									<h3>Применить для всей недели</h3>
 								</div>
 								<div className={styles.applyToAll_date_inputs}>
 									<FormInput
 										name={`applyToAllDate.from`}
 										type="time"
-										help="Время начала работы мероприяти"
+										help="Время начала работы мероприятия"
 									/>
 									<FormInput
 										name={`applyToAllDate.to`}
 										type="time"
 										help="Время конца работы мероприятия"
-									/>
-									<FormInput
-										help="Выходной?"
-										name={`applyToAllDate.isWeekend`}
-										type="checkbox"
 									/>
 								</div>
 							</div>
@@ -194,7 +220,7 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 											<FormInput name={`days.${key}.from`} type={value.type} />
 											<FormInput name={`days.${key}.to`} type={value.type} />
 											<FormInput
-												help="Выходной?"
+												help="Выходной"
 												name={`days.${key}.isWeekend`}
 												type="checkbox"
 											/>
@@ -205,7 +231,7 @@ export const EventScheduleFrom: React.FC<EventScheduleFormProps> = ({
 						</div>
 
 						<div className={styles.dates_container}>
-							<h2>Даты:</h2>
+							<h2>Даты мероприятия:</h2>
 							<FormInput
 								name={`startDate`}
 								type="date"

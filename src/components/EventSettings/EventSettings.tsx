@@ -1,5 +1,5 @@
 import React from "react";
-import { EventScheduleFrom } from "../EventScheduleForm/EventScheduleFrom";
+import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
 import { EventT, EventTimeT } from "../../app/Types/EventsT";
 
 type EventSettingsPropsT = {
@@ -10,7 +10,7 @@ export const EventSettings: React.FC<EventSettingsPropsT> = ({defaultScheduleDat
     
 	return (
     <div>
-        <EventScheduleFrom defaultData={defaultScheduleData?.times as EventTimeT}/>
+        <EventScheduleForm defaultData={defaultScheduleData?.times as EventTimeT}/>
     </div>
     )
 };

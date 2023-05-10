@@ -19,7 +19,7 @@ import {
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
-import { EventScheduleFrom } from "../EventScheduleForm/EventScheduleFrom";
+import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
 
 interface formType {
 	eventName: string;

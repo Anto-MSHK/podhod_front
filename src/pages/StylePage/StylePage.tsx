@@ -23,7 +23,7 @@ import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
 import CustomCard from "../../components/CustomCard/CustomCard";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import ImageItem from "../../components/ImageItem/ImageItem";
-import { EventScheduleFrom } from "../../components/EventScheduleForm/EventScheduleFrom";
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
 
 export const MainPage = () => {
 	const btnData = [
