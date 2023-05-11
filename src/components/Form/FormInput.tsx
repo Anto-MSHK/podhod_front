@@ -19,9 +19,10 @@ import {
 import { InputType } from "reactstrap/types/lib/Input";
 
 interface CustomInputI extends InputProps {
-	form: any;
+	form?: any;
 	type?: InputType;
-	disabled: boolean;
+	disabled?: boolean;
+	placeholder?: string;
 }
 interface CustomFormInputI extends FieldConfig {
 	label?: string;
@@ -46,32 +47,42 @@ export const CustomInput: FC<CustomInputI> = ({
 	onChange,
 	onBlur,
 	onFocus,
+	title,
+
 }) => {
 	return (
-		<div>
+		<div style={{ width: "100%" }}>
 			<Input
+
 				onFocus={onFocus}
 				onBlur={onBlur}
 				onChange={onChange}
+
+				title = {title}
+
 				disabled={disabled}
 				placeholder={placeholder}
 				type={type}
 				{...field}
 				valid={
-					form.values[`${field.name}`] ||
-					(form.touched[`${field.name}`] &&
+					(form && form.values[`${field.name}`]) ||
+					(form &&
+						form.touched[`${field.name}`] &&
 						form.errors[`${field.name}`] === undefined)
 				}
 				invalid={
+					form &&
 					form.touched[`${field.name}`] &&
 					form.errors[`${field.name}`] !== undefined
 				}
-				className={styles.AuthInputElements}
+				className={`${styles.AuthInputElements}`}
 			>
 				{children ? children : undefined}
 			</Input>
 			<FormFeedback invalid="true" tag="h2">
-				{form.touched[`${field.name}`] ? form.errors[`${field.name}`] : ""}
+				{form && form.touched[`${field.name}`]
+					? form.errors[`${field.name}`]
+					: ""}
 			</FormFeedback>
 		</div>
 	);
@@ -89,6 +100,7 @@ export const FormInput: FC<CustomFormInputI> = ({
 	onChange,
 	onBlur,
 }) => {
+
 	return (
 		<FormGroup>
 			<h3>{label}</h3>

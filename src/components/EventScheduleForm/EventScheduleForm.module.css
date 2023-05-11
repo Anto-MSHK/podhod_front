@@ -1,0 +1,114 @@
+.form_wrapper {
+    width: 100%;
+    min-width: 600px;
+}
+
+.form_wrapper input {
+    height: 50px;
+}
+
+.content_container {
+    width: fit-content;
+    background-color: var(--dark_gray_color);
+    padding: 2rem;
+    border-radius: var(--radius);
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.title {
+    width: 150px;
+    text-align: end;
+    margin: 0;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.weekDays_container {
+    width: 100%;
+}
+
+.dates_container {
+    background-color: var(--dark_gray_color);
+    border-radius: var(--radius);
+    flex-direction: column;
+}
+
+.applyAll_date_checkbox {
+    display: flex;
+    gap: 1rem;
+}
+
+.applyToAll_date_inputs {
+    display: flex;
+    gap: 1rem;
+}
+
+.nonWorkingDays_block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nonWorkingDays_container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: center;
+}
+
+.nonWorkingDay_container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nonWorkingDay_input {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.remove_nonWorkingDay_btn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50% 50%;
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+
+.remove_nonWorkingDay_btn:hover {
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+
+.add_nonWorkingDay_btn {
+    margin-top: 1rem;
+    background-color: transparent;
+}
+
+.submit_btn {
+    margin-top: 1rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--orange_color);
+    border-color: var(--orange_color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.172l-4-4l-1.414 1.414L9 18.999l12-12l-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}

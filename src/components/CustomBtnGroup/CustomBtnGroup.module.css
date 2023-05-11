@@ -1,10 +1,10 @@
 .buttonsWrapper {
-	display: flex;
+	display: flex !important;
+	align-items: center;
 	column-gap: 10px;
 }
 
 .btnItem {
-	color: white !important;
 	width: 100%;
 	font-weight: 500;
 	font-size: 18px;
@@ -13,37 +13,42 @@
 
 .dropItem {
 	width: 100%;
-	color: black !important;
-	background-color: #ffffff !important;
+	color: black /* !important */;
+	background-color: #ffffff /* !important */;
 	font-weight: 500;
 	font-size: 18px;
 }
 
 .dropItem:hover {
 	width: 100%;
-	background-color: #e7e7e7 !important;
+	background-color: #e7e7e7 /* !important */;
 	font-weight: 500;
 	font-size: 18px;
+	color: white;
 }
 
 .dropItem:focus {
 	width: 100%;
-	color: white !important;
-	background-color: #df791a !important;
+	color: white /* !important */;
+	background-color: #df791a /* !important */;
 	font-weight: 500;
 	font-size: 18px;
 }
 
-.active {
-	color: white !important;
-	background-color: #df791a !important;
-	border: 1px solid #df791a !important;
+.btnItem.active {
+	background-color: #df791a /* !important */;
+	border: 1px solid #df791a;
+	color: white;
 }
 
-.deactivate {
-	color: #9d9d9d !important;
-	background-color: #2b2b2b !important;
-	border: 1px solid #2b2b2b !important;
+.btnItem.deactivate {
+	color: #9d9d9d /* !important */;
+	background-color: #2b2b2b /* !important */;
+	border: 1px solid #2b2b2b /* !important */;
+}
+
+.btnItem.deactivate:hover {
+	color: white /* !important */;
 }
 
 .btnGroupWrapper {
@@ -55,14 +60,22 @@
 }
  */
 
-.fltActive {
-	color: white !important;
-	background-color: var(--blue_color) !important;
-	border: 1px solid var(--blue_color) !important;
+.btnItem.fltActive {
+	color: white /* !important */;
+	background-color: var(--blue_color) /* !important */;
+	border: 1px solid var(--blue_color) /* !important */;
 }
 
-.fltDeactivate {
-	color: #9d9d9d !important;
-	background-color: #2b2b2b !important;
-	border: 1px solid #2b2b2b !important;
+.btnItem.fltActive:hover {
+	background-color: var(--blue_color) /* !important */;
+}
+
+.btnItem.fltDeactivate {
+	color: #9d9d9d /* !important */;
+	background-color: #2b2b2b /* !important */;
+	border: 1px solid #2b2b2b /* !important */;
+}
+.btnItem.fltDeactivate:hover {
+	color: white;
+	background-color: var(--blue_color) /* !important */;
 }

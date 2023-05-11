@@ -6,14 +6,16 @@ import {
 	ImagesArrayType,
 	SingleType,
 	avatarExpoDeleteImg,
+	imgBlockDeleteImg,
 } from "../../app/Slices/imagesUploadSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 interface IImageComponent {
 	image: imageType;
-	field: SingleType;
+	field: SingleType | ImagesArrayType;
 	type: "gallery" | "single";
 	className?: string;
+	style?: React.CSSProperties | undefined;
 }
 
 const ImageItem: React.FC<IImageComponent> = ({
@@ -21,6 +23,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 	type,
 	field,
 	className,
+	style,
 }) => {
 	const [modal, setModal] = useState(false);
 	const dispatch = useAppDispatch();
@@ -31,6 +34,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 
 	const ImgHandler = {
 		avatarExpo: avatarExpoDeleteImg,
+		galleryImgBlock: imgBlockDeleteImg,
 	};
 
 	return (
@@ -45,7 +49,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 				<img
 					className={className ? className : styles.image}
 					src={image.path}
-					style={{ cursor: "pointer" }}
+					style={{ cursor: "pointer", ...style }}
 					alt=""
 				/>
 			</div>

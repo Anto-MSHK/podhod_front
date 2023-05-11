@@ -1,4 +1,6 @@
 import React from "react";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store, persistor } from "./app/store";

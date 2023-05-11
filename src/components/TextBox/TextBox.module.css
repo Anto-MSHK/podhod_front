@@ -1,0 +1,17 @@
+.textBox_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.textBox_title {
+    font-weight: bold;
+}
+
+.textBox_shortDesc {
+    color: gray;
+}
+
+.textBox_desc {
+
+}
