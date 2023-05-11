@@ -16,16 +16,16 @@ import {
 	CreateEventPayloadT,
 	EventT,
 	UpdateEventPayloadT,
-	PriceT, PricesT,
+	PriceT,
+	PricesT,
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
 
 import { PriceForm } from "../PriceForm/PriceForm";
-import { useUpdatePricesMutation } from "../../app/services/PricesApi";
+import { useUpdatePricesMutation } from "../../app/services/EventsApi";
 
 import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
-
 
 interface formType {
 	eventName: string;
@@ -80,7 +80,6 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const handleUpdateEvent = async (event: UpdateEventPayloadT) => {
 		await updateEvent(event).unwrap();
 	};
-
 
 	type FormInputDataT = {
 		label: string;

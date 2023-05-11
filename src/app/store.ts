@@ -29,7 +29,6 @@ import { chaptersApi } from "./services/ChapterApi";
 import ExpoCreatePageSlice from "./Slices/ExpoCreatePageSlice";
 
 const rootReducer = combineReducers({
-	[pricesApi.reducerPath]: pricesApi.reducer,
 	[eventsApi.reducerPath]: eventsApi.reducer,
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
