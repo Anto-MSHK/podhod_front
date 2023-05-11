@@ -21,6 +21,7 @@ import {
 } from "reactstrap";
 import styles from "./CustomListItem.module.css";
 import CustomCard from "../CustomCard/CustomCard";
+import { DropDown } from "../DropDown/DropDown";
 var classNames = require("classnames");
 
 export interface ListDropDownItemsI {
@@ -55,7 +56,7 @@ const CustomListItem: React.FC<CustomListItemI> = props => {
 		children,
 	} = props;
 
-	const [isActive, setIsActive] = useState(false);
+	const isOpenState = useState(false);
 
 	let classes = classNames(className, styles.item);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -121,32 +122,7 @@ const CustomListItem: React.FC<CustomListItemI> = props => {
 					<CardDeck className={styles.dropDown_container}>
 						{extra && <div>{extra}</div>}
 						{dropdownItems && (
-							<Dropdown
-								isOpen={dropdownOpen}
-								toggle={toggle}
-								direction={"down"}
-								className={styles.dropDown}
-							>
-								<DropdownToggle
-									cssModule={{
-										btn: styles.dropDown_toggle,
-										"btn-secondary": styles.btn_secondary,
-									}}
-								>
-									<h2 className={styles.dropDown__btn_text}>···</h2>
-								</DropdownToggle>
-								<DropdownMenu className={styles.dropDown_menu}>
-									{dropdownItems.map((el, index) => (
-										<DropdownItem
-											key={el.text + index}
-											onClick={el.onClick}
-											className={styles.dropDown_item}
-										>
-											<p>{el.text}</p>
-										</DropdownItem>
-									))}
-								</DropdownMenu>
-							</Dropdown>
+							<DropDown items={dropdownItems} isOpenState={isOpenState} />
 						)}
 					</CardDeck>
 				</CardHeader>

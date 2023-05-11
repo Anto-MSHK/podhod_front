@@ -1,5 +1,6 @@
 .buttonsWrapper {
-	display: flex;
+	display: flex !important;
+	align-items: center;
 	column-gap: 10px;
 }
 
@@ -35,11 +36,9 @@
 }
 
 .btnItem.active {
-
 	background-color: #df791a /* !important */;
-	border: 1px solid #df791a ;
+	border: 1px solid #df791a;
 	color: white;
-
 }
 
 .btnItem.deactivate {
@@ -50,9 +49,7 @@
 
 .btnItem.deactivate:hover {
 	color: white /* !important */;
-	
 }
-
 
 .btnGroupWrapper {
 	display: flex;
@@ -80,7 +77,5 @@
 }
 .btnItem.fltDeactivate:hover {
 	color: white;
-	background-color: var(--blue_color)  /* !important */;
-
+	background-color: var(--blue_color) /* !important */;
 }
-

@@ -45,6 +45,7 @@ import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
 import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
+import { CustomBtnGroup } from "../CustomBtnGroup/CustomBtnGroup";
 
 interface formType {
 	exhibitName: string;
@@ -68,6 +69,7 @@ export const EventShowpiecesEdit = () => {
 		data: showpiece,
 		isLoading: isChaptersLoading,
 		isFetching: isChaptersFetching,
+		refetch,
 	} = useFetchChaptersQuery(chapterConf);
 	const [addExhibit] = useAddExhibitMutation();
 	const [updateExhibit] = useUpdateExhibitMutation();
@@ -93,7 +95,7 @@ export const EventShowpiecesEdit = () => {
 		setCurrenstItem(e.key);
 		сhangeShowPiece(e.key);
 
-		const selectedExhibit = data?.find((exhibit) => exhibit.id === e.key);
+		const selectedExhibit = data?.find(exhibit => exhibit.id === e.key);
 		dispatch(setSelectedExhibit(selectedExhibit || null));
 	};
 
@@ -195,6 +197,11 @@ export const EventShowpiecesEdit = () => {
 		},
 	};
 
+	const btnData = [
+		{ name: "Текст", onClick: () => {} },
+		{ name: "Картинка", onClick: () => {} },
+	];
+
 	const schemaConfig: Yup.ObjectShape = {
 		exhibitName: Yup.string().required("Обязательное поле!"),
 		exhibitShort: Yup.string().required("Обязательное поле!"),
@@ -270,6 +277,7 @@ export const EventShowpiecesEdit = () => {
 							)}
 						</CustomCard>
 					</div>
+
 					<Modal
 						isOpen={modalChapter}
 						toggle={toggleChapter}
@@ -346,7 +354,7 @@ export const EventShowpiecesEdit = () => {
 							<ModalFooter
 								style={{ backgroundColor: "#1E1E1E", color: "white" }}
 							>
-								<CustomBtn color="primary" type="submit">
+								<CustomBtn onClick={() => {}} color="primary" type="submit">
 									Сохранить
 								</CustomBtn>
 								<CustomBtn onClick={toggle}>Отменить</CustomBtn>

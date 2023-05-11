@@ -48,36 +48,39 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 		<div className={styles.images_gallery_wrapper}>
 			<div className={styles.images_wrapper}>
 				{images &&
-					images.map((image, index) => (
-						<div
-							key={index}
-							className={styles.image_container}
-							draggable
-							onDragStart={() => handleDragStart(index)}
-							onDragOver={e => handleDragOver(e, index)}
-							onDrop={e => handleDrop(e, index)}
-							style={{
-								opacity: draggedIndex === index ? 0.5 : 1,
-								border: draggedIndex === index ? "5px solid #df791a" : "none",
-								backgroundColor:
-									dragOverIndex === index ? "lightgray" : "white",
-								scale: dragOverIndex === index ? "1.05" : "1",
-								cursor: "pointer",
-							}}
-						>
-							{/* <ImageItem field={imgField} type={"gallery"} image={image} /> */}
-						</div>
-					))}
+					images.map((image, index) => {
+						console.log(image.path);
+						return (
+							<div
+								key={index}
+								className={styles.image_container}
+								draggable
+								onDragStart={() => handleDragStart(index)}
+								onDragOver={e => handleDragOver(e, index)}
+								onDrop={e => handleDrop(e, index)}
+								style={{
+									opacity: draggedIndex === index ? 0.5 : 1,
+									border: draggedIndex === index ? "5px solid #df791a" : "none",
+									backgroundColor:
+										dragOverIndex === index ? "lightgray" : "white",
+									scale: dragOverIndex === index ? "1.05" : "1",
+									cursor: "pointer",
+								}}
+							>
+								<ImageItem field={imgField} type={"gallery"} image={image} />
+							</div>
+						);
+					})}
 			</div>
 
-			{/* <div className={styles.drag_and_drop}>
+			<div className={styles.drag_and_drop}>
 				<DragAndDrop
 					field={imgField}
 					type="gallery"
 					path={path}
 					description=""
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 };

@@ -22,7 +22,11 @@ export const ImgBlock: FC<ImgBlockI> = ({ imgs }) => {
 				alignItems: "center",
 			}}
 		>
-			<Gallery images={images} isDisabled />
+			{images.length > 0 ? (
+				<Gallery images={images} isDisabled />
+			) : (
+				<h5>пока нет картинок</h5>
+			)}
 		</div>
 	);
 };

@@ -32,7 +32,7 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 	data,
 	handleActiveBtn,
 	type,
-	activeBtn
+	activeBtn,
 }) => {
 	const [rSelected, setRSelected] = useState<number | null>(0);
 	const [cSelected, setCSelected] = useState<number[]>([]);
@@ -75,14 +75,14 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 		},
 		index: number,
 	) => {
-		const isActive = activeBtn !== undefined
-			? view === "radio"
-				? activeBtn === index
-				: cSelected.includes(index)
-			: view === "radio"
+		const isActive =
+			activeBtn !== undefined
+				? view === "radio"
+					? activeBtn === index
+					: cSelected.includes(index)
+				: view === "radio"
 				? rSelected === index
 				: cSelected.includes(index);
-
 
 		const handleClick =
 			view === "radio"
@@ -143,7 +143,6 @@ export const CustomBtnGroup: FC<BtnGroupI> = ({
 			return (
 				<div key={index}>
 					<CustomBtn
-				
 						className={`${styles.btnItem} ${
 							type === "filter"
 								? isActive

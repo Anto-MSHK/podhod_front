@@ -14,8 +14,13 @@ import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import { EventPageEdit } from "../../components/EventPageEdit/EventPageEdit";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
+
 import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
 import { EventSettings } from "../../components/EventSettings/EventSettings";
+
+import useScrollPosition from "../../features/hooks/useScrollPosition";
+import useComponentSize from "../../features/hooks/useSize";
+
 
 const btnData = [
 	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
@@ -125,24 +130,61 @@ export const EventEdit: React.FC = () => {
 		setDragStartX(null);
 	};
 
+	const scroll = useScrollPosition();
+	console.log(scroll);
+
+	const LIMIT = 70;
+	const HIGH_SCROLL = scroll > LIMIT;
+	const LOW_SCROLL = scroll <= LIMIT;
+	const [ref, size] = useComponentSize();
 	return (
 		<div>
 			{(!isLoading && event) || !id ? (
-				<div className={styles.expo_create_wrapper}>
+				<div className={styles.expo_create_wrapper} style={{ marginTop: 20 }}>
 					<div className={styles.expo_create__content}>
-						<div className={styles.content__header_container}>
-							{id && (
-								<ImageSingle
-									imgField="avatarExpo"
-									textButton={"добавьте фото "}
-									path={`/img/to/event/${event?.id}`}
-									isLoading={isImgLoading}
-									description="Это главное изображение события"
-								/>
-							)}
-
-							<div className={styles.header__info_container}>
-								<h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
+						<div
+							className={styles.content__header_container}
+							style={{ position: "relative" }}
+						>
+							<div
+								style={{
+									opacity: 1 - (scroll * 1.5) / 100,
+								}}
+							>
+								{id && (
+									<ImageSingle
+										imgField="avatarExpo"
+										textButton={"добавьте фото "}
+										path={`/img/to/event/${event?.id}`}
+										isLoading={isImgLoading}
+										description="Это главное изображение события"
+										style={{
+											width: 275 - scroll,
+											height: 150 - scroll,
+										}}
+									/>
+								)}
+							</div>
+							<div
+								className={styles.header__info_container}
+								style={{
+									display: "flex",
+									flexDirection: HIGH_SCROLL ? undefined : "column",
+									marginLeft:
+										LOW_SCROLL && id ? 295 - scroll * 1 : 295 - LIMIT * 4,
+									marginTop: HIGH_SCROLL ? 55 : undefined,
+									marginBottom: !id ? -15 : undefined,
+								}}
+								ref={ref as any}
+							>
+								<h1
+									style={{
+										width: "70%",
+										margin: `0 0 ${HIGH_SCROLL ? 0 : -30}px 0`,
+										fontWeight: 700,
+										fontSize: LOW_SCROLL ? 42 - scroll / 5 : 42 - LIMIT / 5,
+									}}
+								>
 									<p
 										className="min"
 										style={{ margin: 0, fontSize: 20, fontWeight: 600 }}
@@ -153,7 +195,13 @@ export const EventEdit: React.FC = () => {
 										? `«${eventSlice?.eventName}»`
 										: "Создайте новое мероприятие"}
 								</h1>
-								<div className={styles.info__toolbar_container}>
+								<div
+									className={styles.info__toolbar_container}
+									style={{
+										justifyContent: LOW_SCROLL ? undefined : "end",
+										alignItems: "center",
+									}}
+								>
 									{event && (
 										<CustomBtnGroup
 											handleActiveBtn={handleActiveBtn}
@@ -167,7 +215,7 @@ export const EventEdit: React.FC = () => {
 						</div>
 						<div
 							style={{
-								margin: "30px 0 15px 0",
+								margin: `20px 0 15px 0`,
 								background: "#DF791A",
 								height: 2,
 								borderRadius: 10,
@@ -204,6 +252,7 @@ export const EventEdit: React.FC = () => {
 										icon={errorIcon}
 									/>
 								</div>
+
 							</div>
 						)}
 					</div>
