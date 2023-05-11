@@ -1,33 +1,24 @@
 import React, { FC } from "react";
 import { Button, ButtonProps } from "reactstrap";
 import styles from "./CustomBtn.module.css";
-
+var classNames = require("classnames");
 interface ButtonArtI extends ButtonProps {
-	className?: string;
-	style?: React.CSSProperties;
-	onClick?: () => void;
-	type?: "button" | "submit" | "reset";
-	size?: "lg" | "sm";
 	icon?: any;
 	iconWidth?: number;
-	disabled?: boolean;
-	color?: string;
+	iconPosition?: "top" | "left" | "right" | "bottom";
 }
 
 export const CustomBtn: FC<ButtonArtI> = ({
-	children,
-	className = "",
-	onClick,
-	type = "button",
-	style,
-	active,
+	iconPosition,
 	icon,
 	iconWidth,
-	disabled,
-	size,
-	color = "warning",
+	...props
 }) => {
-	const customClassName = className ? className : styles.customBtn;
+	const classes = classNames(
+		props.className,
+		styles.customBtn,
+		styles[`icon_${iconPosition}`],
+	);
 	const iconElement = icon ? (
 		<img
 			className={styles.imageWrapper}
@@ -39,18 +30,9 @@ export const CustomBtn: FC<ButtonArtI> = ({
 
 	return (
 		<div className={styles.custom_btn_container}>
-			<Button
-				className={customClassName}
-				onClick={onClick}
-				type={type}
-				active={active}
-				style={style}
-				disabled={disabled}
-				size={size}
-				color={color}
-			>
+			<Button {...props} className={classes} color="warning">
 				{iconElement}
-				{children}
+				{props.children}
 			</Button>
 		</div>
 	);

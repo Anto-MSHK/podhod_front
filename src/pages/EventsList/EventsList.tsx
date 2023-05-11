@@ -107,6 +107,8 @@ export const EventsList: React.FC = () => {
 		}
 	};
 
+
+
 	const handleSortByType = (asc: boolean) => {
 		if (items) {
 			const sorted = [...items].sort((a, b) => {
@@ -145,6 +147,7 @@ export const EventsList: React.FC = () => {
 			},
 		},
 	];
+
 
 	return (
 		<div className={styles.wrapper}>

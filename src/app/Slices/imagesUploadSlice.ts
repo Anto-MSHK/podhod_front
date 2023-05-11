@@ -16,11 +16,11 @@ export type imageType = {
 	eventId: number;
 };
 
-export type ImagesArrayType = "galleryMainPage";
+export type ImagesArrayType = "galleryImgBlock";
 export type SingleType = "avatarExpo";
 
 type imagesUploadSliceT = {
-	galleryMainPage: imageType[];
+	galleryImgBlock: imageType[];
 	avatarExpo: imageType | undefined;
 };
 
@@ -43,6 +43,24 @@ export const avatarExpoUploadImg = createAsyncThunk(
 	},
 );
 
+export const imgBlockUploadImg = createAsyncThunk(
+	"images/uploadBlockImg",
+	async ({ path, formData }: any, thunkAPI) => {
+		const response = await $api.post(path, formData);
+		response.data.imgs.map((img: any) => {
+			img.path = API_URL + "/" + img.path;
+			return img;
+		});
+		return response.data.imgs;
+	},
+);
+
+export const imgBlockDeleteImg = createAsyncThunk(
+	"images/deleteBlockImg",
+	async (path: string, thunkAPI) => {
+		await $api.delete(path);
+	},
+);
 export const avatarExpoDeleteImg = createAsyncThunk(
 	"images/deleteEventImg",
 	async (path: string, thunkAPI) => {
@@ -52,13 +70,17 @@ export const avatarExpoDeleteImg = createAsyncThunk(
 
 const initialState: imagesUploadSliceT = {
 	avatarExpo: undefined,
-	galleryMainPage: [],
+	galleryImgBlock: [],
 };
 
 const imagesUploadSlice = createSlice({
 	name: "images",
 	initialState,
-	reducers: {},
+	reducers: {
+		deleteImgInImgBlock(state) {
+			state.galleryImgBlock = [];
+		},
+	},
 	extraReducers: builder => {
 		builder.addCase(getEventImg.fulfilled, (state, action) => {
 			if (action.payload === null) state.avatarExpo = undefined;
@@ -70,8 +92,11 @@ const imagesUploadSlice = createSlice({
 		builder.addCase(avatarExpoDeleteImg.fulfilled, (state, action) => {
 			state.avatarExpo = undefined;
 		});
+		builder.addCase(imgBlockUploadImg.fulfilled, (state, action) => {
+			state.galleryImgBlock = action.payload;
+		});
 	},
 });
 
-export const {} = imagesUploadSlice.actions;
+export const { deleteImgInImgBlock } = imagesUploadSlice.actions;
 export default imagesUploadSlice.reducer;

@@ -16,9 +16,10 @@
 .eventPreview_content {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    padding: 10px;
+    max-width: 340px;
+    flex-wrap: wrap;
 }
 
 .eventPreview_bottom {
