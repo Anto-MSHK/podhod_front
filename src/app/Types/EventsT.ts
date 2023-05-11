@@ -26,6 +26,28 @@ export type EventT = {
 		path: string;
 		eventId: number;
 	};
+	times: EventTimeT,
+};
+
+export type EventWeekDayT = {
+	to: string;
+	from: string;
+	isWeekend: boolean;
+};
+
+export type EventTimeT = {
+	startDate: string;
+	endDate: string;
+	nonWorkingDays: string[];
+	days: {
+		friday: EventWeekDayT;
+		monday: EventWeekDayT;
+		sunday: EventWeekDayT;
+		tuesday: EventWeekDayT;
+		saturday: EventWeekDayT;
+		thursday: EventWeekDayT;
+		wednesday: EventWeekDayT;
+	};
 };
 
 export type CreateEventPayloadT = {
@@ -35,6 +57,26 @@ export type CreateEventPayloadT = {
 	type: string;
 	ageLimit: string;
 	prices: PriceT[];
+};
+
+
+export type UpdateEventCalendarPayload = {
+	id: string;
+	body: {
+		startDate: string;
+		endDate: string;
+		nonWorkingDays: string[];
+	};
+};
+export type UpdateEventTimes = {
+	id: string;
+	body:{
+		dayOfWeek: string
+		from: string,
+		to: string,
+		isWeekend: boolean,
+		applyToAll: boolean
+	},
 };
 
 export type UpdateEventPayloadT = {

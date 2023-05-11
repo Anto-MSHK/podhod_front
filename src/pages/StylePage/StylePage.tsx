@@ -23,6 +23,7 @@ import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
 import CustomCard from "../../components/CustomCard/CustomCard";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import ImageItem from "../../components/ImageItem/ImageItem";
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
 
 export const MainPage = () => {
 	const btnData = [
@@ -97,7 +98,8 @@ export const MainPage = () => {
 							gap: "10px",
 							marginBottom: 10,
 						}}
-					>
+						>
+		
 						<WidgetItem info="4" icon={icon1} description="экспоната" />
 						<WidgetItem
 							info="от 250р."
@@ -222,5 +224,6 @@ export const MainPage = () => {
 				<img alt="Sample" src="https://picsum.photos/300/200" />
 			</Card>
 		</div>
+		
 	);
 };
