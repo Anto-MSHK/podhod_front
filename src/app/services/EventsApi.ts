@@ -1,4 +1,4 @@
-import { UpdateEventTimes } from './../Types/EventsT';
+import { UpdateEventTimes } from "./../Types/EventsT";
 import { API_URL } from "../http";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -79,5 +79,4 @@ export const {
 	useUpdateEventMutation,
 	useUpdateEventCalendarMutation,
 	useUpdateEventTimesMutation,
-
 } = eventsApi;

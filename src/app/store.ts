@@ -24,6 +24,7 @@ import {
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
 import { eventPagesApi } from "./services/EventPages.Api";
+import { pricesApi } from "./services/PricesApi";
 import { chaptersApi } from "./services/ChapterApi";
 import ExpoCreatePageSlice from "./Slices/ExpoCreatePageSlice";
 
@@ -58,7 +59,9 @@ export const store = configureStore({
 			eventsApi.middleware,
 			exhibitsApi.middleware,
 			eventPagesApi.middleware,
+			pricesApi.middleware,
 			chaptersApi.middleware,
+
 		]),
 });
 

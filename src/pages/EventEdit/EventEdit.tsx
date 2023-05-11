@@ -21,7 +21,6 @@ import { EventSettings } from "../../components/EventSettings/EventSettings";
 import useScrollPosition from "../../features/hooks/useScrollPosition";
 import useComponentSize from "../../features/hooks/useSize";
 
-
 const btnData = [
 	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
 	{
@@ -94,7 +93,7 @@ export const EventEdit: React.FC = () => {
 			case 2:
 				return <EventShowpiecesEdit />;
 			case 3:
-				return <EventSettings defaultScheduleData={event}/>;
+				return <EventSettings defaultScheduleData={event} />;
 		}
 	};
 
@@ -252,7 +251,6 @@ export const EventEdit: React.FC = () => {
 										icon={errorIcon}
 									/>
 								</div>
-
 							</div>
 						)}
 					</div>

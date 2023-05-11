@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./EventForm.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig, FormikProps } from "formik";
@@ -16,9 +16,15 @@ import {
 	CreateEventPayloadT,
 	EventT,
 	UpdateEventPayloadT,
+	PriceT,
+	PricesT,
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
+
+import { PriceForm } from "../PriceForm/PriceForm";
+import { useUpdatePricesMutation } from "../../app/services/EventsApi";
+
 import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
 
 interface formType {
@@ -29,6 +35,10 @@ interface formType {
 }
 interface MainInfoExpoFormI {
 	defaultData: EventT | undefined;
+}
+interface Price {
+	criterion: string;
+	price: number;
 }
 export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const { id } = useParams();
@@ -56,6 +66,12 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const dispatch = useAppDispatch();
 	const [addEvent, { isError }] = useAddEventMutation();
 	const [updateEvent, { isError: isErrorUpdate }] = useUpdateEventMutation();
+	const [updatePrices] = useUpdatePricesMutation();
+	const [prices, setPrices] = useState<Price[]>([]);
+
+	// const handlePriceAdded = async (price: PricesT) => {
+	// 	setPrices((prevPrices) => [...prevPrices, price]);
+	// };
 
 	const handleAddEvent = async (event: CreateEventPayloadT) => {
 		return await addEvent(event).unwrap();
