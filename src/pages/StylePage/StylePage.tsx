@@ -1,6 +1,6 @@
-import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
-import { InfoTag } from "../../components/InfoTag/InfoTag";
-import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
+import {CustomBtnGroup} from "../../components/CustomBtnGroup/CustomBtnGroup";
+import {InfoTag} from "../../components/InfoTag/InfoTag";
+import {WidgetItem} from "../../components/WidgetItem/WidgetItem";
 
 import icon1 from "../../assets/icons/NumberOfExhibits.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
@@ -13,87 +13,49 @@ import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
 import Headphones from "../../assets/icons/Headphones.svg"
 // import { Form } from "../../components/Form/Form";
-import { FormContainer } from "../../components/Form/Form";
-import { FormInput } from "../../components/Form/FormInput";
+import {FormContainer} from "../../components/Form/Form";
+import {FormInput} from "../../components/Form/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import { Gallery } from "../../components/Gallery/Gallery";
-import React from "react";
-import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
-import Head from "../../components/Head/Head";
-import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
-import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
-import {TextBlock} from "../../components/TextBlock/TextBlock";
-
-const images = [
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 1",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 2",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 4",
-	},
-];
+import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
+import CustomCard from "../../components/CustomCard/CustomCard";
+import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import ImageItem from "../../components/ImageItem/ImageItem";
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
 
 
 export const MainPage = () => {
-	const btnData = [
-		{ name: "Все" },
-		{ name: "Активные" },
-		{ name: "Просмотренные" },
-		{ name: "Черновик" },
-	];
+    const btnData = [
+        {name: "Все"},
+        {name: "Активные"},
+        {name: "Просмотренные"},
+        {name: "Черновик"},
+    ];
 
-	const sort = [{ name: "По дате" }, { name: "По типу" }];
+    const sort = [{name: "По дате"}, {name: "По типу"}];
 
-	const formConfig: FormikConfig<any> = {
-		initialValues: {
-			email: "",
-			password: "",
-		},
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
-	};
+    const formConfig: FormikConfig<any> = {
+        initialValues: {
+            criterion: "",
+            price: "",
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    };
 
-	const schemaConfig: Yup.ObjectShape = {
-		email: Yup.string()
-			.email("Некорректная почта!")
-			.required("Обязательное поле!"),
-		password: Yup.string()
-			.min(4, "Минимум 4 символа!")
-			.max(12, "Максимум 12 символов!")
-			.required("Обязательное поле!"),
-	};
+    const schemaConfig: Yup.ObjectShape = {
+        email: Yup.string()
+            .email("Некорректная почта!")
+            .required("Обязательное поле!"),
+        password: Yup.string()
+            .min(4, "Минимум 4 символа!")
+            .max(12, "Максимум 12 символов!")
+            .required("Обязательное поле!"),
+    };
 
 	return (
 		<div>
@@ -141,7 +103,8 @@ export const MainPage = () => {
 							gap: "10px",
 							marginBottom: 10,
 						}}
-					>
+						>
+		
 						<WidgetItem info="4" icon={icon1} description="экспоната" />
 						<WidgetItem
 							info="от 250р."
@@ -288,5 +251,6 @@ export const MainPage = () => {
 				</BottomMenu>
 			</div>
 		</div>
+		
 	);
 };

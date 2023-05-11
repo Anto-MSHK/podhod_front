@@ -14,6 +14,10 @@ import { getEventImg } from "../../app/Slices/imagesUploadSlice";
 import { EventPageEdit } from "../../components/EventPageEdit/EventPageEdit";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
+
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
+import { EventSettings } from "../../components/EventSettings/EventSettings";
+
 import useScrollPosition from "../../features/hooks/useScrollPosition";
 import useComponentSize from "../../features/hooks/useSize";
 
@@ -89,7 +93,7 @@ export const EventEdit: React.FC = () => {
 			case 2:
 				return <EventShowpiecesEdit />;
 			case 3:
-				return null;
+				return <EventSettings defaultScheduleData={event} />;
 		}
 	};
 

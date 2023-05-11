@@ -17,7 +17,6 @@ import {
 	FormikTouched,
 } from "formik";
 import { InputType } from "reactstrap/types/lib/Input";
-import { type } from "os";
 
 interface CustomInputI extends InputProps {
 	form?: any;
@@ -32,6 +31,10 @@ interface CustomFormInputI extends FieldConfig {
 	type?: InputType;
 	value?: any;
 	disabled?: boolean;
+	placeholder?: string;
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+	onBlur?: (event: React.FocusEvent<any>) => void;
+	onFocus?: (event: React.FocusEvent<any>) => void;
 }
 
 export const CustomInput: FC<CustomInputI> = ({
@@ -41,11 +44,24 @@ export const CustomInput: FC<CustomInputI> = ({
 	children,
 	disabled,
 	placeholder,
+	onChange,
+	onBlur,
+	onFocus,
+	title,
+
 }) => {
 	return (
 		<div style={{ width: "100%" }}>
 			<Input
+
+				onFocus={onFocus}
+				onBlur={onBlur}
+				onChange={onChange}
+
+				title = {title}
+
 				disabled={disabled}
+				placeholder={placeholder}
 				type={type}
 				{...field}
 				valid={
@@ -59,8 +75,7 @@ export const CustomInput: FC<CustomInputI> = ({
 					form.touched[`${field.name}`] &&
 					form.errors[`${field.name}`] !== undefined
 				}
-				className={styles.AuthInputElements}
-				placeholder={placeholder}
+				className={`${styles.AuthInputElements}`}
 			>
 				{children ? children : undefined}
 			</Input>
@@ -81,11 +96,18 @@ export const FormInput: FC<CustomFormInputI> = ({
 	children,
 	value,
 	disabled,
+	placeholder,
+	onChange,
+	onBlur,
 }) => {
+
 	return (
 		<FormGroup>
 			<h3>{label}</h3>
 			<Field
+				onBlur={onBlur}
+				onChange={onChange}
+				placeholder={placeholder}
 				disabled={disabled}
 				type={type}
 				name={name}

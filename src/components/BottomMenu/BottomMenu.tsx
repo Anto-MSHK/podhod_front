@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {CSSProperties} from 'react';
 import styles from './BottomMenu.module.css';
 
 interface BottomMenuI {
 	children: React.ReactNode;
 	gallery?: React.ReactNode;
+	style?: CSSProperties
 }
 
-export const BottomMenu: React.FC<BottomMenuI> = ({ gallery, children }) => {
+export const BottomMenu: React.FC<BottomMenuI> = ({ gallery, children , style}) => {
+
 	return (
 		<div className={styles.bottomMenu}>
 			{gallery ? (
@@ -15,7 +17,7 @@ export const BottomMenu: React.FC<BottomMenuI> = ({ gallery, children }) => {
 				</div>
 			) : null}
 			<div className={styles.content}>
-				<div className={styles.childContainer}>
+				<div className={styles.childContainer} style={style}>
 					{children}
 				</div>
 			</div>
