@@ -12,7 +12,7 @@ import {
 	useUpdateEventTimesMutation,
 } from "../../app/services/EventsApi";
 import { EventTimeT, EventWeekDayT } from "../../app/Types/EventsT";
-import removeIcon from '../../assets/icons/CrossInCircle.svg'
+import removeIcon from "../../assets/icons/CrossInCircle.svg";
 
 type FormInputDataT = {
 	label: string;
@@ -97,14 +97,12 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 			isWeekendArray.push(dayData.isWeekend);
 		});
 
-		const allFromEqual = fromValues.every((val) => val === fromValues[0]);
-		const allToEndEqual = toValues.every((val) => val === toValues[0]);
-		const noWeekendDays = isWeekendArray.every((val) => !val);
+		const allFromEqual = fromValues.every(val => val === fromValues[0]);
+		const allToEndEqual = toValues.every(val => val === toValues[0]);
+		const noWeekendDays = isWeekendArray.every(val => !val);
 
 		return allFromEqual && allToEndEqual && noWeekendDays;
 	};
-
-
 
 	const defaultDays: DaysOfWeekT = defaultData?.days || {
 		friday: {} as EventWeekDayT,
@@ -117,7 +115,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 	};
 
 	const applyToAll: boolean = checkApplyToAll(defaultDays);
-
 
 	const formConfig: FormikConfig<formType> = {
 		initialValues: {
@@ -189,7 +186,7 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 				{formik => (
 					<div className={styles.content_container}>
 						<div className={styles.weekDays_container}>
-							<h2>Время работы:</h2>
+							<h2 style={{ margin: 0 }}>Время работы:</h2>
 							<div className={styles.applyToAllDate_container}>
 								<div className={styles.applyAll_date_checkbox}>
 									<FormInput name="applyToAllDate.applyToAll" type="checkbox" />

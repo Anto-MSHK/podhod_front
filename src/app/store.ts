@@ -33,6 +33,7 @@ const rootReducer = combineReducers({
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
 	[chaptersApi.reducerPath]: chaptersApi.reducer,
+	[pricesApi.reducerPath]: pricesApi.reducer,
 	counter: counterReducer,
 	images: imagesUploadReducer,
 	eventCreate: ExpoCreateReducer,
@@ -61,7 +62,6 @@ export const store = configureStore({
 			eventPagesApi.middleware,
 			pricesApi.middleware,
 			chaptersApi.middleware,
-
 		]),
 });
 

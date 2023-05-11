@@ -23,7 +23,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
 
 import { PriceForm } from "../PriceForm/PriceForm";
-import { useUpdatePricesMutation } from "../../app/services/EventsApi";
+import { useUpdatePricesMutation } from "../../app/services/PricesApi";
 
 import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
 
