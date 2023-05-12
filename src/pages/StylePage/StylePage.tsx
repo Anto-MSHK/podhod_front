@@ -25,6 +25,11 @@ import CustomCard from "../../components/CustomCard/CustomCard";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import ImageItem from "../../components/ImageItem/ImageItem";
 import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
+import {TextBlock} from "../../components/TextBlock/TextBlock";
+import {BottomMenu} from "../../components/BottomMenu/BottomMenu";
+import {Gallery} from "../../components/Gallery/Gallery";
+import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
+import Head from "../../components/Head/Head";
 
 
 export const MainPage = () => {
@@ -70,7 +75,6 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<div>
 						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
@@ -243,12 +247,6 @@ export const MainPage = () => {
 В общем, братан, посадка на Луну - это нечто, это крутость, это настоящее приключение. Я бы сам, блять, не прочь сходить туда и посмотреть, что там да как, только вот не знаю, куда свою ментовку деть, чтобы никто не украл."
 						   titleButton={<ButtonArt onClick={() => console.log("Clicked")} icon={Headphones}/>}
 				/>
-			</div>
-			<div style={{ marginTop: 50, width: "20%"}}>
-				<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}  >
-					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
-					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
-				</BottomMenu>
 			</div>
 		</div>
 		
