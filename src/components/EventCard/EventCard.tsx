@@ -65,6 +65,18 @@ const btnTitle = (status: string) => {
 };
 type WidgetsT = { iconDesc: string, desc: string, icon: string }
 
+type EventType = 'exhibition' | 'fair' | 'promo-exhibition';
+
+const typesEvent: Record<EventType, string> = {
+	exhibition: "Выставка",
+	fair: "Ярмарка",
+	"promo-exhibition": "Промо-выставка",
+};
+
+function isEventType(key: string): key is EventType {
+	return key in typesEvent;
+}
+
 
 export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 	event,
@@ -112,7 +124,7 @@ export const EventCard: React.FunctionComponent<IStyledCardProps> = ({
 				)}
 			</div>
 			<div className={styles.card_status}>
-				<InfoTag text={event.name} />
+				<InfoTag text={event?.type && isEventType(event.type) ? typesEvent[event.type] : undefined} />
 			</div>
 			<CardBody className={styles.cardBody} inverse="true">
 				<CardTitle tag="h3" className={styles.cardTitle}>

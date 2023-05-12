@@ -18,6 +18,7 @@ interface ISingleImageUpload {
 	path: string;
 	isLoading: boolean;
 	description?: string;
+	style?: React.CSSProperties | undefined;
 }
 
 export const ImageSingle: React.FC<ISingleImageUpload> = ({
@@ -28,6 +29,7 @@ export const ImageSingle: React.FC<ISingleImageUpload> = ({
 	path,
 	isLoading,
 	description,
+	style,
 }) => {
 	const { id } = useParams();
 	const image = useAppSelector(state => state.images[imgField]);
@@ -42,16 +44,20 @@ export const ImageSingle: React.FC<ISingleImageUpload> = ({
 					</div>
 				)}
 				<div className={styles.images_wrapper}></div>
-				<div className={styles.drag_and_drop}>
+				<div
+					className={styles.drag_and_drop}
+					style={{ position: "relative", width: 0 }}
+				>
 					{image && !isLoading ? (
 						<ImageItem
 							field={imgField}
 							type="single"
 							image={image}
 							className={styles.img}
+							style={style}
 						/>
 					) : !isLoading || !id ? (
-						<div className={styles.drag_and_drop_container}>
+						<div className={styles.drag_and_drop_container} style={style}>
 							<DragAndDrop
 								field={imgField}
 								description={description || ""}

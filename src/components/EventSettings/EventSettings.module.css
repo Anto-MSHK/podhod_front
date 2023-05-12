@@ -1,0 +1,9 @@
+.content_container {
+	/* width: fit-content; */
+	display: flex;
+	justify-content: start;
+	background-color: var(--dark_gray_color);
+	padding: 2rem;
+	border-radius: var(--radius);
+	margin: 0 auto;
+}

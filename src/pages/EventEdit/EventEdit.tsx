@@ -15,14 +15,20 @@ import { EventPageEdit } from "../../components/EventPageEdit/EventPageEdit";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
+import { EventSettings } from "../../components/EventSettings/EventSettings";
+
+import useScrollPosition from "../../features/hooks/useScrollPosition";
+import useComponentSize from "../../features/hooks/useSize";
+
 const btnData = [
-	{ name: "Основная информация", lable: "mainScreen", type: "EventPage" },
+	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
 	{
 		name: "Страницы",
 		lable: "pages",
-		type: "ChapterPage",
+		type: "PagesPreview",
 	},
-	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitPage" },
+	{ name: "Экспонаты", lable: "exhibits", type: "ExhibitsPreview" },
 	{ name: "Настройки", lable: "settings" },
 ];
 
@@ -87,15 +93,16 @@ export const EventEdit: React.FC = () => {
 			case 2:
 				return <EventShowpiecesEdit />;
 			case 3:
-				return null;
+				return <EventSettings defaultScheduleData={event} />;
 		}
 	};
 
-	const [selectedPageType, setSelectedPageType] = useState<string>("EventPage");
+	const [selectedPageType, setSelectedPageType] =
+		useState<string>("EventPreview");
 
 	useEffect(() => {
 		if (typeof activeBtn === "number") {
-			setSelectedPageType(btnData[activeBtn]?.type || "EventPage");
+			setSelectedPageType(btnData[activeBtn]?.type || "EventPreview");
 		}
 	}, [activeBtn]);
 
@@ -108,43 +115,75 @@ export const EventEdit: React.FC = () => {
 		const dragOffset = e.clientX - dragStartX;
 
 		if (dragOffset < -50) {
-			const newActiveBtn = (activeBtn as number ?? 0) + 1;
-			setActiveBtn(newActiveBtn > 3 ? 0 : newActiveBtn);
+			const newActiveBtn = ((activeBtn as number) ?? 0) + 1;
+			setActiveBtn(newActiveBtn > 2 ? 0 : newActiveBtn);
 			setDragStartX(null);
 		} else if (dragOffset > 50) {
-			const newActiveBtn = (activeBtn as number ?? 0) - 1;
-			setActiveBtn(newActiveBtn < 0 ? 3 : newActiveBtn);
+			const newActiveBtn = ((activeBtn as number) ?? 0) - 1;
+			setActiveBtn(newActiveBtn < 0 ? 2 : newActiveBtn);
 			setDragStartX(null);
 		}
 	};
-
-
-
-
-
 
 	const handleDragEnd = () => {
 		setDragStartX(null);
 	};
 
+	const scroll = useScrollPosition();
+	console.log(scroll);
+
+	const LIMIT = 70;
+	const HIGH_SCROLL = scroll > LIMIT;
+	const LOW_SCROLL = scroll <= LIMIT;
+	const [ref, size] = useComponentSize();
 	return (
 		<div>
 			{(!isLoading && event) || !id ? (
-				<div className={styles.expo_create_wrapper}>
+				<div className={styles.expo_create_wrapper} style={{ marginTop: 20 }}>
 					<div className={styles.expo_create__content}>
-						<div className={styles.content__header_container}>
-							{id && (
-								<ImageSingle
-									imgField="avatarExpo"
-									textButton={"добавьте фото "}
-									path={`/img/to/event/${event?.id}`}
-									isLoading={isImgLoading}
-									description="Это главное изображение события"
-								/>
-							)}
-
-							<div className={styles.header__info_container}>
-								<h1 style={{ margin: "0 0 -15px 0", fontWeight: 700 }}>
+						<div
+							className={styles.content__header_container}
+							style={{ position: "relative" }}
+						>
+							<div
+								style={{
+									opacity: 1 - (scroll * 1.5) / 100,
+								}}
+							>
+								{id && (
+									<ImageSingle
+										imgField="avatarExpo"
+										textButton={"добавьте фото "}
+										path={`/img/to/event/${event?.id}`}
+										isLoading={isImgLoading}
+										description="Это главное изображение события"
+										style={{
+											width: 275 - scroll,
+											height: 150 - scroll,
+										}}
+									/>
+								)}
+							</div>
+							<div
+								className={styles.header__info_container}
+								style={{
+									display: "flex",
+									flexDirection: HIGH_SCROLL ? undefined : "column",
+									marginLeft:
+										LOW_SCROLL && id ? 295 - scroll * 1 : 295 - LIMIT * 4,
+									marginTop: HIGH_SCROLL ? 55 : undefined,
+									marginBottom: !id ? -15 : undefined,
+								}}
+								ref={ref as any}
+							>
+								<h1
+									style={{
+										width: "70%",
+										margin: `0 0 ${HIGH_SCROLL ? 0 : -30}px 0`,
+										fontWeight: 700,
+										fontSize: LOW_SCROLL ? 42 - scroll / 5 : 42 - LIMIT / 5,
+									}}
+								>
 									<p
 										className="min"
 										style={{ margin: 0, fontSize: 20, fontWeight: 600 }}
@@ -155,19 +194,27 @@ export const EventEdit: React.FC = () => {
 										? `«${eventSlice?.eventName}»`
 										: "Создайте новое мероприятие"}
 								</h1>
-								<div className={styles.info__toolbar_container}>
-									<CustomBtnGroup
-										handleActiveBtn={handleActiveBtn}
-										view={"radio"}
-										data={btnData}
-										activeBtn={activeBtn as number}
-									/>
+								<div
+									className={styles.info__toolbar_container}
+									style={{
+										justifyContent: LOW_SCROLL ? undefined : "end",
+										alignItems: "center",
+									}}
+								>
+									{event && (
+										<CustomBtnGroup
+											handleActiveBtn={handleActiveBtn}
+											view={"radio"}
+											data={btnData}
+											activeBtn={activeBtn as number}
+										/>
+									)}
 								</div>
 							</div>
 						</div>
 						<div
 							style={{
-								margin: "30px 0 15px 0",
+								margin: `20px 0 15px 0`,
 								background: "#DF791A",
 								height: 2,
 								borderRadius: 10,
@@ -177,27 +224,35 @@ export const EventEdit: React.FC = () => {
 						<div className={styles.content_wrapper}>{handleActivePage()}</div>
 					</div>
 					<div ref={containerRef} className={styles.preview_wrapper} style={{}}>
-						<div>
-							<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
-								Предпросмотр
-							</h3>
-						</div>
-						<div
-							className={styles.preview__container}
-							onMouseDown={handleDragStart}
-							onMouseMove={handleDragMove}
-							onMouseUp={handleDragEnd}
-						>
-							<Preview backgroundImg={backgroundImage} selectedPageType={selectedPageType} />
-						</div>
-						<div className={styles.InfoComponentWrapper}>
-							<InfoMessage
-								style={{ padding: "1rem" }}
-								title={"Не может быть опубликовано"}
-								desc={"Есть незаполненные поля"}
-								icon={errorIcon}
-							/>
-						</div>
+						{event && activeBtn !== 3 && (
+							<div>
+								<div>
+									<h3 style={{ margin: "0 0 10px 0", textAlign: "left" }}>
+										Предпросмотр
+									</h3>
+								</div>
+
+								<div
+									className={styles.preview__container}
+									onMouseDown={handleDragStart}
+									onMouseMove={handleDragMove}
+									onMouseUp={handleDragEnd}
+								>
+									<Preview
+										backgroundImg={backgroundImage}
+										selectedPageType={selectedPageType}
+									/>
+								</div>
+								<div className={styles.InfoComponentWrapper}>
+									<InfoMessage
+										style={{ padding: "1rem" }}
+										title={"Не может быть опубликовано"}
+										desc={"Есть незаполненные поля"}
+										icon={errorIcon}
+									/>
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 			) : (

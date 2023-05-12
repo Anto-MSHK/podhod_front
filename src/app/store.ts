@@ -8,6 +8,8 @@ import counterReducer from "../features/counter/counterSlice";
 import imagesUploadReducer from "./Slices/imagesUploadSlice";
 import ExpoCreateReducer from "./Slices/ExpoCreateSlice";
 import ExhibitCreateReducer from "./Slices/ExhibitCreateSlice";
+import selectedExhibitReducer from "./Slices/SelectedExhibitSlice";
+import selectedPageReducer from "../app/Slices/SelectedPageSlice";
 import { eventsApi } from "./services/EventsApi";
 import storage from "redux-persist/es/storage";
 import {
@@ -22,21 +24,29 @@ import {
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
 import { eventPagesApi } from "./services/EventPages.Api";
+import { pricesApi } from "./services/PricesApi";
+import { chaptersApi } from "./services/ChapterApi";
+import ExpoCreatePageSlice from "./Slices/ExpoCreatePageSlice";
 
 const rootReducer = combineReducers({
 	[eventsApi.reducerPath]: eventsApi.reducer,
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
+	[chaptersApi.reducerPath]: chaptersApi.reducer,
+	[pricesApi.reducerPath]: pricesApi.reducer,
 	counter: counterReducer,
 	images: imagesUploadReducer,
 	eventCreate: ExpoCreateReducer,
 	exhibitCreate: ExhibitCreateReducer,
+	eventCreatePage: ExpoCreatePageSlice,
+	selectedExhibit: selectedExhibitReducer,
+	selectedPage: selectedPageReducer,
 });
 
 const persistConfig = {
 	key: "root",
 	storage,
-	blacklist: ["events", "eventCreate", "images"],
+	blacklist: ["events", "eventCreate", "images", "chapters", "blocks"],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
@@ -50,6 +60,8 @@ export const store = configureStore({
 			eventsApi.middleware,
 			exhibitsApi.middleware,
 			eventPagesApi.middleware,
+			pricesApi.middleware,
+			chaptersApi.middleware,
 		]),
 });
 
