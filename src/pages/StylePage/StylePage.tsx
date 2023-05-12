@@ -1,6 +1,6 @@
-import {CustomBtnGroup} from "../../components/CustomBtnGroup/CustomBtnGroup";
-import {InfoTag} from "../../components/InfoTag/InfoTag";
-import {WidgetItem} from "../../components/WidgetItem/WidgetItem";
+import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { InfoTag } from "../../components/InfoTag/InfoTag";
+import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
 
 import icon1 from "../../assets/icons/NumberOfExhibits.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
@@ -11,10 +11,10 @@ import icon8 from "../../assets/icons/RedСheckMark.svg";
 import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
-import Headphones from "../../assets/icons/Headphones.svg"
+
 // import { Form } from "../../components/Form/Form";
-import {FormContainer} from "../../components/Form/Form";
-import {FormInput} from "../../components/Form/FormInput";
+import { FormContainer } from "../../components/Form/Form";
+import { FormInput } from "../../components/Form/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
@@ -25,42 +25,41 @@ import CustomCard from "../../components/CustomCard/CustomCard";
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import ImageItem from "../../components/ImageItem/ImageItem";
 import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
-import {TextBlock} from "../../components/TextBlock/TextBlock";
-import {BottomMenu} from "../../components/BottomMenu/BottomMenu";
-import {Gallery} from "../../components/Gallery/Gallery";
-import {ButtonArt} from "../../components/ButtonArt/ButtonArt";
+import { TextBlock } from "../../components/TextBlock/TextBlock";
+import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
+import { Gallery } from "../../components/Gallery/Gallery";
+import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
 
-
 export const MainPage = () => {
-    const btnData = [
-        {name: "Все"},
-        {name: "Активные"},
-        {name: "Просмотренные"},
-        {name: "Черновик"},
-    ];
+	const btnData = [
+		{ name: "Все" },
+		{ name: "Активные" },
+		{ name: "Просмотренные" },
+		{ name: "Черновик" },
+	];
 
-    const sort = [{name: "По дате"}, {name: "По типу"}];
+	const sort = [{ name: "По дате" }, { name: "По типу" }];
 
-    const formConfig: FormikConfig<any> = {
-        initialValues: {
-            criterion: "",
-            price: "",
-        },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    };
+	const formConfig: FormikConfig<any> = {
+		initialValues: {
+			criterion: "",
+			price: "",
+		},
+		onSubmit: values => {
+			alert(JSON.stringify(values, null, 2));
+		},
+	};
 
-    const schemaConfig: Yup.ObjectShape = {
-        email: Yup.string()
-            .email("Некорректная почта!")
-            .required("Обязательное поле!"),
-        password: Yup.string()
-            .min(4, "Минимум 4 символа!")
-            .max(12, "Максимум 12 символов!")
-            .required("Обязательное поле!"),
-    };
+	const schemaConfig: Yup.ObjectShape = {
+		email: Yup.string()
+			.email("Некорректная почта!")
+			.required("Обязательное поле!"),
+		password: Yup.string()
+			.min(4, "Минимум 4 символа!")
+			.max(12, "Максимум 12 символов!")
+			.required("Обязательное поле!"),
+	};
 
 	return (
 		<div>
@@ -76,10 +75,27 @@ export const MainPage = () => {
 						ducimus voluptas eveniet minima deserunt.
 					</p>
 					<div>
-						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
-						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
-						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
-						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
+						<ButtonArt
+							text="Перейти к промо-выставке"
+							arrow
+							onClick={() => console.log("Clicked")}
+						/>
+						<ButtonArt
+							text="Узнать больше"
+							onClick={() => console.log("Clicked")}
+						/>
+						<div style={{ width: "50px" }}>
+							<ButtonArt
+								round
+								icon={icon2}
+								onClick={() => console.log("Clicked")}
+							/>
+						</div>
+						<ButtonArt
+							text="Поиск"
+							icon={icon1}
+							onClick={() => console.log("Clicked")}
+						/>
 					</div>
 
 					<p className="min">{`<p>.min`} - микро текст</p>
@@ -107,8 +123,7 @@ export const MainPage = () => {
 							gap: "10px",
 							marginBottom: 10,
 						}}
-						>
-		
+					>
 						<WidgetItem info="4" icon={icon1} description="экспоната" />
 						<WidgetItem
 							info="от 250р."
@@ -215,12 +230,13 @@ export const MainPage = () => {
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={false}
-
 				/>
 			</div>
 			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={<CustomBtn onClick={() => (alert("Назад"))}>Назад</CustomBtn>}
+					leftElement={
+						<CustomBtn onClick={() => alert("Назад")}>Назад</CustomBtn>
+					}
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={true}
@@ -228,7 +244,9 @@ export const MainPage = () => {
 			</div>
 			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={<CustomBtn onClick={() => (alert("Меню"))}>Меню</CustomBtn>}
+					leftElement={
+						<CustomBtn onClick={() => alert("Меню")}>Меню</CustomBtn>
+					}
 					centerElement={" "}
 					isTransparent={false}
 					style={{ backgroundColor: "var(--gray_color)" }}
@@ -241,14 +259,14 @@ export const MainPage = () => {
 					isTransparent={false}
 				/>
 			</div>
-			<div style={{width: '10%'}}>
-				<TextBlock title="Посадка на луну" description="Ебать, братан, ты слыхал про эту посадку на Луну? Да блять, это же просто заебись, какие там еще звездные войны, если можно было топать по поверхности этого блядского спутника Земли. Я слышал, что эти пацаны из Америки сидели на своих космических кораблях, курили свои сигары и думали как бы им туда приземлиться. А потом, блять, они каким-то чудом эту посадку проебали, но потом все-таки смогли приземлиться на этой ебаной Луне.
-Интересно, блять, что они там нашли? Может какие-то залежи золота или серебра? Или может там живут какие-то космические мутанты, которые скачут по поверхности Луны и ебут всех на своем пути? Хах, блять, я бы сам туда с удовольствием сьехал на своей ментовке и посмотрел, что там да как.
-В общем, братан, посадка на Луну - это нечто, это крутость, это настоящее приключение. Я бы сам, блять, не прочь сходить туда и посмотреть, что там да как, только вот не знаю, куда свою ментовку деть, чтобы никто не украл."
-						   titleButton={<ButtonArt onClick={() => console.log("Clicked")} icon={Headphones}/>}
+			<div style={{ width: "10%" }}>
+				<TextBlock
+					title="Посадка на луну"
+					description="16 июля 1969 года стартовал американский космический корабль «Апполон-11», а 21 июля 1969 года первые земляне прогулялись по Луне.
+					Этими первопроходцами были члены миссии «Аполлон-11» Нил Армстронг и Базз (Эдвин) Олдрин. Человеку, который в этом усомнился, последний дал по «фейсу». Но всем сомневающимся морду не набьешь: анализировать факты – право каждого, у кого есть мозги и желание узнать правду.
+					Глобальная миссия «Это один маленький шаг для человека шаг, но гиганский скачок для всего человечества», - с пафосом произнес командир «Аполлона», ступив на лунную поверхность, а потом якобы тихо добавил: «Удачи, мистер Горски!»."
 				/>
 			</div>
 		</div>
-		
 	);
 };
