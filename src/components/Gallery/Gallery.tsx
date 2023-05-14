@@ -10,7 +10,7 @@ import exp from "constants";
 
 export interface ImageProps {
 	src: string;
-	alt: string;
+	alt?: string;
 }
 
 interface GalleryProps {

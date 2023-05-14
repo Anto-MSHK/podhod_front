@@ -9,8 +9,6 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-	ListGroup,
-	DropdownItemProps,
 	Spinner,
 } from "reactstrap";
 
@@ -45,7 +43,7 @@ import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
 import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
-import { CustomBtnGroup } from "../CustomBtnGroup/CustomBtnGroup";
+
 
 interface formType {
 	exhibitName: string;

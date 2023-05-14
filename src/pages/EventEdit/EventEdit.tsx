@@ -130,7 +130,6 @@ export const EventEdit: React.FC = () => {
 	};
 
 	const scroll = useScrollPosition();
-	console.log(scroll);
 
 	const LIMIT = 70;
 	const HIGH_SCROLL = scroll > LIMIT;
