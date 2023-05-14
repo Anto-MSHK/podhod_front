@@ -18,7 +18,7 @@ import {
 	useDeleteExhibitMutation,
 	useUpdateExhibitMutation,
 } from "../../app/services/ExhibitsApi";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setExhibit } from "../../app/Slices/ExhibitCreateSlice";
 import {
 	CreateExhibitPayloadT,
@@ -54,7 +54,7 @@ interface formType {
 export const EventShowpiecesEdit = () => {
 	const [modalChapter, setModalChapter] = useState(false);
 	const toggleChapter = () => setModalChapter(!modalChapter);
-
+	const selectedExhibit = useAppSelector(state => state.selectedExhibit.exhibit)
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
 	const [currentItem, setCurrenstItem] = useState("");
@@ -162,7 +162,9 @@ export const EventShowpiecesEdit = () => {
 
 		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
 	});
-
+	useEffect(() => {
+		setCurrenstItem(selectedExhibit?.id as string)
+	},[selectedExhibit])
 	useEffect(() => {
 		if (menuItems && menuItems?.length > 0) setCurrenstItem(menuItems[0].key);
 		setChapterConf({
@@ -208,7 +210,7 @@ export const EventShowpiecesEdit = () => {
 
 	return (
 		<div className={styles.main_page_form_wrapper}>
-			{showpiece ? (
+			{selectedExhibit ? (
 				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
 					<div style={{ maxWidth: 300 }}>
 						<div className={styles.form_header}>
@@ -235,7 +237,7 @@ export const EventShowpiecesEdit = () => {
 					<div style={{ width: "100%" }}>
 						<div className={styles.form_header}>
 							<h2 style={{ marginTop: -6, fontSize: 28 }}>
-								{showpiece?.name}
+								{selectedExhibit?.name}
 								<p className="min" style={{ marginTop: -2, marginBottom: 0 }}>
 									экспонат
 								</p>
@@ -253,11 +255,11 @@ export const EventShowpiecesEdit = () => {
 							className={`${styles.showpiece_list} ${styles["chapters"]}`}
 							style={{ backgroundColor: "#363535", padding: "1rem" }}
 						>
-							{showpiece &&
-							showpiece.chapters &&
-							showpiece.chapters?.length > 0 ? (
+							{selectedExhibit &&
+							selectedExhibit.chapters &&
+							selectedExhibit.chapters?.length > 0 ? (
 								<ChapterList
-									showpiece={showpiece}
+									showpiece={selectedExhibit}
 									eventId={eventId as string}
 								/>
 							) : isChaptersFetching ? (

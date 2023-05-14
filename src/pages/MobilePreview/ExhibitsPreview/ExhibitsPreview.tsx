@@ -12,6 +12,7 @@ import {
 	clearSelectedExhibit,
 	selectNextExhibit,
 	setExhibits,
+	setSelectedExhibit,
 } from "../../../app/Slices/SelectedExhibitSlice";
 import { useAppDispatch } from "../../../app/hooks";
 import { useFetchExhibitsQuery } from "../../../app/services/ExhibitsApi";
@@ -73,7 +74,12 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		});
 	},[data])
 
-	const handleBlocksImgsList = (exhibit?: exhibitsT | null) => {
+	const handleClickNextExhibit = () => {
+		console.log('next', nextExhibit)
+		dispatch(setSelectedExhibit(nextExhibit))
+	} 
+
+	const handleBlocksImgsList = useCallback(((exhibit?: exhibitsT | null) => {
 		const sliderData: ISliderImage[] = [];
 		exhibit?.chapters?.forEach(chapter => {
 			chapter.blocks.forEach(block => {
@@ -86,11 +92,9 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 			});
 		});
 		return sliderData;
-	};
+	}),[nextExhibit, data]);
 	const sliderImages = handleBlocksImgsList(data)
 	const nextExhibitImgs = handleBlocksImgsList(nextExhibit)
-	console.log('imgseeee', nextExhibitImgs)
-	console.log('nextImg', nextExhibit)
 
 	/*	const sortedExhibitImages = (exhibitImages ?? [])
 			.sort((a, b) => parseInt(a.alt) - parseInt(b.alt))
@@ -133,8 +137,8 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 							<div>
 								<h5>Далее: {nextExhibit?.name}</h5>
 							</div>
-							<div style={{ width: "100%", height: "50px" }}>
-								<ButtonArt text={"Перейти"} arrow />
+							<div onClick={() => handleClickNextExhibit()} style={{ width: "100%", height: "50px" }}>
+								<ButtonArt   text={"Перейти"} arrow />
 							</div>
 						</div>
 							{nextExhibitImgs.length !== 0 &&(

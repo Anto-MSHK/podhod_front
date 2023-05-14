@@ -28,7 +28,6 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 	const goToIndex = (newIndex: number) => {
 		setActiveIndex(newIndex);
 	};
-	console.log('images', images)
 	/* const indicators = images.map((item, index) => {
 		return (
 			<div
