@@ -42,7 +42,7 @@ import plusIcon from "../../assets/icons/plusIcon.svg";
 import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
-import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
+import { clearSelectedExhibit, setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
 
 
 interface formType {
@@ -74,11 +74,8 @@ export const EventShowpiecesEdit = () => {
 	const [deleteExhibit] = useDeleteExhibitMutation();
 	const [editingExhibit, setEditingExhibit] = useState<any>(null);
 	const dispatch = useAppDispatch();
-
-	const toggle = () => setModal(!modal);
-
+	const toggle = () => setModal(!modal)
 	const handleEditExhibit = (exhibit: exhibitsT) => {
-		console.log(exhibit);
 		setEditingExhibit(exhibit);
 		toggle();
 	};
@@ -126,7 +123,6 @@ export const EventShowpiecesEdit = () => {
 			toggle();
 		}
 	};
-
 	const handleDeleteExhibit = async (id: string) => {
 		console.log("delete...");
 		await deleteExhibit({ id, eventId: eventId as string }).unwrap();
@@ -171,6 +167,9 @@ export const EventShowpiecesEdit = () => {
 			eventId: eventId as string,
 			showpieceId: data?.length ? data[0].id : "0",
 		});
+		dispatch(clearSelectedExhibit())
+		showpiece &&
+		dispatch(setSelectedExhibit(showpiece))
 	}, [data]);
 
 	const formConfig: FormikConfig<formType> = {
@@ -210,7 +209,7 @@ export const EventShowpiecesEdit = () => {
 
 	return (
 		<div className={styles.main_page_form_wrapper}>
-			{selectedExhibit ? (
+			{showpiece ? (
 				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
 					<div style={{ maxWidth: 300 }}>
 						<div className={styles.form_header}>
