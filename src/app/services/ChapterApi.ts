@@ -61,6 +61,9 @@ export const chaptersApi = createApi({
 		fetchChapters: builder.query<exhibitsT, GetChaptersReqT>({
 			query: ({ eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
+				params: {
+					sort: "id"
+				}
 			}),
 			providesTags: result => [{ type: "Chapters", id: result?.id }],
 		}),
@@ -88,6 +91,9 @@ export const chaptersApi = createApi({
 				url: `/${eventId}/showpieces/${id}`,
 				method: "PUT",
 				body,
+				params: {
+            sort: "id"
+        }
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
 		}), */

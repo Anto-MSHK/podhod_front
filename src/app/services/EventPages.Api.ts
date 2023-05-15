@@ -28,6 +28,9 @@ export const eventPagesApi = createApi({
 		fetchPage: builder.query<EventPagesT[], any>({
 			query: (id: string) => ({
 				url: `/${id}/pages`,
+				params: {
+					sort: "id"
+				}
 			}),
 			providesTags: result =>
 				result
@@ -51,6 +54,9 @@ export const eventPagesApi = createApi({
 				url: `/${eventId}/pages/${id}`,
 				method: "PUT",
 				body,
+				params: {
+					sort: "id"
+				}
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
 		}),

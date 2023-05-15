@@ -1,4 +1,4 @@
-import { UpdateEventTimes } from "./../Types/EventsT";
+import { PricesT, PriceT, UpdateEventTimes } from "./../Types/EventsT";
 import { API_URL } from "../http";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -18,15 +18,22 @@ export const eventsApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${API_URL}`,
 	}),
+	tagTypes: ["Price"],
 	endpoints: builder => ({
 		fetchEvents: builder.query<EventT[], void>({
 			query: () => ({
 				url: `/events`,
+				params: {
+					sort: "id"
+				}
 			}),
 		}),
 		fetchEvent: builder.query<EventT, any>({
 			query: (id: string) => ({
 				url: `/events/${id}`,
+				params: {
+					sort: "id"
+				}
 			}),
 		}),
 		getEventPages: builder.query<EventPagesT[], number>({
@@ -51,6 +58,9 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}`,
 				method: "PATCH",
 				body: data,
+				params: {
+					sort: "id"
+				}
 			}),
 		}),
 		updateEventCalendar: builder.mutation<EventT, UpdateEventCalendarPayload>({
@@ -58,6 +68,9 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}/times/calendar`,
 				method: "PATCH",
 				body: data.body,
+				params: {
+					sort: "id"
+				}
 			}),
 		}),
 		updateEventTimes: builder.mutation<EventT, UpdateEventTimes>({
@@ -65,7 +78,21 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}/times`,
 				method: "PATCH",
 				body: data.body,
+				params: {
+					sort: "id"
+				}
 			}),
+		}),
+		updatePrices: builder.mutation<PriceT, { id: string; prices: PricesT[] }>({
+			query: ({ id, prices }) => ({
+				url: `/events/${id}/prices`,
+				method: "PATCH",
+				body: prices,
+				params: {
+					sort: "id"
+				}
+			}),
+			invalidatesTags: (result, error, { id }) => [{ type: "Price", id }],
 		}),
 	}),
 });
@@ -79,4 +106,5 @@ export const {
 	useUpdateEventMutation,
 	useUpdateEventCalendarMutation,
 	useUpdateEventTimesMutation,
+	useUpdatePricesMutation,
 } = eventsApi;
