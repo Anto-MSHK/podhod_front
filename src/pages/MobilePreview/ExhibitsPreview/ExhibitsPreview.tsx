@@ -38,7 +38,6 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		title: data?.name,
 		shortDesc: data?.short,
 		desc: data?.description,
-
 	};
 
 	const exhibitImages = (nextExhibit?.imgs?.map((img) => ({

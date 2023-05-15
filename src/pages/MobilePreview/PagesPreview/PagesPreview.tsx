@@ -2,40 +2,57 @@ import React, { FC, useEffect } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
-import nextArrow from '../../../assets/icons/nextArrow.svg'
+import nextArrow from "../../../assets/icons/nextArrow.svg";
 import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
-import styles from './PagesPreview.module.css'
+import styles from "./PagesPreview.module.css";
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { EventPagesT } from "../../../app/Types/EventPageT";
-import { clearSelectedPage } from "../../../app/Slices/SelectedPageSlice";
-import { useDispatch } from "react-redux";
-
+import { clearSelectedPage, setPages } from "../../../app/Slices/SelectedPageSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useFetchExhibitsQuery } from "../../../app/services/ExhibitsApi";
+import { useFetchPageQuery } from "../../../app/services/EventPages.Api";
+import { useParams } from "react-router-dom";
+import { useAppDispatch } from "../../../app/hooks";
+import { clearSelectedExhibit, setExhibits } from "../../../app/Slices/SelectedExhibitSlice";
+import { setPage } from "../../../app/Slices/ExpoCreatePageSlice";
 
 interface IExhibitPage {
 	data?: EventPagesT | null;
 }
 
-export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 
-	const dispatch = useDispatch();
+
+export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
+	const {id: eventId} = useParams();
+	const { data: pages, error, isLoading, refetch } = useFetchPageQuery(eventId);
+	const dispatch = useAppDispatch();
+
 
 	useEffect(() => {
-		return () => {
+		if (pages) {
+			refetch();
+			dispatch(setPages(pages));
 			dispatch(clearSelectedPage());
-		};
-	}, [dispatch]);
+		}
+	}, [pages, dispatch]);
 
 	const pageData = {
-		desc: data?.description
-	}
+		title: data?.name,
+		desc: data?.description,
+	};
 
 	return (
 		<div className={styles.exhibitPreview_wrapper}>
 			<div className={styles.exhibitPreview_head}>
-				<Head leftElement={<h3>{data ? data.name : 'Выберите страницу'}</h3>}
-							centerElement={' '}
-							isTransparent={false}
-							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: '10px 10px 0 0'}}
+				<Head
+					leftElement={<div style={{ width: "35px", height: "35px" }}>
+						<ButtonArt round icon={backArrow}
+											 onClick={() => console.log("Clicked")}
+						/>
+					</div>}
+					centerElement={<h3>{data ? " " : "Выберите страницу"}</h3>}
+					isTransparent={true}
+					style={{ width: "100%" }}
 				/>
 			</div>
 			<div className={styles.exhibitPreview_content}>
@@ -43,26 +60,11 @@ export const PagesPreview: FC<IExhibitPage> = ({data}) => {
 			</div>
 			<div className={styles.exhibitPreview_bottom}>
 				{data &&
-				<BottomMenu style={{borderRadius: 'var(--radius)'}}>
-					<div className={styles.bottom_wrapper}>
-						<div className={styles.bottom_leftContainer}>
+					<BottomMenu style={{ backgroundColor: "transparent", borderRadius: "var(--radius)" }}>
 							<div>
-								<h3>Опубликовано</h3>
+								Gallery
 							</div>
-							<div>
-								<h5 style={{color: 'gray'}}>
-									{
-										new Date(data.updatedAt).toLocaleString('ru', { day: '2-digit', month: '2-digit', year: 'numeric'}).replace(/[,\.]/g, ' ').replace(/(\d{4})\s/, '$1.').replace(/\s/g, '.')
-									}
-								</h5>
-							</div>
-						</div>
-						<div className={styles.bottom_rightContainer}>
-							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={backArrow} onClick={() => console.log("Clicked")} /></div>
-							<div style={{ width: "40px", height: '40px' }}><ButtonArt round icon={nextArrow} onClick={() => console.log("Clicked")} /></div>
-						</div>
-					</div>
-				</BottomMenu>
+						</BottomMenu>
 				}
 			</div>
 		</div>

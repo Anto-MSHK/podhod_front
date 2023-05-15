@@ -14,6 +14,7 @@
 }
 
 .exhibitPreview_content {
+    align-items: center;
     flex-grow: 1;
     display: flex;
     padding: 10px;
