@@ -10,7 +10,7 @@ function App() {
 	return (
 		<Layout>
 			<Routes>
-				<Route element={<MainPage />} path="/"></Route>
+				<Route element={<EventsList />} path="/"></Route>
 				<Route element={<TestPage />} path="/redux-test"></Route>
 				<Route element={<Auth />} path="/registration"></Route>
 				<Route element={<EventEdit />} path="/expo/"></Route>
