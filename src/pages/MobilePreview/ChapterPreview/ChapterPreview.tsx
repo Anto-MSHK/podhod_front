@@ -48,6 +48,9 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 			</div>
 			<div className={styles.chapterPreview_content}>
 				{
+					data?.blocks.length === 0 && <h3>Здесь пока ничего нет</h3>
+				}
+				{
 					data?.blocks.map(block => {
 						if (block.type === 'text') {
 							return <TextBlock title={block.title} description={block.textBlock.description} />
@@ -59,7 +62,7 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 							}));
 							return (
 								<div>
-									<h4>{images.length > 0 && block.title}</h4>
+									<h3>{images.length > 0 && block.title}</h3>
 									<Gallery images={images} />
 								</div>
 							)
