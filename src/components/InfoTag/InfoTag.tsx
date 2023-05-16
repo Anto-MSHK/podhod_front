@@ -1,26 +1,26 @@
 import * as React from "react";
 import styles from "./InfoTag.module.css";
+import classNames from "classnames";
 
-interface IInfoTagProps {
+interface IInfoTagProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	color?: string;
 	text?: string;
 	icon?: string;
+	className?: string,
 }
 
-const setType = (color?: string, text?: string, icon?: string) => {
-	return (
-		<div
-			className={`${styles.status} ${styles.status_event}`}
-			style={{ backgroundColor: color }}
-		>
-			{icon && <img src={icon} alt={text} className={styles.status_img} />}
-			{text}
-		</div>
-	);
-};
 
-export const InfoTag: React.FC<IInfoTagProps> = ({ color, text, icon }) => {
+
+export const InfoTag: React.FC<IInfoTagProps> = ({ color, text, icon, className, style}, props) => {
+
+	let classes = classNames(
+		className,
+		styles.status_container,
+	)
 	return (
-		<div className={styles.status_container}>{setType(color, text, icon)}</div>
+		<div {...props}  className={classes} style={{ backgroundColor: color, ...style}} >
+				{icon && <img src={icon} alt={text} className={styles.status_img} />}
+				{text}
+		</div>
 	);
 };

@@ -9,8 +9,6 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-	ListGroup,
-	DropdownItemProps,
 	Spinner,
 } from "reactstrap";
 
@@ -20,7 +18,7 @@ import {
 	useDeleteExhibitMutation,
 	useUpdateExhibitMutation,
 } from "../../app/services/ExhibitsApi";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setExhibit } from "../../app/Slices/ExhibitCreateSlice";
 import {
 	CreateExhibitPayloadT,
@@ -44,8 +42,8 @@ import plusIcon from "../../assets/icons/plusIcon.svg";
 import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
-import { setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
-import { CustomBtnGroup } from "../CustomBtnGroup/CustomBtnGroup";
+import { clearSelectedExhibit, setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
+
 
 interface formType {
 	exhibitName: string;
@@ -56,7 +54,7 @@ interface formType {
 export const EventShowpiecesEdit = () => {
 	const [modalChapter, setModalChapter] = useState(false);
 	const toggleChapter = () => setModalChapter(!modalChapter);
-
+	const selectedExhibit = useAppSelector(state => state.selectedExhibit.exhibit)
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
 	const [currentItem, setCurrenstItem] = useState("");
@@ -76,11 +74,8 @@ export const EventShowpiecesEdit = () => {
 	const [deleteExhibit] = useDeleteExhibitMutation();
 	const [editingExhibit, setEditingExhibit] = useState<any>(null);
 	const dispatch = useAppDispatch();
-
-	const toggle = () => setModal(!modal);
-
+	const toggle = () => setModal(!modal)
 	const handleEditExhibit = (exhibit: exhibitsT) => {
-		console.log(exhibit);
 		setEditingExhibit(exhibit);
 		toggle();
 	};
@@ -128,7 +123,6 @@ export const EventShowpiecesEdit = () => {
 			toggle();
 		}
 	};
-
 	const handleDeleteExhibit = async (id: string) => {
 		console.log("delete...");
 		await deleteExhibit({ id, eventId: eventId as string }).unwrap();
@@ -164,13 +158,18 @@ export const EventShowpiecesEdit = () => {
 
 		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
 	});
-
+	useEffect(() => {
+		setCurrenstItem(selectedExhibit?.id as string)
+	},[selectedExhibit])
 	useEffect(() => {
 		if (menuItems && menuItems?.length > 0) setCurrenstItem(menuItems[0].key);
 		setChapterConf({
 			eventId: eventId as string,
 			showpieceId: data?.length ? data[0].id : "0",
 		});
+		dispatch(clearSelectedExhibit())
+		showpiece &&
+		dispatch(setSelectedExhibit(showpiece))
 	}, [data]);
 
 	const formConfig: FormikConfig<formType> = {
@@ -237,7 +236,7 @@ export const EventShowpiecesEdit = () => {
 					<div style={{ width: "100%" }}>
 						<div className={styles.form_header}>
 							<h2 style={{ marginTop: -6, fontSize: 28 }}>
-								{showpiece?.name}
+								{selectedExhibit?.name}
 								<p className="min" style={{ marginTop: -2, marginBottom: 0 }}>
 									экспонат
 								</p>
@@ -255,11 +254,11 @@ export const EventShowpiecesEdit = () => {
 							className={`${styles.showpiece_list} ${styles["chapters"]}`}
 							style={{ backgroundColor: "#363535", padding: "1rem" }}
 						>
-							{showpiece &&
-							showpiece.chapters &&
-							showpiece.chapters?.length > 0 ? (
+							{selectedExhibit &&
+							selectedExhibit.chapters &&
+							selectedExhibit.chapters?.length > 0 ? (
 								<ChapterList
-									showpiece={showpiece}
+									showpiece={selectedExhibit}
 									eventId={eventId as string}
 								/>
 							) : isChaptersFetching ? (

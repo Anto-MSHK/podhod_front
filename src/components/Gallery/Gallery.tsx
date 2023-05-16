@@ -17,7 +17,7 @@ interface GalleryProps {
 	images: ImageProps[];
 	className?: string;
 	scrollLocked?: boolean;
-	isDisabled?: boolean; // добавить isDisabled prop
+	isDisabled?: boolean;
 }
 
 interface GalleryImageProps extends ImageProps {
@@ -25,7 +25,7 @@ interface GalleryImageProps extends ImageProps {
 	onClick: (index: number) => void;
 	imageNumber: number;
 	className?: string;
-	isDisabled?: boolean; // добавить isDisabled prop
+	isDisabled?: boolean;
 }
 
 const GalleryImage: React.FC<GalleryImageProps> = React.memo(
@@ -52,12 +52,11 @@ const GalleryImage: React.FC<GalleryImageProps> = React.memo(
 );
 
 export const Gallery: React.FC<GalleryProps> = ({
-	images,
-	className = "",
-	scrollLocked = false,
-	isDisabled = false,
-}) => {
-	// добавить isDisabled в деструктуризацию props
+																									images,
+																									className = "",
+																									scrollLocked = false,
+																									isDisabled = false,
+																								}) => {
 	const [activeIndex, setActiveIndex] = useState<number>(() => {
 		const storedIndex = localStorage.getItem("activeIndex");
 		return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
@@ -67,7 +66,8 @@ export const Gallery: React.FC<GalleryProps> = ({
 		setActiveIndex(prevActiveIndex => (index === prevActiveIndex ? -1 : index));
 	}, []);
 
-	const emptyFunction = useCallback(() => {}, []);
+	const emptyFunction = useCallback(() => {
+	}, []);
 
 	useEffect(() => {
 		localStorage.setItem("activeIndex", activeIndex.toString());
@@ -90,15 +90,15 @@ export const Gallery: React.FC<GalleryProps> = ({
 	const galleryImages = useMemo(() => {
 		return images
 			? images.map((image, index) => (
-					<GalleryImage
-						key={image.src}
-						{...image}
-						isActive={isDisabled ? false : index === activeIndex}
-						onClick={isDisabled ? emptyFunction : handleImageClick} // использовать пустую функцию, если isDisabled передан
-						imageNumber={index + 1}
-						className={className}
-					/>
-			  ))
+				<GalleryImage
+					key={image.src}
+					{...image}
+					isActive={isDisabled ? false : index === activeIndex}
+					onClick={isDisabled ? emptyFunction : handleImageClick}
+					imageNumber={index + 1}
+					className={className}
+				/>
+			))
 			: null;
 	}, [
 		images,

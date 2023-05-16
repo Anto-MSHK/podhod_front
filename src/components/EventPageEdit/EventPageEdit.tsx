@@ -3,14 +3,10 @@ import styles from "./EventPageEdit.module.css";
 import { FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
-import { FormikConfig, Field } from "formik";
+import { FormikConfig } from "formik";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
 import { useAppDispatch } from "../../app/hooks";
-import {
-	CreateExhibitPayloadT,
-	UpdateExhibitPayloadT,
-} from "../../app/Types/ExhibitsT";
 import deleteIcon from "../../assets/icons/CrossInCircle.svg";
 import editIcon from '../../assets/icons/editIcon.svg'
 import { useParams } from "react-router-dom";
@@ -26,10 +22,6 @@ import {
 	EventPagesT,
 } from "../../app/Types/EventPageT";
 import { setPage } from "../../app/Slices/ExpoCreatePageSlice";
-import {Gallery} from "../Gallery/Gallery";
-import imageItem from "../ImageItem/ImageItem";
-import addFileIcon from '../../assets/icons/addFileIcon.svg'
-import imageForAuth from '../../assets/pictures/imageForAuth.png'
 import { setSelectedPage } from "../../app/Slices/SelectedPageSlice";
 
 interface formType {
@@ -149,14 +141,14 @@ export const EventPageEdit = () => {
 									className={styles.pagesListWrapper}
 									onClick={() => handleSelectPage(el)}
 								>
-									<div>{el.name}</div>
+									<div>{el.name === "#main-page" ? "Главная страница" : el.name}</div>
 								</div>
 								<div className={styles.pagesDeleteWrapper}
 									onClick={() => {
 										handleEditPage(el);
 									}}
 								>
-								<img src={editIcon} style={{width: '21px', height: '21px'}}/>
+								<img src={editIcon} alt="" style={{width: '21px', height: '21px'}}/>
 								</div>
 								<div
 									className={styles.pagesDeleteWrapper}
@@ -164,7 +156,7 @@ export const EventPageEdit = () => {
 										handleDeletePage(el.id);
 									}}
 								>
-									<img src={deleteIcon} />
+									<img alt="" src={deleteIcon} />
 								</div>
 							</div>
 						);

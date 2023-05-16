@@ -26,44 +26,7 @@ interface Iitems {
 	ageRestriction: string;
 }
 
-/* const items = [
-    {
-        id: 1, name: "1", date: "12.06.2023", image: event1, type: 'Выставка', status: 'draft',
-        numberOfExhibits: '50', entryCost: '1000', ageRestriction: '50'
-    },
-    {
-        id: 2, name: "2", date: "12.06.2023", image: event2, type: 'Выставка', status: 'completed',
-        numberOfExhibits: '2000000000', entryCost: '15000', ageRestriction: '6'
-    },
-    {
-        id: 3, name: "3", date: "12.06.2023", image: event3, type: 'Выставка', status: 'published',
-        numberOfExhibits: '10', entryCost: '300', ageRestriction: '12'
-    },
-    {
-        id: 4, name: "5", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-    {
-        id: 5, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-    {
-        id:6, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-    {
-        id: 7, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-    {
-        id: 8, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-    {
-        id: 9, name: "7", date: "12.06.2023", image: event1, type: 'Тусня', status: 'completed',
-        numberOfExhibits: '24', entryCost: '250', ageRestriction: '18'
-    },
-]; */
+
 
 const handleFilter = (date: string | number, type?: string | undefined) => {};
 

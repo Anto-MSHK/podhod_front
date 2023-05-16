@@ -1,7 +1,5 @@
 .textBox_wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+ 
 }
 
 .textBox_title {
@@ -13,4 +11,5 @@
 }
 
 .textBox_desc {
+    overflow: auto;
 }

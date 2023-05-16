@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
@@ -15,18 +15,33 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../app/hooks";
 import { clearSelectedExhibit, setExhibits } from "../../../app/Slices/SelectedExhibitSlice";
 import { setPage } from "../../../app/Slices/ExpoCreatePageSlice";
+import { Gallery } from "../../../components/Gallery/Gallery";
+import imagesGallery from "../../../components/ImagesGallery/ImagesGallery";
+import icon2 from "../../../assets/icons/Wallet.svg";
 
 interface IExhibitPage {
 	data?: EventPagesT | null;
 }
 
-
-
 export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
-	const {id: eventId} = useParams();
+
+	const images = [
+		{
+			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+			alt: "Image 1",
+		},
+		{
+			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Manoel.jpg/275px-Manoel.jpg",
+			alt: "Image 2",
+		},
+		{
+			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Manul_kitten.jpg/300px-Manul_kitten.jpg",
+			alt: "Image 3",
+		},
+	];
+	const { id: eventId } = useParams();
 	const { data: pages, error, isLoading, refetch } = useFetchPageQuery(eventId);
 	const dispatch = useAppDispatch();
-
 
 	useEffect(() => {
 		if (pages) {
@@ -59,13 +74,17 @@ export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
 				<TextBox data={pageData} />
 			</div>
 			<div className={styles.exhibitPreview_bottom}>
-				{data &&
-					<BottomMenu style={{ backgroundColor: "transparent", borderRadius: "var(--radius)" }}>
-							<div>
-								Gallery
-							</div>
-						</BottomMenu>
-				}
+				{data && (
+					<BottomMenu
+						gallery={
+							<Gallery
+								images={images}
+								scrollLocked={false}
+								className="gallery"
+							/>
+						}
+					/>
+				)}
 			</div>
 		</div>
 	);
