@@ -68,9 +68,6 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}/times`,
 				method: "PATCH",
 				body: data.body,
-				params: {
-					sort: "id"
-				}
 			}),
 		}),
 		updatePrices: builder.mutation<PriceT, { id: string; prices: PricesT[] }>({
