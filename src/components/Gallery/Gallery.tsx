@@ -2,8 +2,8 @@ import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import styles from './Gallery.module.css';
 
 export interface ImageProps {
-    src: string;
-    alt: string;
+	src: string;
+	alt?: string;
 }
 
 interface GalleryProps {
