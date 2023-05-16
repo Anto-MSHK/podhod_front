@@ -16,10 +16,12 @@ export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }
 	const selectedExhibit = useAppSelector((state) => state.selectedExhibit.exhibit);
 	const selectedPage = useAppSelector((state) => state.selectedPage.selectedPage)
 	const isChapterShown = useSelector((state: RootState) => state.isChapterShown);
-
 	const isChaptersShown = selectedExhibit && selectedExhibit.chapters?.map(chapter => isChapterShown[chapter.id] || false);
-
 	const isAnyChapterShown = isChaptersShown?.some(isShown => isShown) ?? false;
+	const chapterId = Object.keys(isChapterShown).find(id => isChapterShown[id]);
+	const selectedChapter = selectedExhibit?.chapters?.find(chapter => chapter.id.toString() === chapterId);
+
+
 
 	const renderPage = () => {
 		switch (selectedPageType) {
@@ -29,7 +31,7 @@ export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }
 				return <PagesPreview data={selectedPage}/>;
 			case "ExhibitsPreview":
 				if (isAnyChapterShown) {
-					return <ChapterPreview data={selectedPage} />
+					return <ChapterPreview data={selectedChapter} exhibit={selectedExhibit} />
 				}
 				else return <ExhibitsPreview data={selectedExhibit}/>;
 			default:
