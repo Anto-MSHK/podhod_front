@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { TestPage } from "./pages/TestPage/TestPage";
-import { MainPage } from "./pages/StylePage/StylePage";
 import { Layout } from "./layout/Layout";
 import Auth from "./pages/Auth/Auth";
 import { EventEdit } from "./pages/EventEdit/EventEdit";
