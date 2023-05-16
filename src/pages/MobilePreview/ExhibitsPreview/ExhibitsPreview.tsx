@@ -45,7 +45,6 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		if (exhibits) {
 			refetch();
 			dispatch(setExhibits(exhibits));
-			dispatch(clearSelectedExhibit());
 		}
 	}, [exhibits, refetch]);
 
