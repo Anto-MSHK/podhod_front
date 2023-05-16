@@ -62,8 +62,11 @@ export const chaptersApi = createApi({
 		fetchChapters: builder.query<exhibitsT, GetChaptersReqT>({
 			query: ({ eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
-				sortComparer: (a: ChapterT, b: ChapterT) => a.id - b.id,
 			}),
+			transformResponse: (response: exhibitsT) => {
+				response.chapters?.sort((a, b) => Number(a.id) - Number(b.id));
+				return response;
+			},
 			providesTags: result => [{ type: "Chapters", id: result?.id }],
 		}),
 

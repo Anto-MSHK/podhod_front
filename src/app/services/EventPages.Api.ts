@@ -28,8 +28,10 @@ export const eventPagesApi = createApi({
 		fetchPage: builder.query<EventPagesT[], any>({
 			query: (id: string) => ({
 				url: `/${id}/pages`,
-				sortComparer: (a: EventPagesT, b: EventPagesT) => a.id - b.id,
 			}),
+			transformResponse: (response: EventPagesT[]) => {
+				return response.sort((a, b) => Number(a.id) - Number(b.id));
+			},
 			providesTags: result =>
 				result
 					? [

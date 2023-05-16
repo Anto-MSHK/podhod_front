@@ -33,8 +33,10 @@ export const exhibitsApi = createApi({
 		fetchExhibits: builder.query<exhibitsT[], any>({
 			query: (id: string) => ({
 				url: `/${id}/showpieces`,
-				sortComparer: (a: exhibitsT, b: exhibitsT) => a.id.localeCompare(b.id),
 			}),
+			transformResponse: (response: exhibitsT[]) => {
+				return response.sort((a, b) => a.id.localeCompare(b.id));
+			},
 			providesTags: result =>
 				result
 					? [

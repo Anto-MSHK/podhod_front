@@ -23,13 +23,14 @@ export const eventsApi = createApi({
 		fetchEvents: builder.query<EventT[], void>({
 			query: () => ({
 				url: `/events`,
-				sortComparer: (a: EventT, b: EventT) => a.id - b.id,
 			}),
+			transformResponse: (response: EventT[]) => {
+				return response.sort((a, b) => a.id - b.id);
+			},
 		}),
 		fetchEvent: builder.query<EventT, any>({
 			query: (id: string) => ({
 				url: `/events/${id}`,
-				sortComparer: (a: EventT, b: EventT) => a.id - b.id,
 			}),
 		}),
 		getEventPages: builder.query<EventPagesT[], number>({
