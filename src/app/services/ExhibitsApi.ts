@@ -33,9 +33,7 @@ export const exhibitsApi = createApi({
 		fetchExhibits: builder.query<exhibitsT[], any>({
 			query: (id: string) => ({
 				url: `/${id}/showpieces`,
-				params: {
-					sort: "id"
-				}
+				sortComparer: (a: exhibitsT, b: exhibitsT) => a.id.localeCompare(b.id),
 			}),
 			providesTags: result =>
 				result
@@ -59,9 +57,6 @@ export const exhibitsApi = createApi({
 				url: `/${eventId}/showpieces/${id}`,
 				method: "PUT",
 				body,
-				params: {
-					sort: "id"
-				}
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
 		}),

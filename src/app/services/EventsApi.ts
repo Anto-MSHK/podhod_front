@@ -23,17 +23,13 @@ export const eventsApi = createApi({
 		fetchEvents: builder.query<EventT[], void>({
 			query: () => ({
 				url: `/events`,
-				params: {
-					sort: "id"
-				}
+				sortComparer: (a: EventT, b: EventT) => a.id - b.id,
 			}),
 		}),
 		fetchEvent: builder.query<EventT, any>({
 			query: (id: string) => ({
 				url: `/events/${id}`,
-				params: {
-					sort: "id"
-				}
+				sortComparer: (a: EventT, b: EventT) => a.id - b.id,
 			}),
 		}),
 		getEventPages: builder.query<EventPagesT[], number>({
@@ -58,9 +54,6 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}`,
 				method: "PATCH",
 				body: data,
-				params: {
-					sort: "id"
-				}
 			}),
 		}),
 		updateEventCalendar: builder.mutation<EventT, UpdateEventCalendarPayload>({
@@ -68,9 +61,6 @@ export const eventsApi = createApi({
 				url: `/events/${data.id}/times/calendar`,
 				method: "PATCH",
 				body: data.body,
-				params: {
-					sort: "id"
-				}
 			}),
 		}),
 		updateEventTimes: builder.mutation<EventT, UpdateEventTimes>({
@@ -88,9 +78,6 @@ export const eventsApi = createApi({
 				url: `/events/${id}/prices`,
 				method: "PATCH",
 				body: prices,
-				params: {
-					sort: "id"
-				}
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Price", id }],
 		}),

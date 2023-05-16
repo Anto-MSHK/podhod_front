@@ -7,6 +7,7 @@ import {
 	UpdateExhibitPayloadT,
 } from "../Types/ExhibitsT";
 import { ChapterT } from "../Types/ChapterT";
+import { EventPagesT } from "../Types/EventPageT";
 
 type GetChaptersReqT = {
 	eventId: string;
@@ -61,9 +62,7 @@ export const chaptersApi = createApi({
 		fetchChapters: builder.query<exhibitsT, GetChaptersReqT>({
 			query: ({ eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
-				params: {
-					sort: "id"
-				}
+				sortComparer: (a: ChapterT, b: ChapterT) => a.id - b.id,
 			}),
 			providesTags: result => [{ type: "Chapters", id: result?.id }],
 		}),
