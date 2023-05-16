@@ -48,8 +48,6 @@
 
 .bottom_wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     gap: 5px;
     width: 100%;
     padding: 10px;
@@ -68,5 +66,6 @@
 }
 
 .bottom_rightContainer {
+    margin-top: -20px;
     height: 85px;  
 }
