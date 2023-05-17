@@ -129,7 +129,7 @@ export const PriceForm: React.FC<Props> = ({ disabled, eventId }) => {
 							</div>
 						</div>
 						<div className={styles.inputRow}>
-							<div className={styles.buttonRow}>
+							<div className={styles.buttonCriterion}>
 								<FormInput
 									onChange={e => {
 										formik.handleChange(e);
@@ -141,7 +141,7 @@ export const PriceForm: React.FC<Props> = ({ disabled, eventId }) => {
 									value={formik.values.criterion}
 								/>
 							</div>
-							<div className={styles.buttonRow}>
+							<div className={styles.buttonPrice}>
 								<FormInput
 									onChange={e => {
 										formik.handleChange(e);
