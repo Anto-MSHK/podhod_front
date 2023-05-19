@@ -12,9 +12,9 @@ export const Header = () => {
 				</NavLink>
 			</div>
 			<div className={styles.header__nav_links}>
-				<NavLink to="/registration">
+				{/* <NavLink to="/registration">
 					<p>Регистрация</p>
-				</NavLink>
+				</NavLink> */}
 				<NavLink to="/event">
 					<p>Список мероприятий</p>
 				</NavLink>

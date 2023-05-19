@@ -12,6 +12,10 @@ import scaleIcon from "../../assets/icons/scaleIcon.svg";
 import { LayoutBlock } from "../BlockCards/LayoutBlock";
 import { LayoutForm } from "../BlockForms/LayoutForm";
 import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toggleChapter } from "../../app/Slices/isChapterShownSlice";
+import { RootState } from "../../app/store";
 type ChapterItemT = {
 	chapter: ChapterT;
 	showpieceId: string;
@@ -23,7 +27,14 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 	showpieceId,
 	eventId,
 }) => {
-	const [isChapterShown, setIsChapterShow] = useState(false);
+	const dispatch = useDispatch();
+	const handleClick = () => {
+		dispatch(toggleChapter(chapter.id));
+	};
+
+	const isChapterShown = useSelector((state: RootState) => state.isChapterShown[chapter.id] || false);
+
+
 	const [deleteChapter] = useDeleteChapterMutation();
 
 	const dropdownItems: ListDropDownItemsI[] = [
@@ -67,7 +78,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					></CustomBtn>
 					<CustomBtn
 						style={{ width: "45px" }}
-						onClick={() => setIsChapterShow(!isChapterShown)}
+						onClick={() => handleClick()}
 						icon={scaleIcon}
 					></CustomBtn>
 					<DropDown items={dropdownItems} isOpenState={isOpenState} />

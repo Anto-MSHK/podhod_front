@@ -1,9 +1,52 @@
 .content_container {
-	/* width: fit-content; */
+	width: 100%;
 	display: flex;
-	justify-content: start;
 	background-color: var(--dark_gray_color);
-	padding: 2rem;
 	border-radius: var(--radius);
 	margin: 0 auto;
+	position: relative;
+	justify-content: space-between;
 }
+
+.price_container {
+	position: relative;
+	max-width: 40%;
+	padding-top: 2rem;
+	padding-left: 2rem;
+}
+
+.line {
+	justify-content: center;
+	width: 1px;
+	background-color: white;
+}
+
+.schedule_container {
+	min-width: 40%;
+	display: flex;
+	justify-content: center;
+	padding-top: 2rem;
+}
+
+@media only screen and (max-width: 1020px) {
+	.content_container {
+		flex-direction: column;
+		justify-content: center;
+		width: fit-content;
+	}
+	.price_container {
+		display: flex;
+		max-width: fit-content;
+		margin-bottom: 2rem;
+		justify-content: center;
+	}
+	.schedule_container {
+		display: flex;
+		width: fit-content;
+		justify-content: center;
+	}
+	.line {
+		display: none;
+	}
+}
+

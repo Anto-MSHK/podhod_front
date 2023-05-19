@@ -11,7 +11,6 @@ import icon8 from "../../assets/icons/RedСheckMark.svg";
 import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
-
 // import { Form } from "../../components/Form/Form";
 import { FormContainer } from "../../components/Form/Form";
 import { FormInput } from "../../components/Form/FormInput";
@@ -43,8 +42,8 @@ export const MainPage = () => {
 
 	const formConfig: FormikConfig<any> = {
 		initialValues: {
-			criterion: "",
-			price: "",
+			email: "",
+			password: "",
 		},
 		onSubmit: values => {
 			alert(JSON.stringify(values, null, 2));
@@ -74,30 +73,13 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
+					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<div>
-						<ButtonArt
-							text="Перейти к промо-выставке"
-							arrow
-							onClick={() => console.log("Clicked")}
-						/>
-						<ButtonArt
-							text="Узнать больше"
-							onClick={() => console.log("Clicked")}
-						/>
-						<div style={{ width: "50px" }}>
-							<ButtonArt
-								round
-								icon={icon2}
-								onClick={() => console.log("Clicked")}
-							/>
-						</div>
-						<ButtonArt
-							text="Поиск"
-							icon={icon1}
-							onClick={() => console.log("Clicked")}
-						/>
+						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
+						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
+						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
+						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
 					</div>
-
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
@@ -156,7 +138,6 @@ export const MainPage = () => {
 				{/* <ImagesGallery /> */}
 				<div style={{ margin: "10px 0" }} />
 			</div>
-
 			<div>{/* <MainInfoExpoForm /> */}</div>
 			<div style={{ marginTop: "10px", marginBottom: "10px" }}>
 				<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
@@ -244,9 +225,7 @@ export const MainPage = () => {
 			</div>
 			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={
-						<CustomBtn onClick={() => alert("Меню")}>Меню</CustomBtn>
-					}
+					leftElement={<CustomBtn onClick={() => (alert("Меню"))}>Меню</CustomBtn>}
 					centerElement={" "}
 					isTransparent={false}
 					style={{ backgroundColor: "var(--gray_color)" }}

@@ -9,16 +9,17 @@ type EventSettingsPropsT = {
 };
 
 export const EventSettings: React.FC<EventSettingsPropsT> = ({
-	defaultScheduleData,
-}) => {
+																															 defaultScheduleData,
+																														 }) => {
 	return (
 		<div className={styles.content_container}>
-			<PriceForm eventId={"" + defaultScheduleData?.id} />
-			<EventScheduleForm
-				defaultData={defaultScheduleData?.times as EventTimeT}
-			/>
+			<div className={styles.price_container}>
+				<PriceForm eventId={"" + defaultScheduleData?.id} />
+			</div>
+			<div className={styles.line}></div>
+			<div className={styles.schedule_container}>
+				<EventScheduleForm defaultData={defaultScheduleData?.times as EventTimeT} />
+			</div>
 		</div>
 	);
 };
-
-export default EventSettings;

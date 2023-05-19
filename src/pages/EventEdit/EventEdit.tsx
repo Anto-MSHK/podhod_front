@@ -15,7 +15,6 @@ import { EventPageEdit } from "../../components/EventPageEdit/EventPageEdit";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
 import { EventForm } from "../../components/EventForm/EventForm";
 
-import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
 import { EventSettings } from "../../components/EventSettings/EventSettings";
 
 import useScrollPosition from "../../features/hooks/useScrollPosition";
@@ -130,7 +129,6 @@ export const EventEdit: React.FC = () => {
 	};
 
 	const scroll = useScrollPosition();
-	console.log(scroll);
 
 	const LIMIT = 70;
 	const HIGH_SCROLL = scroll > LIMIT;

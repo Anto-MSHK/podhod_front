@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { exhibitsT } from '../../app/Types/ExhibitsT';
+import { chaptersApi } from '../services/ChapterApi';
 
 export interface SelectedExhibitState {
 	exhibit: exhibitsT | null;
@@ -25,6 +26,12 @@ export const selectedExhibitSlice = createSlice({
 		clearSelectedExhibit: (state) => {
 			state.exhibit = state.exhibits.length ? state.exhibits[0] : null;
 		},
+	},
+	extraReducers: (builder) => {
+		builder
+			.addMatcher(chaptersApi.endpoints.fetchChapters.matchFulfilled, (state, { payload }) => {
+				state.exhibit = payload;
+			});
 	},
 });
 

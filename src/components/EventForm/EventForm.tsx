@@ -16,16 +16,10 @@ import {
 	CreateEventPayloadT,
 	EventT,
 	UpdateEventPayloadT,
-	PriceT,
-	PricesT,
 } from "../../app/Types/EventsT";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputType } from "reactstrap/types/lib/Input";
 
-import { PriceForm } from "../PriceForm/PriceForm";
-import { useUpdatePricesMutation } from "../../app/services/PricesApi";
-
-import { EventScheduleForm } from "../EventScheduleForm/EventScheduleForm";
 
 interface formType {
 	eventName: string;
@@ -66,7 +60,6 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 	const dispatch = useAppDispatch();
 	const [addEvent, { isError }] = useAddEventMutation();
 	const [updateEvent, { isError: isErrorUpdate }] = useUpdateEventMutation();
-	const [updatePrices] = useUpdatePricesMutation();
 	const [prices, setPrices] = useState<Price[]>([]);
 
 	// const handlePriceAdded = async (price: PricesT) => {
