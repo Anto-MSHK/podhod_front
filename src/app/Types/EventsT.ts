@@ -1,4 +1,5 @@
 import { type } from "os";
+import { exhibitsT } from "./ExhibitsT";
 
 export type PricesT =
 	{
@@ -33,6 +34,7 @@ export type EventT = {
 		eventId: number;
 	};
 	times: EventTimeT,
+	showpieces: exhibitsT[]
 };
 
 export type EventWeekDayT = {

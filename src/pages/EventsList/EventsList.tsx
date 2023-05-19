@@ -13,6 +13,8 @@ import { EventT } from "../../app/Types/EventsT";
 import { bool, date } from "yup";
 import icon10 from "../../assets/icons/DateOfEvent.svg";
 import icon11 from "../../assets/icons/DeterminingTheType.svg";
+import { InfoCard } from "../../components/InfoCard/InfoCard";
+import { exhibitsT } from "../../app/Types/ExhibitsT";
 
 interface Iitems {
 	id: number;
@@ -111,6 +113,61 @@ export const EventsList: React.FC = () => {
 		},
 	];
 
+	const calcAvgPrice = (events: EventT[] | undefined): number => {
+		let totalPrice = 0;
+		let totalCount = 0;
+
+		events?.forEach(event => {
+			event.prices.forEach(price => {
+				totalPrice += price.price;
+				totalCount++;
+			});
+		});
+
+		return totalCount ? Math.round(totalPrice / totalCount) : 0;
+	};
+
+	const roundToNearest = (num: number, numArray: number[]): number => {
+		let curr = numArray[0];
+		let diff = Math.abs(num - curr);
+
+		numArray.forEach(val => {
+			let newdiff = Math.abs(num - val);
+			if (newdiff < diff) {
+				diff = newdiff;
+				curr = val;
+			}
+		});
+
+		return curr;
+	}
+
+	const calcAvgAge = (events: EventT[] | undefined): number => {
+		let totalAge = 0;
+		let totalCount = 0;
+
+		events?.forEach(event => {
+			if(event.ageLimit !== null){
+				const age = parseInt(event.ageLimit);
+				if(!isNaN(age)){
+					totalAge += age;
+					totalCount++;
+				}
+			}
+		});
+
+		const averageAge = totalCount ? totalAge / totalCount : 0;
+
+		return roundToNearest(averageAge, [0, 6, 12, 16, 18]);
+	};
+
+
+	const countEvents = (events: EventT[] | undefined): number => {
+		return events?.length || 0;
+	};
+
+
+
 
 	return (
 		<div className={styles.wrapper}>
@@ -118,9 +175,16 @@ export const EventsList: React.FC = () => {
 				<h1>Мероприятия</h1>
 			</div>
 			<div className={styles.filter}>
-				<CustomBtnGroup view="radio" data={btnData} />
+				<div style={{display: 'flex', flexDirection: 'column', gap: 15}}>
+					<CustomBtnGroup view="radio" data={btnData} />
+					<CustomBtnGroup data={sort} view={"radio"} type={"filter"} />
+				</div>
 				<div style={{ margin: "10px 0" }} />
-				<CustomBtnGroup data={sort} view={"radio"} type={"filter"} />
+				<div className={styles.infoCards}>
+					<InfoCard title="Средняя цена за выставку" value={calcAvgPrice(events)} />
+					<InfoCard title="Всего создано выставок" value={countEvents(events)} />
+					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} />
+				</div>
 			</div>
 			<div className={styles.content_container}>
 				<div className={styles.content_container__grid_list}>

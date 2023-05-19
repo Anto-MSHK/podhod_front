@@ -27,6 +27,12 @@
 	display: flex;
 }
 
+.infoCards {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
 @media (max-width: 767px) {
 	.filter {
 		flex-wrap: wrap;
