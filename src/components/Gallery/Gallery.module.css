@@ -50,17 +50,17 @@
 
 .image {
     display: block;
-    width: 100px;
-    height: 80px;
+    width: 130px;
+    height: 90px;
     object-fit: cover;
     border-radius: 8px;
     transform-origin: center center;
 }
 
 figure {
-    margin-block-start: 15px;
-    margin-block-end: 5px;
-    margin-inline-start: 10px;
+    margin-block-start: 25px;
+    margin-block-end: 10px;
+    margin-inline-start: 20px;
     margin-inline-end: 0;
     display: flex;
     overflow: visible;

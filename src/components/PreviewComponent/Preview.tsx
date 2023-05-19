@@ -29,7 +29,7 @@ const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType}) => {
 		<div
 			className={styles.preview_picture}
 			style={
-				selectedPageType === "EventPreview" || "PagesPreview"
+				selectedPageType === "EventPreview"
 					? {
 						backgroundImage: backgroundImg
 							? `linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,212,255,0) 100%),  url(${backgroundImg.path})`

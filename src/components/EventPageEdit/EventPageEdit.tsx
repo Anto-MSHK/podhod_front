@@ -30,6 +30,8 @@ interface formType {
 	visibleLogo: boolean;
 }
 
+
+
 export const EventPageEdit = () => {
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
@@ -133,30 +135,28 @@ export const EventPageEdit = () => {
 				{!isLoading &&
 					sortedData &&
 					sortedData.map((el: EventPagesT, index) => {
-						const updatedName = el.name === "#main-page" ? { ...el, name: "Главная страница" } : el;
 						return (
 							<div key={el.id} className={styles.mainCreatePageWrapper}>
 								<div
 									className={styles.pagesListWrapper}
-									onClick={() => handleSelectPage(updatedName)}
+									onClick={() => handleSelectPage(el)}
 								>
-									<div>{updatedName.name}</div>
+									<div>{el.name}</div>
+								</div>
+								<div className={styles.pagesDeleteWrapper}
+									onClick={() => {
+										handleEditPage(el);
+									}}
+								>
+								<img src={editIcon} alt="" style={{width: '21px', height: '21px'}}/>
 								</div>
 								<div
 									className={styles.pagesDeleteWrapper}
 									onClick={() => {
-										handleEditPage(updatedName);
+										handleDeletePage(el.id);
 									}}
 								>
-									<img src={editIcon} style={{ width: "21px", height: "21px" }} />
-								</div>
-								<div
-									className={styles.pagesDeleteWrapper}
-									onClick={() => {
-										handleDeletePage(updatedName.id);
-									}}
-								>
-									<img src={deleteIcon} />
+									<img alt="" src={deleteIcon} />
 								</div>
 							</div>
 						);
@@ -193,10 +193,7 @@ export const EventPageEdit = () => {
 							>
 								<div>
 									<div>
-										<FormInput
-											name="pageName"
-											label="Название:"
-										/>
+										<FormInput name="pageName" label="Название:" />
 										<FormInput
 											name="pageDescription"
 											label="Полное описание:"

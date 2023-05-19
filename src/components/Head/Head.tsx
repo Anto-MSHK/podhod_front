@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./Head.module.css";
-
 var classNames = require("classnames");
-
 interface HeadProps {
 	leftElement?: React.ReactNode;
 	centerElement?: React.ReactNode;
@@ -15,17 +13,18 @@ interface HeadProps {
 }
 
 const Head: React.FC<HeadProps> = ({
-																		 className,
-																		 leftElement,
-																		 centerElement,
-																		 rightElement,
-																		 isTransparent = false,
-																		 centerStyle,
-																		 rightStyle,
-																		 style,
-																	 }) => {
+	className,
+	leftElement,
+	centerElement,
+	rightElement,
+	isTransparent = false,
+	centerStyle,
+	rightStyle,
+	style,
+}) => {
 	if (!centerElement) {
 		console.error("Center element is not defined in Head component");
+		return null;
 	}
 
 	let classes = classNames(className, styles.container, {
@@ -34,9 +33,7 @@ const Head: React.FC<HeadProps> = ({
 
 	return (
 		<header className={classes} style={style}>
-			<div className={styles.left}>
-				{leftElement}
-			</div>
+			<div className={styles.left}>{leftElement}</div>
 			<div className={styles.center} style={centerStyle}>
 				{centerElement}
 			</div>

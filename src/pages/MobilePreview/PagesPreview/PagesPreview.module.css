@@ -1,5 +1,4 @@
 .exhibitPreview_wrapper {
-    position: relative;
     display: flex;
     flex-direction: column;
     height: 680px;
@@ -15,15 +14,15 @@
 }
 
 .exhibitPreview_content {
-    align-items: center;
     flex-grow: 1;
     display: flex;
     padding: 10px;
 }
 
 .exhibitPreview_bottom {
-    position: sticky;
-    bottom: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .bottom_wrapper {
