@@ -8,7 +8,12 @@ import backArrow from "../../../assets/icons/backArrow.svg";
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { exhibitsT } from "../../../app/Types/ExhibitsT";
 import { useSelector } from "react-redux";
-import { clearSelectedExhibit, selectNextExhibit, setExhibits } from "../../../app/Slices/SelectedExhibitSlice";
+import {
+	clearSelectedExhibit,
+	selectNextExhibit,
+	setExhibits,
+	setSelectedExhibit,
+} from "../../../app/Slices/SelectedExhibitSlice";
 import { useAppDispatch } from "../../../app/hooks";
 import { useFetchExhibitsQuery } from "../../../app/services/ExhibitsApi";
 import { useParams } from "react-router-dom";
@@ -20,12 +25,21 @@ import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
 interface IChapterPage {
 	data?: exhibitsT | null;
 }
+interface ISliderImage {
+	src: string;
+	alt?: string | undefined;
+	caption?: string | undefined;
+}
 
 export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
-
 	const { id: eventId } = useParams();
 	const dispatch = useAppDispatch();
-	const { data: exhibits, error, isLoading, refetch } = useFetchExhibitsQuery(eventId);
+	const {
+		data: exhibits,
+		error,
+		isLoading,
+		refetch,
+	} = useFetchExhibitsQuery(eventId);
 	const nextExhibit = useSelector(selectNextExhibit);
 
 	useEffect(() => {
@@ -43,8 +57,8 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		title: data?.name,
 		shortDesc: data?.short,
 		desc: data?.description,
+		imgs: data?.imgs,
 	};
-
 
 	const blocksTag = useMemo(() => {
 		return data?.chapters?.map((chapter, index) => {
@@ -87,33 +101,40 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 	const sliderImages = handleBlocksImgsList(data);
 	const nextExhibitImgs = handleBlocksImgsList(nextExhibit);
 
-
 	/*	const sortedExhibitImages = (exhibitImages ?? [])
 			.sort((a, b) => parseInt(a.alt) - parseInt(b.alt))
 			.map((img) => ({
 				src: `${img.src}`,
 				alt: img.alt,
-			})) as ImageProps[];*/
-
-	const firstImage = exhibitImages.slice(0, 1);
-
+		})) as ImageProps[];*/
 
 	return (
 		<div className={styles.chapterPreview_wrapper}>
 			<div className={styles.chapterPreview_head}>
-				<Head leftElement={<div style={{ width: "35px", height: "35px" }}><ButtonArt round icon={backArrow}
-																																										 onClick={() => console.log("Clicked")} />
-				</div>}
-							centerElement={<h3>{data ? " " : "Выберите экспонат"}</h3>}
-							isTransparent={true}
-							style={{ width: "100%" }}
+				<Head
+					leftElement={
+						<div style={{ width: "35px", height: "35px" }}>
+							<ButtonArt
+								round
+								icon={backArrow}
+								onClick={() => console.log("Clicked")}
+							/>
+						</div>
+					}
+					centerElement={<h3>{data ? " " : "Выберите экспонат"}</h3>}
+					isTransparent={true}
+					style={{ width: "100%" }}
 				/>
+			</div>
+			<div className={styles.chapterPreview_slider_container}>
+				<Slider images={sliderImages} />
 			</div>
 			<div className={styles.chapterPreview_content}>
 				<TextBox data={ExhibitData} />
 				<h3>Больше интересного</h3>
 				<div className={styles.chapterPreview_tags_container}>{blocksTag}</div>
 			</div>
+
 			<div className={styles.chapterPreview_bottom}>
 				<BottomMenu style={{ borderRadius: "var(--radius)" }}>
 					<div className={styles.bottom_wrapper}>

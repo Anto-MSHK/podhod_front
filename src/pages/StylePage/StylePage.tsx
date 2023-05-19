@@ -73,7 +73,6 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-					<Gallery images={images} scrollLocked={false} className="gallery"/>
 					<div>
 						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
 						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />

@@ -1,16 +1,9 @@
-import React, {
-	useState,
-	useCallback,
-	useMemo,
-	useEffect,
-	useRef,
-} from "react";
-import styles from "./Gallery.module.css";
-import exp from "constants";
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import styles from './Gallery.module.css';
 
 export interface ImageProps {
 	src: string;
-	alt: string;
+	alt?: string;
 }
 
 interface GalleryProps {
@@ -28,49 +21,36 @@ interface GalleryImageProps extends ImageProps {
 	isDisabled?: boolean;
 }
 
-const GalleryImage: React.FC<GalleryImageProps> = React.memo(
-	({ src, alt, isActive, onClick, imageNumber, className, isDisabled }) => {
-		const handleClick = useCallback(() => {
-			onClick(imageNumber - 1);
-		}, [onClick, imageNumber]);
+const GalleryImage: React.FC<GalleryImageProps> = React.memo(({ src, alt, isActive, onClick, imageNumber, className, isDisabled }) => {
+	const handleClick = useCallback(() => {
+		onClick(imageNumber - 1);
+	}, [onClick, imageNumber]);
 
-		return (
-			<figure
-				className={`${styles.imageWrapper} ${isActive ? styles.selected : ""} ${
-					isDisabled ? styles.disabled : ""
-				} ${className}`}
-				onClick={handleClick}
-				aria-label={`Image ${imageNumber}`}
-				role="button"
-				tabIndex={0}
-				data-isactive={isActive}
-			>
-				<img src={src} alt={alt} className={styles.image} />
-			</figure>
-		);
-	},
-);
+	return (
+		<figure
+			className={`${styles.imageWrapper} ${isActive ? styles.selected : ''} ${isDisabled ? styles.disabled : ''} ${className}`}
+			onClick={handleClick}
+			role="button"
+		>
+			<img src={src} alt={alt} className={styles.image} />
+		</figure>
+	);
+});
 
-export const Gallery: React.FC<GalleryProps> = ({
-																									images,
-																									className = "",
-																									scrollLocked = false,
-																									isDisabled = false,
-																								}) => {
+export const Gallery: React.FC<GalleryProps> = ({ images, className = '', scrollLocked = false, isDisabled = false }) => {
 	const [activeIndex, setActiveIndex] = useState<number>(() => {
-		const storedIndex = localStorage.getItem("activeIndex");
+		const storedIndex = localStorage.getItem('activeIndex');
 		return storedIndex !== null ? parseInt(storedIndex, 10) : -1;
 	});
 
 	const handleImageClick = useCallback((index: number) => {
-		setActiveIndex(prevActiveIndex => (index === prevActiveIndex ? -1 : index));
+		setActiveIndex(prevActiveIndex => index === prevActiveIndex ? -1 : index);
 	}, []);
 
-	const emptyFunction = useCallback(() => {
-	}, []);
+	const emptyFunction = useCallback(() => {}, []);
 
 	useEffect(() => {
-		localStorage.setItem("activeIndex", activeIndex.toString());
+		localStorage.setItem('activeIndex', activeIndex.toString());
 	}, [activeIndex]);
 
 	useEffect(() => {
@@ -88,26 +68,17 @@ export const Gallery: React.FC<GalleryProps> = ({
 	}, [scrollLocked, isDisabled]);
 
 	const galleryImages = useMemo(() => {
-		return images
-			? images.map((image, index) => (
-				<GalleryImage
-					key={image.src}
-					{...image}
-					isActive={isDisabled ? false : index === activeIndex}
-					onClick={isDisabled ? emptyFunction : handleImageClick}
-					imageNumber={index + 1}
-					className={className}
-				/>
-			))
-			: null;
-	}, [
-		images,
-		activeIndex,
-		handleImageClick,
-		className,
-		isDisabled,
-		emptyFunction,
-	]);
+		return images ? images.map((image, index) => (
+			<GalleryImage
+				key={image.src}
+				{...image}
+				isActive={isDisabled ? false : index === activeIndex}
+				onClick={isDisabled ? emptyFunction : handleImageClick} // использовать пустую функцию, если isDisabled передан
+				imageNumber={index + 1}
+				className={className}
+			/>
+		)) : null;
+	}, [images, activeIndex, handleImageClick, className, isDisabled, emptyFunction]);
 
 	const galleryRef = useRef<HTMLDivElement>(null);
 
@@ -120,11 +91,7 @@ export const Gallery: React.FC<GalleryProps> = ({
 	}, [scrollLocked]);
 
 	return (
-		<div
-			ref={galleryRef}
-			className={`${styles.gallery} ${className}`}
-			aria-label="Gallery"
-		>
+		<div ref={galleryRef} className={`${styles.gallery}`}>
 			{galleryImages}
 		</div>
 	);

@@ -34,9 +34,6 @@ export const exhibitsApi = createApi({
 			query: (id: string) => ({
 				url: `/${id}/showpieces`,
 			}),
-			transformResponse: (response: exhibitsT[]) => {
-				return response.sort((a, b) => a.id.localeCompare(b.id));
-			},
 			providesTags: result =>
 				result
 					? [
