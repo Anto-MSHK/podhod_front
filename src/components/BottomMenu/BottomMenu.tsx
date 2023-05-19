@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BottomMenu.module.css';
 
 interface BottomMenuI {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	style?: React.CSSProperties;
 	gallery?: React.ReactNode;
 }
