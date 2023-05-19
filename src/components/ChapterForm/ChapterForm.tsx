@@ -9,6 +9,7 @@ import { FormInput } from "../Form/FormInput";
 import { useAppDispatch } from "../../app/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddChapterReqT, useAddChapterMutation } from "../../app/services/ChapterApi";
+import { toggleChapter } from "../../app/Slices/isChapterShownSlice";
 
 interface ChapterFormConfigT {
     title: string;
@@ -18,8 +19,9 @@ interface ChapterFormT {
     defaultData?: any
     eventId: string,
     showPieceId: string,
+    toggleChapter?: React.MouseEventHandler<HTMLButtonElement> | undefined
 }
-export const ChapterForm: React.FC<ChapterFormT> = ({ defaultData, showPieceId, eventId}) => {
+export const ChapterForm: React.FC<ChapterFormT> = ({ defaultData, showPieceId, eventId, toggleChapter}) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -80,6 +82,7 @@ export const ChapterForm: React.FC<ChapterFormT> = ({ defaultData, showPieceId, 
                             <div style={{ display: "flex", gap: 15 }}>
                                     <CustomBtn
                                         type="submit"
+                                        onClick={toggleChapter}
                                     >
                                         Создать
                                     </CustomBtn>

@@ -42,8 +42,10 @@ import plusIcon from "../../assets/icons/plusIcon.svg";
 import descIcon from "../../assets/icons/descIcon.svg";
 import { CustomBtn } from "./../CustomBtn/CustomBtn";
 import { ChapterForm } from "../ChapterForm/ChapterForm";
-import { clearSelectedExhibit, setSelectedExhibit } from "../../app/Slices/SelectedExhibitSlice";
-
+import {
+	clearSelectedExhibit,
+	setSelectedExhibit,
+} from "../../app/Slices/SelectedExhibitSlice";
 
 interface formType {
 	exhibitName: string;
@@ -54,7 +56,9 @@ interface formType {
 export const EventShowpiecesEdit = () => {
 	const [modalChapter, setModalChapter] = useState(false);
 	const toggleChapter = () => setModalChapter(!modalChapter);
-	const selectedExhibit = useAppSelector(state => state.selectedExhibit.exhibit)
+	const selectedExhibit = useAppSelector(
+		state => state.selectedExhibit.exhibit,
+	);
 	const { id: eventId } = useParams();
 	const [modal, setModal] = useState(false);
 	const [currentItem, setCurrenstItem] = useState("");
@@ -74,7 +78,7 @@ export const EventShowpiecesEdit = () => {
 	const [deleteExhibit] = useDeleteExhibitMutation();
 	const [editingExhibit, setEditingExhibit] = useState<any>(null);
 	const dispatch = useAppDispatch();
-	const toggle = () => setModal(!modal)
+	const toggle = () => setModal(!modal);
 	const handleEditExhibit = (exhibit: exhibitsT) => {
 		setEditingExhibit(exhibit);
 		toggle();
@@ -159,17 +163,16 @@ export const EventShowpiecesEdit = () => {
 		return getItem(item.name, item.id, item.id, item.short, dropDownItems);
 	});
 	useEffect(() => {
-		setCurrenstItem(selectedExhibit?.id as string)
-	},[selectedExhibit])
+		setCurrenstItem(selectedExhibit?.id as string);
+	}, [selectedExhibit]);
 	useEffect(() => {
 		if (menuItems && menuItems?.length > 0) setCurrenstItem(menuItems[0].key);
 		setChapterConf({
 			eventId: eventId as string,
 			showpieceId: data?.length ? data[0].id : "0",
 		});
-		dispatch(clearSelectedExhibit())
-		showpiece &&
-		dispatch(setSelectedExhibit(showpiece))
+		dispatch(clearSelectedExhibit());
+		showpiece && dispatch(setSelectedExhibit(showpiece));
 	}, [data]);
 
 	const formConfig: FormikConfig<formType> = {
@@ -289,6 +292,7 @@ export const EventShowpiecesEdit = () => {
 							<ChapterForm
 								eventId={eventId}
 								showPieceId={chapterConf.showpieceId}
+								toggleChapter={toggleChapter}
 							/>
 						)}
 					</Modal>

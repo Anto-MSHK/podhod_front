@@ -29,6 +29,9 @@ export const eventPagesApi = createApi({
 			query: (id: string) => ({
 				url: `/${id}/pages`,
 			}),
+			transformResponse: (response: EventPagesT[]) => {
+				return response.sort((a, b) => Number(a.id) - Number(b.id));
+			},
 			providesTags: result =>
 				result
 					? [

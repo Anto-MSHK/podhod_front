@@ -7,6 +7,7 @@ import {
 	UpdateExhibitPayloadT,
 } from "../Types/ExhibitsT";
 import { ChapterT } from "../Types/ChapterT";
+import { EventPagesT } from "../Types/EventPageT";
 
 type GetChaptersReqT = {
 	eventId: string;
@@ -62,6 +63,10 @@ export const chaptersApi = createApi({
 			query: ({ eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}`,
 			}),
+			transformResponse: (response: exhibitsT) => {
+				response.chapters?.sort((a, b) => Number(a.id) - Number(b.id));
+				return response;
+			},
 			providesTags: result => [{ type: "Chapters", id: result?.id }],
 		}),
 
@@ -88,6 +93,9 @@ export const chaptersApi = createApi({
 				url: `/${eventId}/showpieces/${id}`,
 				method: "PUT",
 				body,
+				params: {
+            sort: "id"
+        }
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
 		}), */
