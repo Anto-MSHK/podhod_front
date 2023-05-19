@@ -1,6 +1,6 @@
-import {CustomBtnGroup} from "../../components/CustomBtnGroup/CustomBtnGroup";
-import {InfoTag} from "../../components/InfoTag/InfoTag";
-import {WidgetItem} from "../../components/WidgetItem/WidgetItem";
+import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
+import { InfoTag } from "../../components/InfoTag/InfoTag";
+import { WidgetItem } from "../../components/WidgetItem/WidgetItem";
 
 import icon1 from "../../assets/icons/NumberOfExhibits.svg";
 import icon2 from "../../assets/icons/Wallet.svg";
@@ -11,50 +11,72 @@ import icon8 from "../../assets/icons/RedСheckMark.svg";
 import icon7 from "../../assets/icons/Calendar.svg";
 import loginIcon from "../../assets/icons/loginIcon.svg";
 import registerIcon from "../../assets/icons/RegisterIcon.svg";
-import Headphones from "../../assets/icons/Headphones.svg"
 // import { Form } from "../../components/Form/Form";
-import {FormContainer} from "../../components/Form/Form";
-import {FormInput} from "../../components/Form/FormInput";
+import { FormContainer } from "../../components/Form/Form";
+import { FormInput } from "../../components/Form/FormInput";
 import * as Yup from "yup";
 import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
-import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
-import CustomCard from "../../components/CustomCard/CustomCard";
-import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
-import ImageItem from "../../components/ImageItem/ImageItem";
-import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
+import { Gallery } from "../../components/Gallery/Gallery";
+import React from "react";
+import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
+import Head from "../../components/Head/Head";
+import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
+import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
+
+const images = [
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
+		alt: "Image 1",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Manoel.jpg/275px-Manoel.jpg",
+		alt: "Image 2",
+	},
+	{
+		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Manul_kitten.jpg/300px-Manul_kitten.jpg",
+		alt: "Image 3",
+	},{
+		src: "https://theology.education/storage/articles/d0450f9603254e299d0ad3220789f1db.jpg",
+		alt: "Image 4",
+	},{
+		src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ57F3CrhbcKSllSqdqKUuHJpery1TCMCt3ic-7fL3ZLhUJNljWqeSHoYleOFTMJU-7HB4&usqp=CAU",
+		alt: "Image 5",
+	},
+];
+
 
 export const MainPage = () => {
-    const btnData = [
-        {name: "Все"},
-        {name: "Активные"},
-        {name: "Просмотренные"},
-        {name: "Черновик"},
-    ];
+	const btnData = [
+		{ name: "Все" },
+		{ name: "Активные" },
+		{ name: "Просмотренные" },
+		{ name: "Черновик" },
+	];
 
-    const sort = [{name: "По дате"}, {name: "По типу"}];
+	const sort = [{ name: "По дате" }, { name: "По типу" }];
 
-    const formConfig: FormikConfig<any> = {
-        initialValues: {
-            criterion: "",
-            price: "",
-        },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    };
+	const formConfig: FormikConfig<any> = {
+		initialValues: {
+			email: "",
+			password: "",
+		},
+		onSubmit: values => {
+			alert(JSON.stringify(values, null, 2));
+		},
+	};
 
-    const schemaConfig: Yup.ObjectShape = {
-        email: Yup.string()
-            .email("Некорректная почта!")
-            .required("Обязательное поле!"),
-        password: Yup.string()
-            .min(4, "Минимум 4 символа!")
-            .max(12, "Максимум 12 символов!")
-            .required("Обязательное поле!"),
-    };
+	const schemaConfig: Yup.ObjectShape = {
+		email: Yup.string()
+			.email("Некорректная почта!")
+			.required("Обязательное поле!"),
+		password: Yup.string()
+			.min(4, "Минимум 4 символа!")
+			.max(12, "Максимум 12 символов!")
+			.required("Обязательное поле!"),
+	};
 
 	// @ts-ignore
 	// @ts-ignore
@@ -73,7 +95,13 @@ export const MainPage = () => {
 						tempore veniam possimus quasi aliquid aliquam, magnam fugiat,
 						ducimus voluptas eveniet minima deserunt.
 					</p>
-
+					<Gallery images={images} scrollLocked={false} className="gallery"/>
+					<div>
+						<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
+						<ButtonArt text="Узнать больше" onClick={() => console.log("Clicked")} />
+						<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
+						<ButtonArt text="Поиск" icon={icon1} onClick={() => console.log("Clicked")} />
+					</div>
 					<p className="min">{`<p>.min`} - микро текст</p>
 					<CustomBtnGroup view="radio" data={btnData} />
 					<div style={{ margin: "10px 0" }} />
@@ -99,8 +127,7 @@ export const MainPage = () => {
 							gap: "10px",
 							marginBottom: 10,
 						}}
-						>
-		
+					>
 						<WidgetItem info="4" icon={icon1} description="экспоната" />
 						<WidgetItem
 							info="от 250р."
@@ -133,7 +160,6 @@ export const MainPage = () => {
 				{/* <ImagesGallery /> */}
 				<div style={{ margin: "10px 0" }} />
 			</div>
-
 			<div>{/* <MainInfoExpoForm /> */}</div>
 			<div style={{ marginTop: "10px", marginBottom: "10px" }}>
 				<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
@@ -202,29 +228,43 @@ export const MainPage = () => {
 					"Лорем ипсум долор сит амет, цонсецтетуер адиписцинг елит. Аенеан вулпутате маурис ид аугуе, алияуам тинцидунт нулла ац, пеллентескуе сед маурис. Нам а цонгуе еуисмод елеифенд. Нулла рисус орнаре етим, егестас вел лигула. Сед егестас фелис а дуи, моллис ут рисус ат, моллис моллис рисус."
 				}
 			/>
-			<CustomCard title="sadadas">
-				<img style={{ width: "100px" }} src={icon1}></img>
-				<CardBody>
-					<CardTitle tag="h1">Card title</CardTitle>
-					<CardSubtitle className="mb-2 text-muted" tag="h6">
-						Card subtitle
-					</CardSubtitle>
-					<CardText>
-						Some quick example text to build on the card title and make up the
-						bulk of the card‘s content.
-					</CardText>
-					<CustomBtn>Button</CustomBtn>
-				</CardBody>
-			</CustomCard>
-			<Card
-				style={{
-					width: "18rem",
-					height: "fit-content",
-				}}
-			>
-				<img alt="Sample" src="https://picsum.photos/300/200" />
-			</Card>
+			<div style={{ marginTop: 50, width: "30%" }}>
+				<Head
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={false}
+
+				/>
+			</div>
+			<div style={{ marginTop: 50, width: "30%" }}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert("Назад"))}>Назад</CustomBtn>}
+					centerElement={<h3>Название</h3>}
+					rightElement={<h5>6+</h5>}
+					isTransparent={true}
+				/>
+			</div>
+			<div style={{ marginTop: 50, width: "30%" }}>
+				<Head
+					leftElement={<CustomBtn onClick={() => (alert("Меню"))}>Меню</CustomBtn>}
+					centerElement={" "}
+					isTransparent={false}
+					style={{ backgroundColor: "var(--gray_color)" }}
+				/>
+			</div>
+			<div style={{ marginTop: 50, width: "30%" }}>
+				<Head
+					leftElement={<CustomBtn>Назад</CustomBtn>}
+					centerElement={<h3>История написания</h3>}
+					isTransparent={false}
+				/>
+			</div>
+			<div style={{ marginTop: 50, width: "35%"}}>
+				<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}  >
+					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
+					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
+				</BottomMenu>
+			</div>
 		</div>
-		
 	);
 };

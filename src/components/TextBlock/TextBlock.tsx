@@ -12,7 +12,7 @@ export const TextBlock: React.FC<TextBlockProps> = ({ title, description, titleB
         <div className={styles.textContainer}>
             <div className={styles.titleContainer}>
                 {titleButton && <div className={styles.button}>{titleButton}</div>}
-                <span className={styles.title}>{title}</span>
+                <h3 className={styles.title}>{title}</h3>
             </div>
             <div className={styles.description}>{description}</div>
         </div>

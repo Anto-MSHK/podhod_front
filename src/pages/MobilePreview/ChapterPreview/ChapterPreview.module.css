@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 680px;
     justify-content: space-between;
+    width: 100%;
     background-color: black;
 }
 
@@ -10,13 +11,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 100%;
-}
-.chapterPreview_slider_container{
-    height: 150px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    width: 335px;
 }
 
 .chapterPreview_content {
@@ -24,48 +19,39 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    max-height: 365px;
+    max-height: 490px;
     overflow: auto;
+    gap: 10px;
 }
-.chapterPreview_content_text{
-    max-height: 400px;
-    overflow: auto;
-}
-.chapterPreview_tags_container{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
+
 .chapterPreview_bottom {
     display: flex;
     justify-content: center;
-}
-
-.chapterPreview_bottom{
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .bottom_wrapper {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 5px;
     width: 100%;
-    padding: 10px;
+    padding: 0 5px;
 }
 
 .bottom_leftContainer {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    width: 100%;
-}
-
-.bottom_rightContainer img{
-    width: 100px;
-    height: 75px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .bottom_rightContainer {
-    margin-top: -20px;
-    height: 85px;  
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
 }
+
