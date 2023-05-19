@@ -25,6 +25,10 @@ body {
 	font-family: "Gilgory";
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-image: url('../assets/pictures/backgroundPattern.jpg');
+	background-repeat: repeat;
+	background-size: 1000px;
+
 }
 
 body.no-scrollbar::-webkit-scrollbar {

@@ -1,3 +1,10 @@
+.main_page_form_wrapper {
+	background-color: var(--dark_gray_color);
+	padding: 15px;
+	border-radius: var(--radius);
+}
+
+
 .mainCreatePageWrapper {
 	display: flex;
 	justify-content: space-between;
