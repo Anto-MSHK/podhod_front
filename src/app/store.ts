@@ -24,7 +24,6 @@ import {
 } from "redux-persist";
 import { exhibitsApi } from "./services/ExhibitsApi";
 import { eventPagesApi } from "./services/EventPages.Api";
-import { pricesApi } from "./services/PricesApi";
 import { chaptersApi } from "./services/ChapterApi";
 import ExpoCreatePageSlice from "./Slices/ExpoCreatePageSlice";
 import isChapterShownReducer from './Slices/isChapterShownSlice'
@@ -34,7 +33,6 @@ const rootReducer = combineReducers({
 	[exhibitsApi.reducerPath]: exhibitsApi.reducer,
 	[eventPagesApi.reducerPath]: eventPagesApi.reducer,
 	[chaptersApi.reducerPath]: chaptersApi.reducer,
-	[pricesApi.reducerPath]: pricesApi.reducer,
 	counter: counterReducer,
 	images: imagesUploadReducer,
 	eventCreate: ExpoCreateReducer,
@@ -62,7 +60,6 @@ export const store = configureStore({
 			eventsApi.middleware,
 			exhibitsApi.middleware,
 			eventPagesApi.middleware,
-			pricesApi.middleware,
 			chaptersApi.middleware,
 		]),
 });

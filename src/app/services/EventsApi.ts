@@ -1,4 +1,4 @@
-import { UpdateEventTimes } from "./../Types/EventsT";
+import { PricesT, PriceT, UpdateEventTimes } from "./../Types/EventsT";
 import { API_URL } from "../http";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -18,11 +18,15 @@ export const eventsApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${API_URL}`,
 	}),
+	tagTypes: ["Price"],
 	endpoints: builder => ({
 		fetchEvents: builder.query<EventT[], void>({
 			query: () => ({
 				url: `/events`,
 			}),
+			transformResponse: (response: EventT[]) => {
+				return response.sort((a, b) => a.id - b.id);
+			},
 		}),
 		fetchEvent: builder.query<EventT, any>({
 			query: (id: string) => ({
@@ -67,6 +71,14 @@ export const eventsApi = createApi({
 				body: data.body,
 			}),
 		}),
+		updatePrices: builder.mutation<PriceT, { id: string; prices: PricesT[] }>({
+			query: ({ id, prices }) => ({
+				url: `/events/${id}/prices`,
+				method: "PATCH",
+				body: prices,
+			}),
+			invalidatesTags: (result, error, { id }) => [{ type: "Price", id }],
+		}),
 	}),
 });
 
@@ -79,4 +91,5 @@ export const {
 	useUpdateEventMutation,
 	useUpdateEventCalendarMutation,
 	useUpdateEventTimesMutation,
+	useUpdatePricesMutation,
 } = eventsApi;

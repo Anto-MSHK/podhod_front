@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { FormInput } from "../Form/FormInput";
 import Delete from "../../assets/icons/Delete.svg";
 import Plus from "../../assets/icons/Plus.svg";
-import { useUpdatePricesMutation } from "../../app/services/PricesApi";
+import { useUpdatePricesMutation } from "../../app/services/EventsApi";
 import { useParams } from "react-router-dom";
 import { useFetchEventQuery } from "../../app/services/EventsApi";
 
