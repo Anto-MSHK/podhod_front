@@ -2,6 +2,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	z-index: 0;
+	position: relative;
+	margin-top: 20px;
 }
 .spinner {
 	width: 100px;

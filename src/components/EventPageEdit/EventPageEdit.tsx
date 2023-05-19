@@ -38,12 +38,14 @@ export const EventPageEdit = () => {
 	const [updatePage] = useUpdatePageMutation();
 	const [deletePage] = useDeletePageMutation();
 	const [editingPage, setEditingPage] = useState<any>(null);
+	const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
 	const dispatch = useAppDispatch();
 
 	const toggle = () => setModal(!modal);
 
 	const handleSelectPage = (page: EventPagesT) => {
 		dispatch(setSelectedPage(page));
+		setSelectedPageId(page.id);
 	}
 
 	const handleEditPage = (page: EventPagesT) => {
@@ -133,17 +135,18 @@ export const EventPageEdit = () => {
 				{!isLoading &&
 					sortedData &&
 					sortedData.map((el: EventPagesT, index) => {
+						const isActivePage = selectedPageId === el.id; // Check if current page is the selected page
 						const updatedName = el.name === "#main-page" ? { ...el, name: "Главная страница" } : el;
 						return (
 							<div key={el.id} className={styles.mainCreatePageWrapper}>
 								<div
-									className={styles.pagesListWrapper}
+									className={isActivePage ? styles.pagesListWrapperActive : styles.pagesListWrapper}
 									onClick={() => handleSelectPage(updatedName)}
 								>
 									<div>{updatedName.name}</div>
 								</div>
 								<div
-									className={styles.pagesDeleteWrapper}
+									className={styles.pagesEditWrapper}
 									onClick={() => {
 										handleEditPage(updatedName);
 									}}

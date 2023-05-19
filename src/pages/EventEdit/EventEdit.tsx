@@ -190,7 +190,12 @@ export const EventEdit: React.FC = () => {
 									</p>
 									{event && event.name
 										? `«${eventSlice?.eventName}»`
-										: "Создайте новое мероприятие"}
+										: (
+											<div className={styles.createEventSign_wrapper}>
+												<div className={styles.createEvent_title}>Создайте новое мероприятие</div>
+												<div className={styles.createEvent_hint}>После создания вам будет доступна полная версия редактора</div>
+											</div>
+										)}
 								</h1>
 								<div
 									className={styles.info__toolbar_container}
