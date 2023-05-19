@@ -27,6 +27,7 @@ import { eventPagesApi } from "./services/EventPages.Api";
 import { pricesApi } from "./services/PricesApi";
 import { chaptersApi } from "./services/ChapterApi";
 import ExpoCreatePageSlice from "./Slices/ExpoCreatePageSlice";
+import isChapterShownReducer from './Slices/isChapterShownSlice'
 
 const rootReducer = combineReducers({
 	[eventsApi.reducerPath]: eventsApi.reducer,
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
 	eventCreatePage: ExpoCreatePageSlice,
 	selectedExhibit: selectedExhibitReducer,
 	selectedPage: selectedPageReducer,
+	isChapterShown: isChapterShownReducer
 });
 
 const persistConfig = {
