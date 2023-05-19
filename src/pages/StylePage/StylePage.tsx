@@ -19,34 +19,16 @@ import { useFormik, FormikConfig } from "formik";
 import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { MyForm } from "./Test";
 import { InfoMessage } from "../../components/InfoMessage/InfoMessage";
+import { ChapterForm } from "../../components/ChapterForm/ChapterForm";
+import CustomCard from "../../components/CustomCard/CustomCard";
+import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import ImageItem from "../../components/ImageItem/ImageItem";
+import { EventScheduleForm } from "../../components/EventScheduleForm/EventScheduleForm";
+import { TextBlock } from "../../components/TextBlock/TextBlock";
+import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
 import { Gallery } from "../../components/Gallery/Gallery";
-import React from "react";
 import { ButtonArt } from "../../components/ButtonArt/ButtonArt";
 import Head from "../../components/Head/Head";
-import { BottomMenu } from "../../components/BottomMenu/BottomMenu";
-import imagesGallery from "../../components/ImagesGallery/ImagesGallery";
-
-const images = [
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-		alt: "Image 1",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Manoel.jpg/275px-Manoel.jpg",
-		alt: "Image 2",
-	},
-	{
-		src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Manul_kitten.jpg/300px-Manul_kitten.jpg",
-		alt: "Image 3",
-	},{
-		src: "https://theology.education/storage/articles/d0450f9603254e299d0ad3220789f1db.jpg",
-		alt: "Image 4",
-	},{
-		src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ57F3CrhbcKSllSqdqKUuHJpery1TCMCt3ic-7fL3ZLhUJNljWqeSHoYleOFTMJU-7HB4&usqp=CAU",
-		alt: "Image 5",
-	},
-];
-
 
 export const MainPage = () => {
 	const btnData = [
@@ -78,10 +60,6 @@ export const MainPage = () => {
 			.required("Обязательное поле!"),
 	};
 
-	// @ts-ignore
-	// @ts-ignore
-	// @ts-ignore
-	// @ts-ignore
 	return (
 		<div>
 			<div style={{ display: "flex" }}>
@@ -233,12 +211,13 @@ export const MainPage = () => {
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={false}
-
 				/>
 			</div>
 			<div style={{ marginTop: 50, width: "30%" }}>
 				<Head
-					leftElement={<CustomBtn onClick={() => (alert("Назад"))}>Назад</CustomBtn>}
+					leftElement={
+						<CustomBtn onClick={() => alert("Назад")}>Назад</CustomBtn>
+					}
 					centerElement={<h3>Название</h3>}
 					rightElement={<h5>6+</h5>}
 					isTransparent={true}
@@ -259,11 +238,13 @@ export const MainPage = () => {
 					isTransparent={false}
 				/>
 			</div>
-			<div style={{ marginTop: 50, width: "35%"}}>
-				<BottomMenu gallery={<Gallery images={images} scrollLocked={false} className="gallery"/>}  >
-					<ButtonArt text="Перейти к промо-выставке" arrow onClick={() => console.log("Clicked")} />
-					<div style={{ width: "50px" }}><ButtonArt round icon={icon2} onClick={() => console.log("Clicked")} /></div>
-				</BottomMenu>
+			<div style={{ width: "10%" }}>
+				<TextBlock
+					title="Посадка на луну"
+					description="16 июля 1969 года стартовал американский космический корабль «Апполон-11», а 21 июля 1969 года первые земляне прогулялись по Луне.
+					Этими первопроходцами были члены миссии «Аполлон-11» Нил Армстронг и Базз (Эдвин) Олдрин. Человеку, который в этом усомнился, последний дал по «фейсу». Но всем сомневающимся морду не набьешь: анализировать факты – право каждого, у кого есть мозги и желание узнать правду.
+					Глобальная миссия «Это один маленький шаг для человека шаг, но гиганский скачок для всего человечества», - с пафосом произнес командир «Аполлона», ступив на лунную поверхность, а потом якобы тихо добавил: «Удачи, мистер Горски!»."
+				/>
 			</div>
 		</div>
 	);

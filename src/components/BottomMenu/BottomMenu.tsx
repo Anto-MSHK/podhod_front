@@ -7,6 +7,7 @@ interface BottomMenuI {
 	gallery?: React.ReactNode;
 }
 
+
 export const BottomMenu: React.FC<BottomMenuI> = ({ children, style, gallery }) => {
 	return (
 		<div className={styles.bottomMenu}>
