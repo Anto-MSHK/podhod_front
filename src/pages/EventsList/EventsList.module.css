@@ -5,6 +5,9 @@
 	padding: 15px;
 	max-width: 2050px;
 	margin: 0 auto;
+	background-image: url('../../assets/pictures/backgroundPattern.jpg');
+	background-repeat: repeat;
+	background-size: 1000px;
 }
 
 .filter {
