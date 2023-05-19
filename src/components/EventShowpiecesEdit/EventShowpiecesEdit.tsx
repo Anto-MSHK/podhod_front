@@ -292,6 +292,7 @@ export const EventShowpiecesEdit = () => {
 							<ChapterForm
 								eventId={eventId}
 								showPieceId={chapterConf.showpieceId}
+								toggleChapter={toggleChapter}
 							/>
 						)}
 					</Modal>
