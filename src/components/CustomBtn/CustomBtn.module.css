@@ -11,6 +11,7 @@
 	align-items: center;
 	text-align: center;
 	gap: 0.5rem;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .customBtn.icon_left {
@@ -43,9 +44,9 @@
 	color: white;
 }
 
-.disabled {
-	background-color: #636363 !important;
-	border: 1px solid #636363 !important;
+.customBtn:disabled {
+	background-color: var(--orange_color) !important;
+	border: 1px solid var(--orange_color) !important;
 	font-weight: 500;
 	font-size: 18px;
 	align-items: center;

@@ -25,6 +25,17 @@
 	height: fit-content;
 }
 
+.createEventSign_wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.createEvent_hint {
+	color: gray;
+	font-size: medium;
+	padding: 2px;
+}
+
 @media (max-width: 1140px) {
 	.info__toolbar_container {
 		display: flex;

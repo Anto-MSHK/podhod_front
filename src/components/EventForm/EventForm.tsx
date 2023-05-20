@@ -167,7 +167,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 				{formik => (
 					<div className={styles.fillForm_container}>
 						<div className={styles.asd}>
-							<h2>{`Основная информация`}</h2>
+							<h2 style={{textShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"}}>{`Основная информация`}</h2>
 							<div style={{ display: "flex", gap: 15 }}>
 								{editing && (
 									<CustomBtn

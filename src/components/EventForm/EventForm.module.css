@@ -1,19 +1,21 @@
 .fillForm_container {
 	display: flex;
 	flex-direction: column;
+	padding: 20px;
+	border-radius: var(--radius);
+	background-color: var(--dark_gray_color);
 }
 
 .asd {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 2px;
 }
 
 .form {
 	width: 100%;
 	height: fit-content;
-
-	background: rgba(226, 226, 226, 0.03);
 	border-radius: var(--radius) ;
 	padding: 1.5%;
 }
@@ -25,12 +27,20 @@
 
 .left {
 	width: 62%;
+	background-color: var(--dark_gray_color);
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	padding: 20px;
+	border-radius: var(--radius);
 }
 
 .right {
 	display: flex;
 	flex-direction: column;
 	width: 35%;
+	background-color: var(--dark_gray_color);
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	border-radius: var(--radius);
+	padding: 20px;
 }
 
 .name {

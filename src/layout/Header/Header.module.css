@@ -8,6 +8,8 @@
 	padding: 20px;
 	align-items: center;
 	text-align: center;
+	z-index: 2;
+	position: relative;
 }
 
 .header a {

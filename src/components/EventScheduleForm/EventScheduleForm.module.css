@@ -1,6 +1,9 @@
 .form_wrapper {
 	width: 100%;
 	/* min-width: 600px; */
+	justify-content: center;
+	display: flex;
+	align-items: center;
 }
 
 .form_wrapper input {

@@ -12,14 +12,18 @@ export const EventSettings: React.FC<EventSettingsPropsT> = ({
 																															 defaultScheduleData,
 																														 }) => {
 	return (
-		<div className={styles.content_container}>
-			<div className={styles.price_container}>
-				<PriceForm eventId={"" + defaultScheduleData?.id} />
+		<div className={styles.main_settings_container}>
+			<div className={styles.content_container}>
+				<div className={styles.price_container}>
+					<PriceForm eventId={"" + defaultScheduleData?.id} />
+				</div>
 			</div>
-			<div className={styles.line}></div>
-			<div className={styles.schedule_container}>
-				<EventScheduleForm defaultData={defaultScheduleData?.times as EventTimeT} />
+			<div className={styles.content_container}>
+				<div className={styles.schedule_container}>
+					<EventScheduleForm defaultData={defaultScheduleData?.times as EventTimeT} />
+				</div>
 			</div>
 		</div>
+
 	);
 };

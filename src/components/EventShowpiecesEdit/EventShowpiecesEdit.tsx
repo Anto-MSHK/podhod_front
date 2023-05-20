@@ -215,7 +215,7 @@ export const EventShowpiecesEdit = () => {
 			{showpiece ? (
 				<div className={styles.main_form_wrapper} style={{ display: "flex" }}>
 					<div style={{ maxWidth: 300 }}>
-						<div className={styles.form_header}>
+						<div className={styles.search_form_header}>
 							<CustomInput placeholder={"Найти экспонат..."} />
 						</div>
 						<CustomListMenu
