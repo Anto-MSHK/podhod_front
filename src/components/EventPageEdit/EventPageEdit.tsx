@@ -206,11 +206,11 @@ export const EventPageEdit = () => {
 											label="Полное описание:"
 											type={"textarea"}
 										/>
-										<FormInput
+{/*										<FormInput
 											name="visibleLogo"
 											label="Показывать логотип"
 											type="checkbox"
-										/>
+										/>*/}
 									</div>
 									{editingPage !== null ?
 										(
