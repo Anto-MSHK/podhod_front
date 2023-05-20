@@ -246,14 +246,6 @@ export const EventEdit: React.FC = () => {
 										selectedPageType={selectedPageType}
 									/>
 								</div>
-								<div className={styles.InfoComponentWrapper}>
-									<InfoMessage
-										style={{ padding: "1rem" }}
-										title={"Не может быть опубликовано"}
-										desc={"Есть незаполненные поля"}
-										icon={errorIcon}
-									/>
-								</div>
 							</div>
 						)}
 					</div>
