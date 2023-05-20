@@ -9,6 +9,7 @@ export type EventPagesT = {
 	createdAt: string;
 	updatedAt: string;
 	gallery: imageType[];
+	imgs?: {id: number, description: string, path: string}[]
 };
 
 export type CreateExpoPagePayloadT = {
