@@ -77,3 +77,21 @@
 	background-color: #000000 !important;
 	opacity: 0.8 !important;
 }
+
+input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	appearance: none;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+	background-color: var(--orange_color) !important;
+	border-color: var(--orange_color) !important;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.172l-4-4l-1.414 1.414L9 18.999l12-12l-1.414-1.414z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+}
