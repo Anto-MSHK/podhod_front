@@ -28,6 +28,15 @@ export type AddChapterReqT = {
 	eventId: string;
 	showpieceId: string;
 };
+export type UpdateChapterReqT = {
+	body: {
+		title: string;
+		description: string;
+	};
+	eventId: string;
+	showpieceId: string;
+	chapterId: string;
+};
 
 type DeleteСhapterReqT = {
 	id: string;
@@ -79,6 +88,16 @@ export const chaptersApi = createApi({
 
 			invalidatesTags: ["Chapters"],
 		}),
+		
+		updateChapter: builder.mutation<null, UpdateChapterReqT>({
+			query: ({ eventId, body, showpieceId, chapterId}) => ({
+				url: `/${eventId}/showpieces/${showpieceId}/chapter/${chapterId}`,
+				method: "PUT",
+				body: body,
+			}),
+
+			invalidatesTags: ["Chapters"],
+		}),
 
 		addBlock: builder.mutation<any, AddBlockReqT>({
 			query: ({ chapterId, body }) => ({
@@ -121,6 +140,7 @@ export const {
 	useFetchChaptersQuery,
 	useAddBlockMutation,
 	useAddChapterMutation,
+	useUpdateChapterMutation,
 	useDeleteChapterMutation,
 	useDeleteBlockMutation,
 } = chaptersApi;
