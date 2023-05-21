@@ -37,7 +37,6 @@ export const getConfigImgForm = (
 					body: {
 						title: values.title,
 						type: "img",
-						content: {},
 					},
 				});
 			},
