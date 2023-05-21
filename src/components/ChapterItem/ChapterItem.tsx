@@ -111,7 +111,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 					)}
 				</CustomCard>
 			</Collapse>
-			<LayoutForm id={"" + chapter.id} modal={modal} />
+			<LayoutForm chapterId={"" + chapter.id} modal={modal} />
 			<Modal
 						isOpen={modalChapter}
 						toggle={toggleEditChapter}

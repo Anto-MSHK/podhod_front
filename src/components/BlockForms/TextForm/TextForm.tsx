@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { FormInput } from "../../Form/FormInput";
 import { FormikConfig } from "formik";
-import { useAddBlockMutation } from "../../../app/services/ChapterApi";
 import * as Yup from "yup";
 
 export type TextBlockFormType = {
@@ -11,8 +10,10 @@ export type TextBlockFormType = {
 };
 
 export const getConfigTextForm = (
-	id: string,
-	addBlock: (config: any) => void,
+	handleReqBlock: (config: any) => void,
+	chapterId: string,
+	blockId?: string,
+	initialValues?: any,
 ): {
 	formConfig: FormikConfig<TextBlockFormType>;
 	schemaConfig: Yup.ObjectShape;
@@ -24,13 +25,14 @@ export const getConfigTextForm = (
 	return {
 		formConfig: {
 			initialValues: {
-				title: "",
-				description: "",
+				title: initialValues?.title || '',
+				description: initialValues?.data['description'] || '',
 				type: "text",
 			},
-			onSubmit: (values, form) => {
-				addBlock({
-					chapterId: id,
+			onSubmit: async (values, form) => {
+				let blockConf = {
+					chapterId,
+					blockId,
 					body: {
 						title: values.title,
 						type: "text",
@@ -38,7 +40,10 @@ export const getConfigTextForm = (
 							description: values.description,
 						},
 					},
-				});
+				};
+				try {
+					await handleReqBlock(blockConf);
+				} catch (error) {}
 			},
 		},
 		schemaConfig,

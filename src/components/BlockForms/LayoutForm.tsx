@@ -15,6 +15,7 @@ import { FormikConfig } from "formik";
 import {
 	chaptersApi,
 	useAddBlockMutation,
+	useUpdateBlockMutation,
 } from "../../app/services/ChapterApi";
 import { CustomBtnGroup } from "../CustomBtnGroup/CustomBtnGroup";
 import { group } from "console";
@@ -27,19 +28,34 @@ import { ImgForm, getConfigImgForm } from "./ImgForm/ImgForm";
 import { useDispatch } from "react-redux";
 import { deleteImgInImgBlock } from "../../app/Slices/imagesUploadSlice";
 import { InfoTag } from "../InfoTag/InfoTag";
+import { ImgBlockT, TextBlockT } from "../../app/Types/ChapterT";
 
-interface LayoutFormI {
-	id: string;
-	modal: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+export interface BlockDefaultData{
+	title: string,
+	data: TextBlockT | ImgBlockT,
 }
 
-export const LayoutForm: React.FC<LayoutFormI> = ({ id, modal }) => {
+interface LayoutFormI {
+	chapterId: string;
+	modal: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+	defaultData?: BlockDefaultData,
+	blockId?: string,
+	isEdit?:boolean
+	blockType?: 'text' | 'img'
+}
+
+export const LayoutForm: React.FC<LayoutFormI> = ({ chapterId, modal, isEdit, defaultData, blockId, blockType}) => {
+	
 	const [addBlock, { data, isLoading, isSuccess, reset }] =
 		useAddBlockMutation();
+	const [updateBlock] = useUpdateBlockMutation()	
 	const dispatch = useDispatch();
-	const [type, setType] = useState("text");
-	let [form, setForm]: any = useState(getConfigTextForm(id, addBlock));
+	const [type, setType] = useState(blockType || "text");
+	const handleBlockReq = isEdit ? updateBlock : addBlock 
+	console.log('block', blockId)
+	let [form, setForm]: any = useState(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
 	let curTypeText = "текст";
+
 
 	switch (type) {
 		case "text":
@@ -52,27 +68,30 @@ export const LayoutForm: React.FC<LayoutFormI> = ({ id, modal }) => {
 			<></>;
 	}
 
-	const btnData = [
+	const defaultBtnData = [
 		{
 			name: "Текст",
 			onClick: () => {
 				setType("text");
-				setForm(getConfigTextForm(id, addBlock));
+				setForm(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
 			},
 		},
 		{
 			name: "Картинка",
 			onClick: () => {
 				setType("img");
-				setForm(getConfigImgForm(id, addBlock));
+				setForm(getConfigImgForm(chapterId, addBlock));
 			},
 		},
 	];
 
+
+	
+
 	const toggleFunk = () => {
 		reset();
 		setType("text");
-		setForm(getConfigTextForm(id, addBlock));
+		setForm(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
 		modal[1](prev => !prev);
 		dispatch(chaptersApi.util.invalidateTags(["Chapters"]));
 		dispatch(deleteImgInImgBlock());
@@ -100,12 +119,14 @@ export const LayoutForm: React.FC<LayoutFormI> = ({ id, modal }) => {
 				{formik => (
 					<div>
 						<ModalHeader style={{ backgroundColor: "#1E1E1E" }}>
-							Создать новый блок
+						{
+							isEdit ? "Редактирование блока" : "Создать новый блок"
+						}	
 						</ModalHeader>
 						<ModalBody style={{ backgroundColor: "#1E1E1E ", color: "white" }}>
-							{!isSuccess ? (
+							{!isSuccess && !isEdit ? (
 								<div style={{ backgroundColor: "#1E1E1E " }}>
-									<CustomBtnGroup view="radio" data={btnData} />
+									<CustomBtnGroup view="radio" data={defaultBtnData} />
 								</div>
 							) : (
 								<InfoTag text={curTypeText} />
