@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Modal,
 	ModalHeader,
@@ -30,68 +30,120 @@ import { deleteImgInImgBlock } from "../../app/Slices/imagesUploadSlice";
 import { InfoTag } from "../InfoTag/InfoTag";
 import { ImgBlockT, TextBlockT } from "../../app/Types/ChapterT";
 
-export interface BlockDefaultData{
-	title: string,
-	data: TextBlockT | ImgBlockT,
+export interface BlockDefaultData {
+	title: string;
+	data: TextBlockT | ImgBlockT;
+}
+
+enum BlockTypeEnum {
+	"text" = "текст",
+	"img" = "слайдер",
 }
 
 interface LayoutFormI {
 	chapterId: string;
 	modal: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-	defaultData?: BlockDefaultData,
-	blockId?: string,
-	isEdit?:boolean
-	blockType?: 'text' | 'img'
+	defaultData?: BlockDefaultData;
+	blockId?: string;
+	isEdit?: boolean;
+	blockType?: "text" | "img";
 }
 
-export const LayoutForm: React.FC<LayoutFormI> = ({ chapterId, modal, isEdit, defaultData, blockId, blockType}) => {
-	
+export const LayoutForm: React.FC<LayoutFormI> = ({
+	chapterId,
+	modal,
+	isEdit,
+	defaultData,
+	blockId,
+	blockType,
+}) => {
 	const [addBlock, { data, isLoading, isSuccess, reset }] =
 		useAddBlockMutation();
-	const [updateBlock] = useUpdateBlockMutation()	
+	const [updateBlock] = useUpdateBlockMutation();
 	const dispatch = useDispatch();
-	const [type, setType] = useState(blockType || "text");
-	const handleBlockReq = isEdit ? updateBlock : addBlock 
-	console.log('block', blockId)
-	let [form, setForm]: any = useState(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
-	let curTypeText = "текст";
+	const [type, setType] = useState<{
+		value: string;
+		label: string;
+	}>({ value: "text", label: "текст" });
 
+	const handleBlockReq = isEdit ? updateBlock : addBlock;
 
-	switch (type) {
-		case "text":
-			curTypeText = "текст";
-			break;
-		case "img":
-			curTypeText = "слайдер";
-			break;
-		default:
-			<></>;
-	}
+	let [form, setForm]: any = useState(
+		getConfigTextForm(handleBlockReq, chapterId, blockId || "", defaultData),
+	);
+
+	useEffect(() => {
+		let type = blockType
+			? {
+					value: blockType,
+					label: BlockTypeEnum[blockType],
+			  }
+			: {
+					value: "text",
+					label: "текст",
+			  };
+		setType(type);
+	}, [blockType]);
+
+	useEffect(() => {
+		let form =
+			type.value === "text"
+				? getConfigTextForm(
+						handleBlockReq,
+						chapterId,
+						blockId || "",
+						defaultData,
+				  )
+				: getConfigImgForm(
+						handleBlockReq,
+						chapterId,
+						blockId || "",
+						defaultData,
+				  );
+
+		setForm(form);
+	}, [type]);
 
 	const defaultBtnData = [
 		{
 			name: "Текст",
 			onClick: () => {
-				setType("text");
-				setForm(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
+				setType({ value: "text", label: "текст" });
+				setForm(
+					getConfigTextForm(
+						handleBlockReq,
+						chapterId,
+						blockId || "",
+						defaultData,
+					),
+				);
 			},
 		},
 		{
 			name: "Картинка",
 			onClick: () => {
-				setType("img");
-				setForm(getConfigImgForm(chapterId, addBlock));
+				setType({ value: "img", label: "слайдер" });
+				setForm(
+					getConfigImgForm(
+						handleBlockReq,
+						chapterId,
+						blockId || "",
+						defaultData,
+					),
+				);
 			},
 		},
 	];
 
-
-	
-
 	const toggleFunk = () => {
 		reset();
-		setType("text");
-		setForm(getConfigTextForm(handleBlockReq, chapterId, blockId || '', defaultData));
+		setType({
+			value: blockType || "text",
+			label: blockType ? BlockTypeEnum[blockType] : "текст",
+		});
+		setForm(
+			getConfigTextForm(handleBlockReq, chapterId, blockId || "", defaultData),
+		);
 		modal[1](prev => !prev);
 		dispatch(chaptersApi.util.invalidateTags(["Chapters"]));
 		dispatch(deleteImgInImgBlock());
@@ -119,9 +171,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({ chapterId, modal, isEdit, de
 				{formik => (
 					<div>
 						<ModalHeader style={{ backgroundColor: "#1E1E1E" }}>
-						{
-							isEdit ? "Редактирование блока" : "Создать новый блок"
-						}	
+							{isEdit ? "Редактирование блока" : "Создать новый блок"}
 						</ModalHeader>
 						<ModalBody style={{ backgroundColor: "#1E1E1E ", color: "white" }}>
 							{!isSuccess && !isEdit ? (
@@ -129,11 +179,11 @@ export const LayoutForm: React.FC<LayoutFormI> = ({ chapterId, modal, isEdit, de
 									<CustomBtnGroup view="radio" data={defaultBtnData} />
 								</div>
 							) : (
-								<InfoTag text={curTypeText} />
+								<InfoTag text={type.label} />
 							)}
-							{type === "text" ? (
+							{type.value === "text" ? (
 								<TextForm />
-							) : type === "img" ? (
+							) : type.value === "img" ? (
 								<ImgForm id={data ? data.id : undefined} />
 							) : (
 								<></>
@@ -142,7 +192,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({ chapterId, modal, isEdit, de
 
 						<ModalFooter style={{ backgroundColor: "#1E1E1E", color: "white" }}>
 							{isLoading && <Spinner />}
-							{!isSuccess && type !== "img" && (
+							{!isSuccess && type.value !== "img" && (
 								<CustomBtn color="primary" type="submit">
 									Сохранить
 								</CustomBtn>

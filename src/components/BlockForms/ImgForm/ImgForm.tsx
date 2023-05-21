@@ -12,8 +12,10 @@ export type ImgBlockFormType = {
 };
 
 export const getConfigImgForm = (
-	id: string,
-	addBlock: (config: any) => void,
+	handleBlockReq: (config: any) => void,
+	chapterId: string,
+	blockId?: string,
+	initialValues?: any,
 ): {
 	formConfig: FormikConfig<ImgBlockFormType>;
 	schemaConfig: Yup.ObjectShape;
@@ -25,13 +27,13 @@ export const getConfigImgForm = (
 	return {
 		formConfig: {
 			initialValues: {
-				title: "",
+				title: initialValues ? initialValues.title : '',
 				type: "img",
 			},
-			onSubmit: values => {
-				console.log("<---");
-				addBlock({
-					chapterId: id,
+			onSubmit: async (values) => {
+			await handleBlockReq({
+					chapterId,
+					blockId,
 					body: {
 						title: values.title,
 						type: "img",
