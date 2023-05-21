@@ -66,6 +66,6 @@
 }
 
 .bottom_rightContainer {
-    margin-top: -20px;
-    height: 85px;  
+    height: 100%; 
+    width: 120px;
 }

@@ -9,13 +9,19 @@ type SliderT = {
 		alt?: string;
 		caption?: string;
 	}[];
+	bordered?: boolean
 };
 
-export const Slider: React.FC<SliderT> = ({ images }) => {
+export const Slider: React.FC<SliderT> = ({ images, bordered }) => {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const captionClassName = classNames(styles.slide_caption, {
 		[styles.single]: images.length <= 1,
 	});
+
+	const slideContainerClassName = classNames(
+		styles.slide_container,
+		{[styles.bordered] : bordered}
+	)
 	useEffect(() => {
 		const slideEl = document.getElementById(`slide-${activeIndex}`);
 		slideEl?.scrollIntoView({
@@ -44,7 +50,7 @@ export const Slider: React.FC<SliderT> = ({ images }) => {
 	const slides = images.map((item, index) => {
 		return (
 			<div
-				className={styles.slide_container}
+				className={slideContainerClassName}
 				id={`slide-${index}`}
 				onClick={() => goToIndex(index)}
 				key={item.src + index}
