@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./EventPageEdit.module.css";
 import { FormInput } from "../Form/FormInput";
 import { FormContainer } from "../Form/Form";
@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { FormikConfig } from "formik";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import deleteIcon from "../../assets/icons/CrossInCircle.svg";
 import editIcon from '../../assets/icons/editIcon.svg'
 import { useParams } from "react-router-dom";
@@ -24,6 +24,8 @@ import {
 import { setPage } from "../../app/Slices/ExpoCreatePageSlice";
 import { setSelectedPage } from "../../app/Slices/SelectedPageSlice";
 import ImagesGallery from "../ImagesGallery/ImagesGallery";
+import { imageType, replaceImgInPage } from "../../app/Slices/imagesUploadSlice";
+import { API_URL } from "../../app/http";
 
 interface formType {
 	pageName: string;
@@ -41,17 +43,20 @@ export const EventPageEdit = () => {
 	const [editingPage, setEditingPage] = useState<any>(null);
 	const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
 	const dispatch = useAppDispatch();
+	const replaceImgs = useAppSelector((state) => state.images.galleryPageImgs);
 
 	const toggle = () => setModal(!modal);
 
 	const handleSelectPage = (page: EventPagesT) => {
 		dispatch(setSelectedPage(page));
 		setSelectedPageId(page.id);
-	}
+	};
 
-	const handleEditPage = (page: EventPagesT) => {
-		setEditingPage(page);
-		toggle();
+	const handleEditPage = async (page: EventPagesT) => {
+		dispatch(setSelectedPage(page))
+		await setEditingPage(page);
+		await setSelectedPageId(page.id);
+		await toggle();
 	};
 
 	const handleAddPage = (values: formType) => {
@@ -83,6 +88,24 @@ export const EventPageEdit = () => {
 			toggle();
 		}
 	};
+
+	useEffect(() => {
+		if (data) {
+			let page = data.find((page) => page.id === selectedPageId);
+			if (page && page.imgs) {
+				console.log('pypa', '111');
+				let imgs: imageType[] = page.imgs.map((img) => {
+					return {
+						...img,
+						path: API_URL + "/" + img.path,
+						eventId: Number(eventId),
+					};
+				});
+				console.log('byba', imgs);
+				dispatch(replaceImgInPage(imgs));
+			}
+		}
+	}, [data, eventId, selectedPageId]);
 
 	const handleDeletePage = async (id: any) => {
 		await deletePage({ eventId: eventId as string, id }).unwrap();
@@ -215,12 +238,12 @@ export const EventPageEdit = () => {
 									{editingPage !== null ?
 										(
 											<ImagesGallery
-												imgField="galleryImgBlock"
+												imgField="galleryPageImgs"
 												path={`/img/to/page/${editingPage?.id}`}
 											/>
 										) :
 										(
-											<h6 style={{color: "gray"}}>После создания вам будет доступна загрузка фотографий</h6>
+											<h6 style={{ color: "gray" }}>После создания вам будет доступна загрузка фотографий</h6>
 										)
 									}
 								</div>

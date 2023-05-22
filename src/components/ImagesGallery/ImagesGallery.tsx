@@ -64,7 +64,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 									backgroundColor:
 										dragOverIndex === index ? "lightgray" : "white",
 									scale: dragOverIndex === index ? "1.05" : "1",
-									cursor: "pointer",
 								}}
 							>
 								<ImageItem field={imgField} type={"gallery"} image={image} />

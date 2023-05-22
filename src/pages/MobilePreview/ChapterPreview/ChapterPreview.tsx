@@ -63,7 +63,7 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 							return (
 								<div>
 									<h3>{images.length > 0 && block.title}</h3>
-									<Gallery images={images} />
+									<Gallery images={images} isDisabled={true} />
 								</div>
 							)
 						}
