@@ -12,8 +12,11 @@ export type ImgBlockFormType = {
 };
 
 export const getConfigImgForm = (
-	id: string,
-	addBlock: (config: any) => void,
+	handleBlockReq: (config: any) => void,
+	chapterId: string,
+	blockId?: string,
+	initialValues?: any,
+	isEdit?: boolean,
 ): {
 	formConfig: FormikConfig<ImgBlockFormType>;
 	schemaConfig: Yup.ObjectShape;
@@ -25,19 +28,29 @@ export const getConfigImgForm = (
 	return {
 		formConfig: {
 			initialValues: {
-				title: "",
+				title: initialValues ? initialValues.title : "",
 				type: "img",
 			},
-			onSubmit: values => {
-				console.log("<---");
-				addBlock({
-					chapterId: id,
-					body: {
-						title: values.title,
-						type: "img",
-						content: {},
-					},
-				});
+			onSubmit: async values => {
+				let body = isEdit
+					? {
+							chapterId,
+							blockId,
+							body: {
+								title: values.title,
+								type: "img",
+							},
+					  }
+					: {
+							chapterId,
+							blockId,
+							body: {
+								title: values.title,
+								type: "img",
+								content: {},
+							},
+					  };
+				await handleBlockReq(body);
 			},
 		},
 		schemaConfig,
@@ -45,8 +58,9 @@ export const getConfigImgForm = (
 };
 interface IImgForm {
 	id: string;
+	isEdit?: boolean;
 }
-export const ImgForm: FC<IImgForm> = ({ id }) => {
+export const ImgForm: FC<IImgForm> = ({ id, isEdit }) => {
 	return (
 		<div>
 			<FormInput name="title" label="Название:" />
@@ -59,7 +73,7 @@ export const ImgForm: FC<IImgForm> = ({ id }) => {
 					Сохранить и добавить картинки
 				</CustomBtn>
 			)}
-			{id && (
+			{(id || isEdit) && (
 				<div>
 					<h3>Картинки:</h3>
 					<ImagesGallery

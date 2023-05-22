@@ -20,6 +20,18 @@ type UpdateExhibitReqT = {
 	eventId: string;
 };
 
+type UpdateBlockReqT = {
+	chapterId: string,
+	blockId: string,
+	body: {
+		title: string,
+		content: {
+		  description: string,
+		  withAudio?: boolean,
+		}
+	  }
+}
+
 export type AddChapterReqT = {
 	body: {
 		title: string;
@@ -107,17 +119,14 @@ export const chaptersApi = createApi({
 			}),
 			invalidatesTags: ["Chapters"],
 		}),
-		/* updateExhibit: builder.mutation<null, UpdateExhibitReqT>({
-			query: ({ body, eventId, id }) => ({
-				url: `/${eventId}/showpieces/${id}`,
+		updateBlock: builder.mutation<null, UpdateBlockReqT>({
+			query: ({ body, chapterId, blockId }) => ({
+				url: `/${chapterId}/block/${blockId}`,
 				method: "PUT",
 				body,
-				params: {
-            sort: "id"
-        }
 			}),
-			invalidatesTags: (result, error, { id }) => [{ type: "Pages", id }],
-		}), */
+			invalidatesTags: ['Chapters'],
+		}),
 		deleteChapter: builder.mutation<null, DeleteСhapterReqT>({
 			query: ({ id, eventId, showpieceId }) => ({
 				url: `/${eventId}/showpieces/${showpieceId}/chapter/${id}`,
@@ -143,4 +152,5 @@ export const {
 	useUpdateChapterMutation,
 	useDeleteChapterMutation,
 	useDeleteBlockMutation,
+	useUpdateBlockMutation,
 } = chaptersApi;

@@ -16,6 +16,7 @@ import { TextBlock } from "./TextBlock/TextBlock";
 import { ImgBlock } from "./ImgBlock/ImgBlock";
 import { DropDown, ListDropDownItemsI } from "../DropDown/DropDown";
 import { useDeleteBlockMutation } from "../../app/services/ChapterApi";
+import { LayoutForm } from "../BlockForms/LayoutForm";
 
 interface LayoutBlockI {
 	title: string;
@@ -50,19 +51,20 @@ export const LayoutBlock: FC<LayoutBlockI> = ({
 	let curBlock = undefined;
 	let curTypeText = undefined;
 	const [deleteChapter] = useDeleteBlockMutation();
-
+	const modal = useState(false);
 	const isOpenState = useState(false);
 	const dropdownItems: ListDropDownItemsI[] = [
-		// {
-		// 	text: "Редактировать",
-		// 	onClick: () => handleEditExhibit(item),
-		// },
+		{
+			text: "Редактировать",
+			onClick: () => {
+				modal[1](prev => !prev);
+			},
+		},
 		{
 			text: "Удалить",
 			onClick: () => handleDeleteChapter(data.id, chapterId),
 		},
 	];
-
 	const handleDeleteChapter = async (id: number, chapterId: number) => {
 		try {
 			console.log(chapterId + " " + id);
@@ -117,6 +119,14 @@ export const LayoutBlock: FC<LayoutBlockI> = ({
 			<ListGroupItemText style={{ color: themes[type].text, display: "grid" }}>
 				{curBlock}
 			</ListGroupItemText>
+			<LayoutForm
+				chapterId={"" + chapterId}
+				defaultData={{ title, data }}
+				blockId={"" + blockId}
+				modal={modal}
+				isEdit
+				blockType={type}
+			/>
 		</ListGroupItem>
 	);
 };
