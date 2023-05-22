@@ -181,8 +181,8 @@ export const EventsList: React.FC = () => {
 				</div>
 				<div style={{ margin: "10px 0" }} />
 				<div className={styles.infoCards}>
-					<InfoCard title="Средняя цена за выставку" value={calcAvgPrice(events)} />
-					<InfoCard title="Всего создано выставок" value={countEvents(events)} />
+					<InfoCard title="Средняя цена за выставку" value={`${calcAvgPrice(events)} руб.`} />
+					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} />
 					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} />
 				</div>
 			</div>

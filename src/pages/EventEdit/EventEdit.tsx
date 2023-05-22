@@ -52,7 +52,7 @@ export const EventEdit: React.FC = () => {
 		setActiveBtn(btn);
 	};
 
-	/*	useEffect(() => {
+		useEffect(() => {
 			const handleScroll = () => {
 				setTimeout(() => {
 					if (containerRef.current && window.scrollY > 90) {
@@ -66,7 +66,7 @@ export const EventEdit: React.FC = () => {
 			};
 			window.addEventListener("scroll", handleScroll);
 			return () => window.removeEventListener("scroll", handleScroll);
-		}, []);*/
+		}, []);
 
 	useEffect(() => {
 		if (event) {

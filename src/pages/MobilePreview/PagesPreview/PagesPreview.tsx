@@ -18,6 +18,7 @@ import { setPage } from "../../../app/Slices/ExpoCreatePageSlice";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import imagesGallery from "../../../components/ImagesGallery/ImagesGallery";
 import icon2 from "../../../assets/icons/Wallet.svg";
+import { API_URL } from "../../../app/http";
 
 interface IExhibitPage {
 	data?: EventPagesT | null;
@@ -25,20 +26,12 @@ interface IExhibitPage {
 
 export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
 
-	const images = [
-		{
-			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Zunge_raus.JPG/80px-Zunge_raus.JPG",
-			alt: "Image 1",
-		},
-		{
-			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Manoel.jpg/275px-Manoel.jpg",
-			alt: "Image 2",
-		},
-		{
-			src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Manul_kitten.jpg/300px-Manul_kitten.jpg",
-			alt: "Image 3",
-		},
-	];
+	const images = data && data.imgs?.map(img => ({
+		src: `${API_URL}/${img.path}`,
+		caption: img.description,
+	}));
+
+
 	const { id: eventId } = useParams();
 	const { data: pages, error, isLoading, refetch } = useFetchPageQuery(eventId);
 	const dispatch = useAppDispatch();
@@ -74,7 +67,7 @@ export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
 				<TextBox data={pageData} />
 			</div>
 			<div className={styles.exhibitPreview_bottom}>
-				{data && (
+				{data && images && images.length > 0 ? (
 					<BottomMenu
 						gallery={
 							<Gallery
@@ -84,7 +77,9 @@ export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
 							/>
 						}
 					/>
-				)}
+				) : data ? (
+					<BottomMenu><h3>Здесь пока нет изображений</h3></BottomMenu>
+				) : ('')}
 			</div>
 		</div>
 	);

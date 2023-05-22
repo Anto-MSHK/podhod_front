@@ -23,6 +23,7 @@ import {
 } from "../../app/Types/EventPageT";
 import { setPage } from "../../app/Slices/ExpoCreatePageSlice";
 import { setSelectedPage } from "../../app/Slices/SelectedPageSlice";
+import ImagesGallery from "../ImagesGallery/ImagesGallery";
 
 interface formType {
 	pageName: string;
@@ -211,6 +212,17 @@ export const EventPageEdit = () => {
 											type="checkbox"
 										/>
 									</div>
+									{editingPage !== null ?
+										(
+											<ImagesGallery
+												imgField="galleryImgBlock"
+												path={`/img/to/page/${editingPage?.id}`}
+											/>
+										) :
+										(
+											<h6 style={{color: "gray"}}>После создания вам будет доступна загрузка фотографий</h6>
+										)
+									}
 								</div>
 							</ModalBody>
 							<ModalFooter
