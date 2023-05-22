@@ -70,21 +70,28 @@ export const imgBlockUploadImg = createAsyncThunk(
 
 export const uploadPageImgDelete = createAsyncThunk(
 	"images/uploadPageImgDelete",
-	async (path: string, thunkAPI) => {
+	async (id: number, thunkAPI) => {
+		const path = `/img/${id}`;
 		await $api.delete(path);
+		return id;
 	},
 );
 
+
 export const imgBlockDeleteImg = createAsyncThunk(
 	"images/deleteBlockImg",
-	async (path: string, thunkAPI) => {
+	async (id: number, thunkAPI) => {
+		const path = `/img/${id}`;
 		await $api.delete(path);
+		return id;
 	},
 );
 export const avatarExpoDeleteImg = createAsyncThunk(
 	"images/deleteEventImg",
-	async (path: string, thunkAPI) => {
+	async (id: number, thunkAPI) => {
+		const path = `/img/${id}`;
 		await $api.delete(path);
+		return id;
 	},
 );
 
@@ -124,6 +131,12 @@ const imagesUploadSlice = createSlice({
 		});
 		builder.addCase(avatarExpoDeleteImg.fulfilled, (state, action) => {
 			state.avatarExpo = undefined;
+		});
+		builder.addCase(uploadPageImgDelete.fulfilled, (state, action: PayloadAction<number>) => {
+			state.galleryPageImgs = state.galleryPageImgs.filter(img => img.id !== action.payload);
+		});
+		builder.addCase(imgBlockDeleteImg.fulfilled, (state, action: PayloadAction<number>) => {
+			state.galleryImgBlock = state.galleryImgBlock.filter(img => img.id !== action.payload);
 		});
 		builder.addCase(imgBlockUploadImg.fulfilled, (state, action) => {
 			state.galleryImgBlock = action.payload;

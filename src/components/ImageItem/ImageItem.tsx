@@ -38,12 +38,12 @@ const ImageItem: React.FC<IImageComponent> = ({
 			<div>
 				<div
 					className={styles.closeIcon}
-					onClick={() => dispatch(ImgHandler[field](`/img/${image.id}`))}
+					onClick={() => dispatch(ImgHandler[field](image.id))}
 				/>
 				<img
 					className={className ? className : styles.image}
 					src={image.path}
-					style={{...style }}
+					style={{...style}}
 					alt=""
 				/>
 			</div>
