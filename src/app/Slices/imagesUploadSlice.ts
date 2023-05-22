@@ -80,6 +80,10 @@ const imagesUploadSlice = createSlice({
 		deleteImgInImgBlock(state) {
 			state.galleryImgBlock = [];
 		},
+		
+		replaceImgInImgBlock(state, action) {
+			state.galleryImgBlock = action.payload
+		}
 	},
 	extraReducers: builder => {
 		builder.addCase(getEventImg.fulfilled, (state, action) => {
@@ -98,5 +102,5 @@ const imagesUploadSlice = createSlice({
 	},
 });
 
-export const { deleteImgInImgBlock } = imagesUploadSlice.actions;
+export const { deleteImgInImgBlock, replaceImgInImgBlock } = imagesUploadSlice.actions;
 export default imagesUploadSlice.reducer;

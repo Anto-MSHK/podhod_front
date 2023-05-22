@@ -26,9 +26,12 @@ import {
 } from "./TextForm/TextForm";
 import { ImgForm, getConfigImgForm } from "./ImgForm/ImgForm";
 import { useDispatch } from "react-redux";
-import { deleteImgInImgBlock } from "../../app/Slices/imagesUploadSlice";
+import { deleteImgInImgBlock, imageType, replaceImgInImgBlock } from "../../app/Slices/imagesUploadSlice";
 import { InfoTag } from "../InfoTag/InfoTag";
 import { ImgBlockT, TextBlockT } from "../../app/Types/ChapterT";
+import { useAppSelector } from "../../app/hooks";
+import { ImgBlock } from "../BlockCards/ImgBlock/ImgBlock";
+import { API_URL } from "../../app/http";
 
 export interface BlockDefaultData {
 	title: string;
@@ -60,6 +63,9 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 	const [addBlock, { data, isLoading, isSuccess, reset }] =
 		useAddBlockMutation();
 	const [updateBlock] = useUpdateBlockMutation();
+
+	const [setImgs] = useAppSelector(state => state.images.galleryImgBlock)
+	
 	const dispatch = useDispatch();
 	const [type, setType] = useState<{
 		value: string;
@@ -71,6 +77,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 	let [form, setForm]: any = useState(
 		getConfigTextForm(handleBlockReq, chapterId, blockId || "", defaultData),
 	);
+
 
 	useEffect(() => {
 		let type = blockType
@@ -86,8 +93,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 	}, [blockType]);
 
 	useEffect(() => {
-		let form =
-			type.value === "text"
+		let form = (type.value === "text")
 				? getConfigTextForm(
 						handleBlockReq,
 						chapterId,
@@ -100,9 +106,21 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 						blockId || "",
 						defaultData,
 				  );
-
 		setForm(form);
 	}, [type]);
+
+	useEffect(() => {
+		if ((defaultData?.data as ImgBlockT)?.imgs) {
+			console.log('dassta', defaultData?.data)
+			let imgs: imageType[] = (defaultData?.data as ImgBlockT)?.imgs.map((img) => {
+				return {
+					...img,
+					path: `${API_URL}/${img.path}`,
+				}
+			})
+			dispatch(replaceImgInImgBlock(imgs || []))
+		}
+	}, [defaultData])
 
 	const defaultBtnData = [
 		{
@@ -129,6 +147,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 						chapterId,
 						blockId || "",
 						defaultData,
+						isEdit,
 					),
 				);
 			},
@@ -184,7 +203,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 							{type.value === "text" ? (
 								<TextForm />
 							) : type.value === "img" ? (
-								<ImgForm id={data ? data.id : undefined} />
+								<ImgForm  id={data ? data.id : blockId ? blockId : undefined} isEdit={isEdit} />
 							) : (
 								<></>
 							)}
@@ -192,7 +211,7 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 
 						<ModalFooter style={{ backgroundColor: "#1E1E1E", color: "white" }}>
 							{isLoading && <Spinner />}
-							{!isSuccess && type.value !== "img" && (
+							{(!isSuccess && type.value !== "img") && (
 								<CustomBtn color="primary" type="submit">
 									Сохранить
 								</CustomBtn>
