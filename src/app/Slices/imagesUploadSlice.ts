@@ -16,12 +16,13 @@ export type imageType = {
 	eventId: number;
 };
 
-export type ImagesArrayType = "galleryImgBlock";
+export type ImagesArrayType = "galleryImgBlock" | 'galleryPageImgs';
 export type SingleType = "avatarExpo";
 
 type imagesUploadSliceT = {
 	galleryImgBlock: imageType[];
 	avatarExpo: imageType | undefined;
+	galleryPageImgs: imageType[];
 };
 
 export const getEventImg = createAsyncThunk(
@@ -43,6 +44,18 @@ export const avatarExpoUploadImg = createAsyncThunk(
 	},
 );
 
+
+export const uploadPageImgs = createAsyncThunk(
+	"images/uploadPageImgs",
+	async ({ path, formData }: any, thunkAPI) => {
+		const response = await $api.post(path, formData);
+		response.data.imgs.map((img: any) => {
+			img.path = API_URL + "/" + img.path;
+			return img;
+		});
+		return response.data.imgs;
+	},
+);
 export const imgBlockUploadImg = createAsyncThunk(
 	"images/uploadBlockImg",
 	async ({ path, formData }: any, thunkAPI) => {
@@ -52,6 +65,13 @@ export const imgBlockUploadImg = createAsyncThunk(
 			return img;
 		});
 		return response.data.imgs;
+	},
+);
+
+export const uploadPageImgDelete = createAsyncThunk(
+	"images/uploadPageImgDelete",
+	async (path: string, thunkAPI) => {
+		await $api.delete(path);
 	},
 );
 
@@ -71,6 +91,7 @@ export const avatarExpoDeleteImg = createAsyncThunk(
 const initialState: imagesUploadSliceT = {
 	avatarExpo: undefined,
 	galleryImgBlock: [],
+	galleryPageImgs:[],
 };
 
 const imagesUploadSlice = createSlice({
@@ -83,6 +104,14 @@ const imagesUploadSlice = createSlice({
 		
 		replaceImgInImgBlock(state, action) {
 			state.galleryImgBlock = action.payload
+		},
+
+		deleteImgInPage(state) {
+			state.galleryPageImgs = [];
+		},
+
+		replaceImgInPage(state, action) {
+			state.galleryPageImgs = action.payload
 		}
 	},
 	extraReducers: builder => {
@@ -99,8 +128,12 @@ const imagesUploadSlice = createSlice({
 		builder.addCase(imgBlockUploadImg.fulfilled, (state, action) => {
 			state.galleryImgBlock = action.payload;
 		});
+		builder.addCase(uploadPageImgs.fulfilled, (state, action) => {
+			state.galleryPageImgs = action.payload;
+		});
+
 	},
 });
 
-export const { deleteImgInImgBlock, replaceImgInImgBlock } = imagesUploadSlice.actions;
+export const { deleteImgInImgBlock, replaceImgInImgBlock, replaceImgInPage, deleteImgInPage } = imagesUploadSlice.actions;
 export default imagesUploadSlice.reducer;

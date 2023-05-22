@@ -7,7 +7,7 @@ import {
 	ImagesArrayType,
 	SingleType,
 	avatarExpoUploadImg,
-	imgBlockUploadImg,
+	imgBlockUploadImg, uploadPageImgs,
 } from "../../app/Slices/imagesUploadSlice";
 
 interface IDragAndDrop {
@@ -32,6 +32,7 @@ const DragAndDrop: React.FC<IDragAndDrop> = ({
 	const DragHandler = {
 		avatarExpo: avatarExpoUploadImg,
 		galleryImgBlock: imgBlockUploadImg,
+		galleryPageImgs: uploadPageImgs,
 	};
 
 	const processImages = useCallback(
