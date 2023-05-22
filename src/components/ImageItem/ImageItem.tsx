@@ -43,7 +43,7 @@ const ImageItem: React.FC<IImageComponent> = ({
 				<img
 					className={className ? className : styles.image}
 					src={image.path}
-					style={{ cursor: "pointer", ...style }}
+					style={{...style }}
 					alt=""
 				/>
 			</div>
