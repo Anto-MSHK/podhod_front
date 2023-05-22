@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toggleChapter } from "../../app/Slices/isChapterShownSlice";
 import { RootState } from "../../app/store";
+import { ChapterForm } from "../ChapterForm/ChapterForm";
 type ChapterItemT = {
 	chapter: ChapterT;
 	showpieceId: string;
@@ -28,20 +29,22 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 	eventId,
 }) => {
 	const dispatch = useDispatch();
+	
+	const isChapterShown = useSelector((state: RootState) => state.isChapterShown[chapter.id] || false);
 	const handleClick = () => {
 		dispatch(toggleChapter(chapter.id));
 	};
-
-	const isChapterShown = useSelector((state: RootState) => state.isChapterShown[chapter.id] || false);
+	const [modalChapter, setModalChapter] = useState(false);
+	const toggleEditChapter = () => setModalChapter(!modalChapter);
 
 
 	const [deleteChapter] = useDeleteChapterMutation();
 
 	const dropdownItems: ListDropDownItemsI[] = [
-		// {
-		// 	text: "Редактировать",
-		// 	onClick: () => handleEditExhibit(item),
-		// },
+		 {
+			text: "Редактировать",
+			onClick: () => handleEditChapter(),
+		},
 		{
 			text: "Удалить",
 			onClick: () => handleDeleteChapter("" + chapter.id, showpieceId),
@@ -60,6 +63,10 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 			console.log(error);
 		}
 	};
+
+	const handleEditChapter = () => {
+		toggleEditChapter()
+	}
 
 	const modal = useState(false);
 	const toggle = () => modal[1](prev => !prev);
@@ -86,7 +93,7 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 			}
 		>
 			<Collapse isOpen={isChapterShown}>
-				<CustomCard className={styles.card_body} outline>
+				<CustomCard className={styles.card_body}>
 					{chapter.blocks.length > 0 ? (
 						chapter.blocks.map((block, index) => (
 							<LayoutBlock
@@ -105,6 +112,25 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 				</CustomCard>
 			</Collapse>
 			<LayoutForm id={"" + chapter.id} modal={modal} />
+			<Modal
+						isOpen={modalChapter}
+						toggle={toggleEditChapter}
+						size={"xl"}
+						contentClassName={styles.modalWrapper}
+						className={styles.modal}
+						backdropClassName={styles.modalModal}
+					>
+						{eventId && (
+							<ChapterForm
+								eventId={eventId}
+								showPieceId={showpieceId}
+								toggleChapter={toggleEditChapter}
+								isEdit
+								defaultData={chapter}
+								chapterId={''+chapter.id}
+							/>
+						)}
+					</Modal>
 		</CustomListItem>
 	);
 };

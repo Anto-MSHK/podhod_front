@@ -1,96 +1,101 @@
 import * as React from "react";
 import styles from "./ChapterForm.module.css";
 import { CustomBtn } from "../CustomBtn/CustomBtn";
-import { useState, useEffect } from "react";
 import { FormContainer } from "../Form/Form";
 import * as Yup from "yup";
 import { FormikConfig } from "formik";
 import { FormInput } from "../Form/FormInput";
-import { useAppDispatch } from "../../app/hooks";
-import { useNavigate, useParams } from "react-router-dom";
-import { AddChapterReqT, useAddChapterMutation } from "../../app/services/ChapterApi";
-import { toggleChapter } from "../../app/Slices/isChapterShownSlice";
+import {
+	AddChapterReqT,
+	UpdateChapterReqT,
+	useAddChapterMutation,
+	useUpdateChapterMutation,
+} from "../../app/services/ChapterApi";
 
 interface ChapterFormConfigT {
-    title: string;
-    description: string;
+	title: string;
+	description: string;
 }
 interface ChapterFormT {
-    defaultData?: any
-    eventId: string,
-    showPieceId: string,
-    toggleChapter?: React.MouseEventHandler<HTMLButtonElement> | undefined
+	defaultData?: {
+		title: string;
+		description: string;
+	};
+	eventId: string;
+	showPieceId: string;
+	chapterId?: string;
+	toggleChapter?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+	isEdit?: boolean;
 }
-export const ChapterForm: React.FC<ChapterFormT> = ({ defaultData, showPieceId, eventId, toggleChapter}) => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-    const [addChapter] = useAddChapterMutation()
-    const [editing, setEditing] = useState(false);
+interface IChapterReq extends AddChapterReqT, UpdateChapterReqT {}
 
-    const formConfig: FormikConfig<ChapterFormConfigT> = {
-        initialValues: {
-            title: '',
-            description: "",
-        },
-        onSubmit: async (values, form) => {
-            let chapter: AddChapterReqT = {
-                body: {
-                    title: values.title,
-                description: values.description
-                } ,
-                eventId: eventId,
-                showpieceId: showPieceId,
-            }
-            try {
-                const payload = await addChapter(chapter).unwrap()
-                console.log(payload)
-            } catch (error) {
-                console.log(error)
-            }
-            
-        },
-    };
-    const schemaConfig: Yup.ObjectShape = {
-        title: Yup.string().required("Обязательное поле!"),
-        description: Yup.string().required("Обязательное поле!"),
-    };
+export const ChapterForm: React.FC<ChapterFormT> = ({
+	defaultData,
+	showPieceId,
+	eventId,
+	toggleChapter,
+	isEdit,
+	chapterId,
+}) => {
+	const [addChapter] = useAddChapterMutation();
+	const [updateChapter] = useUpdateChapterMutation();
 
-    useEffect(() => {
-        if (!id) setEditing(true);
-    }, [id]);
+	const handleSumbitChapter = async (chapter: IChapterReq) => {
+		try {
+			if (isEdit) {
+				await updateChapter(chapter).unwrap;
+			} else await addChapter(chapter).unwrap;
+		} catch (error) {}
+	};
 
+	const formConfig: FormikConfig<ChapterFormConfigT> = {
+		initialValues: {
+			title: defaultData?.title || "",
+			description: defaultData?.description || "",
+		},
+		onSubmit: async (values, form) => {
+			let chapter: IChapterReq = {
+				body: {
+					title: values.title,
+					description: values.description,
+				},
+				eventId: eventId,
+				showpieceId: showPieceId,
+				chapterId: chapterId || "",
+			};
+			await handleSumbitChapter(chapter);
+		},
+	};
+	const schemaConfig: Yup.ObjectShape = {
+		title: Yup.string().required("Обязательное поле!"),
+		description: Yup.string().required("Обязательное поле!"),
+	};
 
-    const toggleEditing = () => {
-        setEditing(!editing);
-    };
-
-    return (
-        <div className = {styles.chapter_form_wrapper}>
-            <FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
-                {formik => (
-                    <div className={styles.fillForm_container}>
-                        <div className={styles.asd}>
-                            <h2>{`Создание раздела`}</h2>
-                        </div>
-                        <div className={styles.form}>
-                            <div className={styles.form_info}>
-                                <FormInput name="title" label="Название:" />
-                                <FormInput name="description" label="Описание:" />
-                            </div>
-                        </div>
-                            <div style={{ display: "flex", gap: 15 }}>
-                                    <CustomBtn
-                                        type="submit"
-                                        onClick={toggleChapter}
-                                    >
-                                        Создать
-                                    </CustomBtn>
-                             
-                            </div>
-                    </div>
-                )}
-            </FormContainer>
-        </div>
-    );
+	return (
+		<div className={styles.chapter_form_wrapper}>
+			<FormContainer schemaConfig={schemaConfig} formConfig={formConfig}>
+				{formik => (
+					<div className={styles.fillForm_container}>
+						<div className={styles.asd}>
+							<h2>{isEdit ? "Редактирование раздела" : "Создание раздела"}</h2>
+						</div>
+						<div className={styles.form}>
+							<div className={styles.form_info}>
+								<FormInput name="title" label="Название:" />
+								<FormInput name="description" label="Описание:" />
+							</div>
+						</div>
+						<div
+							style={{ display: "flex", gap: 15, justifyContent: "flex-end" }}
+						>
+							<CustomBtn type="submit" onClick={toggleChapter}>
+								{isEdit ? "Сохранить" : "Создать"}
+							</CustomBtn>
+							<CustomBtn onClick={toggleChapter}>Закрыть</CustomBtn>
+						</div>
+					</div>
+				)}
+			</FormContainer>
+		</div>
+	);
 };
