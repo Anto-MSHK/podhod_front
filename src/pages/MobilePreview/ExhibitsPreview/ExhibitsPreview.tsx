@@ -25,7 +25,7 @@ import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
 interface IChapterPage {
 	data?: exhibitsT | null;
 }
-interface ISliderImage {
+export interface ISliderImage {
 	src: string;
 	alt?: string | undefined;
 	caption?: string | undefined;
