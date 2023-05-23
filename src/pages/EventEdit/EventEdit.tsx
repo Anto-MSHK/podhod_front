@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./EventEdit.module.css";
 import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
-import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
+import errorIcon from "../../assets/icons/CheckmarkInСircle.svg";
 import Preview from "../../components/PreviewComponent/Preview";
 import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
 import { useNavigate, useParams } from "react-router-dom";
@@ -284,8 +284,8 @@ export const EventEdit: React.FC = () => {
 								<div className={styles.InfoComponentWrapper}>
 									<InfoMessage
 										style={{ padding: "1rem" }}
-										title={"Не может быть опубликовано"}
-										desc={"Есть незаполненные поля"}
+										title={"Готово к публикации"}
+										desc={"Вы можете опубликовать это мероприятие"}
 										icon={errorIcon}
 									/>
 								</div>

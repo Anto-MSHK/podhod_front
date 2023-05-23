@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
@@ -7,11 +7,14 @@ import { BottomMenu } from "../../../components/BottomMenu/BottomMenu";
 import styles from "./EventPreview.module.css";
 import { TextBox } from "../../../components/TextBox/TextBox";
 import { eventForm } from "../../../app/Slices/ExpoCreateSlice";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { API_URL } from "../../../app/http";
 import { ISliderImage } from "../ExhibitsPreview/ExhibitsPreview";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import { Slider } from "../../../components/Slider/Slider";
+import { useParams } from "react-router-dom";
+import { useFetchExhibitsQuery } from "../../../app/services/ExhibitsApi";
+import { setExhibits, setSelectedExhibit } from "../../../app/Slices/SelectedExhibitSlice";
 
 interface IEventPage {
 	data: eventForm | undefined;
@@ -19,10 +22,23 @@ interface IEventPage {
 
 export const EventPreview: FC<IEventPage> = ({ data }) => {
 	type EventType = "exhibition" | "fair" | "promo-exhibition";
-	const exhibits = useAppSelector(state => state.selectedExhibit.exhibits);
+	const { id: eventId } = useParams();
+	const dispatch = useAppDispatch();
+	const {
+		data: exhibits,
+		refetch,
+	} = useFetchExhibitsQuery(eventId);
+	useEffect(() => {
+		if (exhibits) {
+			refetch().unwrap();
+			dispatch(setExhibits(exhibits));
+			const selectedExhibit = exhibits.find(exhib => exhib.id === data?.id);
+			dispatch(setSelectedExhibit(selectedExhibit || exhibits[0]));
+		}
+	}, [exhibits, data]);
 	const handleBlocksImgsList = useCallback(() => {
 		const sliderData: ISliderImage[] = [];
-		exhibits.forEach(exhibit => {
+		exhibits && exhibits.forEach(exhibit => {
 			exhibit?.chapters?.forEach(chapter => {
 				chapter.blocks.forEach(block => {
 					block.imgBlock?.imgs.forEach(img => {

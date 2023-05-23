@@ -3,6 +3,7 @@ import { type } from "os";
 import { EventEdit } from "../../pages/EventEdit/EventEdit";
 
 export type eventForm = {
+	id?: string
 	eventName: string;
 	description: string;
 	age: string | null;
