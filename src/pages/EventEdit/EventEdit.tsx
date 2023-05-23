@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./EventEdit.module.css";
 import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
-import errorIcon from "../../assets/icons/CheckmarkInСircle.svg";
+import CheckIcon from "../../assets/icons/GreenCheckmarkInСircle.svg";
 import Preview from "../../components/PreviewComponent/Preview";
 import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
 import { useNavigate, useParams } from "react-router-dom";
@@ -286,7 +286,7 @@ export const EventEdit: React.FC = () => {
 										style={{ padding: "1rem" }}
 										title={"Готово к публикации"}
 										desc={"Вы можете опубликовать это мероприятие"}
-										icon={errorIcon}
+										icon={CheckIcon}
 									/>
 								</div>
 							</div>
