@@ -113,19 +113,37 @@ export const EventsList: React.FC = () => {
 		},
 	];
 
-	const calcAvgPrice = (events: EventT[] | undefined): number => {
-		let totalPrice = 0;
-		let totalCount = 0;
+	const calcAvgPricePerEvent = (events: EventT[] | undefined): number[] => {
+		let avgPrices: number[] = [];
 
 		events?.forEach(event => {
+			let totalPrice = 0;
+			let totalCount = 0;
 			event.prices.forEach(price => {
 				totalPrice += price.price;
 				totalCount++;
 			});
+			avgPrices.push(totalCount ? totalPrice / totalCount : 0);
 		});
 
-		return totalCount ? Math.round(totalPrice / totalCount) : 0;
+		return avgPrices;
 	};
+
+	const calcAvgOfAvgs = (avgPrices: number[]): number => {
+		let total = 0;
+		let count = 0;
+
+		avgPrices.forEach(avgPrice => {
+			total += avgPrice;
+			count++;
+		});
+
+		return count ? Math.round(total / count) : 0;
+	};
+
+	const avgPrices = calcAvgPricePerEvent(events);
+	const avgOfAvgs = calcAvgOfAvgs(avgPrices);
+
 
 	const roundToNearest = (num: number, numArray: number[]): number => {
 		let curr = numArray[0];
@@ -181,7 +199,7 @@ export const EventsList: React.FC = () => {
 				</div>
 				<div style={{ margin: "10px 0" }} />
 				<div className={styles.infoCards}>
-					<InfoCard title="Средняя цена за выставку" value={`${calcAvgPrice(events)} руб.`} />
+					<InfoCard title="Средняя цена за выставку" value={`${avgOfAvgs} руб.`} />
 					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} />
 					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} />
 				</div>
