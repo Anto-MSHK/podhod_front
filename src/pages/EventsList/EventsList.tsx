@@ -188,12 +188,12 @@ export const EventsList: React.FC = () => {
 			</div>
 			<div className={styles.content_container}>
 				<div className={styles.content_container__grid_list}>
-					{items &&
+					{items.length > 0 ?
 						items.map(item => (
 							<div key={item.id} className={styles.grid_list__item_container}>
 								<EventCard event={item} />
 							</div>
-						))}
+						)) : <h1>Мероприятия отсутствуют</h1>}
 				</div>
 			</div>
 		</div>
