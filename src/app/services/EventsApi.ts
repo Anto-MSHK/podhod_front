@@ -12,6 +12,7 @@ import {
 	UpdateEventPayloadT,
 	UpdateEventCalendarPayload,
 } from "../Types/EventsT";
+import { number } from "yup";
 
 export const eventsApi = createApi({
 	reducerPath: "events",
@@ -79,6 +80,12 @@ export const eventsApi = createApi({
 			}),
 			invalidatesTags: (result, error, { id }) => [{ type: "Price", id }],
 		}),
+		deleteEvent: builder.mutation<EventT, {eventId: string | undefined}>({
+			query: ({ eventId }) => ({
+				url: `/events/${eventId}`,
+				method: "DELETE",
+			}),
+		}),
 	}),
 });
 
@@ -92,4 +99,5 @@ export const {
 	useUpdateEventCalendarMutation,
 	useUpdateEventTimesMutation,
 	useUpdatePricesMutation,
+	useDeleteEventMutation,
 } = eventsApi;

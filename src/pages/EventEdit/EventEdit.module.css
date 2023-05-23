@@ -81,3 +81,13 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
+
+.deleteEventButton {
+	color: white;
+	background-color: var(--red_color);
+	border: 1px solid var(--red_color) !important;
+}
+
+.deleteEventButton:hover {
+	background-color: var(--red_color-hover);
+}

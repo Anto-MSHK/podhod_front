@@ -4,8 +4,8 @@ import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import errorIcon from "../../assets/icons/RedCircleWithCross.svg";
 import Preview from "../../components/PreviewComponent/Preview";
 import { EventShowpiecesEdit } from "../../components/EventShowpiecesEdit/EventShowpiecesEdit";
-import { useParams } from "react-router-dom";
-import { useFetchEventQuery } from "../../app/services/EventsApi";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDeleteEventMutation, useFetchEventQuery } from "../../app/services/EventsApi";
 import { setEvent } from "../../app/Slices/ExpoCreateSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LoadingScreen } from "../../components/LoadingScreen/LoadingScreen";
@@ -19,6 +19,7 @@ import { EventSettings } from "../../components/EventSettings/EventSettings";
 
 import useScrollPosition from "../../features/hooks/useScrollPosition";
 import useComponentSize from "../../features/hooks/useSize";
+import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 
 const btnData = [
 	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
@@ -48,25 +49,30 @@ export const EventEdit: React.FC = () => {
 	const [isImgLoading, setIsImgLoading] = useState(true);
 	const dispatch = useAppDispatch();
 	const [dragStartX, setDragStartX] = useState<number | null>(null);
+	const [confirmDelete, setConfirmDelete] = useState(false);
+	const [deleteEvent, { isLoading: isDeleting }] = useDeleteEventMutation();
+	const navigate = useNavigate();
+
+
 	const handleActiveBtn = (btn: string | number | number[] | null) => {
 		setActiveBtn(btn);
 	};
 
-		useEffect(() => {
-			const handleScroll = () => {
-				setTimeout(() => {
-					if (containerRef.current && window.scrollY > 90) {
-						containerRef.current.style.transform = `translateY(${
-							window.scrollY - 90
-						}px)`;
-					} else if (containerRef.current && window.scrollY < 90) {
-						containerRef.current.style.transform = `translateY(0px)`;
-					}
-				}, 100);
-			};
-			window.addEventListener("scroll", handleScroll);
-			return () => window.removeEventListener("scroll", handleScroll);
-		}, []);
+	useEffect(() => {
+		const handleScroll = () => {
+			setTimeout(() => {
+				if (containerRef.current && window.scrollY > 90) {
+					containerRef.current.style.transform = `translateY(${
+						window.scrollY - 90
+					}px)`;
+				} else if (containerRef.current && window.scrollY < 90) {
+					containerRef.current.style.transform = `translateY(0px)`;
+				}
+			}, 100);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	useEffect(() => {
 		if (event) {
@@ -134,6 +140,28 @@ export const EventEdit: React.FC = () => {
 	const HIGH_SCROLL = scroll > LIMIT;
 	const LOW_SCROLL = scroll <= LIMIT;
 	const [ref, size] = useComponentSize();
+	const handleDeleteClick = async () => {
+		if (confirmDelete) {
+			if (event && event.id) {
+				await deleteEvent({ eventId: id});
+				navigate("/");
+			}
+		} else {
+			setConfirmDelete(true);
+		}
+	};
+
+	useEffect(() => {
+		if (confirmDelete) {
+			const timer = setTimeout(() => {
+				setConfirmDelete(false);
+			}, 5000);
+			return () => clearTimeout(timer);
+		}
+	}, [confirmDelete]);
+
+
+
 	return (
 		<div>
 			{(!isLoading && event) || !id ? (
@@ -193,7 +221,9 @@ export const EventEdit: React.FC = () => {
 										: (
 											<div className={styles.createEventSign_wrapper}>
 												<div className={styles.createEvent_title}>Создайте новое мероприятие</div>
-												<div className={styles.createEvent_hint}>После создания вам будет доступна полная версия редактора</div>
+												<div className={styles.createEvent_hint}>После создания вам будет доступна полная версия
+													редактора
+												</div>
 											</div>
 										)}
 								</h1>
@@ -205,12 +235,17 @@ export const EventEdit: React.FC = () => {
 									}}
 								>
 									{event && (
-										<CustomBtnGroup
-											handleActiveBtn={handleActiveBtn}
-											view={"radio"}
-											data={btnData}
-											activeBtn={activeBtn as number}
-										/>
+										<div style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+											<CustomBtnGroup
+												handleActiveBtn={handleActiveBtn}
+												view={"radio"}
+												data={btnData}
+												activeBtn={activeBtn as number}
+											/>
+											<CustomBtn className={styles.deleteEventButton} onClick={handleDeleteClick}>
+												{confirmDelete ? "Вы уверены?" : "Удалить мероприятие"}
+											</CustomBtn>
+										</div>
 									)}
 								</div>
 							</div>
