@@ -73,9 +73,9 @@ const dictionary: Record<string, FormInputDataT> = {
 	},
 };
 const schemaConfig: Yup.ObjectShape = {
-	days: Yup.object().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	days: Yup.object().required('Это поле не может быть пустым'),
+	startDate: Yup.date().required('Вы должны указать дату начала мероприятия'),
+	endDate: Yup.date().required('Вы должны указать дату окончания мероприятия'),
 };
 
 export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
