@@ -111,7 +111,6 @@ export const LayoutForm: React.FC<LayoutFormI> = ({
 
 	useEffect(() => {
 		if ((defaultData?.data as ImgBlockT)?.imgs) {
-			console.log('dassta', defaultData?.data)
 			let imgs: imageType[] = (defaultData?.data as ImgBlockT)?.imgs.map((img) => {
 				return {
 					...img,

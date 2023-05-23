@@ -67,12 +67,10 @@ export const LayoutBlock: FC<LayoutBlockI> = ({
 	];
 	const handleDeleteChapter = async (id: number, chapterId: number) => {
 		try {
-			console.log(chapterId + " " + id);
 			const payload = await deleteChapter({
 				chapterId: "" + chapterId,
 				blockId: "" + blockId,
 			}).unwrap();
-			console.log(payload);
 		} catch (error) {
 			console.log(error);
 		}

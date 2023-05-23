@@ -20,7 +20,6 @@ interface IEventPage {
 export const EventPreview: FC<IEventPage> = ({ data }) => {
 	type EventType = "exhibition" | "fair" | "promo-exhibition";
 	const exhibits = useAppSelector(state => state.selectedExhibit.exhibits);
-	console.log(exhibits);
 	const handleBlocksImgsList = useCallback(() => {
 		const sliderData: ISliderImage[] = [];
 		exhibits.forEach(exhibit => {

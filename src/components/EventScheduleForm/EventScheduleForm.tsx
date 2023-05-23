@@ -130,7 +130,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 			},
 		},
 		onSubmit: async (values, form) => {
-			console.log(values);
 			let calendar = {
 				startDate: values.startDate,
 				endDate: values.endDate,
@@ -142,7 +141,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 					id: id as string,
 					body: calendar,
 				}).unwrap();
-				console.log("fulfilled", payload);
 			} catch (error) {
 				console.log("rejected", error);
 			}
@@ -171,7 +169,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 
 					for (const day of daysWeek) {
 						payload = await updateEventTimes({ id: id as string, body: day });
-						console.log("fulfilled", payload);
 					}
 				}
 			} catch (error) {

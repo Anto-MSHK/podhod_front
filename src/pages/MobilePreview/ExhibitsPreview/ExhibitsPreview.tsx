@@ -77,7 +77,6 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 	}, [data]);
 
 	const handleClickNextExhibit = () => {
-		console.log("next", nextExhibit);
 		dispatch(setSelectedExhibit(nextExhibit));
 	};
 

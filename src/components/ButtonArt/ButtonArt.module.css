@@ -51,9 +51,9 @@
 
 .arrow_line {
     flex-grow: 1;
-    border: 1px solid white; /* Убираем границу для браузера Firefox */
-    color: white; /* Цвет линии для остальных браузеров */
-    background-color: white; /* Цвет линии для браузера Firefox и Opera */
+    border: 1px solid white;
+    color: white;
+    background-color: white;
     border-bottom-width: 0;
     opacity: 1;
 }

@@ -60,7 +60,6 @@ export const EventPageEdit = () => {
 	};
 
 	const handleAddPage = (values: formType) => {
-		console.log("Submitting form...", values);
 		let page: CreateExpoPagePayloadT = {
 			date: new Date().toISOString(),
 			name: values.pageName,
@@ -73,7 +72,6 @@ export const EventPageEdit = () => {
 	};
 
 	const handleUpdatePage = (values: formType) => {
-		console.log("Updating exhibit...", values);
 		if (editingPage !== null) {
 			const page: UpdateExpoPagePayloadT = {
 				name: values.pageName,
@@ -93,7 +91,6 @@ export const EventPageEdit = () => {
 		if (data) {
 			let page = data.find((page) => page.id === selectedPageId);
 			if (page && page.imgs) {
-				console.log('pypa', '111');
 				let imgs: imageType[] = page.imgs.map((img) => {
 					return {
 						...img,
@@ -101,7 +98,6 @@ export const EventPageEdit = () => {
 						eventId: Number(eventId),
 					};
 				});
-				console.log('byba', imgs);
 				dispatch(replaceImgInPage(imgs));
 			}
 		}
