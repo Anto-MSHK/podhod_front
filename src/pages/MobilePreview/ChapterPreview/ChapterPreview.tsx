@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
@@ -23,10 +23,13 @@ interface IchapterPage {
 
 export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 
-
 	const dispatch = useDispatch();
+	const [randomColor, setRandomColor] = useState("");
 
 	useEffect(() => {
+		const colors = ['var(--blue_color)', 'var(--orange_color)', 'var(--green_color)'];
+		setRandomColor(colors[Math.floor(Math.random() * colors.length)]);
+
 		return () => {
 			dispatch(clearSelectedPage());
 		};
@@ -35,9 +38,6 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 	const pageData = {
 		desc: data?.description
 	}
-
-	const colors = ['var(--blue_color)', 'var(--orange_color)', 'var(--green_color)'];
-	const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
 	return (
 		<div className={styles.chapterPreview_wrapper}>
