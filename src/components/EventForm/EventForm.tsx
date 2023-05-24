@@ -200,6 +200,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 													type={value.type}
 													children={value.children}
 													disabled={!editing}
+													key={key+value.label}
 												/>
 											),
 									)}
@@ -214,6 +215,7 @@ export const EventForm: React.FC<MainInfoExpoFormI> = ({ defaultData }) => {
 													type={value.type}
 													children={value.children}
 													disabled={!editing}
+													key={key+value.label}
 												/>
 											),
 									)}

@@ -7,18 +7,19 @@ interface IInfoTagProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTM
 	text?: string;
 	icon?: string;
 	className?: string,
+	onClick?: any
 }
 
 
 
-export const InfoTag: React.FC<IInfoTagProps> = ({ color, text, icon, className, style}, props) => {
+export const InfoTag: React.FC<IInfoTagProps> = ({ color, text, icon, className, style, onClick}, props) => {
 
 	let classes = classNames(
 		className,
 		styles.status_container,
 	)
 	return (
-		<div {...props}  className={classes} style={{ backgroundColor: color, ...style}} >
+		<div {...props}  className={classes} style={{ backgroundColor: color, ...style}} onClick={onClick} >
 				{icon && <img src={icon} alt={text} className={styles.status_img} />}
 				{text}
 		</div>

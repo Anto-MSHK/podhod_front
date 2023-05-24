@@ -99,7 +99,6 @@ export const EventShowpiecesEdit = () => {
 	};
 
 	const handleAddExhibit = (values: formType) => {
-		console.log("Submitting form...", values);
 		let exhibit: CreateExhibitPayloadT = {
 			date: new Date().toISOString(),
 			name: values.exhibitName,
@@ -112,7 +111,6 @@ export const EventShowpiecesEdit = () => {
 	};
 
 	const handleUpdateExhibit = (values: formType) => {
-		console.log("Updating exhibit...", values);
 		if (editingExhibit !== null) {
 			let exhibit: UpdateExhibitPayloadT = {
 				name: values.exhibitName,
@@ -128,7 +126,6 @@ export const EventShowpiecesEdit = () => {
 		}
 	};
 	const handleDeleteExhibit = async (id: string) => {
-		console.log("delete...");
 		await deleteExhibit({ id, eventId: eventId as string }).unwrap();
 	};
 

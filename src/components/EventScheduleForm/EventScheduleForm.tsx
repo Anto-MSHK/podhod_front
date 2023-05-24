@@ -73,9 +73,9 @@ const dictionary: Record<string, FormInputDataT> = {
 	},
 };
 const schemaConfig: Yup.ObjectShape = {
-	days: Yup.object().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	days: Yup.object().required('Это поле не может быть пустым'),
+	startDate: Yup.date().required('Вы должны указать дату начала мероприятия'),
+	endDate: Yup.date().required('Вы должны указать дату окончания мероприятия'),
 };
 
 export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
@@ -130,7 +130,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 			},
 		},
 		onSubmit: async (values, form) => {
-			console.log(values);
 			let calendar = {
 				startDate: values.startDate,
 				endDate: values.endDate,
@@ -142,7 +141,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 					id: id as string,
 					body: calendar,
 				}).unwrap();
-				console.log("fulfilled", payload);
 			} catch (error) {
 				console.log("rejected", error);
 			}
@@ -171,7 +169,6 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 
 					for (const day of daysWeek) {
 						payload = await updateEventTimes({ id: id as string, body: day });
-						console.log("fulfilled", payload);
 					}
 				}
 			} catch (error) {
@@ -197,11 +194,13 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 										name={`applyToAllDate.from`}
 										type="time"
 										help="Время начала работы мероприятия"
+										
 									/>
 									<FormInput
 										name={`applyToAllDate.to`}
 										type="time"
 										help="Время конца работы мероприятия"
+										
 									/>
 								</div>
 							</div>

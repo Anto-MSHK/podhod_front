@@ -54,7 +54,7 @@ export const TextForm: FC<ITextForm> = ({}) => {
 	return (
 		<div>
 			<FormInput name="title" label="Название:" />
-			<FormInput name="description" label="Описание:" />
+			<FormInput type="textarea" name="description" label="Описание:" />
 		</div>
 	);
 };

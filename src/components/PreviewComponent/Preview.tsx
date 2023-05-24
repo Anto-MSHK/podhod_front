@@ -9,9 +9,10 @@ import { EventT } from "../../app/Types/EventsT";
 interface IPreview {
 	backgroundImg?: imageType;
 	selectedPageType: string;
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
-const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType}) => {
+const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType, setActiveBtn}) => {
 	const [prevSelectedPageType, setPrevSelectedPageType] = useState(selectedPageType);
 
 	useEffect(() => {
@@ -49,7 +50,7 @@ const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType}) => {
 						exitActive: styles.slideExitActive,
 					}}
 				>
-					<PreviewSwitcher selectedPageType={selectedPageType}  />
+					<PreviewSwitcher selectedPageType={selectedPageType}  setActiveBtn={setActiveBtn}/>
 				</CSSTransition>
 			</TransitionGroup>
 		</div>

@@ -21,7 +21,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 
 	const handleDragStart = (index: number) => {
 		setDraggedIndex(index);
-		console.log("draged " + draggedIndex);
 	};
 
 	const handleDragOver = (
@@ -30,8 +29,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 	) => {
 		event.preventDefault();
 		setDragOverIndex(index);
-		console.log();
-		console.log("dragedOver " + dragOverIndex);
 	};
 
 	const handleDrop = (
@@ -39,7 +36,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 		index: number,
 	) => {
 		event.preventDefault();
-		console.log("index= " + index + " draggedIndex= " + draggedIndex);
 		setDraggedIndex(null);
 		setDragOverIndex(null);
 	};
@@ -49,7 +45,6 @@ const ImagesGallery: React.FC<IImagesGallery> = ({ imgField, path }) => {
 			<div className={styles.images_wrapper}>
 				{images &&
 					images.map((image, index) => {
-						console.log(image.path);
 						return (
 							<div
 								key={index}

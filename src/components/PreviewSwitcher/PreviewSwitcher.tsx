@@ -9,9 +9,10 @@ import { ChapterPreview } from "../../pages/MobilePreview/ChapterPreview/Chapter
 
 interface IPreviewSwitcher {
 	selectedPageType: string;
+	setActiveBtn:  React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
-export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }) => {
+export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType, setActiveBtn }) => {
 	const eventSlice = useAppSelector((state) => state.eventCreate.event);
 	const selectedExhibit = useAppSelector((state) => state.selectedExhibit.exhibit);
 	const selectedPage = useAppSelector((state) => state.selectedPage.selectedPage)
@@ -28,12 +29,12 @@ export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType }
 			case "EventPreview":
 				return <EventPreview data={eventSlice} />;
 			case "PagesPreview":
-				return <PagesPreview data={selectedPage}/>;
+				return <PagesPreview data={selectedPage} setActiveBtn={setActiveBtn}/>;
 			case "ExhibitsPreview":
 				if (isAnyChapterShown) {
 					return <ChapterPreview data={selectedChapter} exhibit={selectedExhibit} />
 				}
-				else return <ExhibitsPreview data={selectedExhibit}/>;
+				else return <ExhibitsPreview data={selectedExhibit} setActiveBtn={setActiveBtn}/>;
 			default:
 				return <EventPreview data={eventSlice} />;
 		}

@@ -58,7 +58,6 @@ const ChapterItem: React.FC<ChapterItemT> = ({
 				id,
 				showpieceId,
 			}).unwrap();
-			console.log(payload);
 		} catch (error) {
 			console.log(error);
 		}

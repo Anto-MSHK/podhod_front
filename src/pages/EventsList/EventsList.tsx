@@ -3,18 +3,16 @@ import { EventCard } from "../../components/EventCard/EventCard";
 import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import { BtnFilters } from "../../components/Filters/BtnFilters";
 import styles from "./EventsList.module.css";
-import event1 from "../../assets/pictures/Event1.png";
-import event2 from "../../assets/pictures/Event2.png";
-import event3 from "../../assets/pictures/Event3.png";
 import { useState } from "react";
-import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { useFetchEventsQuery } from "../../app/services/EventsApi";
 import { EventT } from "../../app/Types/EventsT";
-import { bool, date } from "yup";
 import icon10 from "../../assets/icons/DateOfEvent.svg";
 import icon11 from "../../assets/icons/DeterminingTheType.svg";
+
 import { InfoCard } from "../../components/InfoCard/InfoCard";
-import { exhibitsT } from "../../app/Types/ExhibitsT";
+import walletIcon from '../../assets/icons/Wallet.svg'
+import smilingFaceIcon from '../../assets/icons/SmilingFace.svg'
+import numberOfExhIcon from '../../assets/icons/NumberOfExhibits.svg'
 
 interface Iitems {
 	id: number;
@@ -113,19 +111,37 @@ export const EventsList: React.FC = () => {
 		},
 	];
 
-	const calcAvgPrice = (events: EventT[] | undefined): number => {
-		let totalPrice = 0;
-		let totalCount = 0;
+	const calcAvgPricePerEvent = (events: EventT[] | undefined): number[] => {
+		let avgPrices: number[] = [];
 
 		events?.forEach(event => {
+			let totalPrice = 0;
+			let totalCount = 0;
 			event.prices.forEach(price => {
 				totalPrice += price.price;
 				totalCount++;
 			});
+			avgPrices.push(totalCount ? totalPrice / totalCount : 0);
 		});
 
-		return totalCount ? Math.round(totalPrice / totalCount) : 0;
+		return avgPrices;
 	};
+
+	const calcAvgOfAvgs = (avgPrices: number[]): number => {
+		let total = 0;
+		let count = 0;
+
+		avgPrices.forEach(avgPrice => {
+			total += avgPrice;
+			count++;
+		});
+
+		return count ? Math.round(total / count) : 0;
+	};
+
+	const avgPrices = calcAvgPricePerEvent(events);
+	const avgOfAvgs = calcAvgOfAvgs(avgPrices);
+
 
 	const roundToNearest = (num: number, numArray: number[]): number => {
 		let curr = numArray[0];
@@ -181,19 +197,19 @@ export const EventsList: React.FC = () => {
 				</div>
 				<div style={{ margin: "10px 0" }} />
 				<div className={styles.infoCards}>
-					<InfoCard title="Средняя цена за выставку" value={`${calcAvgPrice(events)} руб.`} />
-					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} />
-					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} />
+					<InfoCard title="Средняя цена за выставку" value={`${avgOfAvgs} руб.`} icon={walletIcon}/>
+					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} icon={numberOfExhIcon} />
+					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} icon={smilingFaceIcon} />
 				</div>
 			</div>
 			<div className={styles.content_container}>
 				<div className={styles.content_container__grid_list}>
-					{items &&
+					{items.length > 0 ?
 						items.map(item => (
 							<div key={item.id} className={styles.grid_list__item_container}>
 								<EventCard event={item} />
 							</div>
-						))}
+						)) : <h1>Мероприятия отсутствуют</h1>}
 				</div>
 			</div>
 		</div>

@@ -18,7 +18,7 @@ export const TextBox: FC<ITextBox> = ({data}) => {
 					{data.extra}
 				</div>
 			 <div className={styles.textBox_title}>
-				<h1>
+				<h1 style={{fontSize: 36}}>
 					{data.title}
 				</h1>
 			 </div>

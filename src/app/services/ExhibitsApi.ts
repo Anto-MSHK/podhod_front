@@ -6,6 +6,7 @@ import {
 	CreateExhibitPayloadT,
 	UpdateExhibitPayloadT,
 } from "../Types/ExhibitsT";
+import { number } from "yup";
 
 type UpdateExhibitReqT = {
 	id: string;
@@ -34,14 +35,16 @@ export const exhibitsApi = createApi({
 			query: (id: string) => ({
 				url: `/${id}/showpieces`,
 			}),
+			transformResponse: (response: any) => response && response.sort((a: exhibitsT, b: exhibitsT) => Number(a.id) - Number(b.id)),
 			providesTags: result =>
 				result
 					? [
-							...result.map(({ id }: any) => ({ type: "Pages", id } as const)),
-							{ type: "Pages", id: "LIST" },
-					  ]
+						...result.map(({ id }: any) => ({ type: "Pages", id } as const)),
+						{ type: "Pages", id: "LIST" },
+					]
 					: [{ type: "Pages", id: "LIST" }],
 		}),
+
 
 		addExhibit: builder.mutation<null, AddExhibitReqT>({
 			query: ({ eventId, body }) => ({

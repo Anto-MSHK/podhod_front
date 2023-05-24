@@ -5,11 +5,9 @@ export function MyForm() {
 	const [editing, setEditing] = useState(false);
 
 	const initialValues = {
-		// здесь ваши начальные значения полей формы
 	};
 
 	const handleSubmit = (values: any, actions: any) => {
-		// здесь ваша логика отправки формы
 		actions.setSubmitting(false);
 		setEditing(false);
 	};

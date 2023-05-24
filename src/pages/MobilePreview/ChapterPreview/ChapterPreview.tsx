@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Head from "../../../components/Head/Head";
 import { ButtonArt } from "../../../components/ButtonArt/ButtonArt";
 import backArrow from "../../../assets/icons/backArrow.svg";
@@ -14,6 +14,9 @@ import { ChapterT } from "../../../app/Types/ChapterT";
 import { TextBlock } from "../../../components/TextBlock/TextBlock";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import { API_URL } from "../../../app/http";
+import { Simulate } from "react-dom/test-utils";
+import toggle = Simulate.toggle;
+import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
 
 
 interface IchapterPage {
@@ -23,10 +26,13 @@ interface IchapterPage {
 
 export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 
-
 	const dispatch = useDispatch();
+	const [randomColor, setRandomColor] = useState("");
 
 	useEffect(() => {
+		const colors = ['var(--blue_color)', 'var(--orange_color)', 'var(--green_color)'];
+		setRandomColor(colors[Math.floor(Math.random() * colors.length)]);
+
 		return () => {
 			dispatch(clearSelectedPage());
 		};
@@ -36,14 +42,13 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 		desc: data?.description
 	}
 
-
 	return (
 		<div className={styles.chapterPreview_wrapper}>
 			<div className={styles.chapterPreview_head}>
-				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round /></div>}
-							centerElement={<h3>{data ? data.title : 'Глава не найдена'}</h3>}
+				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round onClick={() => dispatch(toggleChapter(data?.id))}/></div>}
+							centerElement={<h3 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '260px'}}>{data ? data.title : 'Глава не найдена'}</h3>}
 							isTransparent={false}
-							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: '10px 10px 0 0'}}
+							style={{backgroundColor: randomColor, width: '100%', borderRadius: '10px 10px 0 0'}}
 				/>
 			</div>
 			<div className={styles.chapterPreview_content}>
@@ -75,12 +80,12 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h4>
+								<h4 style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '175px'}}>
 									{exhibit?.name}
 								</h4>
 							</div>
 							<div>
-								<h5 style={{color: 'gray'}}>
+								<h5 style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', color: 'gray', width: '200px'}}>
 									{exhibit?.short}
 								</h5>
 							</div>

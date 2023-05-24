@@ -21,9 +21,11 @@ import { API_URL } from "../../../app/http";
 import { Slider } from "../../../components/Slider/Slider";
 import { InfoTag } from "../../../components/InfoTag/InfoTag";
 import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
+import { ChapterT } from "../../../app/Types/ChapterT";
 
 interface IChapterPage {
 	data?: exhibitsT | null;
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 export interface ISliderImage {
 	src: string;
@@ -31,7 +33,7 @@ export interface ISliderImage {
 	caption?: string | undefined;
 }
 
-export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
+export const ExhibitsPreview: FC<IChapterPage> = ({ data, setActiveBtn }) => {
 	const { id: eventId } = useParams();
 	const dispatch = useAppDispatch();
 	const {
@@ -53,6 +55,10 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		}
 	}, [exhibits, data]);
 
+	const handleClick = (chapter: ChapterT) => {
+		dispatch(toggleChapter(chapter.id));
+	};
+
 	const ExhibitData = {
 		title: data?.name,
 		shortDesc: data?.short,
@@ -62,12 +68,13 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 
 	const blocksTag = useMemo(() => {
 		return data?.chapters?.map((chapter, index) => {
-			let colors = ["orange", "green", "blue"];
+			let colors = ['var(--orange_color)', 'var(--green_color)', "var(--blue_color)"];
 			var randomIndex = Math.floor(Math.random() * colors.length);
 			return (
 				<InfoTag
 					className={styles.chapter_tag}
 					color={colors[randomIndex]}
+					onClick={() => handleClick(chapter)}
 					key={chapter.id}
 					text={chapter.title}
 					style={{ boxShadow: `0px 0px 15px 1px ${colors[randomIndex]}` }}
@@ -77,7 +84,6 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 	}, [data]);
 
 	const handleClickNextExhibit = () => {
-		console.log("next", nextExhibit);
 		dispatch(setSelectedExhibit(nextExhibit));
 	};
 
@@ -117,7 +123,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 							<ButtonArt
 								round
 								icon={backArrow}
-								onClick={() => console.log("Clicked")}
+								onClick={() => setActiveBtn(1)}
 							/>
 						</div>
 					}
@@ -140,7 +146,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h5>Далее: {nextExhibit?.name}</h5>
+								<h5 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '150px'}}>Далее: {nextExhibit?.name}</h5>
 							</div>
 							<div
 								onClick={() => handleClickNextExhibit()}

@@ -22,9 +22,10 @@ import { API_URL } from "../../../app/http";
 
 interface IExhibitPage {
 	data?: EventPagesT | null;
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
-export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
+export const PagesPreview: FC<IExhibitPage> = ({ data , setActiveBtn}) => {
 
 	const images = data && data.imgs?.map(img => ({
 		src: `${API_URL}/${img.path}`,
@@ -55,7 +56,7 @@ export const PagesPreview: FC<IExhibitPage> = ({ data }) => {
 				<Head
 					leftElement={<div style={{ width: "35px", height: "35px" }}>
 						<ButtonArt round icon={backArrow}
-											 onClick={() => console.log("Clicked")}
+											 onClick={() => setActiveBtn(0)}
 						/>
 					</div>}
 					centerElement={<h3>{data ? " " : "Выберите страницу"}</h3>}
