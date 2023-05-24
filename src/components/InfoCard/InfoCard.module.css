@@ -20,14 +20,16 @@
     padding: 10px;
     color: white;
     height: fit-content;
-    align-items: start;
     min-height: 60px;
+    font-size: 14px;
+    align-items: center;
 }
 
 .toast_body{
     padding: 10px;
-    height: 100%;
     height: fit-content;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .title {

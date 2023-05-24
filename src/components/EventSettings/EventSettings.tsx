@@ -58,16 +58,14 @@ export const EventSettings: React.FC<EventSettingsPropsT> = ({
 						<h5>Мероприятие будет безвозвратно удалено</h5>
 					</PopoverHeader>
 					<PopoverBody>
-						<div style={{ marginBottom: "10px" }}>
-							<h5 style={{ fontSize: "16px" }}>Вы уверены?</h5>
-						</div>
-						<div style={{ display: "flex" }}>
-							<button
-								className={styles.deleteSubmitButton}
-								onClick={() => handleDeleteEvent()}
-							>
-								Подтвердить
-							</button>
+						<div className={styles.deleteEventTextAndButton}>
+							Вы уверены?
+								<button
+									className={styles.deleteSubmitButton}
+									onClick={() => handleDeleteEvent()}
+								>
+									Подтвердить
+								</button>
 						</div>
 					</PopoverBody>
 				</UncontrolledPopover>
