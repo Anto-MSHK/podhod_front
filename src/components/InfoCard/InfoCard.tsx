@@ -18,10 +18,10 @@ export const InfoCard: React.FC<InfoCardProps> = ({ title, value, icon }) => {
 		<div className={styles.card}>
 			<Toast className={styles.toast_container}>
 				<ToastHeader className={styles.toast_header} icon={iconNode}>
-					<p style={{ fontSize: "14px" }}>{title}</p>
+					<p style={{ fontSize: "14px", fontWeight: '700' }}>{title}</p>
 				</ToastHeader>
 					<ToastBody className={styles.toast_body}>
-						<p style={{ fontSize: "14px" }}>{value}</p>
+						<p style={{ fontSize: "14px", fontWeight: '600' }}>{value}</p>
 					</ToastBody>
 			</Toast>
 		</div>
