@@ -10,7 +10,7 @@ interface InfoCardProps {
 
 export const InfoCard: React.FC<InfoCardProps> = ({ title, value, icon }) => {
 	let iconNode = icon ? (
-		<img style={{ width: "30px", height: "30px" }} src={icon} alt="" />
+		<img style={{ width: "30px", height: "30px", justifyContent: 'center' }} src={icon} alt="" />
 	) : (
 		"primary"
 	);
@@ -18,10 +18,10 @@ export const InfoCard: React.FC<InfoCardProps> = ({ title, value, icon }) => {
 		<div className={styles.card}>
 			<Toast className={styles.toast_container}>
 				<ToastHeader className={styles.toast_header} icon={iconNode}>
-					<p style={{ fontSize: "14px", fontWeight: '600' }}>{title}</p>
+					{title}
 				</ToastHeader>
 					<ToastBody className={styles.toast_body}>
-						<p style={{ fontSize: "14px", fontWeight: '600' }}>{value}</p>
+						{value}
 					</ToastBody>
 			</Toast>
 		</div>
