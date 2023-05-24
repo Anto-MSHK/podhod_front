@@ -3,18 +3,16 @@ import { EventCard } from "../../components/EventCard/EventCard";
 import { CustomBtnGroup } from "../../components/CustomBtnGroup/CustomBtnGroup";
 import { BtnFilters } from "../../components/Filters/BtnFilters";
 import styles from "./EventsList.module.css";
-import event1 from "../../assets/pictures/Event1.png";
-import event2 from "../../assets/pictures/Event2.png";
-import event3 from "../../assets/pictures/Event3.png";
 import { useState } from "react";
-import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 import { useFetchEventsQuery } from "../../app/services/EventsApi";
 import { EventT } from "../../app/Types/EventsT";
-import { bool, date } from "yup";
 import icon10 from "../../assets/icons/DateOfEvent.svg";
 import icon11 from "../../assets/icons/DeterminingTheType.svg";
+
 import { InfoCard } from "../../components/InfoCard/InfoCard";
-import { exhibitsT } from "../../app/Types/ExhibitsT";
+import walletIcon from '../../assets/icons/Wallet.svg'
+import smilingFaceIcon from '../../assets/icons/SmilingFace.svg'
+import numberOfExhIcon from '../../assets/icons/NumberOfExhibits.svg'
 
 interface Iitems {
 	id: number;
@@ -199,9 +197,9 @@ export const EventsList: React.FC = () => {
 				</div>
 				<div style={{ margin: "10px 0" }} />
 				<div className={styles.infoCards}>
-					<InfoCard title="Средняя цена за выставку" value={`${avgOfAvgs} руб.`} />
-					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} />
-					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} />
+					<InfoCard title="Средняя цена за выставку" value={`${avgOfAvgs} руб.`} icon={walletIcon}/>
+					<InfoCard title="Всего создано выставок" value={`${countEvents(events)} шт.`} icon={numberOfExhIcon} />
+					<InfoCard title="Среднее ограничение" value={`${calcAvgAge(events)}+`} icon={smilingFaceIcon} />
 				</div>
 			</div>
 			<div className={styles.content_container}>
