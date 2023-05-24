@@ -21,6 +21,7 @@ import { API_URL } from "../../../app/http";
 import { Slider } from "../../../components/Slider/Slider";
 import { InfoTag } from "../../../components/InfoTag/InfoTag";
 import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
+import { ChapterT } from "../../../app/Types/ChapterT";
 
 interface IChapterPage {
 	data?: exhibitsT | null;
@@ -53,6 +54,10 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 		}
 	}, [exhibits, data]);
 
+	const handleClick = (chapter: ChapterT) => {
+		dispatch(toggleChapter(chapter.id));
+	};
+
 	const ExhibitData = {
 		title: data?.name,
 		shortDesc: data?.short,
@@ -68,6 +73,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 				<InfoTag
 					className={styles.chapter_tag}
 					color={colors[randomIndex]}
+					onClick={() => handleClick(chapter)}
 					key={chapter.id}
 					text={chapter.title}
 					style={{ boxShadow: `0px 0px 15px 1px ${colors[randomIndex]}` }}

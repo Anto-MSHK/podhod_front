@@ -14,6 +14,9 @@ import { ChapterT } from "../../../app/Types/ChapterT";
 import { TextBlock } from "../../../components/TextBlock/TextBlock";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import { API_URL } from "../../../app/http";
+import { Simulate } from "react-dom/test-utils";
+import toggle = Simulate.toggle;
+import { toggleChapter } from "../../../app/Slices/isChapterShownSlice";
 
 
 interface IchapterPage {
@@ -42,7 +45,7 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 	return (
 		<div className={styles.chapterPreview_wrapper}>
 			<div className={styles.chapterPreview_head}>
-				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round /></div>}
+				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round onClick={() => dispatch(toggleChapter(data?.id))}/></div>}
 							centerElement={<h3>{data ? data.title : 'Глава не найдена'}</h3>}
 							isTransparent={false}
 							style={{backgroundColor: randomColor, width: '100%', borderRadius: '10px 10px 0 0'}}
