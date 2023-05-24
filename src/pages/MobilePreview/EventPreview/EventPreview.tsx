@@ -93,7 +93,7 @@ export const EventPreview: FC<IEventPage> = ({ data }) => {
 						</div>
 					}
 					centerElement={
-						<img style={{ width: "120px", height: "30px" }} src={logoExample} />
+						' '
 					}
 					rightElement={
 						<div style={{ width: "35px", height: "35px" }}>
