@@ -62,7 +62,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 
 	const blocksTag = useMemo(() => {
 		return data?.chapters?.map((chapter, index) => {
-			let colors = ["orange", "green", "blue"];
+			let colors = ['var(--orange_color)', 'var(--green_color)', "var(--blue_color)"];
 			var randomIndex = Math.floor(Math.random() * colors.length);
 			return (
 				<InfoTag

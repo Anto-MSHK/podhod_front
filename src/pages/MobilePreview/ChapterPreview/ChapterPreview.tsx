@@ -36,6 +36,8 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 		desc: data?.description
 	}
 
+	const colors = ['var(--blue_color)', 'var(--orange_color)', 'var(--green_color)'];
+	const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
 	return (
 		<div className={styles.chapterPreview_wrapper}>
@@ -43,7 +45,7 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round /></div>}
 							centerElement={<h3>{data ? data.title : 'Глава не найдена'}</h3>}
 							isTransparent={false}
-							style={{backgroundColor: 'var(--blue_color)', width: '100%', borderRadius: '10px 10px 0 0'}}
+							style={{backgroundColor: randomColor, width: '100%', borderRadius: '10px 10px 0 0'}}
 				/>
 			</div>
 			<div className={styles.chapterPreview_content}>
