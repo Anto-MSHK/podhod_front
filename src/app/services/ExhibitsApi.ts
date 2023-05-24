@@ -35,7 +35,7 @@ export const exhibitsApi = createApi({
 			query: (id: string) => ({
 				url: `/${id}/showpieces`,
 			}),
-			transformResponse: (response: any) => response && response.sort((a: any, b: any) => a.id - b.id),
+			transformResponse: (response: any) => response && response.sort((a: exhibitsT, b: exhibitsT) => Number(a.id) - Number(b.id)),
 			providesTags: result =>
 				result
 					? [

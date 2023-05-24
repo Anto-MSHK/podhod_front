@@ -194,11 +194,13 @@ export const EventScheduleForm: React.FC<EventScheduleFormProps> = ({
 										name={`applyToAllDate.from`}
 										type="time"
 										help="Время начала работы мероприятия"
+										
 									/>
 									<FormInput
 										name={`applyToAllDate.to`}
 										type="time"
 										help="Время конца работы мероприятия"
+										
 									/>
 								</div>
 							</div>
