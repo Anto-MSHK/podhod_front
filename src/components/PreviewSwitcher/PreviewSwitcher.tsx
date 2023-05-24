@@ -9,7 +9,7 @@ import { ChapterPreview } from "../../pages/MobilePreview/ChapterPreview/Chapter
 
 interface IPreviewSwitcher {
 	selectedPageType: string;
-	setActiveBtn: any
+	setActiveBtn:  React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
 export const PreviewSwitcher: React.FC<IPreviewSwitcher> = ({ selectedPageType, setActiveBtn }) => {

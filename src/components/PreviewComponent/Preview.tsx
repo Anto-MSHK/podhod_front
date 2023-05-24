@@ -9,7 +9,7 @@ import { EventT } from "../../app/Types/EventsT";
 interface IPreview {
 	backgroundImg?: imageType;
 	selectedPageType: string;
-	setActiveBtn: any
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
 const Preview: React.FC<IPreview> = ({ backgroundImg, selectedPageType, setActiveBtn}) => {

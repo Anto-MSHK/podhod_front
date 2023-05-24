@@ -25,7 +25,7 @@ import { ChapterT } from "../../../app/Types/ChapterT";
 
 interface IChapterPage {
 	data?: exhibitsT | null;
-	setActiveBtn: any
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 export interface ISliderImage {
 	src: string;

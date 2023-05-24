@@ -22,7 +22,7 @@ import { API_URL } from "../../../app/http";
 
 interface IExhibitPage {
 	data?: EventPagesT | null;
-	setActiveBtn: any
+	setActiveBtn: React.Dispatch<React.SetStateAction<string | number | number[] | null>>
 }
 
 export const PagesPreview: FC<IExhibitPage> = ({ data , setActiveBtn}) => {
