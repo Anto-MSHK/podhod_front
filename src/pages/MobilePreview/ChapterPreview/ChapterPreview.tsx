@@ -46,7 +46,7 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 		<div className={styles.chapterPreview_wrapper}>
 			<div className={styles.chapterPreview_head}>
 				<Head leftElement={<div style={{width: '40px', height: '40px'}}><ButtonArt icon={backArrow} round onClick={() => dispatch(toggleChapter(data?.id))}/></div>}
-							centerElement={<h3>{data ? data.title : 'Глава не найдена'}</h3>}
+							centerElement={<h3 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '260px'}}>{data ? data.title : 'Глава не найдена'}</h3>}
 							isTransparent={false}
 							style={{backgroundColor: randomColor, width: '100%', borderRadius: '10px 10px 0 0'}}
 				/>
@@ -80,12 +80,12 @@ export const ChapterPreview: FC<IchapterPage> = ({data, exhibit}) => {
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h4>
+								<h4 style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '175px'}}>
 									{exhibit?.name}
 								</h4>
 							</div>
 							<div>
-								<h5 style={{color: 'gray'}}>
+								<h5 style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', color: 'gray', width: '200px'}}>
 									{exhibit?.short}
 								</h5>
 							</div>

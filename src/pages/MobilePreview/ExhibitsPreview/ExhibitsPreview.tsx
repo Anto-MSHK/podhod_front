@@ -146,7 +146,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data, setActiveBtn }) => {
 					<div className={styles.bottom_wrapper}>
 						<div className={styles.bottom_leftContainer}>
 							<div>
-								<h5>Далее: {nextExhibit?.name}</h5>
+								<h5 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '150px'}}>Далее: {nextExhibit?.name}</h5>
 							</div>
 							<div
 								onClick={() => handleClickNextExhibit()}
