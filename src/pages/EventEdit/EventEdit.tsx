@@ -19,7 +19,6 @@ import { EventSettings } from "../../components/EventSettings/EventSettings";
 
 import useScrollPosition from "../../features/hooks/useScrollPosition";
 import useComponentSize from "../../features/hooks/useSize";
-import { CustomBtn } from "../../components/CustomBtn/CustomBtn";
 
 const btnData = [
 	{ name: "Основная информация", lable: "mainScreen", type: "EventPreview" },
@@ -50,8 +49,6 @@ export const EventEdit: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [dragStartX, setDragStartX] = useState<number | null>(null);
 	const [confirmDelete, setConfirmDelete] = useState(false);
-	const [deleteEvent, { isLoading: isDeleting }] = useDeleteEventMutation();
-	const navigate = useNavigate();
 
 
 	const handleActiveBtn = (btn: string | number | number[] | null) => {
@@ -140,16 +137,7 @@ export const EventEdit: React.FC = () => {
 	const HIGH_SCROLL = scroll > LIMIT;
 	const LOW_SCROLL = scroll <= LIMIT;
 	const [ref, size] = useComponentSize();
-	const handleDeleteClick = async () => {
-		if (confirmDelete) {
-			if (event && event.id) {
-				await deleteEvent({ eventId: id});
-				navigate("/");
-			}
-		} else {
-			setConfirmDelete(true);
-		}
-	};
+	
 
 	useEffect(() => {
 		if (confirmDelete) {
@@ -242,9 +230,6 @@ export const EventEdit: React.FC = () => {
 												data={btnData}
 												activeBtn={activeBtn as number}
 											/>
-											<CustomBtn className={styles.deleteEventButton} onClick={handleDeleteClick}>
-												{confirmDelete ? "Вы уверены?" : "Удалить мероприятие"}
-											</CustomBtn>
 										</div>
 									)}
 								</div>
