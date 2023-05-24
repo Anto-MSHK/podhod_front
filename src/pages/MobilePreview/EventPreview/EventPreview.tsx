@@ -12,7 +12,7 @@ import { API_URL } from "../../../app/http";
 import { ISliderImage } from "../ExhibitsPreview/ExhibitsPreview";
 import { Gallery } from "../../../components/Gallery/Gallery";
 import { Slider } from "../../../components/Slider/Slider";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFetchExhibitsQuery } from "../../../app/services/ExhibitsApi";
 import { setExhibits, setSelectedExhibit } from "../../../app/Slices/SelectedExhibitSlice";
 
@@ -28,6 +28,7 @@ export const EventPreview: FC<IEventPage> = ({ data }) => {
 		data: exhibits,
 		refetch,
 	} = useFetchExhibitsQuery(eventId);
+	const navigate = useNavigate();
 	useEffect(() => {
 		if (exhibits) {
 			refetch().unwrap();
@@ -87,7 +88,7 @@ export const EventPreview: FC<IEventPage> = ({ data }) => {
 							<ButtonArt
 								round
 								icon={backArrow}
-								onClick={() => console.log("Clicked")}
+								onClick={() => navigate('/')}
 							/>
 						</div>
 					}
@@ -99,7 +100,7 @@ export const EventPreview: FC<IEventPage> = ({ data }) => {
 							<ButtonArt
 								round
 								text={data && data.age ? data.age : "?"}
-								onClick={() => console.log("Clicked")}
+								onClick={() => console.log('Clicked')}
 							/>
 						</div>
 					}

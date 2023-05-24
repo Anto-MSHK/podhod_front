@@ -262,6 +262,7 @@ export const EventEdit: React.FC = () => {
 									<Preview
 										backgroundImg={backgroundImage}
 										selectedPageType={selectedPageType}
+										setActiveBtn={setActiveBtn}
 									/>
 								</div>
 								<div className={styles.InfoComponentWrapper}>

@@ -25,6 +25,7 @@ import { ChapterT } from "../../../app/Types/ChapterT";
 
 interface IChapterPage {
 	data?: exhibitsT | null;
+	setActiveBtn: any
 }
 export interface ISliderImage {
 	src: string;
@@ -32,7 +33,7 @@ export interface ISliderImage {
 	caption?: string | undefined;
 }
 
-export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
+export const ExhibitsPreview: FC<IChapterPage> = ({ data, setActiveBtn }) => {
 	const { id: eventId } = useParams();
 	const dispatch = useAppDispatch();
 	const {
@@ -122,7 +123,7 @@ export const ExhibitsPreview: FC<IChapterPage> = ({ data }) => {
 							<ButtonArt
 								round
 								icon={backArrow}
-								onClick={() => console.log("Clicked")}
+								onClick={() => setActiveBtn(1)}
 							/>
 						</div>
 					}
