@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = `http://194.67.121.107:5000`;
+export const API_URL = `https://anto-mshk.ru`;
 
 export const $api = axios.create({
 	//   withCredentials: true,
