@@ -9,7 +9,7 @@ interface ImgBlockI {
 export const ImgBlock: FC<ImgBlockI> = ({ imgs }) => {
 	const images = imgs.map(img => {
 		return {
-			src: API_URL + img.path,
+			src: API_URL + "/" + img.path,
 			alt: img.description,
 		};
 	});
